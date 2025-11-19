@@ -123,7 +123,7 @@ export default function EventsPage() {
         <div className="max-w-6xl mx-auto space-y-8">
           <div className="space-y-2 text-center">
             <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">Event Gallery</p>
-            <h3 className="font-subhead text-4xl uppercase text-sunshine-purple">See the energy</h3>
+            <h3 className="font-headline text-4xl uppercase text-sunshine-purple">See the energy</h3>
             <p className="text-lg text-sunshine-brown leading-relaxed max-w-3xl mx-auto">
               A glimpse of both energies: sun-drenched connection and moon-lit restoration.
             </p>

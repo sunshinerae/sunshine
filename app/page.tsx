@@ -108,7 +108,7 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link href="/events" className="flex items-center">
-                <Button size="lg" variant="outline" className="border-sunshine-white text-sunshine-white hover:bg-sunshine-white hover:text-sunshine-purple">
+                <Button size="lg" variant="outline" className="border-2 border-sunshine-white text-sunshine-white hover:bg-sunshine-white hover:text-sunshine-purple">
                   Explore events
                 </Button>
               </Link>
@@ -245,7 +245,7 @@ export default function HomePage() {
                 </Button>
               </Link>
               <Link href="/community">
-                <Button variant="outline" className="border-sunshine-white text-sunshine-white hover:bg-sunshine-white hover:text-sunshine-purple">
+                <Button variant="outline" className="border-2 border-sunshine-white text-sunshine-white hover:bg-sunshine-white hover:text-sunshine-purple">
                   Join the community
                 </Button>
               </Link>

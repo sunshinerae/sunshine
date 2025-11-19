@@ -65,7 +65,7 @@ export function Pillars() {
           {pillars.map((pillar) => (
             <Card
               key={pillar.title}
-              className="group p-8 hover:border-accent transition-all hover:shadow-md bg-card"
+              className="group p-8 hover:border-accent transition-transform hover:scale-[1.02] bg-card border-2 border-sunshine-purple"
             >
               <h3 className="font-display text-2xl font-semibold mb-2 text-foreground">
                 {pillar.title}
