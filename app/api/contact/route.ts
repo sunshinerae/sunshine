@@ -5,7 +5,7 @@ import { z } from 'zod';
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
   email: z.string().email('Please enter a valid email address.'),
-  projectType: z.string().min(1, 'Please select a project type.'),
+  topic: z.string().min(1, 'Please select a topic.'),
   message: z.string().min(10, 'Message must be at least 10 characters.'),
 });
 
@@ -34,12 +34,12 @@ export async function POST(request: Request) {
     await resend.emails.send({
       from: 'contact@yourdomain.com',
       to: 'your-email@example.com',
-      subject: `New Contact Form: ${validatedData.projectType}`,
+      subject: `New Contact Form: ${validatedData.topic}`,
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${validatedData.name}</p>
         <p><strong>Email:</strong> ${validatedData.email}</p>
-        <p><strong>Project Type:</strong> ${validatedData.projectType}</p>
+        <p><strong>Topic:</strong> ${validatedData.topic}</p>
         <p><strong>Message:</strong></p>
         <p>${validatedData.message}</p>
       `,

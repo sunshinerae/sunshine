@@ -1,60 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-geist-sans);
-  --font-display: var(--font-dm-serif);
+  --color-background: #FCF6F2; /* White Cloud */
+  --color-foreground: #240D01; /* Deep Brown */
+  --color-card: #FCF6F2;
+  --color-card-foreground: #240D01;
+  --color-popover: #FCF6F2;
+  --color-popover-foreground: #240D01;
+  --color-primary: #6E054D; /* Power Purple */
+  --color-primary-foreground: #FCF6F2;
+  --color-secondary: #D4510B; /* Molten Orange */
+  --color-secondary-foreground: #FCF6F2;
+  --color-muted: #FCF6F2;
+  --color-muted-foreground: #240D01;
+  --color-accent: #FFC619; /* Yellow Sun */
+  --color-accent-foreground: #240D01;
+  --color-destructive: #D4510B;
+  --color-destructive-foreground: #FCF6F2;
+  --color-border: #240D01;
+  --color-input: #240D01;
+  --color-ring: #95D7E6; /* Blue Sky */
 
-  --color-background: #ffffff;
-  --color-foreground: #171717;
-  --color-card: #ffffff;
-  --color-card-foreground: #171717;
-  --color-popover: #ffffff;
-  --color-popover-foreground: #171717;
-  --color-primary: #171717;
-  --color-primary-foreground: #fafafa;
-  --color-secondary: #f5f5f5;
-  --color-secondary-foreground: #171717;
-  --color-muted: #f5f5f5;
-  --color-muted-foreground: #737373;
-  --color-accent: #9333ea;
-  --color-accent-foreground: #ffffff;
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #fafafa;
-  --color-border: #e5e5e5;
-  --color-input: #e5e5e5;
-  --color-ring: #9333ea;
-
-  --radius: 0.5rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  @theme {
-    --color-background: #0a0a0a;
-    --color-foreground: #ededed;
-    --color-card: #0f0f0f;
-    --color-card-foreground: #ededed;
-    --color-popover: #0f0f0f;
-    --color-popover-foreground: #ededed;
-    --color-primary: #ededed;
-    --color-primary-foreground: #171717;
-    --color-secondary: #262626;
-    --color-secondary-foreground: #ededed;
-    --color-muted: #262626;
-    --color-muted-foreground: #999999;
-    --color-accent: #a855f7;
-    --color-accent-foreground: #171717;
-    --color-destructive: #dc2626;
-    --color-destructive-foreground: #ededed;
-    --color-border: #262626;
-    --color-input: #262626;
-    --color-ring: #a855f7;
-  }
+  --radius: 0.75rem;
 }
 
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-sans), sans-serif;
+  font-family: var(--font-body), sans-serif;
 }
 
 @keyframes marquee {

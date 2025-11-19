@@ -1,20 +1,21 @@
-// Site-wide constants
-
 export const SITE_CONFIG = {
-  name: 'Clear Light Creative',
-  url: 'https://sunshine-snowy.vercel.app',
-  description: 'Your Creative Vision, Brought to Light',
+  name: 'The Sunshine Effect',
+  url: 'https://thesunshineeffect.com',
+  description: 'Helping women move from burnout to alignment through simple rituals, community, and radiant experiences.',
 };
 
 export const NAV_LINKS = [
-  { href: '/services', label: 'How We Help', section: 'services' },
-  { href: '/work', label: 'Our Work', section: 'work' },
-  { href: '/about', label: 'About' },
+  { href: '/', label: 'Home', section: 'home' },
+  { href: '/about', label: 'About', section: 'about' },
+  { href: '/offerings', label: 'Offerings', section: 'offerings' },
+  { href: '/events', label: 'Events', section: 'events' },
+  { href: '/community', label: 'Community', section: 'community' },
+  { href: '/contact', label: 'Contact', section: 'contact' },
 ];
 
-export const HOME_SECTIONS = ['services', 'work'];
+export const HOME_SECTIONS = ['home', 'alignment', 'pathway', 'offerings', 'events', 'community'];
 
 export const SOCIAL_LINKS = {
-  instagram: '#',
-  linkedin: '#',
+  instagram: 'https://instagram.com/thesunshineeffect',
+  linkedin: 'https://linkedin.com/company/thesunshineeffect',
 };

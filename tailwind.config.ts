@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 export default {
   darkMode: "class",
@@ -11,48 +12,56 @@ export default {
   theme: {
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        'sunshine-purple': '#6E054D',
+        'sunshine-orange': '#D4510B',
+        'sunshine-yellow': '#FFC619',
+        'sunshine-blue': '#95D7E6',
+        'sunshine-white': '#FCF6F2',
+        'sunshine-brown': '#240D01',
+        border: "var(--color-border)",
+        input: "var(--color-input)",
+        ring: "var(--color-ring)",
+        background: "var(--color-background)",
+        foreground: "var(--color-foreground)",
         primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
+          DEFAULT: "var(--color-primary)",
+          foreground: "var(--color-primary-foreground)",
         },
         secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
+          DEFAULT: "var(--color-secondary)",
+          foreground: "var(--color-secondary-foreground)",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "var(--color-destructive)",
+          foreground: "var(--color-destructive-foreground)",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "var(--color-muted)",
+          foreground: "var(--color-muted-foreground)",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "var(--color-accent)",
+          foreground: "var(--color-accent-foreground)",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
+          DEFAULT: "var(--color-popover)",
+          foreground: "var(--color-popover-foreground)",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
+          DEFAULT: "var(--color-card)",
+          foreground: "var(--color-card-foreground)",
         },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        pill: "9999px",
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "sans-serif"],
-        display: ["var(--font-display)", "serif"],
+        headline: ["var(--font-headline)", "Belvare", "serif"],
+        subhead: ["var(--font-subhead)", "Laro Soft Bold", "sans-serif"],
+        body: ["var(--font-body)", "Poppins", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
@@ -70,5 +79,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 } satisfies Config;

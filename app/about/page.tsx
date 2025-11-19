@@ -1,184 +1,159 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import { Card } from '@/components/ui/card';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { FadeIn } from '@/components/fade-in';
+import { BrandCard } from '@/components/brand-card';
 
 export const metadata = {
-  title: 'About | Clear Light Creative',
-  description: 'A guiding hand for ambitious creators. Learn about the person behind Clear Light Creative and how I help artists and founders bring their visions to life.',
+  title: 'About | The Sunshine Effect',
+  description: 'Meet Sunshine, a loving catalyst guiding women from burnout to alignment through rituals, retreats, and community.',
   alternates: { canonical: '/about' },
 };
 
+const timeline = [
+  { title: 'Burnout to wake-up', detail: 'Corporate pace, anxious nights, and the realization: I cannot keep betraying myself to belong.', year: '2016' },
+  { title: 'Rituals + regulation', detail: 'Breathwork, somatic practice, journaling, and boundaries that brought my nervous system back into flow.', year: '2018' },
+  { title: 'Community in motion', detail: 'Living-room circles that grew into Golden Hour and Lunar Room—rooms where women felt resourced and seen.', year: '2021' },
+  { title: 'Guiding others', detail: 'Full-time coaching, retreats, and events for women ready to move like it is already theirs, with support that holds them steady.', year: 'Today' },
+];
+
+const values = [
+  { title: 'Community', description: 'We move together. Safety and belonging are the soil for growth.' },
+  { title: 'Devotion', description: 'Discipline is self love in motion. Small rituals, every day.' },
+  { title: 'Courage', description: 'Gentle, bold steps toward the life you actually want.' },
+  { title: 'Alignment', description: 'Choices that match your values, not old expectations.' },
+  { title: 'Compassion', description: 'Softness with yourself. Healing without shame.' },
+  { title: 'Leadership', description: 'Lead from embodied confidence—no pushing or proving.' },
+];
+
 export default function AboutPage() {
   return (
-    <main>
-      {/* Header */}
-      <FadeIn>
-        <section className="py-20 px-6 bg-background border-b border-border">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-display text-5xl md:text-6xl font-semibold mb-6">
-              We're here to help.
+    <div className="bg-sunshine-white">
+      <section className="relative overflow-hidden bg-sunshine-orange text-sunshine-white px-6 py-20">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-[1.05fr_0.95fr] gap-10 items-center">
+          <div className="space-y-4">
+            <p className="font-subhead uppercase tracking-[0.16em] text-sm text-sunshine-blue">
+              Who is Sunshine
+            </p>
+            <h1 className="font-headline text-[clamp(2.8rem,6vw,4.4rem)] uppercase leading-tight">
+              Catalyst for women ready to create a life centered on purpose.
             </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              Clear Light Creative is a team of creative producers and operational specialists dedicated to helping artists, founders, and lean teams make their mark on the world.
+            <p className="font-body text-lg leading-relaxed">
+              I blend wellness, mindset, and grounded business strategy to help women clear trauma noise, hear their own desires, and take aligned action. Inner peace becomes the foundation for everything.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <Link href="/contact">
+                <Button className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-yellow hover:text-sunshine-brown">
+                  Work With Sunshine
+                </Button>
+              </Link>
+              <Link href="/events">
+                <Button variant="outline" className="border-sunshine-white text-sunshine-white hover:bg-sunshine-white hover:text-sunshine-purple">
+                  Explore events
+                </Button>
+              </Link>
+            </div>
+            <p className="font-body text-sm max-w-xl leading-relaxed">
+              You are allowed to want more ease. Real power does not have to push or prove.
             </p>
           </div>
-        </section>
-      </FadeIn>
-
-      {/* Story */}
-      <FadeIn>
-        <section className="py-20 px-6">
-          <div className="max-w-3xl mx-auto space-y-8 text-lg leading-relaxed text-foreground/90">
-            <p>
-              We know what it's like to have a brilliant vision and feel completely overwhelmed by the logistics, tech, and admin work standing between you and bringing it to life.
-            </p>
-            <p>
-              That's where our team comes in. We handle the operational chaos—tour logistics, website builds, marketing systems, project timelines—so you can focus on what you do best: creating.
-            </p>
-            <p>
-              We've worked with touring artists, independent labels, creative studios, and solopreneurs who are tired of wearing all the hats and just want experienced partners to take the reins on the stuff that drains their energy.
-            </p>
-            <p>
-              Our approach is simple: listen deeply, plan thoroughly, execute flawlessly, and communicate clearly every step of the way. No jargon, no surprises, just real support from a team that genuinely cares about your success.
-            </p>
-          </div>
-        </section>
-      </FadeIn>
-
-      {/* Image Break */}
-      <FadeIn>
-        <section className="py-12 px-6">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="relative h-[300px] rounded-lg overflow-hidden">
-                <Image
-                  src="/bass-guitar-live.png"
-                  alt="Live music performance"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="relative h-[300px] rounded-lg overflow-hidden">
-                <Image
-                  src="/megaphone-marketing.png"
-                  alt="Amplifying your message"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+          <div className="relative">
+            <div className="absolute -top-6 -left-6 w-24 h-24 rounded-full bg-sunshine-yellow" aria-hidden />
+            <div className="relative rounded-3xl overflow-hidden border-4 border-sunshine-white">
+              <Image
+                src="/portrait-female-professional.png"
+                alt="Sunshine portrait"
+                width={640}
+                height={760}
+                className="w-full h-full object-cover"
+                priority
+              />
             </div>
           </div>
-        </section>
-      </FadeIn>
+        </div>
+      </section>
 
-      {/* What I Believe */}
-      <FadeIn>
-        <section className="py-20 px-6 bg-muted/20">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="font-display text-4xl md:text-5xl font-semibold mb-12 text-center">
-              What We Believe
+      <section className="px-6 py-16">
+        <div className="max-w-5xl mx-auto space-y-6 text-lg leading-relaxed text-sunshine-brown font-body">
+          <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">
+            How I hold space
+          </p>
+          <p>
+            Burnout is not a personal failure; it is a nervous system asking for safety. Together we create pockets of peace and clarity so you can lead with devotion instead of dread.
+          </p>
+          <p>
+            I encourage first imperfect steps: one aligned conversation, one nourishing ritual, one brave ask. We pair spiritual depth with practical structure so your momentum sticks.
+          </p>
+          <p>
+            My work is woman-forward, trauma-aware, and rooted in community. You will feel seen, safe, uplifted, and fully capable of leading your own aligned life.
+          </p>
+        </div>
+      </section>
+
+      <section className="px-6 py-16 bg-sunshine-yellow text-sunshine-brown">
+        <div className="max-w-6xl mx-auto space-y-10">
+          <div className="space-y-3">
+            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-purple">Chapters</p>
+            <h2 className="font-headline text-4xl md:text-5xl uppercase text-sunshine-purple leading-tight">
+              From burnout to alignment.
             </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              {[
-                {
-                  title: 'Your Time is Sacred',
-                  description: 'Every hour you spend on admin is an hour you could be creating. We protect your creative time fiercely.'
-                },
-                {
-                  title: 'Clear Beats Complicated',
-                  description: "The best systems are simple, repeatable, and don't require a PhD to understand. We build solutions that just work."
-                },
-                {
-                  title: 'Details Define Success',
-                  description: "The difference between good and great is in the follow-through. We obsess over the little things so you don't have to."
-                },
-                {
-                  title: 'Partnership Over Transactions',
-                  description: "We're not here to check boxes—we're here to help you build something meaningful. Your wins are our wins."
-                }
-              ].map((belief, idx) => (
-                <Card key={idx} className="p-8">
-                  <h3 className="font-display text-2xl font-semibold mb-3 text-foreground">
-                    {belief.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {belief.description}
-                  </p>
-                </Card>
-              ))}
-            </div>
+            <p className="font-body text-lg leading-relaxed max-w-3xl">
+              A real journey, not an overnight success story. Each chapter is honest, embodied, and portable for your own life.
+            </p>
           </div>
-        </section>
-      </FadeIn>
-
-      {/* Skills & Experience */}
-      <FadeIn>
-        <section className="py-20 px-6">
-          <div className="max-w-5xl mx-auto">
-            <h2 className="font-display text-4xl md:text-5xl font-semibold mb-12 text-center">
-              How We Can Support You
-            </h2>
-            <div className="grid md:grid-cols-3 gap-12">
-              <div>
-                <h3 className="font-semibold text-lg mb-4 text-accent">Logistics & Production</h3>
-                <ul className="space-y-2 text-muted-foreground text-sm">
-                  <li>• Tour management & routing</li>
-                  <li>• Event production & coordination</li>
-                  <li>• Vendor negotiation & contracts</li>
-                  <li>• Budget tracking & reconciliation</li>
-                  <li>• Travel & accommodation planning</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-4 text-accent">Web & Growth</h3>
-                <ul className="space-y-2 text-muted-foreground text-sm">
-                  <li>• Next.js website development</li>
-                  <li>• SEO strategy & implementation</li>
-                  <li>• Google Ads & Meta campaigns</li>
-                  <li>• Conversion optimization</li>
-                  <li>• Analytics & reporting</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-lg mb-4 text-accent">Systems & Automation</h3>
-                <ul className="space-y-2 text-muted-foreground text-sm">
-                  <li>• Process design & SOPs</li>
-                  <li>• CRM setup & management</li>
-                  <li>• Email automation workflows</li>
-                  <li>• Project management systems</li>
-                  <li>• Team training & documentation</li>
-                </ul>
-              </div>
-            </div>
+          <div className="grid md:grid-cols-4 gap-6">
+            {timeline.map((item) => (
+              <BrandCard key={item.title} variant="white" className="p-6">
+                <div className="text-xs font-subhead uppercase tracking-[0.12em] text-sunshine-orange mb-2">
+                  {item.year}
+                </div>
+                <h3 className="font-headline text-xl uppercase text-sunshine-purple mb-3">{item.title}</h3>
+                <p className="font-body text-sm leading-relaxed">{item.detail}</p>
+              </BrandCard>
+            ))}
           </div>
-        </section>
-      </FadeIn>
+        </div>
+      </section>
 
-      {/* CTA */}
-      <section className="py-20 px-6 bg-accent text-accent-foreground">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="font-display text-4xl md:text-5xl font-semibold mb-6">
-            Let's work together.
-          </h2>
-          <p className="text-xl mb-10 opacity-90 leading-relaxed">
-            If you're ready to stop juggling everything alone and bring in a team that truly gets it, we'd love to chat.
+      <section className="px-6 py-16 bg-sunshine-white">
+        <div className="max-w-6xl mx-auto space-y-10">
+          <div className="text-center space-y-3">
+            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">Values</p>
+            <h2 className="font-headline text-4xl md:text-5xl uppercase text-sunshine-purple">Rooted & resourced</h2>
+            <p className="font-body text-lg text-sunshine-brown leading-relaxed max-w-3xl mx-auto">
+              The values that shape every coaching session, retreat, and community room.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {values.map((value) => (
+              <BrandCard key={value.title} variant="white" className="p-6">
+                <h3 className="font-headline text-xl uppercase text-sunshine-purple mb-2">{value.title}</h3>
+                <p className="font-body text-sm leading-relaxed text-sunshine-brown">{value.description}</p>
+              </BrandCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-16 md:py-20 bg-sunshine-purple text-sunshine-white">
+        <div className="max-w-5xl mx-auto text-center space-y-6">
+          <h3 className="font-headline text-4xl md:text-5xl uppercase">Let&apos;s walk together.</h3>
+          <p className="font-body text-lg leading-relaxed max-w-3xl mx-auto">
+            If you are ready to feel clear, grounded, and in motion, I am here to hold space and offer structure. Start with a conversation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
-              <Button size="lg" variant="secondary" className="bg-background text-foreground hover:bg-background/90 px-8">
-                Start Your Project
+              <Button className="bg-sunshine-yellow text-sunshine-brown hover:bg-sunshine-blue">
+                Book a clarity call
               </Button>
             </Link>
-            <Link href="/work">
-              <Button size="lg" variant="outline" className="border-background/30 bg-transparent text-accent-foreground hover:bg-background/10 px-8">
-                See Our Work
+            <Link href="/offerings">
+              <Button variant="outline" className="border-sunshine-white text-sunshine-white hover:bg-sunshine-white hover:text-sunshine-purple">
+                Explore offerings
               </Button>
             </Link>
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
