@@ -51,14 +51,14 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-      {/* Modal card - Clean and tasteful */}
-      <div className="relative w-full max-w-[480px] rounded-2xl overflow-hidden shadow-2xl bg-sunshine-white">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md">
+      {/* Modal card - Clean and solid */}
+      <div className="relative w-full max-w-[480px] rounded-2xl overflow-hidden shadow-2xl bg-sunshine-white border-2 border-sunshine-brown/10">
         {/* Subtle accent bar at top */}
-        <div className="h-1 bg-gradient-to-r from-sunshine-orange via-sunshine-yellow to-sunshine-purple"></div>
+        <div className="h-1.5 bg-gradient-to-r from-sunshine-orange via-sunshine-yellow to-sunshine-purple"></div>
 
-        {/* Content */}
-        <div className="relative p-8 md:p-10">
+        {/* Content - solid white background */}
+        <div className="relative p-8 md:p-10 bg-sunshine-white">
           {/* Close button */}
           <button
             onClick={onClose}
