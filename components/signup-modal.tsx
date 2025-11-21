@@ -122,11 +122,12 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
                 />
 
                 {/* Submit button - per brandSpec.layout.signupPage.form.submitButton */}
-                <div className="pt-2">
+                <div className="pt-4">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-sunshine-purple text-white font-subhead font-bold py-3.5 rounded-lg hover:bg-sunshine-orange hover:text-sunshine-brown transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-lg tracking-wide shadow-md hover:shadow-lg uppercase"
+                    className="w-full bg-sunshine-purple text-white font-subhead font-bold py-4 rounded-lg hover:bg-sunshine-orange hover:text-sunshine-brown transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-xl tracking-wider shadow-lg hover:shadow-xl uppercase"
+                    style={{ backgroundColor: '#6E054D' }}
                   >
                     {isSubmitting ? 'Submitting...' : 'I Want In'}
                   </button>
