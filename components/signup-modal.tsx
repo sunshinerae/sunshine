@@ -72,10 +72,10 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
             <>
               {/* Heading - per brandSpec.layout.signupPage.copyOptions */}
               <div className="text-center mb-8">
-                <h3 className="font-subhead text-3xl md:text-4xl text-sunshine-purple mb-4 font-bold uppercase leading-tight">
+                <h3 className="font-subhead text-3xl md:text-4xl text-sunshine-brown mb-4 font-bold uppercase leading-tight">
                   Stay Connected<br />To The Fire
                 </h3>
-                <p className="font-body text-sm md:text-base text-sunshine-brown/70 max-w-sm mx-auto leading-relaxed">
+                <p className="font-body text-sm md:text-base text-sunshine-brown/90 max-w-sm mx-auto leading-relaxed">
                   Enter your info to receive rituals, reflections, and invitations that keep you close to your own light.
                 </p>
               </div>
