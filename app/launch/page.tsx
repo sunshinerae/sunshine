@@ -9,12 +9,40 @@ export default function LaunchPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-sunshine-white">
+      <div className="min-h-screen bg-gradient-to-br from-sunshine-white via-sunshine-white to-sunshine-yellow/8 relative overflow-hidden">
+        {/* Elegant floral overlays - subtle and ethereal */}
+        <div className="absolute top-0 right-0 w-64 h-64 opacity-5 pointer-events-none rotate-12">
+          <Image
+            src="/poppy.jpg"
+            alt=""
+            fill
+            className="object-cover blur-md"
+          />
+        </div>
+        <div className="absolute bottom-0 left-0 w-48 h-48 opacity-5 pointer-events-none -rotate-12">
+          <Image
+            src="/poppy.jpg"
+            alt=""
+            fill
+            className="object-cover blur-sm"
+          />
+        </div>
+
+        {/* Event banner - subtle and elegant */}
+        <div className="bg-sunshine-purple/95 text-sunshine-white text-center py-3 px-4">
+          <p className="text-sm md:text-base font-subhead">
+            <span className="inline-block mr-2">✨</span>
+            <span className="font-bold">Bright Sparks</span> returns Nov 24 in LA
+            <span className="mx-2">•</span>
+            Join the list for early access
+          </p>
+        </div>
+
         {/* Elegant header spacing */}
-        <div className="pt-12 md:pt-20"></div>
+        <div className="pt-16 md:pt-24"></div>
 
         {/* Main container - contained and centered */}
-        <div className="max-w-6xl mx-auto px-6 md:px-12 pb-20">
+        <div className="max-w-6xl mx-auto px-6 md:px-12 pb-24">
 
           {/* Hero Section - Image and Content */}
           <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
@@ -26,7 +54,7 @@ export default function LaunchPage() {
                   src="/ID_LOVE_THIS_PHOTO_ON_THE_SIGN_UP_PAGE.jpg"
                   alt="Woman with flame - The Sunshine Effect"
                   fill
-                  className="object-cover"
+                  className="object-cover md:opacity-100 opacity-90"
                   priority
                   quality={90}
                 />
@@ -58,15 +86,15 @@ export default function LaunchPage() {
               </p>
 
               {/* CTA Button */}
-              <div className="pt-4">
+              <div className="pt-6">
                 <button
                   onClick={() => setShowModal(true)}
-                  className="bg-sunshine-purple text-sunshine-white px-10 py-4 rounded-full text-lg font-subhead font-bold uppercase hover:bg-sunshine-orange transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="bg-sunshine-purple text-sunshine-white px-12 py-5 rounded-full text-lg font-subhead font-bold uppercase hover:bg-sunshine-orange hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl"
                 >
                   I Want In
                 </button>
-                <p className="text-sm text-sunshine-brown/60 font-body mt-3">
-                  Join the inner circle
+                <p className="text-sm text-sunshine-brown/60 font-body mt-4">
+                  Stay connected to the fire
                 </p>
               </div>
             </div>
@@ -74,6 +102,15 @@ export default function LaunchPage() {
           </div>
 
         </div>
+
+        {/* Mission statement footer */}
+        <footer className="border-t border-sunshine-brown/10 py-8">
+          <div className="max-w-6xl mx-auto px-6 md:px-12 text-center">
+            <p className="text-sm md:text-base text-sunshine-brown/70 font-body">
+              The Sunshine Effect is a Los Angeles-based community for women ready to move from burnout to alignment.
+            </p>
+          </div>
+        </footer>
       </div>
 
       {/* Sign Up Modal */}

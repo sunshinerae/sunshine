@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { X } from 'lucide-react';
+import Image from 'next/image';
 
 interface SignupModalProps {
   isOpen: boolean;
@@ -51,59 +52,69 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-lg">
-      {/* Modal card - Clean and solid white */}
-      <div className="relative w-full max-w-[480px] rounded-2xl overflow-hidden shadow-2xl bg-white border-2 border-sunshine-brown/10">
-        {/* Subtle accent bar at top */}
-        <div className="h-1.5 bg-gradient-to-r from-sunshine-orange via-sunshine-yellow to-sunshine-purple"></div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+      {/* Bold Poster-Style Modal */}
+      <div className="relative w-full max-w-[900px] max-h-[90vh] overflow-y-auto rounded-3xl overflow-hidden shadow-2xl bg-sunshine-yellow">
+        {/* Close button - top right */}
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 p-3 rounded-full bg-sunshine-brown/10 hover:bg-sunshine-brown/20 transition-colors z-20"
+          aria-label="Close modal"
+        >
+          <X className="w-7 h-7 text-sunshine-brown" />
+        </button>
 
-        {/* Content - solid white background, no transparency */}
-        <div className="relative p-8 md:p-10 bg-white">
-          {/* Close button */}
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-full hover:bg-sunshine-purple/10 transition-colors z-20"
-            aria-label="Close modal"
-          >
-            <X className="w-6 h-6 text-sunshine-purple" />
-          </button>
+        {!submitted ? (
+          <div className="grid md:grid-cols-2 gap-0">
+            {/* Left side - Hero Image */}
+            <div className="relative h-[300px] md:h-auto md:min-h-[600px]">
+              <Image
+                src="/ID_LOVE_THIS_PHOTO_ON_THE_SIGN_UP_PAGE.jpg"
+                alt="Woman with flame - Stay connected to the fire"
+                fill
+                className="object-cover"
+                priority
+                quality={95}
+              />
+              {/* Warm overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-sunshine-orange/30 via-transparent to-sunshine-yellow/20"></div>
+            </div>
 
-          {!submitted ? (
-            <>
-              {/* Heading - per brandSpec.layout.signupPage.copyOptions */}
-              <div className="text-center mb-8">
-                <h3 className="font-subhead text-3xl md:text-4xl text-sunshine-brown mb-4 font-bold uppercase leading-tight">
-                  Stay Connected<br />To The Fire
-                </h3>
-                <p className="font-body text-sm md:text-base text-sunshine-brown/90 max-w-sm mx-auto leading-relaxed">
+            {/* Right side - Form */}
+            <div className="relative p-8 md:p-12 bg-sunshine-yellow flex flex-col justify-center">
+              {/* Bold Headline */}
+              <div className="mb-8">
+                <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl text-sunshine-brown mb-4 font-bold uppercase leading-tight">
+                  Stay<br />Connected<br />To The Fire
+                </h2>
+                <p className="font-body text-base md:text-lg text-sunshine-brown leading-relaxed max-w-md">
                   Enter your info to receive rituals, reflections, and invitations that keep you close to your own light.
                 </p>
               </div>
 
               {/* Error Message */}
               {error && (
-                <div className="mb-4 p-3 bg-red-500/10 border border-red-400/50 rounded-lg text-center">
-                  <p className="text-red-700 text-sm">{error}</p>
+                <div className="mb-5 p-4 bg-sunshine-orange/30 border-2 border-sunshine-orange rounded-xl">
+                  <p className="text-sunshine-brown font-body text-sm font-medium">{error}</p>
                 </div>
               )}
 
               {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-3.5">
-                {/* Form fields - per brandSpec.layout.signupPage.form.fields */}
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <input
                   type="text"
                   placeholder="First name"
                   value={formData.firstName}
                   onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
                   required
-                  className="w-full px-5 py-3 rounded-lg bg-white border-2 border-sunshine-brown/30 focus:border-sunshine-purple focus:ring-2 focus:ring-sunshine-purple/20 focus:outline-none transition-all placeholder:text-sunshine-brown/50 font-body text-sunshine-brown shadow-sm"
+                  className="w-full px-6 py-4 rounded-xl bg-sunshine-white border-3 border-sunshine-brown/20 focus:border-sunshine-purple focus:ring-4 focus:ring-sunshine-purple/30 focus:outline-none transition-all placeholder:text-sunshine-brown/60 font-body text-sunshine-brown text-lg shadow-md"
                 />
                 <input
                   type="text"
                   placeholder="Last name"
                   value={formData.lastName}
                   onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                  className="w-full px-5 py-3 rounded-lg bg-white border-2 border-sunshine-brown/30 focus:border-sunshine-purple focus:ring-2 focus:ring-sunshine-purple/20 focus:outline-none transition-all placeholder:text-sunshine-brown/50 font-body text-sunshine-brown shadow-sm"
+                  className="w-full px-6 py-4 rounded-xl bg-sunshine-white border-3 border-sunshine-brown/20 focus:border-sunshine-purple focus:ring-4 focus:ring-sunshine-purple/30 focus:outline-none transition-all placeholder:text-sunshine-brown/60 font-body text-sunshine-brown text-lg shadow-md"
                 />
                 <input
                   type="email"
@@ -111,48 +122,46 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
-                  className="w-full px-5 py-3 rounded-lg bg-white border-2 border-sunshine-brown/30 focus:border-sunshine-purple focus:ring-2 focus:ring-sunshine-purple/20 focus:outline-none transition-all placeholder:text-sunshine-brown/50 font-body text-sunshine-brown shadow-sm"
+                  className="w-full px-6 py-4 rounded-xl bg-sunshine-white border-3 border-sunshine-brown/20 focus:border-sunshine-purple focus:ring-4 focus:ring-sunshine-purple/30 focus:outline-none transition-all placeholder:text-sunshine-brown/60 font-body text-sunshine-brown text-lg shadow-md"
                 />
                 <input
                   type="tel"
                   placeholder="Phone number"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-5 py-3 rounded-lg bg-white border-2 border-sunshine-brown/30 focus:border-sunshine-purple focus:ring-2 focus:ring-sunshine-purple/20 focus:outline-none transition-all placeholder:text-sunshine-brown/50 font-body text-sunshine-brown shadow-sm"
+                  className="w-full px-6 py-4 rounded-xl bg-sunshine-white border-3 border-sunshine-brown/20 focus:border-sunshine-purple focus:ring-4 focus:ring-sunshine-purple/30 focus:outline-none transition-all placeholder:text-sunshine-brown/60 font-body text-sunshine-brown text-lg shadow-md"
                 />
 
-                {/* Submit button - per brandSpec.layout.signupPage.form.submitButton */}
+                {/* Bold Submit Button */}
                 <div className="pt-4">
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-sunshine-purple text-white font-subhead font-bold py-4 rounded-lg hover:bg-sunshine-orange hover:text-sunshine-brown transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-xl tracking-wider shadow-lg hover:shadow-xl uppercase"
-                    style={{ backgroundColor: '#6E054D' }}
+                    className="w-full bg-sunshine-purple text-sunshine-white font-subhead font-bold py-5 px-8 rounded-full hover:bg-sunshine-brown hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-2xl tracking-wide shadow-2xl uppercase"
                   >
                     {isSubmitting ? 'Submitting...' : 'I Want In'}
                   </button>
                 </div>
               </form>
-            </>
-          ) : (
-            <div className="text-center py-8">
-              <div className="text-6xl mb-4">✨</div>
-              <h3 className="font-headline text-3xl text-sunshine-purple mb-3 font-bold uppercase">
-                You&apos;re In
-              </h3>
-              {/* Success message - per brandSpec.layout.signupPage.form.successMessage */}
-              <p className="font-body text-sm md:text-base text-sunshine-brown/80 mb-6 max-w-md mx-auto leading-relaxed">
-                You are in. Watch your inbox for your first ritual and a little extra light.
-              </p>
-              <button
-                onClick={onClose}
-                className="bg-sunshine-purple text-sunshine-white px-8 py-3 rounded-lg hover:bg-sunshine-orange transition-all font-subhead font-bold uppercase text-sm"
-              >
-                Close
-              </button>
             </div>
-          )}
-        </div>
+          </div>
+        ) : (
+          <div className="text-center py-16 px-8 md:py-24 bg-sunshine-yellow">
+            <div className="text-7xl md:text-8xl mb-6">🔥</div>
+            <h3 className="font-headline text-4xl md:text-5xl text-sunshine-brown mb-4 font-bold uppercase">
+              You&apos;re In
+            </h3>
+            <p className="font-body text-lg md:text-xl text-sunshine-brown mb-8 max-w-lg mx-auto leading-relaxed">
+              You are in. Watch your inbox for your first ritual and a little extra light.
+            </p>
+            <button
+              onClick={onClose}
+              className="bg-sunshine-purple text-sunshine-white px-12 py-4 rounded-full hover:bg-sunshine-brown transition-all font-subhead font-bold uppercase text-lg shadow-xl"
+            >
+              Close
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
