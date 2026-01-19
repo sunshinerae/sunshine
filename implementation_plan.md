@@ -7,7 +7,7 @@
 - [x] Create `components/motion/slide-in-view.tsx` — scroll-triggered slide animation wrapper (soft, 0.6s ease)
 - [x] Create `components/motion/stagger-children.tsx` — staggered animation for card grids (crisp, 0.3s)
 - [x] Create `components/motion/scale-in.tsx` — scale animation for CTAs and buttons (crisp, 0.3s)
-- [ ] Create `lib/animation-variants.ts` — reusable Framer Motion variants for soft and crisp animations
+- [x] Create `lib/animation-variants.ts` — reusable Framer Motion variants for soft and crisp animations
 
 ## Phase 2: Data Structures
 

@@ -150,3 +150,39 @@ Key features:
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task complete. I created `components/motion/scale-in.tsx` with two components:
+
+1. **`ScaleIn`** - Scroll-triggered scale animation for CTAs and buttons
+   - Crisp 0.3s duration with defined cubic-bezier easing `[0.4, 0, 0.2, 1]`
+   - Scales from 0.9 to 1.0 by default
+   - Optional fade effect (enabled by default)
+   - Configurable delay, initial scale, duration, viewport margin
+
+2. **`ScaleOnHover`** - Interaction-based scale animation for hover/tap states
+   - Scales to 1.05 on hover, 0.98 on tap
+   - Same crisp easing as ScaleIn
+   - Useful for button hover effects mentioned in Phase 8
+
+Both components respect `prefers-reduced-motion` for accessibility.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36mabc5e63 feat: create scale-in scroll-triggered animation wrapper[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 40s │ [0;36mAvg:[0m 43s │ [0;36mEst. remaining:[0m 1h 1m
+
+  [1;37mRecent commits:[0m
+    [0;36mabc5e63 feat: create scale-in scroll-triggered animation wrapper[0m
+    [0;36me4bcbf3 feat: create stagger-children scroll-triggered animation wrapper[0m
+    [0;36mc41d8e2 feat: create slide-in-view scroll-triggered animation wrapper[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 6[0m │ ������������������������������ 5%
+  [0;32m5 done[0m │ [1;33m86 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create `lib/animation-variants.ts` — reusable Framer Motion variants for soft and crisp animations[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
