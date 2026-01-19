@@ -2075,3 +2075,33 @@ Task complete. The blog pages already had scroll animations implemented using Fa
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I created the thank-you page at `app/thank-you/page.tsx` with:
+
+1. **Hero section** - Fire emoji, "You are in" headline, warm welcome message on purple background
+2. **What happens next section** - Three-step cards explaining: check inbox (first ritual in 24 hours), follow on Instagram, mark calendar for events
+3. **Community invitation section** - Instagram link with "You do not have to do this alone" messaging on yellow background
+4. **Explore more section** - Cards linking to Events and Offerings pages with hover effects, plus Return Home button
+
+All sections use soft entrance animations (FadeInView, StaggerChildren) and follow brand color contrast rules.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m5a54957 feat: create thank-you page for post-signup redirect[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 18s │ [0;36mAvg:[0m 11m 10s │ [0;36mEst. remaining:[0m 4h 16m
+
+  [1;37mRecent commits:[0m
+    [0;36m5a54957 feat: create thank-you page for post-signup redirect[0m
+    [0;36m24d003b feat: add scroll animations to blog pages[0m
+    [0;36m5960065 feat: add related posts section at bottom of blog post[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 69[0m │ ������������������������������ 74%
+  [0;32m68 done[0m │ [1;33m23 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Add warm confirmation message with fire emoji[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
