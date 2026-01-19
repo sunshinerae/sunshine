@@ -39,11 +39,11 @@ export default function OfferingsPage() {
   }
 
   return (
-    <div className="bg-sunshine-white">
-      <section className="bg-sunshine-purple text-sunshine-white px-6 py-16 md:py-20">
+    <div className="bg-sun-cream">
+      <section className="bg-sun-plum text-white px-6 py-16 md:py-20">
         <div className="max-w-5xl mx-auto text-center space-y-4">
           <FadeInView delay={0}>
-            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-blue">Offerings</p>
+            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-gold">Offerings</p>
           </FadeInView>
           <FadeInView delay={0.1}>
             <h1 className="font-headline text-[clamp(2.8rem,6vw,4.5rem)] uppercase leading-tight">
@@ -58,12 +58,12 @@ export default function OfferingsPage() {
           <FadeInView delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="/contact">
-                <Button className="bg-sunshine-yellow text-sunshine-brown hover:bg-sunshine-blue">
+                <Button className="bg-sun-gold text-sun-cocoa hover:bg-sun-gold/90">
                   Work With Sunshine
                 </Button>
               </Link>
               <Link href="/events">
-                <Button variant="outline" className="border-sunshine-white text-sunshine-white hover:bg-sunshine-white hover:text-sunshine-purple">
+                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-sun-plum">
                   Explore events
                 </Button>
               </Link>
@@ -76,12 +76,12 @@ export default function OfferingsPage() {
         <div className="max-w-6xl mx-auto space-y-8">
           <FadeInView>
             <div className="space-y-2">
-              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">1:1 Coaching</p>
-              <h2 className="font-headline text-4xl uppercase text-sunshine-purple">Come home to yourself.</h2>
-              <p className="font-body text-lg text-sunshine-brown leading-relaxed max-w-3xl">
+              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-coral">1:1 Coaching</p>
+              <h2 className="font-headline text-4xl uppercase text-sun-plum">Come home to yourself.</h2>
+              <p className="font-body text-lg text-sun-cocoa leading-relaxed max-w-3xl">
                 Single session or 3-month journey. Together we clear the fog, rebuild confidence, and practice rituals that keep you resourced.
               </p>
-              <p className="font-body text-sm text-sunshine-brown">Starts at $450 per session or $1,200 for 3 months. Payment plans available.</p>
+              <p className="font-body text-sm text-sun-cocoa">Starts at $450 per session or $1,200 for 3 months. Payment plans available.</p>
             </div>
           </FadeInView>
           <StaggerChildren className="grid md:grid-cols-3 gap-6">
@@ -103,11 +103,11 @@ export default function OfferingsPage() {
             </StaggerItem>
             <StaggerItem>
               <BrandCard className="p-7" variant="white">
-              <h3 className="font-headline text-2xl uppercase text-sunshine-purple mb-3">What it helps with</h3>
+              <h3 className="font-headline text-2xl uppercase text-sun-plum mb-3">What it helps with</h3>
               <ul className="space-y-2 text-sm leading-relaxed font-body">
                 {focusAreas.map((item) => (
                   <li key={item} className="flex gap-2 items-start">
-                    <span className="inline-flex h-2.5 w-2.5 rounded-full bg-sunshine-yellow mt-2" aria-hidden />
+                    <span className="inline-flex h-2.5 w-2.5 rounded-full bg-sun-gold mt-2" aria-hidden />
                     <span>{item}</span>
                   </li>
                 ))}
@@ -125,22 +125,22 @@ export default function OfferingsPage() {
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 py-12 md:py-16 overflow-hidden bg-sunshine-yellow text-sunshine-brown">
+      <section className="px-4 sm:px-6 py-12 md:py-16 overflow-hidden bg-sun-gold text-sun-cocoa">
         <div className="max-w-6xl mx-auto space-y-8">
           <FadeInView>
             <div className="space-y-2">
-              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-purple">Retreats</p>
-              <h2 className="font-headline text-4xl uppercase text-sunshine-purple">Release, remember, reconnect.</h2>
+              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum">Retreats</p>
+              <h2 className="font-headline text-4xl uppercase text-sun-plum">Release, remember, reconnect.</h2>
               <p className="font-body text-lg leading-relaxed max-w-3xl">
                 Weekend and longer immersive experiences to shed old identities, remember who you are, and gather tools with women who want the same.
               </p>
-              <p className="font-body text-sm text-sunshine-brown">From $650. Payment plans and limited scholarships available.</p>
+              <p className="font-body text-sm text-sun-cocoa">From $650. Payment plans and limited scholarships available.</p>
             </div>
           </FadeInView>
           <StaggerChildren className="grid md:grid-cols-2 gap-6">
             <StaggerItem>
               <BrandCard className="p-7" variant="orange">
-                <p className="font-subhead uppercase tracking-[0.14em] text-xs text-sunshine-blue">Energy</p>
+                <p className="font-subhead uppercase tracking-[0.14em] text-xs text-sun-plum">Energy</p>
                 <h3 className="font-headline text-2xl uppercase mt-2">Immersive + restorative</h3>
                 <p className="font-body leading-relaxed mt-3 text-sm">
                   Release old narratives, reset your nervous system, and leave with practice you can carry home.
@@ -149,11 +149,11 @@ export default function OfferingsPage() {
             </StaggerItem>
             <StaggerItem>
               <BrandCard className="p-7" variant="white">
-                <h4 className="font-subhead uppercase tracking-[0.14em] text-xs text-sunshine-purple">Elements</h4>
+                <h4 className="font-subhead uppercase tracking-[0.14em] text-xs text-sun-plum">Elements</h4>
                 <ul className="grid sm:grid-cols-2 gap-3 mt-3 text-sm leading-relaxed font-body">
                   {retreatElements.map((item) => (
                     <li key={item} className="flex gap-2 items-start">
-                      <span className="inline-flex h-2.5 w-2.5 rounded-full bg-sunshine-orange mt-2" aria-hidden />
+                      <span className="inline-flex h-2.5 w-2.5 rounded-full bg-sun-coral mt-2" aria-hidden />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -163,7 +163,7 @@ export default function OfferingsPage() {
           </StaggerChildren>
           <FadeInView delay={0.3}>
             <Link href="/events">
-              <Button className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-yellow hover:text-sunshine-brown">
+              <Button className="bg-sun-plum text-white hover:bg-sun-plum/90">
                 Join the retreat waitlist
               </Button>
             </Link>
@@ -171,13 +171,13 @@ export default function OfferingsPage() {
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 py-12 md:py-16 overflow-hidden bg-sunshine-white">
+      <section className="px-4 sm:px-6 py-12 md:py-16 overflow-hidden bg-sun-cream">
         <div className="max-w-6xl mx-auto space-y-8">
           <FadeInView>
             <div className="space-y-2">
-              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-orange">Events hub</p>
-              <h2 className="font-headline text-4xl uppercase text-sunshine-purple leading-[0.9] tracking-tight">Community in motion</h2>
-              <p className="font-body text-lg leading-relaxed max-w-3xl text-sunshine-brown">
+              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-coral">Events hub</p>
+              <h2 className="font-headline text-4xl uppercase text-sun-plum leading-[0.9] tracking-tight">Community in motion</h2>
+              <p className="font-body text-lg leading-relaxed max-w-3xl text-sun-cocoa">
                 Golden Hour (high-energy, heart-led networking) and Lunar Room (slow, introspective sound + stillness). Two energies, one community.
               </p>
             </div>
@@ -187,7 +187,7 @@ export default function OfferingsPage() {
               <BrandCard className="p-7" variant="orange">
                 <h3 className="font-headline text-2xl uppercase mb-2">Golden Hour</h3>
                 <p className="font-body text-sm leading-relaxed">Electric, connective, and playful. Storytelling, mindset coaching, and a clear next step to keep moving.</p>
-                <Button className="mt-5 bg-sunshine-blue text-sunshine-brown hover:bg-sunshine-yellow">
+                <Button className="mt-5 bg-sun-plum text-white hover:bg-sun-plum/90">
                   See upcoming dates
                 </Button>
               </BrandCard>
@@ -196,7 +196,7 @@ export default function OfferingsPage() {
               <BrandCard className="p-7" variant="purple">
                 <h3 className="font-headline text-2xl uppercase mb-2">Lunar Room</h3>
                 <p className="font-body text-sm leading-relaxed">Slow, grounded, candle-lit. Yoga, sound, meditation, and gentle community processing.</p>
-                <Button className="mt-5 bg-sunshine-yellow text-sunshine-brown hover:bg-sunshine-blue">
+                <Button className="mt-5 bg-sun-gold text-sun-cocoa hover:bg-sun-gold/90">
                   Join the waitlist
                 </Button>
               </BrandCard>
@@ -204,7 +204,7 @@ export default function OfferingsPage() {
           </StaggerChildren>
           <FadeInView delay={0.3}>
             <Link href="/events">
-              <Button variant="outline" className="border-sunshine-purple text-sunshine-purple hover:bg-sunshine-purple hover:text-sunshine-white">
+              <Button variant="outline" className="border-sun-plum text-sun-plum hover:bg-sun-plum hover:text-white">
                 Explore all events
               </Button>
             </Link>
@@ -212,12 +212,12 @@ export default function OfferingsPage() {
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 py-12 md:py-16 overflow-hidden bg-sunshine-yellow text-sunshine-brown">
+      <section className="px-4 sm:px-6 py-12 md:py-16 overflow-hidden bg-sun-gold text-sun-cocoa">
         <div className="max-w-6xl mx-auto space-y-8">
           <FadeInView>
             <div className="space-y-2">
-              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-purple">Future offerings</p>
-              <h2 className="font-headline text-4xl uppercase text-sunshine-purple">Planting seeds</h2>
+              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-plum">Future offerings</p>
+              <h2 className="font-headline text-4xl uppercase text-sun-plum">Planting seeds</h2>
               <p className="font-body text-lg leading-relaxed max-w-3xl">
                 We are building more ways to stay in momentum. No overpromising—just honest excitement for what is next.
               </p>
@@ -227,7 +227,7 @@ export default function OfferingsPage() {
             {future.map((item) => (
               <StaggerItem key={item.title}>
                 <BrandCard variant="white" className="p-6">
-                  <h3 className="font-headline text-xl uppercase text-sunshine-purple mb-2">{item.title}</h3>
+                  <h3 className="font-headline text-xl uppercase text-sun-plum mb-2">{item.title}</h3>
                   <p className="font-body text-sm leading-relaxed">{item.copy}</p>
                 </BrandCard>
               </StaggerItem>
