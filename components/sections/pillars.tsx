@@ -51,12 +51,12 @@ const pillars = [
 
 export function Pillars() {
   return (
-    <section id="services" className="py-20 px-6 bg-background">
+    <section id="services" className="py-20 px-6 bg-sun-cream">
       <div className="max-w-7xl mx-auto">
-        <h2 className="font-display text-4xl md:text-5xl font-semibold mb-4 text-center text-foreground">
+        <h2 className="font-display text-4xl md:text-5xl font-semibold mb-4 text-center text-sun-cocoa">
           What We Do
         </h2>
-        <p className="text-center text-muted-foreground mb-16 max-w-2xl mx-auto">
+        <p className="text-center text-sun-cocoa/70 mb-16 max-w-2xl mx-auto">
           Four core services to handle the logistics, growth, systems, and personal development
           that keep creative work moving.
         </p>
@@ -65,25 +65,25 @@ export function Pillars() {
           {pillars.map((pillar) => (
             <Card
               key={pillar.title}
-              className="group p-8 hover:border-accent transition-transform hover:scale-[1.02] bg-card border-2 border-sunshine-purple"
+              className="group p-8 hover:border-sun-plum transition-transform hover:scale-[1.02] bg-sun-paper border border-sun-sand shadow-soft"
             >
-              <h3 className="font-display text-2xl font-semibold mb-2 text-foreground">
+              <h3 className="font-display text-2xl font-semibold mb-2 text-sun-cocoa">
                 {pillar.title}
               </h3>
-              <p className="text-accent text-sm font-medium mb-6 italic">
+              <p className="text-sun-plum text-sm font-medium mb-6 italic">
                 {pillar.promise}
               </p>
               <ul className="space-y-3 mb-8">
                 {pillar.highlights.map((highlight, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <span className="text-accent mt-0.5">•</span>
+                  <li key={idx} className="flex items-start gap-2 text-sm text-sun-cocoa/70">
+                    <span className="text-sun-gold mt-0.5">•</span>
                     <span>{highlight}</span>
                   </li>
                 ))}
               </ul>
               <Link
                 href={pillar.href}
-                className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:gap-3 transition-all"
+                className="inline-flex items-center gap-2 text-sm font-medium text-sun-plum hover:text-sun-plum/80 hover:gap-3 transition-all"
               >
                 Learn more
                 <ArrowRight className="h-4 w-4" />

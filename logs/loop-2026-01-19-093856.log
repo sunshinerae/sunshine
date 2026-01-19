@@ -1305,3 +1305,33 @@ Build passed and changes committed.
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task complete. Updated `components/sections/hero.tsx` with:
+- Hero gradient background using `bg-gradient-to-br from-sun-plum to-sun-gold`
+- White text for headline and subheadline (since they're on the gradient)
+- Primary button using `bg-sun-paper text-sun-plum` (inverted for contrast on gradient)
+- Secondary button with white border and text for visibility on the gradient
+- `rounded-[14px]` on buttons per brand spec
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36mc36c339 feat: Update components/sections/hero.tsx - sun-* colors, hero gradient[0m
+  [0;32m✓[0m Task marked complete
+  [0;36mRunning build check...[0m
+  [0;32m✓[0m Build passed
+
+  [0;36mTask time:[0m 1m 10s │ [0;36mAvg:[0m 2m 24s │ [0;36mEst. remaining:[0m 19m 12s
+
+  [1;37mRecent commits:[0m
+    [0;36mc36c339 feat: Update components/sections/hero.tsx - sun-* colors, hero gradient[0m
+    [0;36m97377b7 feat: Update components/section-separator.tsx - sun-* colors[0m
+    [0;36m9fb32f1 feat: Update components/floating-affirmation.tsx - sun-* colors[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 42[0m │ ������������������������������ 84%
+  [0;32m44 done[0m │ [1;33m8 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Update components/sections/pillars.tsx: sun-* colors[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
