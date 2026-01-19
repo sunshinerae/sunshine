@@ -93,6 +93,32 @@ export default function LaunchPage() {
 
         </div>
 
+        {/* Social Proof Strip */}
+        <section className="bg-sunshine-purple py-12 md:py-16 mt-16">
+          <div className="max-w-6xl mx-auto px-6 md:px-12">
+            <div className="text-center space-y-8">
+              {/* Community count */}
+              <p className="font-subhead text-sunshine-yellow text-lg md:text-xl uppercase tracking-wide">
+                Join 500+ women finding their radiance
+              </p>
+
+              {/* Testimonial */}
+              <blockquote className="max-w-2xl mx-auto">
+                <span className="font-headline text-4xl text-sunshine-yellow leading-none select-none" aria-hidden="true">"</span>
+                <p className="font-body text-lg md:text-xl text-sunshine-white leading-relaxed -mt-2">
+                  For the first time in years, I feel like I can breathe. The Sunshine Effect helped me find clarity when everything felt overwhelming.
+                </p>
+                <footer className="mt-6">
+                  <cite className="not-italic">
+                    <span className="font-subhead text-sunshine-white block">Sarah M.</span>
+                    <span className="font-body text-sm text-sunshine-white/70">Community Member</span>
+                  </cite>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+        </section>
+
         {/* Mission statement footer */}
         <footer className="border-t border-sunshine-brown/10 py-8">
           <div className="max-w-6xl mx-auto px-6 md:px-12 text-center">

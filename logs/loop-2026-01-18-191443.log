@@ -2223,3 +2223,32 @@ The build passes and the changes have been committed.
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task complete. Created `app/not-found.tsx` with:
+- Warm, on-brand message ("You wandered off the path")
+- Compass emoji with scale-in animation
+- Navigation links grid to all main pages (Home, About, Offerings, Events, Blog, Contact)
+- CTA button to return home
+- Brand colors and typography throughout
+- Soft entrance animations using FadeInView, ScaleIn, and StaggerChildren
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m63d66ca feat: create custom 404 page[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 59s │ [0;36mAvg:[0m 10m 28s │ [0;36mEst. remaining:[0m 3h 8m
+
+  [1;37mRecent commits:[0m
+    [0;36m63d66ca feat: create custom 404 page[0m
+    [0;36me2c9423 feat: add soft entrance animations to thank-you page[0m
+    [0;36mc178364 feat: add social links and community invitation[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 74[0m │ ������������������������������ 84%
+  [0;32m77 done[0m │ [1;33m14 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Add social proof strip to launch page (placeholder testimonial or "X women have joined")[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
