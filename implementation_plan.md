@@ -41,7 +41,7 @@
 - [x] Create `lib/metadata.ts` — utility for generating page metadata (title, description, OG tags)
 - [x] Create `app/sitemap.ts` — dynamic sitemap generation for all pages
 - [x] Create `app/robots.ts` — robots.txt configuration (update existing if needed)
-- [ ] Add structured data (JSON-LD) component for Organization schema
+- [x] Add structured data (JSON-LD) component for Organization schema
 - [ ] Create `components/seo/og-image.tsx` — template for Open Graph images (or use Next.js OG image generation)
 
 ## Phase 6: Core Pages
