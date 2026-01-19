@@ -1424,3 +1424,32 @@ The divider is now placed between the Golden Hour and Lunar Room sections on the
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I added staggered scroll animations to the Events page:
+
+1. **Event Gallery section** - Added `FadeInView` animations to the section heading, title, and description with sequential delays
+2. **Gallery image grid** - Wrapped the gallery images in `StaggerChildren` and `StaggerItem` components for crisp staggered animations (0.1s delay between each card)
+3. **Fixed type error** - Resolved a pre-existing TypeScript error in `animation-variants.ts` where `readonly number[]` wasn't compatible with Framer Motion's `Easing` type
+
+The event cards in the Golden Hour and Lunar Room zones already had staggered animations in place from previous tasks, so those were left as-is.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36mcdb604b feat: add scroll animations to event cards (staggered)[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 2m 15s │ [0;36mAvg:[0m 15m 57s │ [0;36mEst. remaining:[0m 11h 57m
+
+  [1;37mRecent commits:[0m
+    [0;36mcdb604b feat: add scroll animations to event cards (staggered)[0m
+    [0;36m8128b63 feat: add visual divider or transition between zones[0m
+    [0;36m1970187 feat: add Lunar Room zone with cool background, moon imagery, and event cards from JSON[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 47[0m │ ������������������������������ 50%
+  [0;32m46 done[0m │ [1;33m45 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create `app/community/page.tsx` — minimal page with metadata[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

@@ -70,7 +70,7 @@
 - [x] Add scroll animations to event cards (staggered)
 
 ### Community Page
-- [ ] Create `app/community/page.tsx` — minimal page with metadata
+- [x] Create `app/community/page.tsx` — minimal page with metadata
 - [ ] Add Community hero with placeholder headline and description
 - [ ] Add single CTA section ("Join the List" or similar)
 - [ ] Add scroll animations

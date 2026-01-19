@@ -1,35 +1,12 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { BrandCard } from '@/components/brand-card';
 import { isFeatureEnabled } from '@/lib/features';
+import { PAGE_METADATA } from '@/lib/metadata';
 
-export const metadata = {
-  title: 'Community',
-  description: 'Belonging for big-hearted, creative women in transition. Accountability, courage, and aligned action together.',
-  keywords: ['women community', 'women support group', 'accountability group', 'women network'],
-  openGraph: {
-    title: 'Community | The Sunshine Effect',
-    description: 'Belonging for big-hearted, creative women in transition. Accountability, courage, and aligned action together.',
-    url: '/community',
-    type: 'website',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'The Sunshine Effect Community',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Community | The Sunshine Effect',
-    description: 'Belonging for big-hearted, creative women in transition. Accountability, courage, and aligned action together.',
-    images: ['/og-image.png'],
-  },
-  alternates: { canonical: '/community' },
-};
+export const metadata: Metadata = PAGE_METADATA.community;
 
 const pillars = [
   {
