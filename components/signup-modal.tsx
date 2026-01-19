@@ -88,6 +88,9 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
               <p className="font-body text-base md:text-lg text-sunshine-brown leading-relaxed max-w-md">
                 Enter your info to receive rituals, reflections, and invitations that keep you close to your own light.
               </p>
+              <p className="font-subhead text-sm md:text-base text-sunshine-purple mt-3 font-bold">
+                Get your first ritual in 24 hours
+              </p>
             </div>
 
             {/* Error Message */}

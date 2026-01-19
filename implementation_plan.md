@@ -114,7 +114,7 @@
 
 - [x] Add social proof strip to launch page (placeholder testimonial or "X women have joined")
 - [x] Update signup modal success state to redirect to /thank-you page
-- [ ] Add lead magnet tease to signup modal intro copy ("Get your first ritual in 24 hours")
+- [x] Add lead magnet tease to signup modal intro copy ("Get your first ritual in 24 hours")
 
 ## Phase 8: Micro-interactions & Polish
 

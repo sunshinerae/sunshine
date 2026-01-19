@@ -2279,3 +2279,31 @@ Task complete. I added a social proof strip to the launch page (`app/launch/page
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. The signup modal now redirects to `/thank-you` after successful form submission instead of showing an inline success state. Changes made:
+
+1. Added `useRouter` import from `next/navigation`
+2. Removed the `submitted` state variable (no longer needed)
+3. On successful form submission, the modal closes and redirects to `/thank-you`
+4. Removed the inline success state UI since the thank-you page now handles that
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36md57ebd4 feat: update signup modal success state to redirect to /thank-you page[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 16s │ [0;36mAvg:[0m 10m 13s │ [0;36mEst. remaining:[0m 2h 2m
+
+  [1;37mRecent commits:[0m
+    [0;36md57ebd4 feat: update signup modal success state to redirect to /thank-you page[0m
+    [0;36m75da209 feat: add social proof strip to launch page[0m
+    [0;36m63d66ca feat: create custom 404 page[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 76[0m │ ������������������������������ 86%
+  [0;32m79 done[0m │ [1;33m12 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Add lead magnet tease to signup modal intro copy ("Get your first ritual in 24 hours")[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
