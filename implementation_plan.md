@@ -37,7 +37,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 - [x] Update components/ui/badge.tsx: sun-* colors
 - [x] Update components/ui/input.tsx: sun-sand border, sun-plum focus ring
 - [x] Update components/ui/textarea.tsx: sun-sand border, sun-plum focus ring
-- [ ] Update components/ui/select.tsx: sun-sand border, sun-plum focus ring
+- [x] Update components/ui/select.tsx: sun-sand border, sun-plum focus ring
 - [ ] Update components/ui/cta-button.tsx: sun-plum bg, rounded-[14px]
 - [ ] Update components/ui/section-heading.tsx: sun-cocoa text
 - [ ] Update components/ui/reading-progress.tsx: sun-gold progress bar
