@@ -69,26 +69,26 @@ export function ContactPageForm() {
   if (isSubmitted) {
     return (
       <BrandCard className="max-w-2xl mx-auto p-12 text-center" variant="white">
-        <div className="w-16 h-16 rounded-full bg-sunshine-yellow flex items-center justify-center mx-auto mb-6 text-sunshine-brown animate-bounce">
+        <div className="w-16 h-16 rounded-full bg-sun-gold flex items-center justify-center mx-auto mb-6 text-sun-cocoa animate-bounce">
           <CheckCircle2 className="h-8 w-8" />
         </div>
-        <h2 className="font-headline text-4xl uppercase mb-4 text-sunshine-purple">
+        <h2 className="font-headline text-4xl uppercase mb-4 text-sun-plum">
           Thank you for reaching out.
         </h2>
-        <p className="font-body text-lg mb-8 leading-relaxed text-sunshine-brown">
+        <p className="font-body text-lg mb-8 leading-relaxed text-sun-cocoa">
           You&apos;ll hear from Sunshine within 24 hours. In the meantime, explore events or join the Consistent Bulletin to stay in the flow.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             variant="outline"
-            className="border-sunshine-purple text-sunshine-purple hover:bg-sunshine-purple hover:text-sunshine-white"
+            className="border-sun-plum text-sun-plum hover:bg-sun-plum hover:text-white"
             onClick={() => setIsSubmitted(false)}
           >
             Send another note
           </Button>
           <Button
             onClick={() => window.location.href = '/events'}
-            className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange"
+            className="bg-sun-plum text-white hover:bg-sun-plum/90"
           >
             Explore events
           </Button>
@@ -178,19 +178,19 @@ export function ContactPageForm() {
             <Button
               type="submit"
               size="lg"
-              className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange px-12"
+              className="bg-sun-plum text-white hover:bg-sun-plum/90 px-12"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
                 <span className="inline-flex items-center gap-2">
-                  <span className="h-4 w-4 border-2 border-sunshine-white border-t-transparent rounded-full animate-spin" aria-hidden />
+                  <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" aria-hidden />
                   Sending...
                 </span>
               ) : (
                 'Send message'
               )}
             </Button>
-            <p className="text-sm text-sunshine-brown max-w-md">
+            <p className="text-sm text-sun-cocoa max-w-md">
               Expect a reply in 24 hours. Your words stay confidential and are read by Sunshine only.
             </p>
           </div>
