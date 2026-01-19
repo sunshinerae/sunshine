@@ -78,7 +78,7 @@
 ### Contact Page
 - [x] Create `app/contact/page.tsx` — page structure with metadata
 - [x] Add Contact hero with welcoming headline placeholder
-- [ ] Add contact form section
+- [x] Add contact form section
 - [ ] Add newsletter signup section ("Consistent Bulletin")
 - [ ] Add SMS signup section with "love note" placeholder copy
 - [ ] Add social links section (Instagram primary)
