@@ -42,7 +42,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 - [x] Update components/ui/section-heading.tsx: sun-cocoa text
 - [x] Update components/ui/reading-progress.tsx: sun-gold progress bar
 - [x] Update components/ui/testimonial-card.tsx: sun-* colors
-- [ ] Update components/ui/zone-divider.tsx: sun-* colors
+- [x] Update components/ui/zone-divider.tsx: sun-* colors
 
 ### Card Components
 - [ ] Update components/cards/event-card.tsx: sun-paper bg, sun-sand border

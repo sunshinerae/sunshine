@@ -11,11 +11,11 @@ export function ZoneDivider({ from, to }: ZoneDividerProps) {
   const isGoldenToLunar = from === 'golden-hour' && to === 'lunar-room';
 
   // Colors based on transition direction
-  const fromBg = isGoldenToLunar ? 'bg-sunshine-orange' : 'bg-sunshine-purple';
-  const toBg = isGoldenToLunar ? 'bg-sunshine-purple' : 'bg-sunshine-orange';
-  const fromColor = isGoldenToLunar ? '#D4510B' : '#6E054D';
-  const toColor = isGoldenToLunar ? '#6E054D' : '#D4510B';
-  const accentColor = isGoldenToLunar ? '#FFC619' : '#95D7E6';
+  const fromBg = isGoldenToLunar ? 'bg-sun-gold' : 'bg-sun-plum';
+  const toBg = isGoldenToLunar ? 'bg-sun-plum' : 'bg-sun-gold';
+  const fromColor = isGoldenToLunar ? '#F6C453' : '#6E054D';
+  const toColor = isGoldenToLunar ? '#6E054D' : '#F6C453';
+  const accentColor = isGoldenToLunar ? '#F6C453' : '#F28C7D';
 
   return (
     <div className={`relative h-32 md:h-48 ${fromBg} overflow-hidden`}>
@@ -88,21 +88,21 @@ export function ZoneDivider({ from, to }: ZoneDividerProps) {
       {isGoldenToLunar && (
         <>
           <motion.div
-            className="absolute top-8 left-1/4 w-1.5 h-1.5 rounded-full bg-sunshine-white/40"
+            className="absolute top-8 left-1/4 w-1.5 h-1.5 rounded-full bg-sun-paper/40"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.5 }}
           />
           <motion.div
-            className="absolute top-12 right-1/3 w-1 h-1 rounded-full bg-sunshine-white/30"
+            className="absolute top-12 right-1/3 w-1 h-1 rounded-full bg-sun-paper/30"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.6 }}
           />
           <motion.div
-            className="absolute top-6 right-1/4 w-2 h-2 rounded-full bg-sunshine-blue/40"
+            className="absolute top-6 right-1/4 w-2 h-2 rounded-full bg-sun-coral/40"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
