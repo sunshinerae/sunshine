@@ -2396,3 +2396,37 @@ Task complete. I added subtle hover effects to the navigation links:
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I've added smooth focus states for form inputs with brand colors:
+
+**Changes made:**
+- `components/ui/input.tsx` - Added `transition-all duration-200 ease-out` for smooth transitions, changed border to `sunshine-brown/20` (subtler unfocused state), focus ring now uses `sunshine-purple/30` for a softer brand-colored glow
+- `components/ui/textarea.tsx` - Same improvements as Input
+- `components/ui/select.tsx` (SelectTrigger) - Same improvements, plus updated to use brand colors consistently
+
+**Key improvements:**
+- Smooth 200ms transitions on all focus state changes
+- Softer default border (`sunshine-brown/20`) that transitions to `sunshine-purple` on focus
+- Brand-colored ring with 30% opacity (`sunshine-purple/30`) for an elegant glow effect
+- Removed ring-offset for a cleaner, more integrated appearance
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m04b30a5 feat: add smooth focus states for form inputs (ring with brand color)[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 14s │ [0;36mAvg:[0m 9m 45s │ [0;36mEst. remaining:[0m 1h 18m
+
+  [1;37mRecent commits:[0m
+    [0;36m04b30a5 feat: add smooth focus states for form inputs (ring with brand color)[0m
+    [0;36m7b6213b feat: add subtle hover effects to nav links[0m
+    [0;36m201ba86 feat: add hover scale effect to all CTA buttons site-wide[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 80[0m │ ������������������������������ 91%
+  [0;32m83 done[0m │ [1;33m8 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Add hover effects to all card components (slight lift/shadow)[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

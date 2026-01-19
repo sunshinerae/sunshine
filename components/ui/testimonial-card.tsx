@@ -1,6 +1,8 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { crispEase } from '@/lib/animation-variants';
 
 interface TestimonialCardProps {
   /** The testimonial quote text */
@@ -35,7 +37,16 @@ export function TestimonialCard({
   };
 
   return (
-    <blockquote
+    <motion.blockquote
+      initial={{ y: 0, boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+      whileHover={{
+        y: -4,
+        boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
+      }}
+      transition={{
+        duration: 0.3,
+        ease: crispEase,
+      }}
       className={cn(
         'rounded-2xl p-8 flex flex-col gap-6',
         variantStyles[variant],
@@ -67,6 +78,6 @@ export function TestimonialCard({
           </span>
         </cite>
       </footer>
-    </blockquote>
+    </motion.blockquote>
   );
 }
