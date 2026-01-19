@@ -15,7 +15,7 @@ export function Footer() {
   const [footerSubmitted, setFooterSubmitted] = useState(false);
 
   return (
-    <footer className="bg-sunshine-purple text-sunshine-white border-t border-sunshine-brown">
+    <footer className="bg-sun-plum text-white border-t border-sun-sand">
       <div className="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-3 gap-10">
         <div className="space-y-3">
           <p className="font-subhead uppercase tracking-[0.14em] text-sm">
@@ -28,13 +28,13 @@ export function Footer() {
             Weekly love notes, event invites, and gentle reminders that discipline is self love in motion.
           </p>
           <div className="flex items-center gap-4 pt-3">
-            <Link href={SOCIAL_LINKS.instagram} aria-label="Instagram" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sunshine-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-sunshine-purple rounded-full transition-transform hover:scale-110">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sunshine-yellow text-sunshine-brown font-semibold">
+            <Link href={SOCIAL_LINKS.instagram} aria-label="Instagram" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-full transition-transform hover:scale-110">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sun-gold text-sun-cocoa font-semibold">
                 IG
               </span>
             </Link>
-            <Link href={SOCIAL_LINKS.linkedin} aria-label="LinkedIn" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sunshine-blue focus-visible:ring-offset-2 focus-visible:ring-offset-sunshine-purple rounded-full transition-transform hover:scale-110">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sunshine-blue text-sunshine-brown font-semibold">
+            <Link href={SOCIAL_LINKS.linkedin} aria-label="LinkedIn" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-coral focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-full transition-transform hover:scale-110">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sun-coral text-sun-cocoa font-semibold">
                 In
               </span>
             </Link>
@@ -51,7 +51,7 @@ export function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium hover:text-sunshine-yellow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sunshine-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-sunshine-purple rounded-sm"
+                  className="text-sm font-medium hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm"
                 >
                   {link.label}
                 </Link>
@@ -103,24 +103,24 @@ export function Footer() {
                     value={footerEmail}
                     onChange={(e) => setFooterEmail(e.target.value)}
                     disabled={footerSubmitting}
-                    className="bg-sunshine-white text-sunshine-brown placeholder:text-sunshine-brown/60 border-2 border-sunshine-purple"
+                    className="bg-sun-paper text-sun-cocoa placeholder:text-sun-cocoa/60 border-2 border-sun-sand"
                     aria-label="Email address for newsletter"
                     required
                   />
                   <Button
                     type="submit"
                     disabled={footerSubmitting}
-                    className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-yellow hover:text-sunshine-brown disabled:opacity-50"
+                    className="bg-sun-gold text-sun-cocoa hover:bg-sun-gold/90 disabled:opacity-50"
                   >
                     {footerSubmitting ? 'Joining...' : 'Join'}
                   </Button>
                 </form>
                 <p className="text-xs">
-                  We celebrate consent. Unsubscribe anytime. No spam, ever. <Link href="/privacy" className="underline hover:text-sunshine-yellow transition-colors">Privacy Policy</Link>
+                  We celebrate consent. Unsubscribe anytime. No spam, ever. <Link href="/privacy" className="underline hover:text-sun-gold transition-colors">Privacy Policy</Link>
                 </p>
               </>
             ) : (
-              <div className="bg-sunshine-yellow text-sunshine-purple rounded-lg p-4">
+              <div className="bg-sun-gold text-sun-cocoa rounded-lg p-4">
                 <p className="font-semibold text-sm">✨ You&apos;re in!</p>
                 <p className="text-xs mt-1">Check your inbox for a warm welcome.</p>
               </div>
@@ -128,20 +128,20 @@ export function Footer() {
           </div>
         )}
       </div>
-      <div className="border-t border-sunshine-brown">
+      <div className="border-t border-sun-sand/30">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
             <p className="font-medium">© {year} The Sunshine Effect</p>
-            <Link href="/privacy" className="text-xs hover:text-sunshine-yellow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sunshine-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-sunshine-purple rounded-sm">
+            <Link href="/privacy" className="text-xs hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm">
               Privacy Policy
             </Link>
           </div>
           <div className="flex gap-4">
             {FEATURES.fullContact && (
-              <Link href="/contact" className="hover:text-sunshine-yellow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sunshine-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-sunshine-purple rounded-sm">Work With Sunshine</Link>
+              <Link href="/contact" className="hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm">Work With Sunshine</Link>
             )}
             {FEATURES.events && (
-              <Link href="/events" className="hover:text-sunshine-yellow transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sunshine-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-sunshine-purple rounded-sm">Explore Events</Link>
+              <Link href="/events" className="hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm">Explore Events</Link>
             )}
           </div>
         </div>
