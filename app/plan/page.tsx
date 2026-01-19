@@ -21,15 +21,15 @@ export default function PlanPage() {
   const sections = planContent.split(/^##\s+/gm).filter(Boolean);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-sun-cream">
       {/* Header */}
-      <header className="border-b border-border sticky top-0 bg-background z-50">
+      <header className="border-b border-sun-sand sticky top-0 bg-sun-cream z-50">
         <div className="max-w-5xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
-            <h1 className="font-display text-2xl font-semibold tracking-tight">Project Plan</h1>
+            <h1 className="font-headline text-2xl font-semibold tracking-tight text-sun-cocoa">Project Plan</h1>
             <Link
               href="/"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="text-sm text-sun-cocoa/70 hover:text-sun-plum transition-colors"
             >
               ← Back to Home
             </Link>
@@ -47,10 +47,10 @@ export default function PlanPage() {
 
             return (
               <section key={idx} className="mb-16 scroll-mt-24" id={`section-${idx}`}>
-                <h2 className="font-display text-4xl font-semibold mb-6 text-foreground border-b border-border pb-4">
+                <h2 className="font-headline text-4xl font-semibold mb-6 text-sun-cocoa border-b border-sun-sand pb-4">
                   {title}
                 </h2>
-                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <div className="space-y-4 text-sun-cocoa/70 leading-relaxed">
                   {content.split('\n\n').map((para, pIdx) => {
                     // Handle lists
                     if (para.startsWith('*') || para.startsWith('-')) {
@@ -58,7 +58,7 @@ export default function PlanPage() {
                       return (
                         <ul key={pIdx} className="space-y-2 ml-6">
                           {items.map((item, iIdx) => (
-                            <li key={iIdx} className="text-foreground/80">
+                            <li key={iIdx} className="text-sun-cocoa/80">
                               {item.replace(/^[\*\-]\s+/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}
                             </li>
                           ))}
@@ -68,14 +68,14 @@ export default function PlanPage() {
 
                     // Handle bold text and regular paragraphs
                     const formatted = para
-                      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-foreground">$1</strong>')
+                      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-sun-cocoa">$1</strong>')
                       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                      .replace(/`(.*?)`/g, '<code class="bg-muted px-1.5 py-0.5 rounded text-sm font-mono">$1</code>');
+                      .replace(/`(.*?)`/g, '<code class="bg-sun-sand px-1.5 py-0.5 rounded text-sm font-mono">$1</code>');
 
                     return (
                       <p
                         key={pIdx}
-                        className="text-foreground/80 leading-relaxed"
+                        className="text-sun-cocoa/80 leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: formatted }}
                       />
                     );
@@ -88,9 +88,9 @@ export default function PlanPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border mt-24">
+      <footer className="border-t border-sun-sand mt-24">
         <div className="max-w-5xl mx-auto px-6 py-8">
-          <p className="text-sm text-muted-foreground text-center">
+          <p className="text-sm text-sun-cocoa/70 text-center">
             Project Plan · Updated {new Date().toLocaleDateString('en-US', {
               month: 'long',
               day: 'numeric',
