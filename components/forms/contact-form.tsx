@@ -113,34 +113,34 @@ export function ContactForm({
 
   // Text colors based on background variant
   const textStyles = {
-    purple: 'text-sunshine-white',
-    orange: 'text-sunshine-white',
-    yellow: 'text-sunshine-brown',
-    white: 'text-sunshine-brown',
+    purple: 'text-white',
+    orange: 'text-white',
+    yellow: 'text-sun-cocoa',
+    white: 'text-sun-cocoa',
   };
 
   // Input styles based on variant for proper contrast
   const inputStyles = {
-    purple: 'bg-sunshine-white/10 border-sunshine-white/30 text-sunshine-white placeholder:text-sunshine-white/60 focus:border-sunshine-yellow focus:ring-sunshine-yellow/30',
-    orange: 'bg-sunshine-white/10 border-sunshine-white/30 text-sunshine-white placeholder:text-sunshine-white/60 focus:border-sunshine-yellow focus:ring-sunshine-yellow/30',
-    yellow: 'bg-sunshine-white border-sunshine-brown/20 text-sunshine-brown placeholder:text-sunshine-brown/50 focus:border-sunshine-purple focus:ring-sunshine-purple/30',
-    white: 'bg-sunshine-white border-sunshine-brown/20 text-sunshine-brown placeholder:text-sunshine-brown/50 focus:border-sunshine-purple focus:ring-sunshine-purple/30',
+    purple: 'bg-white/10 border-white/30 text-white placeholder:text-white/60 focus:border-sun-gold focus:ring-sun-gold/30',
+    orange: 'bg-white/10 border-white/30 text-white placeholder:text-white/60 focus:border-sun-gold focus:ring-sun-gold/30',
+    yellow: 'bg-sun-paper border-sun-sand text-sun-cocoa placeholder:text-sun-cocoa/50 focus:border-sun-plum focus:ring-sun-plum/30',
+    white: 'bg-sun-paper border-sun-sand text-sun-cocoa placeholder:text-sun-cocoa/50 focus:border-sun-plum focus:ring-sun-plum/30',
   };
 
   // Label styles based on variant
   const labelStyles = {
-    purple: 'text-sunshine-white/90',
-    orange: 'text-sunshine-white/90',
-    yellow: 'text-sunshine-brown/80',
-    white: 'text-sunshine-brown/80',
+    purple: 'text-white/90',
+    orange: 'text-white/90',
+    yellow: 'text-sun-cocoa/80',
+    white: 'text-sun-cocoa/80',
   };
 
   // Error styles based on variant
   const errorStyles = {
-    purple: 'text-sunshine-yellow',
-    orange: 'text-sunshine-yellow',
-    yellow: 'text-sunshine-orange',
-    white: 'text-sunshine-orange',
+    purple: 'text-sun-gold',
+    orange: 'text-sun-gold',
+    yellow: 'text-sun-coral',
+    white: 'text-sun-coral',
   };
 
   const inputBaseClasses = cn(
@@ -168,8 +168,8 @@ export function ContactForm({
         <p className={cn(
           'font-body text-sm mb-6 leading-relaxed',
           variant === 'purple' || variant === 'orange'
-            ? 'text-sunshine-white/80'
-            : 'text-sunshine-brown/70'
+            ? 'text-white/80'
+            : 'text-sun-cocoa/70'
         )}>
           {description}
         </p>
@@ -317,8 +317,8 @@ export function ContactForm({
           <p className={cn(
             'text-xs font-body',
             variant === 'purple' || variant === 'orange'
-              ? 'text-sunshine-white/60'
-              : 'text-sunshine-brown/50'
+              ? 'text-white/60'
+              : 'text-sun-cocoa/50'
           )}>
             This is a judgment-free space. We typically respond within 24-48 hours.
           </p>
