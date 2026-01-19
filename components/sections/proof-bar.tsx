@@ -7,12 +7,12 @@ const cities = [
 
 export function ProofBar() {
   return (
-    <section className="border-y border-border bg-muted/30 py-4 overflow-hidden">
+    <section className="border-y border-sun-sand bg-sun-sand/30 py-4 overflow-hidden">
       <div className="flex gap-16 animate-marquee whitespace-nowrap">
         {cities.concat(cities).map((city, idx) => (
           <span
             key={idx}
-            className="text-sm font-medium text-muted-foreground uppercase tracking-wider px-4"
+            className="text-sm font-medium text-sun-cocoa/60 uppercase tracking-wider px-4"
           >
             {city}
           </span>

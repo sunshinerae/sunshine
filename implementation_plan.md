@@ -72,7 +72,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 ### Section Components
 - [x] Update components/sections/hero.tsx: sun-* colors, hero gradient
 - [x] Update components/sections/pillars.tsx: sun-* colors
-- [ ] Update components/sections/proof-bar.tsx: sun-* colors
+- [x] Update components/sections/proof-bar.tsx: sun-* colors
 
 ### Blog Components
 - [ ] Update components/blog/markdown-content.tsx: sun-cocoa text, sun-plum links

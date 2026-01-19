@@ -1335,3 +1335,38 @@ Task complete. Updated `components/sections/hero.tsx` with:
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task complete. Updated `components/sections/pillars.tsx` with sun-* colors:
+
+- Section background: `bg-sun-cream`
+- Headings: `text-sun-cocoa`
+- Muted text: `text-sun-cocoa/70`
+- Cards: `bg-sun-paper border border-sun-sand shadow-soft` with `hover:border-sun-plum`
+- Accent text (promise): `text-sun-plum`
+- Bullet points: `text-sun-gold`
+- Links: `text-sun-plum hover:text-sun-plum/80`
+
+Replaced the old `sunshine-purple` reference with the new brand colors.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m865a3bf feat: Update components/sections/pillars.tsx - sun-* colors[0m
+  [0;32m✓[0m Task marked complete
+  [0;36mRunning build check...[0m
+  [0;32m✓[0m Build passed
+
+  [0;36mTask time:[0m 1m 9s │ [0;36mAvg:[0m 2m 22s │ [0;36mEst. remaining:[0m 16m 34s
+
+  [1;37mRecent commits:[0m
+    [0;36m865a3bf feat: Update components/sections/pillars.tsx - sun-* colors[0m
+    [0;36mc36c339 feat: Update components/sections/hero.tsx - sun-* colors, hero gradient[0m
+    [0;36m97377b7 feat: Update components/section-separator.tsx - sun-* colors[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 43[0m │ ������������������������������ 86%
+  [0;32m45 done[0m │ [1;33m7 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Update components/sections/proof-bar.tsx: sun-* colors[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
