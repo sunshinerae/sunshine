@@ -21,7 +21,7 @@ export function SpotsCounter({ initial = 12 }: SpotsCounterProps) {
   }, []);
 
   return (
-    <div className="font-subhead uppercase tracking-[0.12em] text-sm text-sunshine-white flex items-center gap-2 animate-pulse">
+    <div className="font-subhead uppercase tracking-[0.12em] text-sm text-sun-cream flex items-center gap-2 animate-pulse">
       Only {spots} spots remaining · 2 people viewing now
     </div>
   );
