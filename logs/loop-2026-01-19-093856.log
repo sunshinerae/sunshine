@@ -548,3 +548,39 @@ Also updated focus states to use `sun-plum` ring.
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed successfully.
+
+**Summary:**
+- Updated `components/ui/input.tsx` with new sun-* brand colors:
+  - `border-sun-sand` for border
+  - `bg-sun-paper` for background
+  - `text-sun-cocoa` for text
+  - `placeholder:text-sun-cocoa/60` for placeholder
+  - `focus-visible:border-sun-plum` and `focus-visible:ring-sun-plum/30` for focus ring
+- Build passed
+- Task marked complete in implementation plan
+- Committed: `e358ed9`
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36me358ed9 feat: Update components/ui/input.tsx - sun-sand border, sun-plum focus ring[0m
+  [0;32m✓[0m Task marked complete
+  [0;36mRunning build check...[0m
+  [0;32m✓[0m Build passed
+
+  [0;36mTask time:[0m 59s │ [0;36mAvg:[0m 3m 23s │ [0;36mEst. remaining:[0m 1h 51m
+
+  [1;37mRecent commits:[0m
+    [0;36me358ed9 feat: Update components/ui/input.tsx - sun-sand border, sun-plum focus ring[0m
+    [0;36m438d085 feat: Update components/ui/badge.tsx - sun-* colors[0m
+    [0;36m6133a05 feat: Update components/ui/card.tsx - sun-paper bg, sun-sand border, shadow-soft[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 17[0m │ ������������������������������ 36%
+  [0;32m19 done[0m │ [1;33m33 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Update components/ui/textarea.tsx: sun-sand border, sun-plum focus ring[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

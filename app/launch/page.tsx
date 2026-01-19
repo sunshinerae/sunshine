@@ -60,7 +60,7 @@ export default function LaunchPage() {
             <div className="space-y-8 order-1 md:order-2">
               {/* Small brand tagline */}
               <FadeInView delay={0} duration={0.6}>
-                <p className="font-subhead text-sm md:text-base text-sun-coral uppercase tracking-wider">
+                <p className="font-subhead text-sm md:text-base text-sun-plum uppercase tracking-wider">
                   Glow from the heart
                 </p>
               </FadeInView>

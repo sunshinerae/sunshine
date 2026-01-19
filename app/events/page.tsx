@@ -242,7 +242,7 @@ export default function EventsPage() {
         <div className="max-w-6xl mx-auto space-y-8">
           <div className="space-y-2 text-center">
             <FadeInView>
-              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-coral">Event Gallery</p>
+              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-plum">Event Gallery</p>
             </FadeInView>
             <FadeInView delay={0.1}>
               <h3 className="font-headline text-4xl uppercase text-sun-plum">See the energy</h3>

@@ -58,7 +58,7 @@ export default function ThankYouPage() {
       <section className="px-6 py-16 md:py-20 overflow-hidden">
         <div className="max-w-5xl mx-auto">
           <FadeInView className="text-center mb-12">
-            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-coral mb-3">
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum mb-3">
               What happens next
             </p>
             <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sun-plum mb-4">
@@ -160,7 +160,7 @@ export default function ThankYouPage() {
       <section className="bg-sun-cream px-6 py-16 md:py-20 overflow-hidden">
         <div className="max-w-4xl mx-auto">
           <FadeInView className="text-center mb-10">
-            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-coral mb-3">
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum mb-3">
               While you wait
             </p>
             <h2 className="font-headline text-[clamp(2rem,5vw,3rem)] uppercase leading-[0.9] tracking-tight text-sun-plum mb-4">
