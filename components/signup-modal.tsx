@@ -138,7 +138,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-sunshine-purple text-sunshine-white font-subhead font-bold py-5 px-8 rounded-full hover:bg-sunshine-brown hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-2xl tracking-wide shadow-2xl uppercase"
+                  className="w-full bg-sunshine-purple text-sunshine-white font-subhead font-bold py-5 px-8 rounded-full hover:bg-sunshine-brown hover:scale-105 active:scale-95 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-2xl tracking-wide shadow-2xl uppercase"
                 >
                   {isSubmitting ? 'Submitting...' : 'I Want In'}
                 </button>

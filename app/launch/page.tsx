@@ -79,7 +79,7 @@ export default function LaunchPage() {
               <div className="pt-6">
                 <button
                   onClick={() => setShowModal(true)}
-                  className="bg-sunshine-purple text-sunshine-white px-12 py-5 rounded-full text-lg font-subhead font-bold uppercase hover:bg-sunshine-orange hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl"
+                  className="bg-sunshine-purple text-sunshine-white px-12 py-5 rounded-full text-lg font-subhead font-bold uppercase hover:bg-sunshine-orange hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg hover:shadow-2xl"
                 >
                   I Want In
                 </button>
