@@ -58,7 +58,7 @@
 - [x] Add Offerings hero section with headline and intro text placeholder
 - [x] Add 1:1 Coaching section with placeholder content and CTA
 - [x] Add Retreats section with placeholder content and CTA
-- [ ] Add Events teaser section linking to Events page
+- [x] Add Events teaser section linking to Events page
 - [ ] Add scroll animations to all Offerings page sections
 
 ### Events Page
