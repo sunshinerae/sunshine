@@ -70,7 +70,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 - [x] Update components/section-separator.tsx: sun-sand color
 
 ### Section Components
-- [ ] Update components/sections/hero.tsx: sun-* colors, hero gradient
+- [x] Update components/sections/hero.tsx: sun-* colors, hero gradient
 - [ ] Update components/sections/pillars.tsx: sun-* colors
 - [ ] Update components/sections/proof-bar.tsx: sun-* colors
 
