@@ -45,7 +45,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 - [x] Update components/ui/zone-divider.tsx: sun-* colors
 
 ### Card Components
-- [ ] Update components/cards/event-card.tsx: sun-paper bg, sun-sand border
+- [x] Update components/cards/event-card.tsx: sun-paper bg, sun-sand border
 - [ ] Update components/cards/offering-card.tsx: sun-paper bg, sun-sand border
 - [ ] Update components/cards/blog-card.tsx: sun-paper bg, sun-sand border
 

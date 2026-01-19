@@ -63,22 +63,22 @@ export function EventCard({
   // Type-based styling per brand spec
   const typeStyles = {
     'golden-hour': {
-      card: 'bg-sunshine-orange',
-      dateBox: 'bg-sunshine-yellow text-sunshine-brown',
-      title: 'text-sunshine-white',
-      description: 'text-sunshine-white/90',
-      location: 'text-sunshine-yellow',
-      time: 'text-sunshine-white/80',
-      ctaVariant: 'orange' as const,
+      card: 'bg-sun-paper border border-sun-sand',
+      dateBox: 'bg-sun-gold text-sun-cocoa',
+      title: 'text-sun-cocoa',
+      description: 'text-sun-cocoa/80',
+      location: 'text-sun-plum',
+      time: 'text-sun-cocoa/70',
+      ctaVariant: 'white' as const,
     },
     'lunar-room': {
-      card: 'bg-sunshine-purple',
-      dateBox: 'bg-sunshine-blue text-sunshine-brown',
-      title: 'text-sunshine-white',
-      description: 'text-sunshine-white/90',
-      location: 'text-sunshine-blue',
-      time: 'text-sunshine-white/80',
-      ctaVariant: 'purple' as const,
+      card: 'bg-sun-paper border border-sun-sand',
+      dateBox: 'bg-sun-plum text-white',
+      title: 'text-sun-cocoa',
+      description: 'text-sun-cocoa/80',
+      location: 'text-sun-plum',
+      time: 'text-sun-cocoa/70',
+      ctaVariant: 'white' as const,
     },
   };
 
@@ -86,17 +86,16 @@ export function EventCard({
 
   return (
     <motion.article
-      initial={{ y: 0, boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}
+      initial={{ y: 0 }}
       whileHover={{
         y: -4,
-        boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
       }}
       transition={{
         duration: 0.3,
         ease: crispEase,
       }}
       className={cn(
-        'rounded-2xl overflow-hidden flex flex-col',
+        'rounded-xl overflow-hidden flex flex-col shadow-soft',
         styles.card,
         className
       )}
