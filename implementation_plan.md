@@ -50,7 +50,7 @@
 - [x] Create `app/about/page.tsx` — page structure with metadata
 - [x] Add About hero section with placeholder headline and subhead
 - [x] Add About story section with placeholder paragraphs (2-3 blocks)
-- [ ] Add About values grid section (6 values with icon placeholders and placeholder text)
+- [x] Add About values grid section (6 values with icon placeholders and placeholder text)
 - [ ] Add scroll animations to all About page sections
 
 ### Offerings Page
