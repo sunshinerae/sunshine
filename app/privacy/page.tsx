@@ -10,8 +10,8 @@ export default function PrivacyPage() {
   const lastUpdated = 'November 19, 2024';
 
   return (
-    <div className="bg-sunshine-white">
-      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-purple text-sunshine-white">
+    <div className="bg-sun-cream">
+      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sun-plum text-white">
         <div className="max-w-4xl mx-auto">
           <h1 className="font-headline text-[clamp(2.5rem,6vw,4rem)] uppercase leading-[0.9] tracking-tight mb-4">
             Privacy Policy
@@ -23,9 +23,9 @@ export default function PrivacyPage() {
       </section>
 
       <section className="px-4 sm:px-6 py-12 md:py-20 max-w-4xl mx-auto">
-        <div className="space-y-8 font-body text-sunshine-brown leading-relaxed">
+        <div className="space-y-8 font-body text-sun-cocoa leading-relaxed">
           <BrandCard variant="yellow" className="p-6 md:p-8">
-            <p className="font-semibold text-sunshine-purple mb-2">
+            <p className="font-semibold text-sun-plum mb-2">
               Your Privacy Matters
             </p>
             <p className="text-sm">
@@ -34,7 +34,7 @@ export default function PrivacyPage() {
           </BrandCard>
 
           <div>
-            <h2 className="font-headline text-2xl uppercase text-sunshine-purple mb-3">
+            <h2 className="font-headline text-2xl uppercase text-sun-plum mb-3">
               1. Information We Collect
             </h2>
             <div className="space-y-3">
@@ -59,7 +59,7 @@ export default function PrivacyPage() {
           </div>
 
           <div>
-            <h2 className="font-headline text-2xl uppercase text-sunshine-purple mb-3">
+            <h2 className="font-headline text-2xl uppercase text-sun-plum mb-3">
               2. How We Use Your Information
             </h2>
             <ul className="list-disc pl-6 space-y-2">
@@ -73,7 +73,7 @@ export default function PrivacyPage() {
           </div>
 
           <div>
-            <h2 className="font-headline text-2xl uppercase text-sunshine-purple mb-3">
+            <h2 className="font-headline text-2xl uppercase text-sun-plum mb-3">
               3. We Will NOT
             </h2>
             <ul className="list-disc pl-6 space-y-2">
@@ -85,7 +85,7 @@ export default function PrivacyPage() {
           </div>
 
           <div>
-            <h2 className="font-headline text-2xl uppercase text-sunshine-purple mb-3">
+            <h2 className="font-headline text-2xl uppercase text-sun-plum mb-3">
               4. Third-Party Services
             </h2>
             <p>
@@ -103,7 +103,7 @@ export default function PrivacyPage() {
           </div>
 
           <div>
-            <h2 className="font-headline text-2xl uppercase text-sunshine-purple mb-3">
+            <h2 className="font-headline text-2xl uppercase text-sun-plum mb-3">
               5. Your Rights & Choices
             </h2>
             <p className="mb-3">
@@ -119,7 +119,7 @@ export default function PrivacyPage() {
           </div>
 
           <div>
-            <h2 className="font-headline text-2xl uppercase text-sunshine-purple mb-3">
+            <h2 className="font-headline text-2xl uppercase text-sun-plum mb-3">
               6. Data Security
             </h2>
             <p>
@@ -136,7 +136,7 @@ export default function PrivacyPage() {
           </div>
 
           <div>
-            <h2 className="font-headline text-2xl uppercase text-sunshine-purple mb-3">
+            <h2 className="font-headline text-2xl uppercase text-sun-plum mb-3">
               7. Children&apos;s Privacy
             </h2>
             <p>
@@ -145,7 +145,7 @@ export default function PrivacyPage() {
           </div>
 
           <div>
-            <h2 className="font-headline text-2xl uppercase text-sunshine-purple mb-3">
+            <h2 className="font-headline text-2xl uppercase text-sun-plum mb-3">
               8. Changes to This Policy
             </h2>
             <p>
@@ -154,23 +154,23 @@ export default function PrivacyPage() {
           </div>
 
           <div>
-            <h2 className="font-headline text-2xl uppercase text-sunshine-purple mb-3">
+            <h2 className="font-headline text-2xl uppercase text-sun-plum mb-3">
               9. Contact Us
             </h2>
             <p>
               If you have questions about this privacy policy or how we handle your data, please reach out:
             </p>
             <ul className="list-none space-y-2 mt-3">
-              <li>📧 Email: <a href="mailto:hello@thesunshineeffect.com" className="text-sunshine-purple hover:text-sunshine-orange underline">hello@thesunshineeffect.com</a></li>
-              <li>🌐 Website: <Link href="/contact" className="text-sunshine-purple hover:text-sunshine-orange underline">Contact Form</Link></li>
+              <li>📧 Email: <a href="mailto:hello@thesunshineeffect.com" className="text-sun-plum hover:text-sun-plum/80 underline">hello@thesunshineeffect.com</a></li>
+              <li>🌐 Website: <Link href="/contact" className="text-sun-plum hover:text-sun-plum/80 underline">Contact Form</Link></li>
             </ul>
           </div>
 
           <BrandCard variant="orange" className="p-6 md:p-8 mt-8">
-            <p className="font-headline text-xl uppercase text-sunshine-white mb-2">
+            <p className="font-headline text-xl uppercase text-white mb-2">
               We celebrate consent.
             </p>
-            <p className="text-sm text-sunshine-white">
+            <p className="text-sm text-white">
               You deserve to know exactly how your information is used. If something in this policy is unclear or you have concerns, please reach out. We&apos;re here to support you.
             </p>
           </BrandCard>
@@ -178,7 +178,7 @@ export default function PrivacyPage() {
           <div className="text-center pt-8">
             <Link
               href="/"
-              className="inline-block font-subhead text-sm uppercase tracking-wide text-sunshine-purple hover:text-sunshine-orange transition-colors"
+              className="inline-block font-subhead text-sm uppercase tracking-wide text-sun-plum hover:text-sun-plum/80 transition-colors"
             >
               ← Back to Home
             </Link>
