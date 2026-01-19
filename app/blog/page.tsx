@@ -18,12 +18,12 @@ export default function BlogPage() {
   const categories = getAllCategories();
 
   return (
-    <div className="bg-sunshine-white min-h-screen">
+    <div className="bg-sun-cream min-h-screen">
       {/* Hero Section */}
-      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-purple text-sunshine-white overflow-hidden">
+      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sun-plum text-white overflow-hidden">
         <div className="max-w-5xl mx-auto space-y-5 text-center">
           <FadeInView>
-            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-blue">
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-gold">
               Insights & Reflections
             </p>
           </FadeInView>
@@ -42,12 +42,12 @@ export default function BlogPage() {
       </section>
 
       {/* Category Pills */}
-      <section className="px-4 sm:px-6 py-8 bg-sunshine-white border-b border-sunshine-brown/10">
+      <section className="px-4 sm:px-6 py-8 bg-sun-cream border-b border-sun-sand">
         <div className="max-w-6xl mx-auto">
           <FadeInView>
             <div className="flex flex-wrap justify-center gap-3">
               <button
-                className="px-5 py-2 rounded-full font-subhead text-sm font-semibold tracking-wide uppercase bg-sunshine-purple text-sunshine-white transition-colors"
+                className="px-5 py-2 rounded-full font-subhead text-sm font-semibold tracking-wide uppercase bg-sun-plum text-white transition-colors"
                 aria-current="true"
               >
                 All Posts
@@ -55,7 +55,7 @@ export default function BlogPage() {
               {categories.map((category) => (
                 <button
                   key={category.slug}
-                  className="px-5 py-2 rounded-full font-subhead text-sm font-semibold tracking-wide uppercase bg-sunshine-white text-sunshine-brown border border-sunshine-brown/20 hover:bg-sunshine-yellow hover:border-sunshine-yellow hover:text-sunshine-brown transition-colors"
+                  className="px-5 py-2 rounded-full font-subhead text-sm font-semibold tracking-wide uppercase bg-sun-paper text-sun-cocoa border border-sun-sand hover:bg-sun-gold hover:border-sun-gold hover:text-sun-cocoa transition-colors"
                 >
                   {category.name}
                 </button>
@@ -66,7 +66,7 @@ export default function BlogPage() {
       </section>
 
       {/* Blog Post Grid */}
-      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-white">
+      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sun-cream">
         <div className="max-w-6xl mx-auto">
           <h2 className="sr-only">Blog Posts</h2>
           {posts.length > 0 ? (
@@ -87,7 +87,7 @@ export default function BlogPage() {
           ) : (
             <FadeInView>
               <div className="text-center py-16">
-                <p className="font-subhead text-lg text-sunshine-brown/60">
+                <p className="font-subhead text-lg text-sun-cocoa/60">
                   Fresh words are brewing. Your next dose of radiance arrives soon.
                 </p>
               </div>
@@ -97,27 +97,27 @@ export default function BlogPage() {
       </section>
 
       {/* Newsletter CTA Section */}
-      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-yellow">
+      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sun-gold">
         <div className="max-w-3xl mx-auto text-center">
           <FadeInView>
-            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-purple mb-3">
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum mb-3">
               The Consistent Bulletin
             </p>
           </FadeInView>
           <FadeInView delay={0.1}>
-            <h2 className="font-headline text-[clamp(1.8rem,4vw,2.5rem)] uppercase leading-[0.95] tracking-tight text-sunshine-brown mb-4">
+            <h2 className="font-headline text-[clamp(1.8rem,4vw,2.5rem)] uppercase leading-[0.95] tracking-tight text-sun-cocoa mb-4">
               Get these words delivered.
             </h2>
           </FadeInView>
           <FadeInView delay={0.2}>
-            <p className="font-body text-base leading-relaxed text-sunshine-brown/80 mb-6">
+            <p className="font-body text-base leading-relaxed text-sun-cocoa/80 mb-6">
               Weekly rituals, reflections, and resources for the woman ready to glow from the heart.
             </p>
           </FadeInView>
           <FadeInView delay={0.3}>
             <a
               href="/contact"
-              className="inline-flex px-8 py-3 rounded-full font-subhead text-sm font-semibold tracking-wide uppercase bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange transition-colors"
+              className="inline-flex px-8 py-3 rounded-[14px] font-subhead text-sm font-semibold tracking-wide uppercase bg-sun-plum text-white hover:bg-sun-plum/90 transition-colors"
             >
               Join The List
             </a>
