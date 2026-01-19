@@ -1,0 +1,87 @@
+{
+  "posts": [
+    {
+      "id": "finding-pockets-of-peace",
+      "title": "Finding Pockets of Peace in Your Everyday",
+      "slug": "finding-pockets-of-peace",
+      "category": "Wellness",
+      "date": "2025-01-15",
+      "excerpt": "Small moments of stillness aren't a luxury — they're the foundation for everything else. Here's how to find them.",
+      "image": "/images/blog/pockets-of-peace.jpg",
+      "author": "The Sunshine Effect",
+      "published": true
+    },
+    {
+      "id": "self-trust-over-self-doubt",
+      "title": "Self-Trust Over Self-Doubt: A Gentle Path Forward",
+      "slug": "self-trust-over-self-doubt",
+      "category": "Self-Development",
+      "date": "2025-01-22",
+      "excerpt": "The voice of self-doubt is loud. But there's another voice — quieter, steadier — that already knows the way. Here's how to listen.",
+      "image": "/images/blog/self-trust.jpg",
+      "author": "The Sunshine Effect",
+      "published": true
+    },
+    {
+      "id": "building-without-burning-out",
+      "title": "Building Without Burning Out: Business Strategy for the Soul",
+      "slug": "building-without-burning-out",
+      "category": "Business Strategy",
+      "date": "2025-01-29",
+      "excerpt": "You can build something beautiful without sacrificing yourself in the process. Real power doesn't have to push or prove.",
+      "image": "/images/blog/building-without-burnout.jpg",
+      "author": "The Sunshine Effect",
+      "published": true
+    },
+    {
+      "id": "nervous-system-reset",
+      "title": "Your Nervous System Reset: Coming Home to Yourself",
+      "slug": "nervous-system-reset",
+      "category": "Wellness",
+      "date": "2025-02-05",
+      "excerpt": "When your nervous system is constantly in overdrive, everything feels harder. Here's how to find your way back to groundedness.",
+      "image": "/images/blog/nervous-system-reset.jpg",
+      "author": "The Sunshine Effect",
+      "published": true
+    },
+    {
+      "id": "gentle-momentum",
+      "title": "Gentle Momentum: Moving Forward Without Hustling",
+      "slug": "gentle-momentum",
+      "category": "Self-Development",
+      "date": "2025-02-12",
+      "excerpt": "Progress doesn't require pushing. Discover how to create movement in your life that feels aligned, embodied, and sustainable.",
+      "image": "/images/blog/gentle-momentum.jpg",
+      "author": "The Sunshine Effect",
+      "published": true
+    },
+    {
+      "id": "aligned-business-foundations",
+      "title": "Aligned Business Foundations: Purpose Over Proving",
+      "slug": "aligned-business-foundations",
+      "category": "Business Strategy",
+      "date": "2025-02-19",
+      "excerpt": "What if your business could grow from a place of peace instead of pressure? Let's explore what aligned foundations look like.",
+      "image": "/images/blog/aligned-business.jpg",
+      "author": "The Sunshine Effect",
+      "published": true
+    }
+  ],
+  "categories": [
+    {
+      "name": "Wellness",
+      "slug": "wellness",
+      "description": "Practices and insights for nurturing your body, mind, and nervous system."
+    },
+    {
+      "name": "Self-Development",
+      "slug": "self-development",
+      "description": "Grow into the woman you're becoming — with clarity, confidence, and self-trust."
+    },
+    {
+      "name": "Business Strategy",
+      "slug": "business-strategy",
+      "description": "Build a life and business that feels aligned, embodied, and alive."
+    }
+  ]
+}
