@@ -1489,3 +1489,36 @@ Task complete. The hero gradient utility `.bg-hero-gradient` was already present
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task complete. I removed all remaining `sunshine-*` references from the codebase:
+
+- **components/ui/dialog.tsx**: `border-sunshine-purple` → `border-sun-plum`
+- **components/ui/sheet.tsx**: `border-sunshine-purple` → `border-sun-plum`  
+- **app/not-found.tsx**: Replaced all sunshine-* colors with sun-* equivalents
+- **tailwind.config.ts**: Removed old sunshine-* color definitions, keeping only sun-* colors
+- **app/globals.css**: Removed old `bg-sunshine-gradient` and `bg-sunshine-gradient-warm` utilities
+
+Build passed and changes committed.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36mcc6ccdb feat: Remove all remaining sunshine-* references across codebase[0m
+  [0;32m✓[0m Task marked complete
+  [0;36mRunning build check...[0m
+  [0;32m✓[0m Build passed
+
+  [0;36mTask time:[0m 2m 22s │ [0;36mAvg:[0m 2m 15s │ [0;36mEst. remaining:[0m 4m 30s
+
+  [1;37mRecent commits:[0m
+    [0;36mcc6ccdb feat: Remove all remaining sunshine-* references across codebase[0m
+    [0;36m22456ee feat: Add hero gradient utility to globals.css - linear-gradient(135deg, #6E054D 0%, #F6C453 100%)[0m
+    [0;36m66c7c7d feat: Update components/blog/related-posts.tsx - sun-* colors[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 48[0m │ ������������������������������ 96%
+  [0;32m50 done[0m │ [1;33m2 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Run npm run build and fix any errors[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
