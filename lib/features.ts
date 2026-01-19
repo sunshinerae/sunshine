@@ -22,15 +22,15 @@ export const FEATURES = {
   blog: true,
 
   // PHASE 2+: Features to enable later
-  offerings: false,
-  events: false,
-  community: false,
+  offerings: true,
+  events: true,
+  community: true,
   coaching: false,
   retreats: false,
   smsSignup: false,
   testimonials: false,
   eventBooking: false,
-  fullContact: false,
+  fullContact: true,
 } as const;
 
 /**

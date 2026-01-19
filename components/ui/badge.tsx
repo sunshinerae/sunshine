@@ -5,18 +5,22 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,border] overflow-hidden",
+  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-sun-plum focus-visible:ring-sun-plum/50 focus-visible:ring-[3px] transition-[color,border] overflow-hidden",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
+          "border-transparent bg-sun-plum text-white [a&]:hover:bg-sun-plum/90",
         secondary:
-          "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
+          "border-transparent bg-sun-sand text-sun-cocoa [a&]:hover:bg-sun-sand/80",
         destructive:
-          "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "border-transparent bg-sun-coral text-white [a&]:hover:bg-sun-coral/90 focus-visible:ring-sun-coral/20",
         outline:
-          "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+          "border-sun-sand text-sun-cocoa [a&]:hover:bg-sun-sand [a&]:hover:text-sun-cocoa",
+        success:
+          "border-transparent bg-sun-leaf text-white [a&]:hover:bg-sun-leaf/90",
+        gold:
+          "border-transparent bg-sun-gold text-sun-cocoa [a&]:hover:bg-sun-gold/90",
       },
     },
     defaultVariants: {
