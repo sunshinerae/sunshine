@@ -36,7 +36,7 @@ export function FloatingAffirmation() {
           </div>
           <button
             aria-label="Dismiss affirmation"
-            className="text-sunshine-brown/70 hover:text-sunshine-brown"
+            className="text-sun-cocoa/70 hover:text-sun-cocoa"
             onClick={() => setVisible(false)}
           >
             ✕

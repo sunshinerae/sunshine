@@ -66,7 +66,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 - [x] Update components/signup-modal.tsx: sun-* colors
 - [x] Update components/magnetic-button.tsx: sun-plum colors
 - [x] Update components/spots-counter.tsx: sun-* colors
-- [ ] Update components/floating-affirmation.tsx: sun-* colors
+- [x] Update components/floating-affirmation.tsx: sun-* colors
 - [ ] Update components/section-separator.tsx: sun-sand color
 
 ### Section Components
