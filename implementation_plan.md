@@ -72,7 +72,7 @@
 ### Community Page
 - [x] Create `app/community/page.tsx` — minimal page with metadata
 - [x] Add Community hero with placeholder headline and description
-- [ ] Add single CTA section ("Join the List" or similar)
+- [x] Add single CTA section ("Join the List" or similar)
 - [ ] Add scroll animations
 
 ### Contact Page

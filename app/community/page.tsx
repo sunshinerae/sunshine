@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { BrandCard } from '@/components/brand-card';
 import { isFeatureEnabled } from '@/lib/features';
 import { PAGE_METADATA } from '@/lib/metadata';
+import { NewsletterSignup } from '@/components/forms/newsletter-signup';
 
 export const metadata: Metadata = PAGE_METADATA.community;
 
@@ -127,6 +128,32 @@ export default function CommunityPage() {
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="px-4 sm:px-6 py-16 md:py-24 overflow-hidden bg-sunshine-orange">
+        <div className="max-w-2xl mx-auto text-center space-y-6">
+          <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-yellow">
+            Join the list
+          </p>
+          <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sunshine-white">
+            Your next chapter starts with one small yes.
+          </h2>
+          <p className="font-body text-lg leading-relaxed text-sunshine-white/90 max-w-xl mx-auto">
+            Get weekly love notes, event invites, and gentle nudges toward the woman you are becoming. No spam, just warmth.
+          </p>
+          <div className="pt-4">
+            <NewsletterSignup
+              variant="orange"
+              placeholder="Your email address"
+              buttonText="I Want In"
+              successMessage="You're in! Check your inbox for a warm welcome."
+            />
+          </div>
+          <p className="font-body text-sm text-sunshine-white/70">
+            Unsubscribe anytime. Your peace matters.
+          </p>
         </div>
       </section>
     </div>
