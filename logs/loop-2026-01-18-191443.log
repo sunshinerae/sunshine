@@ -502,3 +502,36 @@ Task complete. I created `components/ui/cta-button.tsx` with:
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task complete. I created `components/forms/newsletter-signup.tsx` with:
+
+- Email input with rounded-full pill styling
+- Submit button using the existing CTAButton component
+- Four variant options (`purple`, `orange`, `yellow`, `white`) for different background contexts
+- Proper contrast and focus states following brand guidelines
+- Form validation with error/success states
+- Accessible labels and ARIA attributes
+- Loading state feedback
+- Optional heading and description props
+- Framer Motion animations for state transitions
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36maa6a89f feat: create components/forms/newsletter-signup.tsx — email input + submit, brand styled[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 55s │ [0;36mAvg:[0m 48s │ [0;36mEst. remaining:[0m 1h 0m
+
+  [1;37mRecent commits:[0m
+    [0;36maa6a89f feat: create components/forms/newsletter-signup.tsx — email input + submit, brand styled[0m
+    [0;36m0b32288 feat: create components/ui/cta-button.tsx — pill-shaped button with hover scale effect (crisp animation)[0m
+    [0;36me4413d4 feat: create components/ui/section-heading.tsx — reusable section title with optional subtitle (uses font-headline)[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 17[0m │ ������������������������������ 17%
+  [0;32m16 done[0m │ [1;33m75 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create `components/forms/sms-signup.tsx` — phone input + submit, brand styled[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
