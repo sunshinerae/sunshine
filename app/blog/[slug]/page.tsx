@@ -51,21 +51,21 @@ export async function generateMetadata({
 function getCategoryStyles(cat: string) {
   const normalizedCategory = cat.toLowerCase();
   if (normalizedCategory.includes('wellness')) {
-    return 'bg-sunshine-yellow text-sunshine-brown';
+    return 'bg-sun-gold text-sun-cocoa';
   }
   if (
     normalizedCategory.includes('self-development') ||
     normalizedCategory.includes('development')
   ) {
-    return 'bg-sunshine-purple text-sunshine-white';
+    return 'bg-sun-plum text-white';
   }
   if (
     normalizedCategory.includes('business') ||
     normalizedCategory.includes('strategy')
   ) {
-    return 'bg-sunshine-orange text-sunshine-white';
+    return 'bg-sun-coral text-white';
   }
-  return 'bg-sunshine-purple text-sunshine-white';
+  return 'bg-sun-plum text-white';
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
@@ -84,18 +84,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const readingTime = getReadingTime(content);
 
   return (
-    <div className="bg-sunshine-white min-h-screen">
+    <div className="bg-sun-cream min-h-screen">
       {/* Reading Progress Bar */}
       <ReadingProgress />
 
       {/* Hero Section */}
-      <section className="px-4 sm:px-6 py-12 md:py-20 bg-sunshine-purple text-sunshine-white overflow-hidden">
+      <section className="px-4 sm:px-6 py-12 md:py-20 bg-sun-plum text-white overflow-hidden">
         <div className="max-w-4xl mx-auto space-y-6 text-center">
           {/* Back link */}
           <FadeInView>
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 font-subhead text-sm font-semibold text-sunshine-blue hover:text-sunshine-yellow transition-colors"
+              className="inline-flex items-center gap-2 font-subhead text-sm font-semibold text-sun-gold hover:text-sun-coral transition-colors"
             >
               <svg
                 className="w-4 h-4"
@@ -128,9 +128,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {/* Meta info */}
           <FadeInView delay={0.3}>
-            <div className="flex items-center justify-center gap-4 text-sunshine-white/80 font-body text-sm">
+            <div className="flex items-center justify-center gap-4 text-white/80 font-body text-sm">
               <span>{formatPostDate(meta.date)}</span>
-              <span className="w-1 h-1 rounded-full bg-sunshine-white/60" />
+              <span className="w-1 h-1 rounded-full bg-white/60" />
               <span>{readingTime} min read</span>
             </div>
           </FadeInView>
@@ -141,7 +141,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <section className="relative -mt-8 px-4 sm:px-6">
         <FadeInView delay={0.4}>
           <div className="max-w-4xl mx-auto">
-            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-sunshine-yellow/40 via-sunshine-orange/30 to-sunshine-purple/40 shadow-xl">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-gradient-to-br from-sun-gold/40 via-sun-coral/30 to-sun-plum/40 shadow-xl">
               {meta.image ? (
                 <img
                   src={meta.image}
@@ -151,7 +151,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               ) : (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <svg
-                    className="w-24 h-24 text-sunshine-purple/30"
+                    className="w-24 h-24 text-sun-plum/30"
                     viewBox="0 0 64 64"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -180,7 +180,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {content ? (
               <MarkdownContent content={content} />
             ) : (
-              <p className="font-body text-lg leading-relaxed text-sunshine-brown/90 text-center italic">
+              <p className="font-body text-lg leading-relaxed text-sun-cocoa/90 text-center italic">
                 This piece is still being crafted with care. Return soon for words that warm the soul.
               </p>
             )}
@@ -189,19 +189,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </article>
 
       {/* Author & Share Section */}
-      <section className="px-4 sm:px-6 py-10 border-t border-sunshine-brown/10">
+      <section className="px-4 sm:px-6 py-10 border-t border-sun-sand">
         <FadeInView>
           <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
             {/* Author info */}
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-sunshine-yellow via-sunshine-orange to-sunshine-purple flex items-center justify-center">
-                <span className="font-headline text-lg text-sunshine-white uppercase">S</span>
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-sun-gold via-sun-coral to-sun-plum flex items-center justify-center">
+                <span className="font-headline text-lg text-white uppercase">S</span>
               </div>
               <div>
-                <p className="font-subhead text-sm font-semibold text-sunshine-brown">
+                <p className="font-subhead text-sm font-semibold text-sun-cocoa">
                   {meta.author}
                 </p>
-                <p className="font-body text-sm text-sunshine-brown/60">
+                <p className="font-body text-sm text-sun-cocoa/60">
                   Glow from the heart.
                 </p>
               </div>
@@ -209,10 +209,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
             {/* Share placeholder */}
             <div className="flex items-center gap-3">
-              <span className="font-body text-sm text-sunshine-brown/60">Share:</span>
+              <span className="font-body text-sm text-sun-cocoa/60">Share:</span>
               <div className="flex gap-2">
                 <button
-                  className="w-10 h-10 rounded-full bg-sunshine-purple/10 hover:bg-sunshine-purple hover:text-sunshine-white text-sunshine-purple flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-full bg-sun-plum/10 hover:bg-sun-plum hover:text-white text-sun-plum flex items-center justify-center transition-colors"
                   aria-label="Share on social media"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -229,27 +229,27 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <RelatedPosts posts={getRelatedPosts(slug)} />
 
       {/* CTA Section */}
-      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-yellow">
+      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sun-gold">
         <div className="max-w-3xl mx-auto text-center">
           <FadeInView>
-            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-purple mb-3">
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum mb-3">
               Continue the journey
             </p>
           </FadeInView>
           <FadeInView delay={0.1}>
-            <h2 className="font-headline text-[clamp(1.8rem,4vw,2.5rem)] uppercase leading-[0.95] tracking-tight text-sunshine-brown mb-4">
+            <h2 className="font-headline text-[clamp(1.8rem,4vw,2.5rem)] uppercase leading-[0.95] tracking-tight text-sun-cocoa mb-4">
               Ready to glow from the heart?
             </h2>
           </FadeInView>
           <FadeInView delay={0.2}>
-            <p className="font-body text-base leading-relaxed text-sunshine-brown/80 mb-6">
+            <p className="font-body text-base leading-relaxed text-sun-cocoa/80 mb-6">
               Join the community for weekly rituals, reflections, and resources delivered straight to your inbox.
             </p>
           </FadeInView>
           <FadeInView delay={0.3}>
             <Link
               href="/contact"
-              className="inline-flex px-8 py-3 rounded-full font-subhead text-sm font-semibold tracking-wide uppercase bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange transition-colors"
+              className="inline-flex px-8 py-3 rounded-[14px] font-subhead text-sm font-semibold tracking-wide uppercase bg-sun-plum text-white hover:bg-sun-plum/90 transition-colors"
             >
               Join The List
             </Link>
