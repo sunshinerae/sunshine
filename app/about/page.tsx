@@ -51,12 +51,28 @@ export default function AboutPage() {
       <section className="py-20 md:py-28 px-4 bg-sunshine-purple">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Portrait placeholder */}
+            {/* Portrait placeholder with gradient */}
             <FadeInView direction="left" className="order-2 md:order-1">
-              <div className="aspect-[3/4] bg-sunshine-yellow/20 rounded-2xl flex items-center justify-center mx-auto max-w-sm">
-                <span className="font-body text-sunshine-white/60 text-sm">
-                  Portrait coming soon
-                </span>
+              <div className="aspect-[3/4] bg-gradient-to-br from-sunshine-yellow/40 via-sunshine-orange/30 to-sunshine-blue/20 rounded-2xl flex items-center justify-center mx-auto max-w-sm overflow-hidden relative shadow-xl">
+                {/* Decorative sun element */}
+                <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-sunshine-yellow/30 blur-2xl" />
+                <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-sunshine-blue/20 blur-xl" />
+                {/* Portrait icon */}
+                <svg
+                  className="w-24 h-24 text-sunshine-white/40 relative z-10"
+                  viewBox="0 0 64 64"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <circle cx="32" cy="22" r="12" stroke="currentColor" strokeWidth="2" />
+                  <path
+                    d="M12 56c0-11.046 8.954-20 20-20s20 8.954 20 20"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  />
+                </svg>
               </div>
             </FadeInView>
 

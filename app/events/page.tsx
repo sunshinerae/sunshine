@@ -15,10 +15,10 @@ import { getGoldenHourEvents, getLunarRoomEvents } from '@/lib/events';
 export const metadata: Metadata = PAGE_METADATA.events;
 
 const gallery = [
-  { src: '/festival-crowd.png', alt: 'Sun-drenched women celebrating together' },
-  { src: '/dj-equipment.png', alt: 'Warm, electric event lighting' },
-  { src: '/la-skyline.png', alt: 'Evening skyline backdrop' },
-  { src: '/planning-notebook.png', alt: 'Quiet journaling moment' },
+  { src: '/festival-crowd.png', alt: 'Sun-drenched women celebrating together', gradient: 'from-sunshine-yellow via-sunshine-orange to-sunshine-purple/40' },
+  { src: '/dj-equipment.png', alt: 'Warm, electric event lighting', gradient: 'from-sunshine-orange via-sunshine-yellow to-sunshine-blue/30' },
+  { src: '/portrait-female-professional.png', alt: 'Community connection', gradient: 'from-sunshine-purple via-sunshine-blue/40 to-sunshine-yellow/30' },
+  { src: '/planning-notebook.png', alt: 'Quiet journaling moment', gradient: 'from-sunshine-blue/40 via-sunshine-purple to-sunshine-orange/30' },
 ];
 
 export default function EventsPage() {
@@ -260,13 +260,15 @@ export default function EventsPage() {
                   className={`p-0 overflow-hidden max-w-full ${idx % 2 === 0 ? 'md:rotate-1' : 'md:-rotate-1'} hover:rotate-0 hover:scale-105 hover:z-10 transition-all duration-300`}
                   variant="white"
                 >
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    width={400}
-                    height={320}
-                    className="w-full h-full object-cover"
-                  />
+                  <div className={`relative w-full aspect-[5/4] bg-gradient-to-br ${item.gradient}`}>
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      width={400}
+                      height={320}
+                      className="w-full h-full object-cover mix-blend-overlay opacity-90"
+                    />
+                  </div>
                 </BrandCard>
               </StaggerItem>
             ))}
