@@ -51,12 +51,59 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Story Section - to be implemented */}
-      <section className="py-16 px-4 bg-sunshine-white">
+      {/* Story Section */}
+      <section className="py-20 md:py-28 px-4 bg-sunshine-white">
         <div className="max-w-3xl mx-auto">
-          <p className="font-body text-lg text-sunshine-brown text-center">
-            Story content coming soon.
-          </p>
+          <FadeInView>
+            <h2 className="font-subhead text-2xl md:text-3xl text-sunshine-purple font-bold text-center mb-12 uppercase">
+              The Journey
+            </h2>
+          </FadeInView>
+
+          {/* Story Block 1 */}
+          <FadeInView delay={0.1} className="mb-12">
+            <div className="text-center md:text-left">
+              <p className="font-body text-lg md:text-xl text-sunshine-brown leading-relaxed mb-6">
+                There was a time when I lived in a constant state of hustle — pushing harder,
+                proving more, and wondering why success never felt like enough. The burnout was
+                real, but the deeper ache was the disconnect from myself and the life I actually
+                wanted.
+              </p>
+              <p className="font-body text-lg md:text-xl text-sunshine-brown leading-relaxed">
+                I thought I needed to do more. What I actually needed was to come home to myself.
+              </p>
+            </div>
+          </FadeInView>
+
+          {/* Story Block 2 */}
+          <FadeInView delay={0.2} className="mb-12">
+            <div className="bg-sunshine-purple/5 rounded-2xl p-8 md:p-10">
+              <p className="font-body text-lg md:text-xl text-sunshine-brown leading-relaxed mb-6">
+                Through a blend of wellness practices, mindset work, and business strategy, I
+                began to rebuild. Not from a place of force, but from a foundation of inner peace
+                and self-trust. I learned that discipline is self-love in motion — and that real
+                power doesn't have to push or prove.
+              </p>
+              <p className="font-body text-lg md:text-xl text-sunshine-brown leading-relaxed">
+                Now I guide other women through the same transformation: from scattered and burned
+                out, to lighter, clearer, and deeply connected to their purpose.
+              </p>
+            </div>
+          </FadeInView>
+
+          {/* Story Block 3 */}
+          <FadeInView delay={0.3}>
+            <div className="text-center">
+              <p className="font-body text-lg md:text-xl text-sunshine-brown leading-relaxed mb-8">
+                The Sunshine Effect isn't just a brand — it's an invitation to glow from the heart.
+                To create a life (and business) that feels aligned, embodied, and alive. To move
+                like it's already yours.
+              </p>
+              <p className="font-subhead text-xl md:text-2xl text-sunshine-purple font-bold italic">
+                "You're allowed to want more ease."
+              </p>
+            </div>
+          </FadeInView>
         </div>
       </section>
 
