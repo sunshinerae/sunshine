@@ -5,10 +5,10 @@ type Variant = 'purple' | 'orange' | 'yellow' | 'white';
 type Decoration = 'none' | 'tape' | 'sticker';
 
 const variants: Record<Variant, string> = {
-  purple: 'bg-sunshine-purple text-sunshine-white border-2 border-sunshine-yellow',
-  orange: 'bg-sunshine-orange text-sunshine-white border-2 border-sunshine-blue',
-  yellow: 'bg-sunshine-yellow text-sunshine-brown border-2 border-sunshine-purple',
-  white: 'bg-sunshine-white text-sunshine-brown border-2 border-sunshine-purple',
+  purple: 'bg-sun-plum text-white border border-sun-gold',
+  orange: 'bg-sun-coral text-sun-cocoa border border-sun-sand',
+  yellow: 'bg-sun-gold text-sun-cocoa border border-sun-plum',
+  white: 'bg-sun-paper text-sun-cocoa border border-sun-sand shadow-soft',
 };
 
 interface BrandCardProps {
@@ -32,12 +32,12 @@ export function BrandCard({
     )}>
       {/* Optional tape decoration */}
       {decoration === 'tape' && (
-        <div className="absolute top-4 right-4 w-20 h-6 bg-sunshine-yellow/40 -rotate-12 rounded-sm border border-sunshine-brown/10" />
+        <div className="absolute top-4 right-4 w-20 h-6 bg-sun-gold/40 -rotate-12 rounded-sm border border-sun-cocoa/10" />
       )}
 
       {/* Optional sticker decoration */}
       {decoration === 'sticker' && (
-        <div className="absolute top-2 right-2 w-10 h-10 rounded-full bg-sunshine-blue border-2 border-sunshine-white" />
+        <div className="absolute top-2 right-2 w-10 h-10 rounded-full bg-sun-coral border-2 border-white" />
       )}
 
       {children}
