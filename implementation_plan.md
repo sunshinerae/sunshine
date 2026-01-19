@@ -92,7 +92,7 @@
 - [x] Create `app/blog/[slug]/page.tsx` — individual blog post template
 - [x] Add reading progress bar to blog post template
 - [x] Add blog post hero with title, date, category, featured image placeholder
-- [ ] Add blog post body content renderer (markdown to JSX)
+- [x] Add blog post body content renderer (markdown to JSX)
 - [ ] Add related posts section at bottom of blog post
 - [ ] Add scroll animations to blog pages
 

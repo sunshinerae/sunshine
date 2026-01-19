@@ -19,6 +19,7 @@ export const FEATURES = {
   // PHASE 1: Active features (launch state)
   about: true,
   emailSignup: true,
+  blog: true,
 
   // PHASE 2+: Features to enable later
   offerings: false,
