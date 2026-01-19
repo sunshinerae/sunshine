@@ -2193,3 +2193,33 @@ Task complete. I enhanced the thank-you page's community invitation section by:
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I added soft entrance animations to the Thank You page:
+
+1. Added a `ScaleIn` animation to the fire emoji with a pop-in effect (scaling from 0.5 to 1)
+2. Orchestrated cascading entrance delays across hero elements (0.1s, 0.2s, 0.4s, 0.6s) for a smooth sequential reveal
+3. Extended animation durations to 0.7s for a softer, more elegant feel
+4. Separated hero elements into individual animation wrappers for better control
+
+The build passes and the changes have been committed.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36me2c9423 feat: add soft entrance animations to thank-you page[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 32s │ [0;36mAvg:[0m 10m 36s │ [0;36mEst. remaining:[0m 3h 21m
+
+  [1;37mRecent commits:[0m
+    [0;36me2c9423 feat: add soft entrance animations to thank-you page[0m
+    [0;36mc178364 feat: add social links and community invitation[0m
+    [0;36m30f5fee feat: add "what happens next" section (lead magnet tease: "Your first ritual arrives in 24 hours")[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 73[0m │ ������������������������������ 79%
+  [0;32m72 done[0m │ [1;33m19 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create `app/not-found.tsx` — custom 404 page[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

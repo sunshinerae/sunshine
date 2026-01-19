@@ -104,11 +104,11 @@
 - [x] Add soft entrance animations
 
 ### 404 Page
-- [ ] Create `app/not-found.tsx` — custom 404 page
-- [ ] Add warm, on-brand message ("You wandered off the path")
-- [ ] Add helpful navigation links back to main pages
-- [ ] Add CTA to return home
-- [ ] Style with brand colors and typography
+- [x] Create `app/not-found.tsx` — custom 404 page
+- [x] Add warm, on-brand message ("You wandered off the path")
+- [x] Add helpful navigation links back to main pages
+- [x] Add CTA to return home
+- [x] Style with brand colors and typography
 
 ## Phase 7: Launch Page Enhancements
 
