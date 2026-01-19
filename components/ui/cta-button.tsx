@@ -43,10 +43,10 @@ export function CTAButton({
   className,
 }: CTAButtonProps) {
   const variantStyles = {
-    purple: 'bg-sunshine-yellow text-sunshine-brown hover:bg-sunshine-blue',
-    orange: 'bg-sunshine-yellow text-sunshine-brown hover:bg-sunshine-blue',
-    yellow: 'bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange',
-    white: 'bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange',
+    purple: 'bg-sun-gold text-sun-cocoa hover:bg-sun-gold/90',
+    orange: 'bg-sun-gold text-sun-cocoa hover:bg-sun-gold/90',
+    yellow: 'bg-sun-plum text-white hover:bg-sun-plum/90',
+    white: 'bg-sun-plum text-white hover:bg-sun-plum/90',
   };
 
   const sizeStyles = {
@@ -56,9 +56,9 @@ export function CTAButton({
 
   const baseStyles = cn(
     'inline-flex items-center justify-center',
-    'rounded-full font-subhead font-semibold tracking-wide',
+    'rounded-[14px] font-subhead font-semibold tracking-wide',
     'transition-colors duration-200',
-    'outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sunshine-purple',
+    'outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sun-plum',
     'disabled:pointer-events-none disabled:opacity-50',
     variantStyles[variant],
     sizeStyles[size],

@@ -617,3 +617,35 @@ Build passed. Committed as `dde09e5`.
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task complete. Updated `components/ui/select.tsx`:
+- Changed border from `border-2 border-sunshine-brown/20` to `border border-sun-sand`
+- Changed focus ring from `focus-visible:border-sunshine-purple focus-visible:ring-sunshine-purple/30` to `focus-visible:border-sun-plum focus-visible:ring-sun-plum/30`
+- Changed background from `bg-sunshine-white` to `bg-sun-paper`
+- Changed text color from `text-sunshine-brown` to `text-sun-cocoa`
+- Updated SelectContent dropdown with `bg-sun-paper text-sun-cocoa border-sun-sand shadow-soft`
+
+Next task: Update components/ui/cta-button.tsx: sun-plum bg, rounded-[14px]
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m14f0f15 feat: Update components/ui/select.tsx - sun-sand border, sun-plum focus ring[0m
+  [0;32m✓[0m Task marked complete
+  [0;36mRunning build check...[0m
+  [0;32m✓[0m Build passed
+
+  [0;36mTask time:[0m 1m 9s │ [0;36mAvg:[0m 3m 7s │ [0;36mEst. remaining:[0m 1h 36m
+
+  [1;37mRecent commits:[0m
+    [0;36m14f0f15 feat: Update components/ui/select.tsx - sun-sand border, sun-plum focus ring[0m
+    [0;36mdde09e5 feat: Update components/ui/textarea.tsx - sun-sand border, sun-plum focus ring[0m
+    [0;36me358ed9 feat: Update components/ui/input.tsx - sun-sand border, sun-plum focus ring[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 19[0m │ ������������������������������ 40%
+  [0;32m21 done[0m │ [1;33m31 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Update components/ui/cta-button.tsx: sun-plum bg, rounded-[14px][0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
