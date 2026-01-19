@@ -62,7 +62,7 @@
 - [x] Add scroll animations to all Offerings page sections
 
 ### Events Page
-- [ ] Create `app/events/page.tsx` — page structure with metadata
+- [x] Create `app/events/page.tsx` — page structure with metadata
 - [ ] Add Events intro section with "community in motion" placeholder copy
 - [ ] Create Golden Hour zone — warm background, sun imagery placeholder, event cards from JSON
 - [ ] Create Lunar Room zone — cool/dark background, moon imagery placeholder, event cards from JSON

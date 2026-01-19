@@ -1,36 +1,13 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { BrandCard } from '@/components/brand-card';
 import { isFeatureEnabled } from '@/lib/features';
+import { PAGE_METADATA } from '@/lib/metadata';
 
-export const metadata = {
-  title: 'Events',
-  description: 'Golden Hour and Lunar Room experiences that invite you to connect, exhale, and move in community.',
-  keywords: ['women events', 'networking events', 'wellness events', 'Golden Hour', 'Lunar Room', 'women gatherings'],
-  openGraph: {
-    title: 'Events | The Sunshine Effect',
-    description: 'Golden Hour and Lunar Room experiences that invite you to connect, exhale, and move in community.',
-    url: '/events',
-    type: 'website',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'The Sunshine Effect Events',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Events | The Sunshine Effect',
-    description: 'Golden Hour and Lunar Room experiences that invite you to connect, exhale, and move in community.',
-    images: ['/og-image.png'],
-  },
-  alternates: { canonical: '/events' },
-};
+export const metadata: Metadata = PAGE_METADATA.events;
 
 const gallery = [
   { src: '/festival-crowd.png', alt: 'Sun-drenched women celebrating together' },
