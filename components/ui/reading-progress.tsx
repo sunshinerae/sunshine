@@ -5,13 +5,13 @@ import { motion, useScroll, useSpring } from 'framer-motion';
 interface ReadingProgressProps {
   /** Height of the progress bar in pixels (default: 3) */
   height?: number;
-  /** Color of the progress bar (default: sunshine-yellow) */
+  /** Color of the progress bar (default: sun-gold) */
   className?: string;
 }
 
 export function ReadingProgress({
   height = 3,
-  className = 'bg-sunshine-yellow',
+  className = 'bg-sun-gold',
 }: ReadingProgressProps) {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
