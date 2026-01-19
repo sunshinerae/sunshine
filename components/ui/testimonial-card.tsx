@@ -25,15 +25,15 @@ export function TestimonialCard({
   className,
 }: TestimonialCardProps) {
   const variantStyles = {
-    purple: 'bg-sunshine-purple text-sunshine-white',
-    orange: 'bg-sunshine-orange text-sunshine-white',
-    white: 'bg-sunshine-white text-sunshine-brown',
+    purple: 'bg-sun-plum text-white',
+    orange: 'bg-sun-coral text-sun-cocoa',
+    white: 'bg-sun-paper text-sun-cocoa border border-sun-sand',
   };
 
   const quoteMarkColor = {
-    purple: 'text-sunshine-yellow',
-    orange: 'text-sunshine-yellow',
-    white: 'text-sunshine-purple',
+    purple: 'text-sun-gold',
+    orange: 'text-sun-gold',
+    white: 'text-sun-plum',
   };
 
   return (
@@ -71,7 +71,7 @@ export function TestimonialCard({
           <span
             className={cn(
               'font-body text-sm',
-              variant === 'white' ? 'text-sunshine-purple/70' : 'text-sunshine-white/80'
+              variant === 'white' ? 'text-sun-plum/70' : 'text-white/80'
             )}
           >
             {descriptor}

@@ -41,7 +41,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 - [x] Update components/ui/cta-button.tsx: sun-plum bg, rounded-[14px]
 - [x] Update components/ui/section-heading.tsx: sun-cocoa text
 - [x] Update components/ui/reading-progress.tsx: sun-gold progress bar
-- [ ] Update components/ui/testimonial-card.tsx: sun-* colors
+- [x] Update components/ui/testimonial-card.tsx: sun-* colors
 - [ ] Update components/ui/zone-divider.tsx: sun-* colors
 
 ### Card Components
