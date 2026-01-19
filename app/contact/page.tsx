@@ -6,6 +6,8 @@ import { isFeatureEnabled } from '@/lib/features';
 import { PAGE_METADATA } from '@/lib/metadata';
 import { ContactPageForm } from '@/components/forms/contact-page-form';
 import { FadeInView } from '@/components/motion/fade-in-view';
+import { SlideInView } from '@/components/motion/slide-in-view';
+import { NewsletterSignup } from '@/components/forms/newsletter-signup';
 
 export const metadata: Metadata = PAGE_METADATA.contact;
 
@@ -51,50 +53,91 @@ export default function ContactPage() {
             <p className="font-body text-sm leading-relaxed">We reduce decision anxiety with clear options and loving encouragement.</p>
           </BrandCard>
         </div>
+      </section>
 
-        {/* Signup Options */}
+      {/* Newsletter Signup Section - Consistent Bulletin */}
+      <section className="bg-sunshine-yellow py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <SlideInView direction="up" className="text-center mb-10">
+            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-purple mb-3">
+              The Consistent Bulletin
+            </p>
+            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-tight text-sunshine-brown mb-4">
+              Stay Connected
+            </h2>
+            <p className="font-body text-lg text-sunshine-brown/80 max-w-2xl mx-auto leading-relaxed">
+              A personal note from Sunshine, curated recommendations, event updates, and gentle reminders that radiance is yours.
+            </p>
+          </SlideInView>
+
+          <FadeInView delay={0.2} className="max-w-xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="flex items-start gap-3">
+                <span className="text-sunshine-purple text-xl">✦</span>
+                <div>
+                  <h3 className="font-subhead text-sunshine-brown font-bold mb-1">Personal Notes</h3>
+                  <p className="font-body text-sm text-sunshine-brown/70">Intimate letters from Sunshine with wisdom and encouragement</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-sunshine-purple text-xl">✦</span>
+                <div>
+                  <h3 className="font-subhead text-sunshine-brown font-bold mb-1">Curated Picks</h3>
+                  <p className="font-body text-sm text-sunshine-brown/70">Books, tools, and practices to support your alignment</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-sunshine-purple text-xl">✦</span>
+                <div>
+                  <h3 className="font-subhead text-sunshine-brown font-bold mb-1">Event Updates</h3>
+                  <p className="font-body text-sm text-sunshine-brown/70">First access to Golden Hour and Lunar Room gatherings</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-sunshine-purple text-xl">✦</span>
+                <div>
+                  <h3 className="font-subhead text-sunshine-brown font-bold mb-1">Community Connection</h3>
+                  <p className="font-body text-sm text-sunshine-brown/70">Ways to stay in touch with women on the same path</p>
+                </div>
+              </div>
+            </div>
+
+            <NewsletterSignup
+              variant="yellow"
+              placeholder="Enter your email"
+              buttonText="Join the Consistent Bulletin"
+              successMessage="Welcome to the community! Your first note arrives soon."
+            />
+
+            <p className="font-body text-xs text-sunshine-brown/60 text-center mt-4">
+              Glow from the heart. Unsubscribe anytime. No spam—just devotion and clarity.
+            </p>
+          </FadeInView>
+        </div>
+      </section>
+
+      {/* SMS Signup Section */}
+      <section className="max-w-5xl mx-auto py-12 px-6">
         <BrandCard className="p-8" variant="white">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-3">
-              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">SMS love notes</p>
-              <h3 className="font-headline text-2xl uppercase text-sunshine-purple">1–2 gentle texts a week</h3>
-              <p className="text-sm text-sunshine-brown leading-relaxed">
-                Soft reminders, encouragement, and links to events or offers when relevant. Always optional, always kind.
-              </p>
-              <div className="space-y-2">
-                <label className="text-sm font-semibold">Phone</label>
-                <input
-                  placeholder="(555) 123-4567"
-                  className="w-full rounded-full px-4 py-3 bg-sunshine-white text-sunshine-brown border-2 border-sunshine-purple placeholder:text-sunshine-brown/60"
-                />
-              </div>
-              <Button className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange w-full sm:w-auto">
-                Join SMS list
-              </Button>
-              <p className="text-xs text-sunshine-brown leading-relaxed">
-                Consent matters. 1–2 texts/week max. Reply STOP anytime.
-              </p>
+          <div className="space-y-3">
+            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">SMS love notes</p>
+            <h3 className="font-headline text-2xl uppercase text-sunshine-purple">1–2 gentle texts a week</h3>
+            <p className="text-sm text-sunshine-brown leading-relaxed max-w-xl">
+              Soft reminders, encouragement, and links to events or offers when relevant. Always optional, always kind.
+            </p>
+            <div className="space-y-2 max-w-md">
+              <label className="text-sm font-semibold">Phone</label>
+              <input
+                placeholder="(555) 123-4567"
+                className="w-full rounded-full px-4 py-3 bg-sunshine-white text-sunshine-brown border-2 border-sunshine-purple placeholder:text-sunshine-brown/60"
+              />
             </div>
-            <div className="space-y-3">
-              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">Consistent Bulletin</p>
-              <h3 className="font-headline text-2xl uppercase text-sunshine-purple">Weekly email love notes</h3>
-              <p className="text-sm text-sunshine-brown leading-relaxed">
-                Personal notes from Sunshine, curated recommendations, upcoming events, and ways to stay connected.
-              </p>
-              <div className="space-y-2">
-                <label className="text-sm font-semibold">Email</label>
-                <input
-                  placeholder="you@example.com"
-                  className="w-full rounded-full px-4 py-3 bg-sunshine-white text-sunshine-brown border-2 border-sunshine-purple placeholder:text-sunshine-brown/60"
-                />
-              </div>
-              <Button className="bg-sunshine-yellow text-sunshine-brown hover:bg-sunshine-blue w-full sm:w-auto">
-                Join the Consistent Bulletin
-              </Button>
-              <p className="text-xs text-sunshine-brown leading-relaxed">
-                Glow from the heart. Unsubscribe anytime. No spam—just devotion and clarity.
-              </p>
-            </div>
+            <Button className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange w-full sm:w-auto">
+              Join SMS list
+            </Button>
+            <p className="text-xs text-sunshine-brown leading-relaxed">
+              Consent matters. 1–2 texts/week max. Reply STOP anytime.
+            </p>
           </div>
         </BrandCard>
       </section>
