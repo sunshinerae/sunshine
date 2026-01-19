@@ -113,7 +113,7 @@
 ## Phase 7: Launch Page Enhancements
 
 - [x] Add social proof strip to launch page (placeholder testimonial or "X women have joined")
-- [ ] Update signup modal success state to redirect to /thank-you page
+- [x] Update signup modal success state to redirect to /thank-you page
 - [ ] Add lead magnet tease to signup modal intro copy ("Get your first ritual in 24 hours")
 
 ## Phase 8: Micro-interactions & Polish
