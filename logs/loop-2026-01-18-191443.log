@@ -1210,3 +1210,33 @@ Marked as complete in `implementation_plan.md` and committed.
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. The Events teaser section was already present in `app/offerings/page.tsx` (lines 152-183), featuring:
+
+- "Events hub" label with "Community in motion" headline
+- Description of Golden Hour and Lunar Room event types
+- Two cards with CTAs for each event type
+- "Explore all events" button linking to `/events`
+
+Marked the task as complete and committed the update.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m3c47a4d feat: add Events teaser section linking to Events page[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 33s │ [0;36mAvg:[0m 49s │ [0;36mEst. remaining:[0m 42m 28s
+
+  [1;37mRecent commits:[0m
+    [0;36m3c47a4d feat: add Events teaser section linking to Events page[0m
+    [0;36m182c080 feat: add Retreats section with placeholder content and CTA[0m
+    [0;36m0417315 feat: add 1:1 Coaching section with placeholder content and CTA[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 40[0m │ ������������������������������ 42%
+  [0;32m39 done[0m │ [1;33m52 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Add scroll animations to all Offerings page sections[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
