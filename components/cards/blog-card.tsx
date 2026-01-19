@@ -52,16 +52,16 @@ export function BlogCard({
   const getCategoryStyles = (cat: string) => {
     const normalizedCategory = cat.toLowerCase();
     if (normalizedCategory.includes('wellness')) {
-      return 'bg-sunshine-yellow text-sunshine-brown';
+      return 'bg-sun-gold text-sun-cocoa';
     }
     if (normalizedCategory.includes('self-development') || normalizedCategory.includes('development')) {
-      return 'bg-sunshine-purple text-sunshine-white';
+      return 'bg-sun-plum text-white';
     }
     if (normalizedCategory.includes('business') || normalizedCategory.includes('strategy')) {
-      return 'bg-sunshine-orange text-sunshine-white';
+      return 'bg-sun-coral text-white';
     }
     // Default fallback
-    return 'bg-sunshine-purple text-sunshine-white';
+    return 'bg-sun-plum text-white';
   };
 
   return (
@@ -77,12 +77,12 @@ export function BlogCard({
           ease: crispEase,
         }}
         className={cn(
-          'rounded-2xl overflow-hidden flex flex-col h-full bg-sunshine-white',
+          'rounded-xl overflow-hidden flex flex-col h-full bg-sun-paper border border-sun-sand shadow-soft',
           className
         )}
       >
         {/* Image placeholder */}
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br from-sunshine-yellow/30 via-sunshine-orange/20 to-sunshine-purple/30">
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br from-sun-gold/30 via-sun-coral/20 to-sun-plum/30">
           {image ? (
             <img
               src={image}
@@ -92,7 +92,7 @@ export function BlogCard({
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
               <svg
-                className="w-16 h-16 text-sunshine-purple/30"
+                className="w-16 h-16 text-sun-plum/30"
                 viewBox="0 0 64 64"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -123,24 +123,24 @@ export function BlogCard({
             >
               {category}
             </span>
-            <span className="font-body text-sm text-sunshine-brown/60">
+            <span className="font-body text-sm text-sun-cocoa/60">
               {formatDate(date)}
             </span>
           </div>
 
           {/* Title */}
-          <h3 className="font-headline text-lg uppercase tracking-wide text-sunshine-brown leading-tight">
+          <h3 className="font-headline text-lg uppercase tracking-wide text-sun-cocoa leading-tight">
             {title}
           </h3>
 
           {/* Excerpt */}
-          <p className="font-body text-sm leading-relaxed text-sunshine-brown/80 line-clamp-3">
+          <p className="font-body text-sm leading-relaxed text-sun-cocoa/80 line-clamp-3">
             {excerpt}
           </p>
 
           {/* Read more link */}
           <div className="mt-auto pt-4">
-            <span className="font-subhead text-sm font-semibold text-sunshine-purple hover:text-sunshine-orange transition-colors">
+            <span className="font-subhead text-sm font-semibold text-sun-plum hover:text-sun-plum/80 transition-colors">
               Read More →
             </span>
           </div>
