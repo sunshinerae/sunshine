@@ -1,75 +1,53 @@
 # Agent Instructions
 
-You are a code implementation agent. You execute ONE task per run, then exit.
+One task per run. Read plan, implement, mark done, commit, exit.
 
-## Context Files
+## Files
 
-Read these files to understand the project:
+- `brand_spec.md` — colors, typography, component patterns
+- `implementation_plan.md` — task checklist
 
-- `docs/brand-spec.md` — brand voice, colors, typography, vibe
-- `IMPLEMENTATION-CHECKLIST.md` — detailed brand requirements
-- `implementation_plan.md` — task checklist (your source of truth)
-
-## Your Job
+## Process
 
 1. Read `implementation_plan.md`
-2. Find the FIRST unchecked `[ ]` task
-3. Implement ONLY that task
-4. Mark it `[x]` in `implementation_plan.md`
-5. Commit with message: `feat: <task description>`
-6. Exit immediately
+2. Find FIRST unchecked `[ ]` task
+3. Implement that ONE task
+4. Run `npm run build` — if it fails, fix errors before continuing
+5. Mark task `[x]` in `implementation_plan.md`
+6. Commit: `git add -A && git commit -m "feat: <task>"`
+7. Exit
 
 ## Rules
 
-- ONE task per run. No exceptions.
-- Do not skip ahead. Do not combine tasks.
-- Do not refactor unrelated code.
-- Do not add features not in the task.
-- If a task is unclear, implement your best interpretation and move on.
-- If a task fails, mark it `[x]` anyway with a commit noting the issue.
+- ONE task only. No skipping, no combining.
+- Reference `brand_spec.md` for all color/typography decisions.
+- Replace `sunshine-*` colors with `sun-*` colors.
+- No refactoring beyond the task scope.
+- If unclear, make best judgment and proceed.
 
-## Tech Stack
-
-- Next.js 14+ (App Router)
-- React with TypeScript
-- Tailwind CSS with custom theme (sunshine-* colors)
-- Framer Motion for animations
-
-## Brand Colors
+## New Brand Colors
 
 ```
-sunshine-purple: #6E054D
-sunshine-orange: #D4510B
-sunshine-yellow: #FFC619
-sunshine-blue: #95D7E6
-sunshine-white: #FCF6F2
-sunshine-brown: #240D01
+sun-plum: #6E054D     (buttons, accents)
+sun-cocoa: #240D01    (text)
+sun-cream: #FFF7F1    (main background)
+sun-paper: #FFFFFF    (cards)
+sun-sand: #F0E4DA     (borders, subtle sections)
+sun-gold: #F6C453     (highlights)
+sun-coral: #F28C7D    (gentle emphasis)
+sun-leaf: #2F7A5B     (success)
 ```
 
-## Typography
+## New Typography
 
-- `font-headline` — Belvare (serif, uppercase, bold)
-- `font-subhead` — Laro Soft (rounded sans, bold)
-- `font-body` — Poppins (sans)
+- Headlines: Fraunces (Google Fonts)
+- Body: Inter (Google Fonts)
 
-## Animation Guidelines
+## Component Patterns
 
-- Body content: soft fades, slow easing (0.6s+)
-- CTAs and cards: crisp motion, defined timing (0.3s)
-- Use Framer Motion. Animate on scroll with intersection observer.
-
-## File Conventions
-
-- Components: `components/<name>.tsx`
-- Pages: `app/<route>/page.tsx`
-- Data: `data/<name>.json` or `content/<name>.md`
-- Utilities: `lib/<name>.ts`
-
-## After Completing the Task
-
-```bash
-git add -A
-git commit -m "feat: <brief task description>"
-```
-
-Then stop. Do not continue to the next task.
+- Buttons: `bg-sun-plum text-white hover:bg-sun-plum/90 rounded-[14px]`
+- Cards: `bg-sun-paper border border-sun-sand rounded-xl shadow-soft`
+- Links: `text-sun-plum hover:text-sun-plum/80`
+- Inputs: `border-sun-sand focus:ring-sun-plum focus:border-sun-plum`
+- Main bg: `bg-sun-cream`
+- Text: `text-sun-cocoa`

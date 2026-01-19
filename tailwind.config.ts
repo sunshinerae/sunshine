@@ -12,13 +12,24 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Brand palette from sunshineBrandSpec
-        'sunshine-purple': '#6E054D', // powerPurple - CTA buttons, important accents
-        'sunshine-orange': '#D4510B', // moltenOrange - secondary bg, badges, hover
-        'sunshine-yellow': '#FFC019', // yellowSun - primary bg, hero sections
-        'sunshine-blue': '#95D7E6', // blueSky - accent bg, pills, badges
-        'sunshine-white': '#FCF6F2', // whiteCloud - page bg, light UI surfaces
-        'sunshine-brown': '#240D01', // deepBrown - primary text on warm backgrounds
+        // New sun-* brand palette (warm, cozy, calm)
+        sun: {
+          plum: '#6E054D',    // buttons, accents, highlights
+          cocoa: '#240D01',   // headlines, body text
+          cream: '#FFF7F1',   // main background
+          paper: '#FFFFFF',   // cards
+          sand: '#F0E4DA',    // borders, subtle sections
+          gold: '#F6C453',    // highlights, warmth
+          coral: '#F28C7D',   // gentle emphasis
+          leaf: '#2F7A5B',    // success states
+        },
+        // Legacy palette (being phased out)
+        'sunshine-purple': '#6E054D',
+        'sunshine-orange': '#D4510B',
+        'sunshine-yellow': '#FFC019',
+        'sunshine-blue': '#95D7E6',
+        'sunshine-white': '#FCF6F2',
+        'sunshine-brown': '#240D01',
         border: "var(--color-border)",
         input: "var(--color-input)",
         ring: "var(--color-ring)",

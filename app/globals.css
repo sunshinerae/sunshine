@@ -1,25 +1,36 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #FCF6F2; /* White Cloud */
-  --color-foreground: #240D01; /* Deep Brown */
-  --color-card: #FCF6F2;
-  --color-card-foreground: #240D01;
-  --color-popover: #FCF6F2;
-  --color-popover-foreground: #240D01;
-  --color-primary: #6E054D; /* Power Purple */
-  --color-primary-foreground: #FCF6F2;
-  --color-secondary: #D4510B; /* Molten Orange */
-  --color-secondary-foreground: #FCF6F2;
-  --color-muted: #FCF6F2;
-  --color-muted-foreground: #240D01;
-  --color-accent: #FFC619; /* Yellow Sun */
-  --color-accent-foreground: #240D01;
-  --color-destructive: #D4510B;
-  --color-destructive-foreground: #FCF6F2;
-  --color-border: #240D01;
-  --color-input: #240D01;
-  --color-ring: #95D7E6; /* Blue Sky */
+  /* Sun-* brand palette (warm, cozy, calm) */
+  --sun-plum: #6E054D;
+  --sun-cocoa: #240D01;
+  --sun-cream: #FFF7F1;
+  --sun-paper: #FFFFFF;
+  --sun-sand: #F0E4DA;
+  --sun-gold: #F6C453;
+  --sun-coral: #F28C7D;
+  --sun-leaf: #2F7A5B;
+
+  /* System colors mapped to sun-* */
+  --color-background: var(--sun-cream);
+  --color-foreground: var(--sun-cocoa);
+  --color-card: var(--sun-paper);
+  --color-card-foreground: var(--sun-cocoa);
+  --color-popover: var(--sun-paper);
+  --color-popover-foreground: var(--sun-cocoa);
+  --color-primary: var(--sun-plum);
+  --color-primary-foreground: var(--sun-paper);
+  --color-secondary: var(--sun-sand);
+  --color-secondary-foreground: var(--sun-cocoa);
+  --color-muted: var(--sun-sand);
+  --color-muted-foreground: var(--sun-cocoa);
+  --color-accent: var(--sun-gold);
+  --color-accent-foreground: var(--sun-cocoa);
+  --color-destructive: var(--sun-coral);
+  --color-destructive-foreground: var(--sun-paper);
+  --color-border: var(--sun-sand);
+  --color-input: var(--sun-sand);
+  --color-ring: var(--sun-plum);
 
   --radius: 0.75rem;
 }
@@ -65,6 +76,23 @@ body::before {
 
 /* Soft gradient utility - warm glow effect */
 @layer utilities {
+  .shadow-soft {
+    box-shadow: 0 8px 30px rgba(36, 13, 1, 0.08);
+  }
+
+  .bg-hero-gradient {
+    background: linear-gradient(135deg, #6E054D 0%, #F6C453 100%);
+  }
+
+  .bg-sun-gradient {
+    background: linear-gradient(135deg, var(--sun-plum) 0%, var(--sun-gold) 100%);
+  }
+
+  .bg-sun-gradient-warm {
+    background: linear-gradient(135deg, var(--sun-cream) 0%, var(--sun-sand) 100%);
+  }
+
+  /* Legacy - being phased out */
   .bg-sunshine-gradient {
     background: radial-gradient(circle at top right, #D4510B 0%, #6E054D 100%);
   }
