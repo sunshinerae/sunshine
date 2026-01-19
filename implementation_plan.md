@@ -3,7 +3,7 @@
 ## Phase 1: Foundation & Animation System
 
 - [x] Install Framer Motion: `npm install framer-motion`
-- [ ] Create `components/motion/fade-in-view.tsx` — scroll-triggered fade animation wrapper (soft, 0.6s ease)
+- [x] Create `components/motion/fade-in-view.tsx` — scroll-triggered fade animation wrapper (soft, 0.6s ease)
 - [ ] Create `components/motion/slide-in-view.tsx` — scroll-triggered slide animation wrapper (soft, 0.6s ease)
 - [ ] Create `components/motion/stagger-children.tsx` — staggered animation for card grids (crisp, 0.3s)
 - [ ] Create `components/motion/scale-in.tsx` — scale animation for CTAs and buttons (crisp, 0.3s)
