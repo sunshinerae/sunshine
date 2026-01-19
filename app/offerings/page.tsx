@@ -76,7 +76,7 @@ export default function OfferingsPage() {
         <div className="max-w-6xl mx-auto space-y-8">
           <FadeInView>
             <div className="space-y-2">
-              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-coral">1:1 Coaching</p>
+              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-plum">1:1 Coaching</p>
               <h2 className="font-headline text-4xl uppercase text-sun-plum">Come home to yourself.</h2>
               <p className="font-body text-lg text-sun-cocoa leading-relaxed max-w-3xl">
                 Single session or 3-month journey. Together we clear the fog, rebuild confidence, and practice rituals that keep you resourced.
@@ -175,7 +175,7 @@ export default function OfferingsPage() {
         <div className="max-w-6xl mx-auto space-y-8">
           <FadeInView>
             <div className="space-y-2">
-              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-coral">Events hub</p>
+              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum">Events hub</p>
               <h2 className="font-headline text-4xl uppercase text-sun-plum leading-[0.9] tracking-tight">Community in motion</h2>
               <p className="font-body text-lg leading-relaxed max-w-3xl text-sun-cocoa">
                 Golden Hour (high-energy, heart-led networking) and Lunar Room (slow, introspective sound + stillness). Two energies, one community.

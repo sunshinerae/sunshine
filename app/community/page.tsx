@@ -69,7 +69,7 @@ export default function CommunityPage() {
       <section className="px-4 sm:px-6 py-12 md:py-16 overflow-hidden">
         <div className="max-w-6xl mx-auto grid md:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
           <SlideInView direction="right" className="space-y-4">
-            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-coral">The gap</p>
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum">The gap</p>
             <h2 className="font-headline text-4xl uppercase text-sun-plum leading-[0.9] tracking-tight">From busy & dull to aligned & radiant.</h2>
             <p className="font-body text-lg leading-relaxed text-sun-cocoa">
               Maybe there is another way. You want clarity, confidence, stability, and a circle that will not let you shrink. Community is how we move from awareness to action.
@@ -116,7 +116,7 @@ export default function CommunityPage() {
       <section className="px-4 sm:px-6 py-12 md:py-16 overflow-hidden bg-sun-cream">
         <div className="max-w-6xl mx-auto space-y-8">
           <FadeInView className="space-y-2 text-center">
-            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-coral">How we stay connected</p>
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum">How we stay connected</p>
             <h3 className="font-headline text-4xl uppercase text-sun-plum leading-[0.9] tracking-tight">Choose your doorway</h3>
             <p className="font-body text-lg leading-relaxed max-w-3xl mx-auto text-sun-cocoa">
               Events, SMS love notes, the Consistent Bulletin, and social touches. Clear labels, big tap targets, and easy opt-outs.
@@ -145,7 +145,7 @@ export default function CommunityPage() {
       {/* CTA Section */}
       <section className="px-4 sm:px-6 py-16 md:py-24 overflow-hidden bg-sun-coral">
         <FadeInView className="max-w-2xl mx-auto text-center space-y-6">
-          <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-gold">
+          <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-cream">
             Join the list
           </p>
           <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-white">
