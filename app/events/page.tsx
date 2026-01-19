@@ -7,6 +7,7 @@ import { BrandCard } from '@/components/brand-card';
 import { FadeInView } from '@/components/motion/fade-in-view';
 import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-children';
 import { EventCard } from '@/components/cards/event-card';
+import { ZoneDivider } from '@/components/ui/zone-divider';
 import { isFeatureEnabled } from '@/lib/features';
 import { PAGE_METADATA } from '@/lib/metadata';
 import { getGoldenHourEvents, getLunarRoomEvents } from '@/lib/events';
@@ -142,6 +143,9 @@ export default function EventsPage() {
           </FadeInView>
         </div>
       </section>
+
+      {/* Visual Divider - Transition from Golden Hour to Lunar Room */}
+      <ZoneDivider from="golden-hour" to="lunar-room" />
 
       {/* Lunar Room Zone - Cool/dark background with moon imagery and event cards */}
       <section id="lunar-room" className="px-4 sm:px-6 py-16 md:py-24 bg-sunshine-purple text-sunshine-white overflow-hidden relative">
