@@ -54,7 +54,7 @@
 - [x] Add scroll animations to all About page sections
 
 ### Offerings Page
-- [ ] Create `app/offerings/page.tsx` — page structure with metadata
+- [x] Create `app/offerings/page.tsx` — page structure with metadata
 - [ ] Add Offerings hero section with headline and intro text placeholder
 - [ ] Add 1:1 Coaching section with placeholder content and CTA
 - [ ] Add Retreats section with placeholder content and CTA

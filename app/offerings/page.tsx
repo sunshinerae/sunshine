@@ -1,35 +1,12 @@
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { BrandCard } from '@/components/brand-card';
 import { isFeatureEnabled } from '@/lib/features';
+import { PAGE_METADATA } from '@/lib/metadata';
 
-export const metadata = {
-  title: 'Offerings',
-  description: 'Coaching, retreats, and events that guide women from burnout to alignment with clarity, devotion, and community.',
-  keywords: ['life coaching', 'women retreats', 'burnout coaching', 'wellness retreats', 'coaching sessions'],
-  openGraph: {
-    title: 'Offerings | The Sunshine Effect',
-    description: 'Coaching, retreats, and events that guide women from burnout to alignment with clarity, devotion, and community.',
-    url: '/offerings',
-    type: 'website',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'The Sunshine Effect Offerings',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Offerings | The Sunshine Effect',
-    description: 'Coaching, retreats, and events that guide women from burnout to alignment with clarity, devotion, and community.',
-    images: ['/og-image.png'],
-  },
-  alternates: { canonical: '/offerings' },
-};
+export const metadata: Metadata = PAGE_METADATA.offerings;
 
 const focusAreas = [
   'Rebuild confidence and self trust',
@@ -165,11 +142,9 @@ export default function OfferingsPage() {
             </BrandCard>
           </div>
           <Link href="/events">
-          <Link href="/events">
             <Button className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-yellow hover:text-sunshine-brown">
               Join the retreat waitlist
             </Button>
-          </Link>
           </Link>
         </div>
       </section>
