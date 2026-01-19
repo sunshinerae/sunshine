@@ -28,10 +28,10 @@ export interface OfferingCardProps {
  * Offering display card with icon placeholder, title, description, and CTA
  *
  * Visual variants:
- * - purple: Power Purple background with White Cloud text
- * - orange: Molten Orange background with White Cloud text
- * - yellow: Yellow Sun background with Deep Brown text
- * - white: White Cloud background with Deep Brown text
+ * - purple: sun-plum background with white text
+ * - orange: sun-coral background with white text
+ * - yellow: sun-gold background with sun-cocoa text
+ * - white: sun-paper background with sun-cocoa text
  */
 export function OfferingCard({
   title,
@@ -46,31 +46,31 @@ export function OfferingCard({
   // Variant-based styling per brand spec contrast rules
   const variantStyles = {
     purple: {
-      card: 'bg-sunshine-purple',
-      icon: 'bg-sunshine-yellow/20 text-sunshine-yellow',
-      title: 'text-sunshine-white',
-      description: 'text-sunshine-white/90',
+      card: 'bg-sun-plum border border-sun-sand',
+      icon: 'bg-sun-gold/20 text-sun-gold',
+      title: 'text-white',
+      description: 'text-white/90',
       ctaVariant: 'purple' as const,
     },
     orange: {
-      card: 'bg-sunshine-orange',
-      icon: 'bg-sunshine-yellow/20 text-sunshine-yellow',
-      title: 'text-sunshine-white',
-      description: 'text-sunshine-white/90',
+      card: 'bg-sun-coral border border-sun-sand',
+      icon: 'bg-sun-gold/20 text-sun-gold',
+      title: 'text-white',
+      description: 'text-white/90',
       ctaVariant: 'orange' as const,
     },
     yellow: {
-      card: 'bg-sunshine-yellow',
-      icon: 'bg-sunshine-purple/20 text-sunshine-purple',
-      title: 'text-sunshine-brown',
-      description: 'text-sunshine-brown/80',
+      card: 'bg-sun-gold border border-sun-sand',
+      icon: 'bg-sun-plum/20 text-sun-plum',
+      title: 'text-sun-cocoa',
+      description: 'text-sun-cocoa/80',
       ctaVariant: 'yellow' as const,
     },
     white: {
-      card: 'bg-sunshine-white',
-      icon: 'bg-sunshine-purple/10 text-sunshine-purple',
-      title: 'text-sunshine-brown',
-      description: 'text-sunshine-brown/80',
+      card: 'bg-sun-paper border border-sun-sand',
+      icon: 'bg-sun-plum/10 text-sun-plum',
+      title: 'text-sun-cocoa',
+      description: 'text-sun-cocoa/80',
       ctaVariant: 'white' as const,
     },
   };
