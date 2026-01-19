@@ -7,23 +7,23 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold tracking-wide font-subhead transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sunshine-purple focus-visible:ring-offset-background hover:scale-105 active:scale-95",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[14px] text-sm font-semibold tracking-wide font-subhead transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sun-plum focus-visible:ring-offset-background hover:scale-105 active:scale-95",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-sunshine-orange",
+        default: "bg-sun-plum text-white hover:bg-sun-plum/90",
         destructive:
-          "bg-destructive text-white hover:bg-sunshine-purple focus-visible:ring-destructive",
+          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive",
         outline:
-          "border-2 bg-transparent hover:bg-accent hover:text-accent-foreground",
+          "border-2 border-sun-sand bg-transparent hover:bg-sun-sand/50 hover:text-sun-cocoa",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-sunshine-purple",
+          "bg-sun-sand text-sun-cocoa hover:bg-sun-sand/80",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline rounded-none hover:scale-100 active:scale-100",
-        glow: "bg-sunshine-orange text-sunshine-white ring-4 ring-sunshine-yellow/40 hover:ring-sunshine-yellow/60 hover:bg-sunshine-orange",
-        "glow-purple": "bg-sunshine-purple text-sunshine-white ring-4 ring-sunshine-yellow/30 hover:ring-sunshine-yellow/50 hover:bg-sunshine-orange",
-        "glow-yellow": "bg-sunshine-yellow text-sunshine-brown ring-4 ring-sunshine-purple/30 hover:ring-sunshine-purple/50 hover:bg-sunshine-blue hover:text-sunshine-brown",
+          "hover:bg-sun-sand/50 hover:text-sun-cocoa",
+        link: "text-sun-plum underline-offset-4 hover:underline hover:text-sun-plum/80 rounded-none hover:scale-100 active:scale-100",
+        glow: "bg-sun-plum text-white ring-4 ring-sun-gold/40 hover:ring-sun-gold/60 hover:bg-sun-plum/90",
+        "glow-purple": "bg-sun-plum text-white ring-4 ring-sun-gold/30 hover:ring-sun-gold/50 hover:bg-sun-plum/90",
+        "glow-yellow": "bg-sun-gold text-sun-cocoa ring-4 ring-sun-plum/30 hover:ring-sun-plum/50 hover:bg-sun-gold/90",
       },
       size: {
         default: "h-11 px-6 has-[>svg]:px-5",
