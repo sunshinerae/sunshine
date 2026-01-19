@@ -92,18 +92,18 @@ export function SMSSignup({
 
   // Text colors based on background variant
   const textStyles = {
-    purple: 'text-sunshine-white',
-    orange: 'text-sunshine-white',
-    yellow: 'text-sunshine-brown',
-    white: 'text-sunshine-brown',
+    purple: 'text-white',
+    orange: 'text-white',
+    yellow: 'text-sun-cocoa',
+    white: 'text-sun-cocoa',
   };
 
   // Input styles based on variant for proper contrast
   const inputStyles = {
-    purple: 'bg-sunshine-white/10 border-sunshine-white/30 text-sunshine-white placeholder:text-sunshine-white/60 focus:border-sunshine-yellow focus:ring-sunshine-yellow/30',
-    orange: 'bg-sunshine-white/10 border-sunshine-white/30 text-sunshine-white placeholder:text-sunshine-white/60 focus:border-sunshine-yellow focus:ring-sunshine-yellow/30',
-    yellow: 'bg-sunshine-white border-sunshine-brown/20 text-sunshine-brown placeholder:text-sunshine-brown/50 focus:border-sunshine-purple focus:ring-sunshine-purple/30',
-    white: 'bg-sunshine-white border-sunshine-brown/20 text-sunshine-brown placeholder:text-sunshine-brown/50 focus:border-sunshine-purple focus:ring-sunshine-purple/30',
+    purple: 'bg-white/10 border-white/30 text-white placeholder:text-white/60 focus:border-sun-gold focus:ring-sun-gold/30',
+    orange: 'bg-white/10 border-white/30 text-white placeholder:text-white/60 focus:border-sun-gold focus:ring-sun-gold/30',
+    yellow: 'bg-sun-paper border-sun-sand text-sun-cocoa placeholder:text-sun-cocoa/50 focus:border-sun-plum focus:ring-sun-plum/30',
+    white: 'bg-sun-paper border-sun-sand text-sun-cocoa placeholder:text-sun-cocoa/50 focus:border-sun-plum focus:ring-sun-plum/30',
   };
 
   // Button variant mapping
@@ -124,8 +124,8 @@ export function SMSSignup({
         <p className={cn(
           'font-body text-sm mb-4 leading-relaxed',
           variant === 'purple' || variant === 'orange'
-            ? 'text-sunshine-white/80'
-            : 'text-sunshine-brown/70'
+            ? 'text-white/80'
+            : 'text-sun-cocoa/70'
         )}>
           {description}
         </p>
@@ -177,8 +177,8 @@ export function SMSSignup({
                 className={cn(
                   'mt-2 text-sm font-body',
                   variant === 'purple' || variant === 'orange'
-                    ? 'text-sunshine-yellow'
-                    : 'text-sunshine-orange'
+                    ? 'text-sun-gold'
+                    : 'text-sun-coral'
                 )}
                 role="alert"
               >
@@ -190,8 +190,8 @@ export function SMSSignup({
               className={cn(
                 'mt-2 text-xs font-body',
                 variant === 'purple' || variant === 'orange'
-                  ? 'text-sunshine-white/60'
-                  : 'text-sunshine-brown/50'
+                  ? 'text-white/60'
+                  : 'text-sun-cocoa/50'
               )}
             >
               Expect 1-2 gentle check-ins per week. Unsubscribe anytime.
