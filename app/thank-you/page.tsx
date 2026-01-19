@@ -97,27 +97,52 @@ export default function ThankYouPage() {
             </p>
           </FadeInView>
 
-          <FadeInView delay={0.2} className="flex flex-col items-center gap-6">
-            <Link
-              href={SOCIAL_LINKS.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-4 px-8 py-5 rounded-2xl bg-sunshine-purple hover:bg-sunshine-orange transition-colors duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sunshine-brown focus-visible:ring-offset-2"
-            >
-              <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-sunshine-white text-sunshine-purple font-headline text-xl group-hover:scale-110 transition-transform duration-300">
-                IG
-              </span>
-              <div className="text-left">
-                <h3 className="font-headline text-lg uppercase text-sunshine-white mb-1">
-                  Follow on Instagram
-                </h3>
-                <p className="font-body text-sm text-sunshine-white/80">
-                  @thesunshineeffect
-                </p>
-              </div>
-            </Link>
+          <StaggerChildren className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8">
+            <StaggerItem>
+              <Link
+                href={SOCIAL_LINKS.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 px-6 py-4 rounded-2xl bg-sunshine-purple hover:bg-sunshine-orange transition-colors duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sunshine-brown focus-visible:ring-offset-2 w-full sm:w-auto"
+              >
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sunshine-white text-sunshine-purple font-headline text-lg group-hover:scale-110 transition-transform duration-300">
+                  IG
+                </span>
+                <div className="text-left">
+                  <h3 className="font-headline text-base uppercase text-sunshine-white mb-0.5">
+                    Instagram
+                  </h3>
+                  <p className="font-body text-xs text-sunshine-white/80">
+                    @thesunshineeffect
+                  </p>
+                </div>
+              </Link>
+            </StaggerItem>
 
-            <p className="font-body text-sm text-sunshine-brown/60 text-center max-w-md">
+            <StaggerItem>
+              <Link
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-4 px-6 py-4 rounded-2xl bg-sunshine-purple hover:bg-sunshine-orange transition-colors duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sunshine-brown focus-visible:ring-offset-2 w-full sm:w-auto"
+              >
+                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sunshine-white text-sunshine-purple font-headline text-lg group-hover:scale-110 transition-transform duration-300">
+                  in
+                </span>
+                <div className="text-left">
+                  <h3 className="font-headline text-base uppercase text-sunshine-white mb-0.5">
+                    LinkedIn
+                  </h3>
+                  <p className="font-body text-xs text-sunshine-white/80">
+                    The Sunshine Effect
+                  </p>
+                </div>
+              </Link>
+            </StaggerItem>
+          </StaggerChildren>
+
+          <FadeInView delay={0.4} className="text-center">
+            <p className="font-body text-sm text-sunshine-brown/70 max-w-md mx-auto">
               Daily inspiration, behind-the-scenes moments, and a community that celebrates your radiance.
             </p>
           </FadeInView>

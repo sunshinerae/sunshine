@@ -100,7 +100,7 @@
 - [x] Create `app/thank-you/page.tsx` — post-signup redirect page
 - [x] Add warm confirmation message with fire emoji
 - [x] Add "what happens next" section (lead magnet tease: "Your first ritual arrives in 24 hours")
-- [ ] Add social links and community invitation
+- [x] Add social links and community invitation
 - [ ] Add soft entrance animations
 
 ### 404 Page
