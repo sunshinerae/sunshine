@@ -39,7 +39,7 @@
 ## Phase 5: SEO Foundation
 
 - [x] Create `lib/metadata.ts` — utility for generating page metadata (title, description, OG tags)
-- [ ] Create `app/sitemap.ts` — dynamic sitemap generation for all pages
+- [x] Create `app/sitemap.ts` — dynamic sitemap generation for all pages
 - [ ] Create `app/robots.ts` — robots.txt configuration (update existing if needed)
 - [ ] Add structured data (JSON-LD) component for Organization schema
 - [ ] Create `components/seo/og-image.tsx` — template for Open Graph images (or use Next.js OG image generation)
