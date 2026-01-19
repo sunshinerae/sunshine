@@ -14,7 +14,7 @@
 - [x] Create `data/events.json` with sample Golden Hour and Lunar Room events (3 each, include: title, date, time, description, type, image placeholder)
 - [x] Create `content/blog/` directory structure with sample markdown post template
 - [x] Create `data/blog-meta.json` for blog post metadata (title, slug, category, date, excerpt, image)
-- [ ] Create `lib/blog.ts` utility functions to read and parse blog posts
+- [x] Create `lib/blog.ts` utility functions to read and parse blog posts
 - [ ] Create `lib/events.ts` utility functions to read and filter events by type
 
 ## Phase 3: Reusable Components
