@@ -80,7 +80,7 @@
 - [x] Add Contact hero with welcoming headline placeholder
 - [x] Add contact form section
 - [x] Add newsletter signup section ("Consistent Bulletin")
-- [ ] Add SMS signup section with "love note" placeholder copy
+- [x] Add SMS signup section with "love note" placeholder copy
 - [ ] Add social links section (Instagram primary)
 - [ ] Add scroll animations to all sections
 

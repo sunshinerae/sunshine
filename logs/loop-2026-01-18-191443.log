@@ -1655,3 +1655,40 @@ Committed as `b006e1a`.
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I added a newsletter signup section ("Consistent Bulletin") to the Contact page with:
+
+- **Section header** with "The Consistent Bulletin" subtitle and "Stay Connected" headline
+- **Description** mentioning personal notes, curated recommendations, event updates, and connection reminders
+- **Four feature highlights** in a 2x2 grid:
+  - Personal Notes from Sunshine
+  - Curated Picks (books, tools, practices)
+  - Event Updates (Golden Hour and Lunar Room access)
+  - Community Connection
+- **Newsletter signup form** using the reusable `NewsletterSignup` component
+- **Microcopy** with "Glow from the heart" and unsubscribe info
+- **Yellow background** with proper contrast (brown text on yellow per brand guidelines)
+- **Scroll animations** using `SlideInView` and `FadeInView` components
+
+The SMS signup section was separated into its own section below the newsletter for better organization.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m807ebf4 feat: add newsletter signup section ("Consistent Bulletin")[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 36s │ [0;36mAvg:[0m 13m 46s │ [0;36mEst. remaining:[0m 8h 29m
+
+  [1;37mRecent commits:[0m
+    [0;36m807ebf4 feat: add newsletter signup section ("Consistent Bulletin")[0m
+    [0;36mb006e1a feat: add contact form section[0m
+    [0;36mbf869a3 feat: add Contact hero with welcoming headline placeholder[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 55[0m │ ������������������������������ 59%
+  [0;32m54 done[0m │ [1;33m37 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Add SMS signup section with "love note" placeholder copy[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

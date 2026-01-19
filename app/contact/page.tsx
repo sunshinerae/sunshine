@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { BrandCard } from '@/components/brand-card';
 import { isFeatureEnabled } from '@/lib/features';
 import { PAGE_METADATA } from '@/lib/metadata';
@@ -8,6 +7,7 @@ import { ContactPageForm } from '@/components/forms/contact-page-form';
 import { FadeInView } from '@/components/motion/fade-in-view';
 import { SlideInView } from '@/components/motion/slide-in-view';
 import { NewsletterSignup } from '@/components/forms/newsletter-signup';
+import { SMSSignup } from '@/components/forms/sms-signup';
 
 export const metadata: Metadata = PAGE_METADATA.contact;
 
@@ -116,30 +116,65 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* SMS Signup Section */}
-      <section className="max-w-5xl mx-auto py-12 px-6">
-        <BrandCard className="p-8" variant="white">
-          <div className="space-y-3">
-            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">SMS love notes</p>
-            <h3 className="font-headline text-2xl uppercase text-sunshine-purple">1–2 gentle texts a week</h3>
-            <p className="text-sm text-sunshine-brown leading-relaxed max-w-xl">
-              Soft reminders, encouragement, and links to events or offers when relevant. Always optional, always kind.
+      {/* SMS Signup Section - Love Notes */}
+      <section className="bg-sunshine-purple py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <SlideInView direction="up" className="text-center mb-10">
+            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-blue mb-3">
+              Love Notes
             </p>
-            <div className="space-y-2 max-w-md">
-              <label className="text-sm font-semibold">Phone</label>
-              <input
-                placeholder="(555) 123-4567"
-                className="w-full rounded-full px-4 py-3 bg-sunshine-white text-sunshine-brown border-2 border-sunshine-purple placeholder:text-sunshine-brown/60"
-              />
+            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-tight text-sunshine-white mb-4">
+              A Little Sunshine in Your Pocket
+            </h2>
+            <p className="font-body text-lg text-sunshine-white/80 max-w-2xl mx-auto leading-relaxed">
+              Short, sweet text messages to brighten your day—gentle check-ins, soft encouragement, and reminders that you are held.
+            </p>
+          </SlideInView>
+
+          <FadeInView delay={0.2} className="max-w-xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              <div className="flex items-start gap-3">
+                <span className="text-sunshine-yellow text-xl">♡</span>
+                <div>
+                  <h3 className="font-subhead text-sunshine-white font-bold mb-1">Gentle Check-ins</h3>
+                  <p className="font-body text-sm text-sunshine-white/70">A soft nudge to pause, breathe, and remember your radiance</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-sunshine-yellow text-xl">♡</span>
+                <div>
+                  <h3 className="font-subhead text-sunshine-white font-bold mb-1">Encouragement</h3>
+                  <p className="font-body text-sm text-sunshine-white/70">Words of warmth when you need them most</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-sunshine-yellow text-xl">♡</span>
+                <div>
+                  <h3 className="font-subhead text-sunshine-white font-bold mb-1">Event Invites</h3>
+                  <p className="font-body text-sm text-sunshine-white/70">First access to Golden Hour and Lunar Room gatherings</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="text-sunshine-yellow text-xl">♡</span>
+                <div>
+                  <h3 className="font-subhead text-sunshine-white font-bold mb-1">Always Optional</h3>
+                  <p className="font-body text-sm text-sunshine-white/70">Reply STOP anytime. Your boundaries are honored.</p>
+                </div>
+              </div>
             </div>
-            <Button className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange w-full sm:w-auto">
-              Join SMS list
-            </Button>
-            <p className="text-xs text-sunshine-brown leading-relaxed">
-              Consent matters. 1–2 texts/week max. Reply STOP anytime.
+
+            <SMSSignup
+              variant="purple"
+              placeholder="(555) 123-4567"
+              buttonText="Get Love Notes"
+              successMessage="Your first love note is on its way. Welcome, beautiful."
+            />
+
+            <p className="font-body text-xs text-sunshine-white/60 text-center mt-4">
+              Move like it&apos;s already yours. 1-2 texts per week, max. Consent matters here.
             </p>
-          </div>
-        </BrandCard>
+          </FadeInView>
+        </div>
       </section>
     </main>
   );
