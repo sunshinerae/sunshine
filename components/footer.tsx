@@ -99,7 +99,7 @@ export function Footer() {
                 >
                   <Input
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder="your@email.com"
                     value={footerEmail}
                     onChange={(e) => setFooterEmail(e.target.value)}
                     disabled={footerSubmitting}

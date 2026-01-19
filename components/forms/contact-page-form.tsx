@@ -109,7 +109,7 @@ export function ContactPageForm() {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Full name" {...field} />
+                    <Input placeholder="Your name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -123,7 +123,7 @@ export function ContactPageForm() {
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="you@example.com" {...field} />
+                    <Input type="email" placeholder="your@email.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -140,7 +140,7 @@ export function ContactPageForm() {
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
                     <SelectTrigger>
-                      <SelectValue placeholder="Choose one" />
+                      <SelectValue placeholder="What brings you here?" />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>

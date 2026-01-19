@@ -181,7 +181,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <MarkdownContent content={content} />
             ) : (
               <p className="font-body text-lg leading-relaxed text-sunshine-brown/90 text-center italic">
-                Content coming soon. Check back later for the full article.
+                This piece is still being crafted with care. Return soon for words that warm the soul.
               </p>
             )}
           </div>

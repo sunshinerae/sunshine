@@ -87,7 +87,7 @@ export default function BlogPage() {
             <FadeInView>
               <div className="text-center py-16">
                 <p className="font-subhead text-lg text-sunshine-brown/60">
-                  New posts coming soon. Stay tuned.
+                  Fresh words are brewing. Your next dose of radiance arrives soon.
                 </p>
               </div>
             </FadeInView>

@@ -128,8 +128,8 @@
 ## Phase 9: Content Placeholders & Final Touches
 
 - [x] Create 3 sample blog posts in markdown with placeholder content (one per category)
-- [ ] Add placeholder images or gradients where hero images are needed
-- [ ] Review all placeholder text for consistent tone (even as placeholders)
+- [x] Add placeholder images or gradients where hero images are needed
+- [x] Review all placeholder text for consistent tone (even as placeholders)
 - [ ] Run Lighthouse audit and fix any critical accessibility issues
 - [ ] Final review: ensure all nav links work, all CTAs function, no broken pages
 
