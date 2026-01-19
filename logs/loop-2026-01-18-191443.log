@@ -116,3 +116,37 @@ Task complete. Created `components/motion/slide-in-view.tsx` with:
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task complete. Created `components/motion/stagger-children.tsx` with:
+
+- **StaggerChildren** - Container component that staggers child animations on scroll into view
+- **StaggerItem** - Child component that uses the stagger animation with crisp 0.3s timing
+- **StaggerContextItem** - Alternative child component with configurable offset/duration
+
+Key features:
+- Crisp cubic-bezier easing `[0.4, 0, 0.2, 1]` for confident card animation
+- 0.3s duration (crisp motion per brand spec)
+- 0.1s stagger delay between children by default
+- Respects `prefers-reduced-motion`
+- Configurable delay, stagger timing, offset, and viewport margin
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36me4bcbf3 feat: create stagger-children scroll-triggered animation wrapper[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 1s │ [0;36mAvg:[0m 44s │ [0;36mEst. remaining:[0m 1h 3m
+
+  [1;37mRecent commits:[0m
+    [0;36me4bcbf3 feat: create stagger-children scroll-triggered animation wrapper[0m
+    [0;36mc41d8e2 feat: create slide-in-view scroll-triggered animation wrapper[0m
+    [0;36meef5bd1 feat: create fade-in-view scroll-triggered animation wrapper[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 5[0m │ ������������������������������ 4%
+  [0;32m4 done[0m │ [1;33m87 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create `components/motion/scale-in.tsx` — scale animation for CTAs and buttons (crisp, 0.3s)[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
