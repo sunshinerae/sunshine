@@ -77,7 +77,7 @@
 
 ### Contact Page
 - [x] Create `app/contact/page.tsx` — page structure with metadata
-- [ ] Add Contact hero with welcoming headline placeholder
+- [x] Add Contact hero with welcoming headline placeholder
 - [ ] Add contact form section
 - [ ] Add newsletter signup section ("Consistent Bulletin")
 - [ ] Add SMS signup section with "love note" placeholder copy

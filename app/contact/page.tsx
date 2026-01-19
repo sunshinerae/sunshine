@@ -5,6 +5,7 @@ import { BrandCard } from '@/components/brand-card';
 import { isFeatureEnabled } from '@/lib/features';
 import { PAGE_METADATA } from '@/lib/metadata';
 import { ContactPageForm } from '@/components/forms/contact-page-form';
+import { FadeInView } from '@/components/motion/fade-in-view';
 
 export const metadata: Metadata = PAGE_METADATA.contact;
 
@@ -16,8 +17,8 @@ export default function ContactPage() {
   return (
     <main className="bg-sunshine-white">
       {/* Hero Section */}
-      <section className="bg-sunshine-purple text-sunshine-white px-6 py-16">
-        <div className="max-w-5xl mx-auto space-y-4">
+      <section className="bg-sunshine-purple text-sunshine-white px-6 py-16 overflow-hidden">
+        <FadeInView className="max-w-5xl mx-auto space-y-4">
           <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-blue">Contact</p>
           <h1 className="font-headline text-[clamp(2.8rem,6vw,4.6rem)] uppercase leading-tight">
             Safe, judgment-free connection.
@@ -28,7 +29,7 @@ export default function ContactPage() {
           <p className="font-body text-sm">
             You are allowed to want more ease. This space is warm, private, and blame-free.
           </p>
-        </div>
+        </FadeInView>
       </section>
 
       {/* Contact Form Section */}
