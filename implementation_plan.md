@@ -82,7 +82,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 
 ## Phase 4: Polish
 
-- [ ] Add hero gradient utility to globals.css: linear-gradient(135deg, #6E054D 0%, #F6C453 100%)
+- [x] Add hero gradient utility to globals.css: linear-gradient(135deg, #6E054D 0%, #F6C453 100%)
 - [ ] Search and remove any remaining sunshine-* references across codebase
 - [ ] Run npm run build and fix any errors
 - [ ] Final visual check: warm, cozy, calm — NOT poster-style, NOT all-white
