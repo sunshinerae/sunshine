@@ -17,7 +17,7 @@ export function MagneticButton({ className, children, ...props }: MagneticButton
   return (
     <Button
       {...props}
-      className={cn('transition-transform duration-200 will-change-transform', className)}
+      className={cn('bg-sun-plum text-white hover:bg-sun-plum/90 rounded-[14px] transition-transform duration-200 will-change-transform', className)}
       style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
       onMouseMove={handleMove}
       onMouseLeave={() => setPos({ x: 0, y: 0 })}
