@@ -86,7 +86,7 @@
 
 ### Blog Pages
 - [x] Create `app/blog/page.tsx` — blog index with metadata
-- [ ] Add Blog hero section with headline
+- [x] Add Blog hero section with headline
 - [ ] Add category filter pills (Wellness, Self-Development, Business Strategy)
 - [ ] Add blog post grid with blog-card components
 - [ ] Create `app/blog/[slug]/page.tsx` — individual blog post template
