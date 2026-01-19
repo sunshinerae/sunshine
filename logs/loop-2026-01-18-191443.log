@@ -2330,3 +2330,36 @@ Task complete. Added "Get your first ritual in 24 hours" as a lead magnet tease 
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I added the hover scale effect (`hover:scale-105 active:scale-95`) to all CTA buttons site-wide:
+
+**Changes made:**
+- `app/launch/page.tsx` - Added `active:scale-95` to the "I Want In" CTA button
+- `components/signup-modal.tsx` - Added `active:scale-95` to the form submit button
+
+**Already had hover scale effects:**
+- `components/ui/button.tsx` - Has `hover:scale-105 active:scale-95` in base class (used by navigation, footer, 404 page)
+- `components/ui/cta-button.tsx` - Has Framer Motion `whileHover: { scale: 1.05 }` and `whileTap: { scale: 0.98 }` (used by forms, event cards, offering cards)
+
+Commit: `201ba86 feat: add hover scale effect to all CTA buttons site-wide`
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m201ba86 feat: add hover scale effect to all CTA buttons site-wide[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 41s │ [0;36mAvg:[0m 9m 58s │ [0;36mEst. remaining:[0m 1h 39m
+
+  [1;37mRecent commits:[0m
+    [0;36m201ba86 feat: add hover scale effect to all CTA buttons site-wide[0m
+    [0;36m2aa0527 feat: add lead magnet tease to signup modal intro copy[0m
+    [0;36md57ebd4 feat: update signup modal success state to redirect to /thank-you page[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 78[0m │ ������������������������������ 89%
+  [0;32m81 done[0m │ [1;33m10 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Add subtle hover effects to nav links[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

@@ -119,7 +119,7 @@
 ## Phase 8: Micro-interactions & Polish
 
 - [x] Add hover scale effect to all CTA buttons site-wide
-- [ ] Add subtle hover effects to nav links
+- [x] Add subtle hover effects to nav links
 - [ ] Add smooth focus states for form inputs (ring with brand color)
 - [ ] Add hover effects to all card components (slight lift/shadow)
 - [ ] Review and ensure all pages have consistent scroll animations
