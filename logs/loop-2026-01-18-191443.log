@@ -568,3 +568,35 @@ Task complete. I created `components/forms/sms-signup.tsx` with the following fe
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I created `components/forms/contact-form.tsx` with:
+
+- **Four fields**: name, email, subject, and message (textarea)
+- **Variant support**: Works on purple, orange, yellow, and white backgrounds with proper contrast
+- **Form validation**: Client-side validation for all required fields with friendly error messages
+- **Status states**: idle, loading, success, and error with appropriate UI feedback
+- **Brand styling**: Uses the same patterns as newsletter-signup and sms-signup (rounded inputs, focus rings, animated error messages)
+- **Accessibility**: Proper labels, aria attributes, and focus management
+- **Microcopy**: "This is a judgment-free space. We typically respond within 24-48 hours." to reduce anxiety about reaching out
+- **Exported data type**: `ContactFormData` interface for type-safe form handling
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36md47bf0c feat: create components/forms/contact-form.tsx — name, email, subject, message fields with submit[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 7s │ [0;36mAvg:[0m 49s │ [0;36mEst. remaining:[0m 59m 37s
+
+  [1;37mRecent commits:[0m
+    [0;36md47bf0c feat: create components/forms/contact-form.tsx — name, email, subject, message fields with submit[0m
+    [0;36mf696a93 feat: create components/forms/sms-signup.tsx — phone input + submit, brand styled[0m
+    [0;36maa6a89f feat: create components/forms/newsletter-signup.tsx — email input + submit, brand styled[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 19[0m │ ������������������������������ 19%
+  [0;32m18 done[0m │ [1;33m73 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create `components/cards/event-card.tsx` — event display card with date, title, description, CTA[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
