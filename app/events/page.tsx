@@ -9,7 +9,7 @@ import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-childr
 import { EventCard } from '@/components/cards/event-card';
 import { isFeatureEnabled } from '@/lib/features';
 import { PAGE_METADATA } from '@/lib/metadata';
-import { getGoldenHourEvents } from '@/lib/events';
+import { getGoldenHourEvents, getLunarRoomEvents } from '@/lib/events';
 
 export const metadata: Metadata = PAGE_METADATA.events;
 
@@ -143,48 +143,94 @@ export default function EventsPage() {
         </div>
       </section>
 
-      <section id="lunar-room" className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-yellow text-sunshine-brown overflow-hidden">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
-          <BrandCard className="p-6 md:p-8 overflow-hidden max-w-full" variant="white">
-            <p className="font-subhead uppercase tracking-[0.14em] text-xs text-sunshine-purple">Lunar Room</p>
-            <h2 className="font-headline text-4xl uppercase mt-2 text-sunshine-purple">Slow, introspective, sound + stillness</h2>
-            <p className="font-body mt-4 text-lg leading-relaxed">
-              Co-facilitated with healers and creative leaders. Expect yoga, sound, meditation, and space to hear your own desires.
-            </p>
-            <div className="grid grid-cols-2 gap-4 mt-6 text-sm">
-              <div>
-                <p className="font-semibold">Session length</p>
-                <p>75–90 minutes</p>
+      {/* Lunar Room Zone - Cool/dark background with moon imagery and event cards */}
+      <section id="lunar-room" className="px-4 sm:px-6 py-16 md:py-24 bg-sunshine-purple text-sunshine-white overflow-hidden relative">
+        {/* Moon imagery placeholder - decorative gradient overlay */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Large moon circle - top left */}
+          <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-sunshine-blue/15 blur-3xl" />
+          {/* Smaller moon accent - bottom right */}
+          <div className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full bg-sunshine-blue/10 blur-2xl" />
+          {/* Subtle glow effect */}
+          <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-sunshine-blue/5 to-transparent" />
+          {/* Stars effect - scattered small circles */}
+          <div className="absolute top-20 right-1/4 w-2 h-2 rounded-full bg-sunshine-white/20" />
+          <div className="absolute top-32 right-1/3 w-1 h-1 rounded-full bg-sunshine-white/30" />
+          <div className="absolute top-48 left-1/4 w-1.5 h-1.5 rounded-full bg-sunshine-white/25" />
+          <div className="absolute bottom-32 left-1/3 w-1 h-1 rounded-full bg-sunshine-white/20" />
+          <div className="absolute bottom-48 right-1/5 w-2 h-2 rounded-full bg-sunshine-white/15" />
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          {/* Section Header */}
+          <div className="text-center mb-12 md:mb-16">
+            <FadeInView>
+              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-blue mb-3">
+                Lunar Room
+              </p>
+            </FadeInView>
+            <FadeInView delay={0.1}>
+              <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.95] tracking-tight mb-4">
+                Slow, introspective, sound + stillness
+              </h2>
+            </FadeInView>
+            <FadeInView delay={0.2}>
+              <p className="font-body text-lg leading-relaxed max-w-2xl mx-auto text-sunshine-white/90">
+                Co-facilitated with healers and creative leaders. Expect yoga, sound, meditation, and space to hear your own desires. Leave with a quieter mind and a fuller heart.
+              </p>
+            </FadeInView>
+          </div>
+
+          {/* Moon imagery placeholder card */}
+          <FadeInView delay={0.3} className="mb-12">
+            <BrandCard className="p-0 overflow-hidden max-w-4xl mx-auto" variant="white">
+              <div className="relative aspect-[16/9] bg-gradient-to-br from-sunshine-purple via-sunshine-blue/40 to-sunshine-purple/80">
+                <Image
+                  src="/planning-notebook.png"
+                  alt="Candle-lit meditation space - restorative stillness and gentle light"
+                  fill
+                  className="object-cover mix-blend-overlay opacity-70"
+                />
+                {/* Moon overlay graphic placeholder */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-sunshine-blue/20 blur-xl" />
+                  <div className="absolute w-24 h-24 md:w-36 md:h-36 rounded-full bg-sunshine-white/10 blur-md" />
+                  {/* Crescent moon shape hint */}
+                  <div className="absolute w-20 h-20 md:w-32 md:h-32 rounded-full bg-sunshine-white/5 shadow-[inset_-8px_-8px_20px_rgba(252,246,242,0.15)]" />
+                </div>
+                {/* Caption overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-sunshine-purple/80 to-transparent">
+                  <p className="font-subhead text-sm md:text-base text-sunshine-white">
+                    Exhale, ground, restore — this is your permission to slow down.
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold">Next date</p>
-                <p>Feb 2 · Austin · Candle-lit</p>
-              </div>
-              <div>
-                <p className="font-semibold">Tickets</p>
-                <p>$55 · 18 spots · 9 left</p>
-              </div>
-              <div>
-                <p className="font-semibold">Refund policy</p>
-                <p>Full refund up to 72 hours</p>
-              </div>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3 mt-8">
-              <Button variant="glow-purple" className="w-full sm:w-auto">Reserve Feb 2 spot</Button>
-              <Button variant="outline" className="w-full sm:w-auto border-sunshine-purple text-sunshine-purple hover:bg-sunshine-purple hover:text-sunshine-white">
-                Join the waitlist
-              </Button>
-            </div>
-          </BrandCard>
-          <BrandCard className="p-0 overflow-hidden" variant="white">
-            <Image
-              src="/planning-notebook.png"
-              alt="Candle-lit journaling setup"
-              width={800}
-              height={600}
-              className="w-full h-full object-cover"
-            />
-          </BrandCard>
+            </BrandCard>
+          </FadeInView>
+
+          {/* Event Cards from JSON */}
+          <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.15}>
+            {getLunarRoomEvents().map((event) => (
+              <StaggerItem key={event.id}>
+                <EventCard
+                  title={event.title}
+                  date={event.date}
+                  time={event.time}
+                  description={event.description}
+                  type={event.type}
+                  location={event.location}
+                  ctaText={event.price === 'Free' ? 'RSVP Free' : `Reserve · ${event.price}`}
+                />
+              </StaggerItem>
+            ))}
+          </StaggerChildren>
+
+          {/* View all CTA */}
+          <FadeInView delay={0.5} className="mt-10 text-center">
+            <Button className="bg-sunshine-blue text-sunshine-purple hover:bg-sunshine-yellow font-subhead">
+              See All Lunar Room Dates
+            </Button>
+          </FadeInView>
         </div>
       </section>
 
