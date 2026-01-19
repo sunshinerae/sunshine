@@ -1723,3 +1723,33 @@ Task complete. I added the SMS signup section ("Love Notes") to the Contact page
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Done. I've added a social links section to the contact page with:
+
+- **Instagram as primary**: Large, prominent card with yellow background that transitions to orange on hover
+- **LinkedIn as secondary**: Smaller pill-style link below Instagram
+- Scroll animations using the existing `SlideInView` and `FadeInView` components
+- Brand-compliant colors and typography (following the spec's contrast rules)
+- A brand catchphrase: "Real power doesn't have to push or prove"
+- Proper accessibility with focus states and external link attributes
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m6471095 feat: add social links section with Instagram as primary[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 58s │ [0;36mAvg:[0m 13m 18s │ [0;36mEst. remaining:[0m 7h 45m
+
+  [1;37mRecent commits:[0m
+    [0;36m6471095 feat: add social links section with Instagram as primary[0m
+    [0;36m7d76e41 feat: add SMS signup section with "love note" placeholder copy[0m
+    [0;36m807ebf4 feat: add newsletter signup section ("Consistent Bulletin")[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 57[0m │ ������������������������������ 61%
+  [0;32m56 done[0m │ [1;33m35 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Add scroll animations to all sections[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

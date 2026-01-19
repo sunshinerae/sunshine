@@ -7,6 +7,7 @@ import { PAGE_METADATA } from '@/lib/metadata';
 import { ContactPageForm } from '@/components/forms/contact-page-form';
 import { FadeInView } from '@/components/motion/fade-in-view';
 import { SlideInView } from '@/components/motion/slide-in-view';
+import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-children';
 import { NewsletterSignup } from '@/components/forms/newsletter-signup';
 import { SMSSignup } from '@/components/forms/sms-signup';
 import { SOCIAL_LINKS } from '@/lib/constants';
@@ -38,23 +39,31 @@ export default function ContactPage() {
 
       {/* Contact Form Section */}
       <section className="max-w-5xl mx-auto py-12 px-6 space-y-12">
-        <ContactPageForm />
+        <FadeInView direction="up" duration={0.6}>
+          <ContactPageForm />
+        </FadeInView>
 
         {/* Info Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
-          <BrandCard className="p-6" variant="yellow">
-            <h3 className="font-headline text-xl uppercase text-sunshine-purple mb-2">Response time</h3>
-            <p className="font-body text-sm leading-relaxed">Within 24 hours, with clear next steps and zero pushiness.</p>
-          </BrandCard>
-          <BrandCard className="p-6" variant="white">
-            <h3 className="font-headline text-xl uppercase text-sunshine-purple mb-2">Safety first</h3>
-            <p className="font-body text-sm leading-relaxed">Judgment-free communication. You can ask for what you need without pressure.</p>
-          </BrandCard>
-          <BrandCard className="p-6" variant="orange">
-            <h3 className="font-headline text-xl uppercase mb-2">Gentle microcopy</h3>
-            <p className="font-body text-sm leading-relaxed">We reduce decision anxiety with clear options and loving encouragement.</p>
-          </BrandCard>
-        </div>
+        <StaggerChildren className="grid md:grid-cols-3 gap-6" staggerDelay={0.1} duration={0.3}>
+          <StaggerItem>
+            <BrandCard className="p-6 h-full" variant="yellow">
+              <h3 className="font-headline text-xl uppercase text-sunshine-purple mb-2">Response time</h3>
+              <p className="font-body text-sm leading-relaxed">Within 24 hours, with clear next steps and zero pushiness.</p>
+            </BrandCard>
+          </StaggerItem>
+          <StaggerItem>
+            <BrandCard className="p-6 h-full" variant="white">
+              <h3 className="font-headline text-xl uppercase text-sunshine-purple mb-2">Safety first</h3>
+              <p className="font-body text-sm leading-relaxed">Judgment-free communication. You can ask for what you need without pressure.</p>
+            </BrandCard>
+          </StaggerItem>
+          <StaggerItem>
+            <BrandCard className="p-6 h-full" variant="orange">
+              <h3 className="font-headline text-xl uppercase mb-2">Gentle microcopy</h3>
+              <p className="font-body text-sm leading-relaxed">We reduce decision anxiety with clear options and loving encouragement.</p>
+            </BrandCard>
+          </StaggerItem>
+        </StaggerChildren>
       </section>
 
       {/* Newsletter Signup Section - Consistent Bulletin */}
