@@ -2492,3 +2492,35 @@ Task completed. Here's a summary of what was done:
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I added page transition animations between routes:
+
+**Changes made:**
+1. Created `components/motion/page-transition.tsx` - a client component that wraps page content with Framer Motion animations keyed to the pathname
+2. Added `pageVariants` and `pageTransition` to `lib/animation-variants.ts` - soft fade animation (0.3s with the brand's soft easing curve)
+3. Updated `app/layout.tsx` to wrap children with the `PageTransition` component
+
+The implementation uses a simple opacity fade (0 → 1) with the brand's soft easing curve, providing a gentle transition between routes without being overly complex.
+
+Commit: `c178bf2 feat: add page transition animations between routes`
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36mc178bf2 feat: add page transition animations between routes[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 2m 28s │ [0;36mAvg:[0m 9m 28s │ [0;36mEst. remaining:[0m 47m 20s
+
+  [1;37mRecent commits:[0m
+    [0;36mc178bf2 feat: add page transition animations between routes[0m
+    [0;36m01c5d2e feat: add consistent scroll animations to home and launch pages[0m
+    [0;36meb48ec3 feat: add hover effects to all card components (slight lift/shadow)[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 83[0m │ ������������������������������ 94%
+  [0;32m86 done[0m │ [1;33m5 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create 3 sample blog posts in markdown with placeholder content (one per category)[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
