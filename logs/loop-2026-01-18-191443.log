@@ -313,3 +313,38 @@ Task completed. I created `data/blog-meta.json` with:
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task complete. Created `lib/blog.ts` with the following utility functions:
+
+- `getAllPostsMeta()` - Get all blog post metadata from JSON
+- `getAllCategories()` - Get all blog categories
+- `getPostsByCategory()` - Filter posts by category slug
+- `getPostMeta()` - Get single post metadata by slug
+- `getPostContent()` - Read and parse markdown content with frontmatter
+- `getAllPosts()` - Get all posts with full content
+- `getRelatedPosts()` - Get related posts by category
+- `getRecentPosts()` - Get most recent posts
+- `getAllPostSlugs()` - Get all slugs for static generation
+- `formatPostDate()` - Format date strings for display
+- `getReadingTime()` - Calculate estimated reading time
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m5f2dbe1 feat: create lib/blog.ts utility functions to read and parse blog posts[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 56s │ [0;36mAvg:[0m 48s │ [0;36mEst. remaining:[0m 1h 4m
+
+  [1;37mRecent commits:[0m
+    [0;36m5f2dbe1 feat: create lib/blog.ts utility functions to read and parse blog posts[0m
+    [0;36m8cf4578 feat: create data/blog-meta.json for blog post metadata (title, slug, category, date, excerpt, image)[0m
+    [0;36m1c074db feat: create content/blog/ directory structure with sample markdown post template[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 11[0m │ ������������������������������ 10%
+  [0;32m10 done[0m │ [1;33m81 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create `lib/events.ts` utility functions to read and filter events by type[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

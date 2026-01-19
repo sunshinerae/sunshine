@@ -15,7 +15,7 @@
 - [x] Create `content/blog/` directory structure with sample markdown post template
 - [x] Create `data/blog-meta.json` for blog post metadata (title, slug, category, date, excerpt, image)
 - [x] Create `lib/blog.ts` utility functions to read and parse blog posts
-- [ ] Create `lib/events.ts` utility functions to read and filter events by type
+- [x] Create `lib/events.ts` utility functions to read and filter events by type
 
 ## Phase 3: Reusable Components
 
