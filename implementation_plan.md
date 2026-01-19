@@ -47,7 +47,7 @@
 ## Phase 6: Core Pages
 
 ### About Page
-- [ ] Create `app/about/page.tsx` — page structure with metadata
+- [x] Create `app/about/page.tsx` — page structure with metadata
 - [ ] Add About hero section with placeholder headline and subhead
 - [ ] Add About story section with placeholder paragraphs (2-3 blocks)
 - [ ] Add About values grid section (6 values with icon placeholders and placeholder text)

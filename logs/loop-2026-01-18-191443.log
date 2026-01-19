@@ -899,3 +899,37 @@ The component integrates with existing `SITE_CONFIG` and `SOCIAL_LINKS` constant
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I created:
+
+1. **`components/seo/og-image.tsx`** - A reusable Open Graph image generation component using Next.js `ImageResponse` with:
+   - Brand colors (purple, orange, yellow, blue, white, brown)
+   - Four variants: `default`, `blog`, `event-golden`, `event-lunar`
+   - Decorative gradient overlays and corner accents
+   - Brand tagline "The Sunshine Effect" at top, "Glow from the heart" at bottom
+   - Helper functions: `generateDefaultOgImage()`, `generateBlogOgImage()`, `generateGoldenHourOgImage()`, `generateLunarRoomOgImage()`
+
+2. **`app/opengraph-image.tsx`** - Route handler that generates the homepage OG image dynamically
+
+The component can be used in any route by creating an `opengraph-image.tsx` file that imports and calls the appropriate generator function.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m2eecc85 feat: create OG image generation component using Next.js ImageResponse[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 2m 11s │ [0;36mAvg:[0m 52s │ [0;36mEst. remaining:[0m 53m 44s
+
+  [1;37mRecent commits:[0m
+    [0;36m2eecc85 feat: create OG image generation component using Next.js ImageResponse[0m
+    [0;36mec2ce56 feat: add structured data (JSON-LD) component for Organization schema[0m
+    [0;36m94abbdf feat: verify app/robots.ts — robots.txt configuration already in place[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 30[0m │ ������������������������������ 31%
+  [0;32m29 done[0m │ [1;33m62 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create `app/about/page.tsx` — page structure with metadata[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
