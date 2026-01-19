@@ -1,21 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-sunshine-yellow flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Decorative poppy in corner - subtle */}
-      <div className="absolute top-8 right-8 w-32 h-32 md:w-48 md:h-48 opacity-20 pointer-events-none hidden md:block">
-        <Image
-          src="/poppy.jpg"
-          alt=""
-          fill
-          className="object-contain"
-        />
-      </div>
-
       {/* Main content */}
       <div className="max-w-4xl mx-auto text-center space-y-8 md:space-y-12 relative z-10">
 
@@ -49,21 +38,6 @@ export default function HomePage() {
           </Link>
           <p className="font-body text-sm md:text-base text-sunshine-brown/70 mt-6">
             Join the list to be first in line for events, offerings, and rituals
-          </p>
-        </div>
-
-        {/* Instagram link */}
-        <div className="pt-8">
-          <p className="font-body text-base md:text-lg text-sunshine-brown">
-            Follow the journey{' '}
-            <a
-              href="https://instagram.com/thesunshineeffect"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-sunshine-purple hover:text-sunshine-orange transition-colors underline"
-            >
-              @thesunshineeffect
-            </a>
           </p>
         </div>
       </div>

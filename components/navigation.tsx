@@ -35,12 +35,6 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
-  // Scroll to email signup section
-  const scrollToSignup = () => {
-    const signupSection = document.getElementById('email-signup');
-    signupSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
-
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-500 ${
@@ -71,14 +65,15 @@ export function Navigation() {
           </Link>
 
           {/* CTA Button */}
-          <Button
-            size="sm"
-            onClick={scrollToSignup}
-            className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange transition-colors"
-          >
-            <span className="hidden sm:inline">{scrolled ? 'Join' : 'Join the Journey'}</span>
-            <span className="sm:hidden">Join</span>
-          </Button>
+          <Link href="/launch">
+            <Button
+              size="sm"
+              className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange transition-colors"
+            >
+              <span className="hidden sm:inline">{scrolled ? 'Join' : 'Join the Journey'}</span>
+              <span className="sm:hidden">Join</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </header>

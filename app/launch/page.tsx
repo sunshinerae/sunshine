@@ -28,17 +28,7 @@ export default function LaunchPage() {
           />
         </div>
 
-        {/* Event banner - subtle and elegant */}
-        <div className="bg-sunshine-purple/95 text-sunshine-white text-center py-3 px-4">
-          <p className="text-sm md:text-base font-subhead">
-            <span className="inline-block mr-2">✨</span>
-            <span className="font-bold">Bright Sparks</span> returns Nov 24 in LA
-            <span className="mx-2">•</span>
-            Join the list for early access
-          </p>
-        </div>
-
-        {/* Elegant header spacing */}
+        {/* Header spacing */}
         <div className="pt-16 md:pt-24"></div>
 
         {/* Main container - contained and centered */}

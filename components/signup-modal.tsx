@@ -52,32 +52,30 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
       {/* Bold Poster-Style Modal */}
-      <div className="relative w-full max-w-[900px] max-h-[90vh] overflow-y-auto rounded-3xl overflow-hidden shadow-2xl bg-sunshine-yellow">
+      <div className="relative w-full max-w-[1200px] max-h-[90vh] overflow-y-auto rounded-3xl overflow-hidden shadow-2xl bg-sunshine-yellow">
         {/* Close button - top right */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-3 rounded-full bg-sunshine-brown/10 hover:bg-sunshine-brown/20 transition-colors z-20"
+          className="absolute top-6 right-6 p-3 rounded-full bg-sunshine-white hover:bg-sunshine-brown/20 transition-colors z-20 shadow-lg"
           aria-label="Close modal"
         >
           <X className="w-7 h-7 text-sunshine-brown" />
         </button>
 
         {!submitted ? (
-          <div className="grid md:grid-cols-2 gap-0">
+          <div className="grid md:grid-cols-[1.2fr,1fr] gap-0">
             {/* Left side - Hero Image */}
-            <div className="relative h-[300px] md:h-auto md:min-h-[600px]">
+            <div className="relative h-[400px] md:h-auto md:min-h-[700px] bg-sunshine-brown/5">
               <Image
                 src="/ID_LOVE_THIS_PHOTO_ON_THE_SIGN_UP_PAGE.jpg"
                 alt="Woman with flame - Stay connected to the fire"
                 fill
-                className="object-cover"
+                className="object-contain"
                 priority
                 quality={95}
               />
-              {/* Warm overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-sunshine-orange/30 via-transparent to-sunshine-yellow/20"></div>
             </div>
 
             {/* Right side - Form */}

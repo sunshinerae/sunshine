@@ -14,12 +14,14 @@ MAX_RETRIES=2
 LOG_DIR="logs"
 BUILD_CHECK=true
 INTERACTIVE=false
+YOLO_MODE=true  # Skip permission prompts (run on isolated VM!)
 
 # --- Parse flags ---
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         --interactive|-i) INTERACTIVE=true ;;
         --no-build) BUILD_CHECK=false ;;
+        --safe) YOLO_MODE=false ;;
         --max=*) MAX_ITERATIONS="${1#*=}" ;;
         --help|-h)
             echo "Usage: ./loop.sh [options]"
@@ -27,8 +29,12 @@ while [[ "$#" -gt 0 ]]; do
             echo "Options:"
             echo "  --interactive, -i   Pause after each task for review"
             echo "  --no-build          Skip build check after each task"
+            echo "  --safe              Require permission prompts (slower but safer)"
             echo "  --max=N             Set max iterations (default: 100)"
             echo "  --help, -h          Show this help"
+            echo ""
+            echo "NOTE: By default runs in YOLO mode (no permission prompts)."
+            echo "      Only run on isolated VMs, not your local machine!"
             exit 0
             ;;
         *) echo "Unknown option: $1"; exit 1 ;;
@@ -61,11 +67,13 @@ log_raw() {
 
 # --- Helper Functions ---
 get_done_count() {
-    grep -c '^\- \[x\]' implementation_plan.md 2>/dev/null || echo 0
+    local count=$(grep -c '^\- \[x\]' implementation_plan.md 2>/dev/null || true)
+    echo "${count:-0}" | tr -d '\n'
 }
 
 get_todo_count() {
-    grep -c '^\- \[ \]' implementation_plan.md 2>/dev/null || echo 0
+    local count=$(grep -c '^\- \[ \]' implementation_plan.md 2>/dev/null || true)
+    echo "${count:-0}" | tr -d '\n'
 }
 
 get_next_task() {
@@ -192,6 +200,11 @@ main() {
     log "  Log file: ${CYAN}$LOG_FILE${NC}"
     log "  Interactive mode: ${CYAN}$INTERACTIVE${NC}"
     log "  Build checks: ${CYAN}$BUILD_CHECK${NC}"
+    if [ "$YOLO_MODE" = true ]; then
+        log "  YOLO mode: ${RED}ON${NC} (no permission prompts)"
+    else
+        log "  YOLO mode: ${GREEN}OFF${NC} (will ask for permissions)"
+    fi
 
     # Pre-flight
     preflight
@@ -278,7 +291,12 @@ CURRENT TASK: $next_task
         log "  ${CYAN}Running Claude...${NC}"
         log_raw "--- Claude Output Start ---"
 
-        if claude --print "$context_prompt" 2>&1 | tee -a "$LOG_FILE"; then
+        local claude_flags="--print"
+        if [ "$YOLO_MODE" = true ]; then
+            claude_flags="--dangerously-skip-permissions --print"
+        fi
+
+        if claude $claude_flags "$context_prompt" 2>&1 | tee -a "$LOG_FILE"; then
             log_raw "--- Claude Output End ---"
         else
             log "  ${RED}Claude exited with error${NC}"
