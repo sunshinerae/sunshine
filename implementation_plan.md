@@ -23,7 +23,7 @@
 - [x] Create `components/ui/testimonial-card.tsx` — quote card with name, descriptor, styled for brand
 - [x] Create `components/ui/section-heading.tsx` — reusable section title with optional subtitle (uses font-headline)
 - [x] Create `components/ui/cta-button.tsx` — pill-shaped button with hover scale effect (crisp animation)
-- [ ] Create `components/forms/newsletter-signup.tsx` — email input + submit, brand styled
+- [x] Create `components/forms/newsletter-signup.tsx` — email input + submit, brand styled
 - [ ] Create `components/forms/sms-signup.tsx` — phone input + submit, brand styled
 - [ ] Create `components/forms/contact-form.tsx` — name, email, subject, message fields with submit
 - [ ] Create `components/cards/event-card.tsx` — event display card with date, title, description, CTA
