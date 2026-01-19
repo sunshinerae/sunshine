@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
-type Variant = 'purple' | 'orange' | 'yellow' | 'white';
+type Variant = 'plum' | 'coral' | 'gold' | 'cream';
 
 const variants: Record<Variant, string> = {
-  purple: 'bg-sunshine-purple text-sunshine-white',
-  orange: 'bg-sunshine-orange text-sunshine-white',
-  yellow: 'bg-sunshine-yellow text-sunshine-brown',
-  white: 'bg-sunshine-white text-sunshine-brown',
+  plum: 'bg-sun-plum text-white',
+  coral: 'bg-sun-coral text-sun-cocoa',
+  gold: 'bg-sun-gold text-sun-cocoa',
+  cream: 'bg-sun-cream text-sun-cocoa',
 };
 
 interface BrandSectionProps {
@@ -16,7 +16,7 @@ interface BrandSectionProps {
   children: ReactNode;
 }
 
-export function BrandSection({ variant = 'white', className = '', children }: BrandSectionProps) {
+export function BrandSection({ variant = 'cream', className = '', children }: BrandSectionProps) {
   return (
     <section className={cn('px-6 py-16', variants[variant], className)}>
       <div className="max-w-6xl mx-auto">{children}</div>
