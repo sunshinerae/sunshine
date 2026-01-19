@@ -338,7 +338,7 @@ export function createFadeInUp(
       y: 0,
       transition: {
         duration,
-        ease,
+        ease: ease as [number, number, number, number],
       },
     },
   };
@@ -374,7 +374,7 @@ export function createScaleIn(
       scale: 1,
       transition: {
         duration,
-        ease,
+        ease: ease as [number, number, number, number],
       },
     },
   };

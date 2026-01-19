@@ -67,7 +67,7 @@
 - [x] Create Golden Hour zone — warm background, sun imagery placeholder, event cards from JSON
 - [x] Create Lunar Room zone — cool/dark background, moon imagery placeholder, event cards from JSON
 - [x] Add visual divider or transition between zones
-- [ ] Add scroll animations to event cards (staggered)
+- [x] Add scroll animations to event cards (staggered)
 
 ### Community Page
 - [ ] Create `app/community/page.tsx` — minimal page with metadata

@@ -241,29 +241,36 @@ export default function EventsPage() {
       <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-white overflow-hidden">
         <div className="max-w-6xl mx-auto space-y-8">
           <div className="space-y-2 text-center">
-            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">Event Gallery</p>
-            <h3 className="font-headline text-4xl uppercase text-sunshine-purple">See the energy</h3>
-            <p className="text-lg text-sunshine-brown leading-relaxed max-w-3xl mx-auto">
-              A glimpse of both energies: sun-drenched connection and moon-lit restoration.
-            </p>
+            <FadeInView>
+              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">Event Gallery</p>
+            </FadeInView>
+            <FadeInView delay={0.1}>
+              <h3 className="font-headline text-4xl uppercase text-sunshine-purple">See the energy</h3>
+            </FadeInView>
+            <FadeInView delay={0.2}>
+              <p className="text-lg text-sunshine-brown leading-relaxed max-w-3xl mx-auto">
+                A glimpse of both energies: sun-drenched connection and moon-lit restoration.
+              </p>
+            </FadeInView>
           </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+          <StaggerChildren className="grid sm:grid-cols-2 md:grid-cols-4 gap-4" staggerDelay={0.1}>
             {gallery.map((item, idx) => (
-              <BrandCard
-                key={item.src}
-                className={`p-0 overflow-hidden max-w-full ${idx % 2 === 0 ? 'md:rotate-1' : 'md:-rotate-1'} hover:rotate-0 hover:scale-105 hover:z-10 transition-all duration-300`}
-                variant="white"
-              >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  width={400}
-                  height={320}
-                  className="w-full h-full object-cover"
-                />
-              </BrandCard>
+              <StaggerItem key={item.src}>
+                <BrandCard
+                  className={`p-0 overflow-hidden max-w-full ${idx % 2 === 0 ? 'md:rotate-1' : 'md:-rotate-1'} hover:rotate-0 hover:scale-105 hover:z-10 transition-all duration-300`}
+                  variant="white"
+                >
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    width={400}
+                    height={320}
+                    className="w-full h-full object-cover"
+                  />
+                </BrandCard>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerChildren>
         </div>
       </section>
     </div>
