@@ -68,6 +68,7 @@ export default function BlogPage() {
       {/* Blog Post Grid */}
       <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-white">
         <div className="max-w-6xl mx-auto">
+          <h2 className="sr-only">Blog Posts</h2>
           {posts.length > 0 ? (
             <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.1}>
               {posts.map((post) => (

@@ -21,9 +21,9 @@ export function Footer() {
           <p className="font-subhead uppercase tracking-[0.14em] text-sm">
             The Sunshine Effect
           </p>
-          <h3 className="font-headline text-3xl leading-tight">
+          <p className="font-headline text-3xl leading-tight">
             Glow from the heart, together.
-          </h3>
+          </p>
           <p className="text-sm leading-relaxed">
             Weekly love notes, event invites, and gentle reminders that discipline is self love in motion.
           </p>
