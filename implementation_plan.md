@@ -131,7 +131,7 @@
 - [x] Add placeholder images or gradients where hero images are needed
 - [x] Review all placeholder text for consistent tone (even as placeholders)
 - [x] Run Lighthouse audit and fix any critical accessibility issues
-- [ ] Final review: ensure all nav links work, all CTAs function, no broken pages
+- [x] Final review: ensure all nav links work, all CTAs function, no broken pages
 
 ## Done
 
