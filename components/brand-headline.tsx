@@ -3,9 +3,9 @@ import { cn } from '@/lib/utils';
 type Level = 'h1' | 'h2' | 'h3';
 
 const styles: Record<Level, string> = {
-  h1: 'font-headline text-[clamp(2.8rem,6vw,4.6rem)] uppercase leading-[0.9] tracking-tight',
-  h2: 'font-headline text-4xl md:text-5xl uppercase leading-[0.9] tracking-tight',
-  h3: 'font-headline text-2xl md:text-3xl uppercase leading-[0.9] tracking-tight',
+  h1: 'font-headline text-[clamp(2.8rem,6vw,4.6rem)] uppercase leading-[0.9] tracking-tight text-sun-cocoa',
+  h2: 'font-headline text-4xl md:text-5xl uppercase leading-[0.9] tracking-tight text-sun-cocoa',
+  h3: 'font-headline text-2xl md:text-3xl uppercase leading-[0.9] tracking-tight text-sun-cocoa',
 };
 
 interface BrandHeadlineProps {

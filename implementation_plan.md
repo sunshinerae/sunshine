@@ -61,7 +61,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 
 ### Brand Components
 - [x] Update components/brand-card.tsx: sun-* colors
-- [ ] Update components/brand-headline.tsx: sun-cocoa text
+- [x] Update components/brand-headline.tsx: sun-cocoa text
 - [ ] Update components/brand-section.tsx: sun-* colors
 - [ ] Update components/signup-modal.tsx: sun-* colors
 - [ ] Update components/magnetic-button.tsx: sun-plum colors
