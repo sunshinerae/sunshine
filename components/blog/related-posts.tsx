@@ -1,7 +1,7 @@
 'use client';
 
 import { FadeInView } from '@/components/motion/fade-in-view';
-import { StaggerChildren } from '@/components/motion/stagger-children';
+import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-children';
 import { BlogCard } from '@/components/cards/blog-card';
 import type { BlogPostMeta } from '@/lib/blog';
 
@@ -34,11 +34,10 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
         </FadeInView>
 
         {/* Related posts grid */}
-        <StaggerChildren>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {posts.map((post) => (
+        <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
+          {posts.map((post) => (
+            <StaggerItem key={post.slug}>
               <BlogCard
-                key={post.slug}
                 title={post.title}
                 excerpt={post.excerpt}
                 category={post.category}
@@ -46,8 +45,8 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
                 slug={post.slug}
                 image={post.image}
               />
-            ))}
-          </div>
+            </StaggerItem>
+          ))}
         </StaggerChildren>
       </div>
     </section>

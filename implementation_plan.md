@@ -94,7 +94,7 @@
 - [x] Add blog post hero with title, date, category, featured image placeholder
 - [x] Add blog post body content renderer (markdown to JSX)
 - [x] Add related posts section at bottom of blog post
-- [ ] Add scroll animations to blog pages
+- [x] Add scroll animations to blog pages
 
 ### Thank You Page
 - [ ] Create `app/thank-you/page.tsx` — post-signup redirect page
