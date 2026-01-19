@@ -85,7 +85,7 @@
 - [x] Add scroll animations to all sections
 
 ### Blog Pages
-- [ ] Create `app/blog/page.tsx` — blog index with metadata
+- [x] Create `app/blog/page.tsx` — blog index with metadata
 - [ ] Add Blog hero section with headline
 - [ ] Add category filter pills (Wellness, Self-Development, Business Strategy)
 - [ ] Add blog post grid with blog-card components
