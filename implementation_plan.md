@@ -75,7 +75,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 - [x] Update components/sections/proof-bar.tsx: sun-* colors
 
 ### Blog Components
-- [ ] Update components/blog/markdown-content.tsx: sun-cocoa text, sun-plum links
+- [x] Update components/blog/markdown-content.tsx: sun-cocoa text, sun-plum links
 - [ ] Update components/blog/related-posts.tsx: sun-* colors
 
 ---

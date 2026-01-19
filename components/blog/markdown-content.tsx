@@ -17,7 +17,7 @@ export function MarkdownContent({ content, className = '' }: MarkdownContentProp
   const elements = renderMarkdown(content);
 
   return (
-    <div className={`prose-sunshine ${className}`}>
+    <div className={`prose-sun ${className}`}>
       {elements}
     </div>
   );
@@ -128,7 +128,7 @@ function processInlineMarkdown(text: string): React.ReactNode {
       <Link
         key={`link-${partIndex++}`}
         href={match[2]}
-        className="text-sunshine-purple hover:text-sunshine-orange underline underline-offset-2 transition-colors"
+        className="text-sun-plum hover:text-sun-plum/80 underline underline-offset-2 transition-colors"
       >
         {match[1]}
       </Link>
@@ -158,10 +158,10 @@ function renderMarkdown(content: string): React.ReactNode[] {
       elements.push(
         <ul
           key={`list-${currentIndex++}`}
-          className="space-y-2 mb-6 pl-6 list-disc marker:text-sunshine-purple"
+          className="space-y-2 mb-6 pl-6 list-disc marker:text-sun-plum"
         >
           {listItems.map((item, i) => (
-            <li key={i} className="font-body text-lg leading-relaxed text-sunshine-brown/90">
+            <li key={i} className="font-body text-lg leading-relaxed text-sun-cocoa/90">
               {processInlineMarkdown(item)}
             </li>
           ))}
@@ -188,7 +188,7 @@ function renderMarkdown(content: string): React.ReactNode[] {
       elements.push(
         <h1
           key={currentIndex++}
-          className="font-headline text-[clamp(2rem,4vw,3rem)] uppercase leading-[0.95] tracking-tight text-sunshine-brown mb-6 mt-10 first:mt-0"
+          className="font-headline text-[clamp(2rem,4vw,3rem)] uppercase leading-[0.95] tracking-tight text-sun-cocoa mb-6 mt-10 first:mt-0"
         >
           {trimmedLine.slice(2)}
         </h1>
@@ -201,7 +201,7 @@ function renderMarkdown(content: string): React.ReactNode[] {
       elements.push(
         <h2
           key={currentIndex++}
-          className="font-subhead text-2xl font-bold text-sunshine-brown mb-4 mt-10"
+          className="font-subhead text-2xl font-bold text-sun-cocoa mb-4 mt-10"
         >
           {trimmedLine.slice(3)}
         </h2>
@@ -214,7 +214,7 @@ function renderMarkdown(content: string): React.ReactNode[] {
       elements.push(
         <h3
           key={currentIndex++}
-          className="font-subhead text-xl font-bold text-sunshine-brown mb-3 mt-8"
+          className="font-subhead text-xl font-bold text-sun-cocoa mb-3 mt-8"
         >
           {trimmedLine.slice(4)}
         </h3>
@@ -228,9 +228,9 @@ function renderMarkdown(content: string): React.ReactNode[] {
       elements.push(
         <blockquote
           key={currentIndex++}
-          className="border-l-4 border-sunshine-purple pl-6 py-2 my-8 bg-sunshine-purple/5 rounded-r-lg"
+          className="border-l-4 border-sun-plum pl-6 py-2 my-8 bg-sun-plum/5 rounded-r-lg"
         >
-          <p className="font-body text-lg italic text-sunshine-brown/90 leading-relaxed">
+          <p className="font-body text-lg italic text-sun-cocoa/90 leading-relaxed">
             {processInlineMarkdown(trimmedLine.slice(2))}
           </p>
         </blockquote>
@@ -242,7 +242,7 @@ function renderMarkdown(content: string): React.ReactNode[] {
     if (trimmedLine === '---') {
       if (inList) flushList();
       elements.push(
-        <hr key={currentIndex++} className="my-10 border-t border-sunshine-brown/20" />
+        <hr key={currentIndex++} className="my-10 border-t border-sun-cocoa/20" />
       );
       continue;
     }
@@ -259,7 +259,7 @@ function renderMarkdown(content: string): React.ReactNode[] {
     elements.push(
       <p
         key={currentIndex++}
-        className="font-body text-lg leading-relaxed text-sunshine-brown/90 mb-6"
+        className="font-body text-lg leading-relaxed text-sun-cocoa/90 mb-6"
       >
         {processInlineMarkdown(trimmedLine)}
       </p>
