@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { FadeInView } from '@/components/motion/fade-in-view';
+import { ReadingProgress } from '@/components/ui/reading-progress';
 import { isFeatureEnabled } from '@/lib/features';
 import {
   getPostContent,
@@ -329,6 +330,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <div className="bg-sunshine-white min-h-screen">
+      {/* Reading Progress Bar */}
+      <ReadingProgress />
+
       {/* Hero Section */}
       <section className="px-4 sm:px-6 py-12 md:py-20 bg-sunshine-purple text-sunshine-white overflow-hidden">
         <div className="max-w-4xl mx-auto space-y-6 text-center">
