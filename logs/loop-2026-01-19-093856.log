@@ -649,3 +649,33 @@ Next task: Update components/ui/cta-button.tsx: sun-plum bg, rounded-[14px]
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Done. Updated `components/ui/cta-button.tsx`:
+- Changed variant styles to use `sun-plum`, `sun-gold`, `sun-cocoa`, and `white` instead of old `sunshine-*` colors
+- Changed border radius from `rounded-full` to `rounded-[14px]`
+- Changed focus ring from `focus-visible:ring-sunshine-purple` to `focus-visible:ring-sun-plum`
+
+Build passed, task marked complete, changes committed.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m03da6d7 feat: Update components/ui/cta-button.tsx - sun-plum bg, rounded-[14px][0m
+  [0;32m✓[0m Task marked complete
+  [0;36mRunning build check...[0m
+  [0;32m✓[0m Build passed
+
+  [0;36mTask time:[0m 1m 4s │ [0;36mAvg:[0m 3m 0s │ [0;36mEst. remaining:[0m 1h 30m
+
+  [1;37mRecent commits:[0m
+    [0;36m03da6d7 feat: Update components/ui/cta-button.tsx - sun-plum bg, rounded-[14px][0m
+    [0;36m14f0f15 feat: Update components/ui/select.tsx - sun-sand border, sun-plum focus ring[0m
+    [0;36mdde09e5 feat: Update components/ui/textarea.tsx - sun-sand border, sun-plum focus ring[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 20[0m │ ������������������������������ 42%
+  [0;32m22 done[0m │ [1;33m30 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Update components/ui/section-heading.tsx: sun-cocoa text[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

@@ -23,17 +23,17 @@ export function SectionHeading({
   className,
 }: SectionHeadingProps) {
   const titleColors = {
-    purple: 'text-sunshine-white',
-    orange: 'text-sunshine-white',
-    yellow: 'text-sunshine-brown',
-    white: 'text-sunshine-brown',
+    purple: 'text-sun-cream',
+    orange: 'text-sun-cream',
+    yellow: 'text-sun-cocoa',
+    white: 'text-sun-cocoa',
   };
 
   const subtitleColors = {
-    purple: 'text-sunshine-white/90',
-    orange: 'text-sunshine-white/90',
-    yellow: 'text-sunshine-purple',
-    white: 'text-sunshine-purple',
+    purple: 'text-sun-cream/90',
+    orange: 'text-sun-cream/90',
+    yellow: 'text-sun-plum',
+    white: 'text-sun-plum',
   };
 
   const alignStyles = {
