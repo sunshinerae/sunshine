@@ -1271,3 +1271,32 @@ All animations use the existing motion components with soft 0.6s easing for body
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I updated the Events page (`app/events/page.tsx`) to use the centralized metadata system from `lib/metadata.ts` instead of inline metadata, matching the pattern used by other pages like the Offerings page. The change:
+
+- Imported `Metadata` type from Next.js
+- Imported `PAGE_METADATA` from `@/lib/metadata`
+- Replaced the inline metadata object with `PAGE_METADATA.events`
+
+Committed: `6b8f50c feat: add page structure with metadata to Events page`
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m6b8f50c feat: add page structure with metadata to Events page[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 0s │ [0;36mAvg:[0m 51s │ [0;36mEst. remaining:[0m 42m 30s
+
+  [1;37mRecent commits:[0m
+    [0;36m6b8f50c feat: add page structure with metadata to Events page[0m
+    [0;36me5514fc feat: add scroll animations to all Offerings page sections[0m
+    [0;36m3c47a4d feat: add Events teaser section linking to Events page[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 42[0m │ ������������������������������ 45%
+  [0;32m41 done[0m │ [1;33m50 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Add Events intro section with "community in motion" placeholder copy[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { BrandCard } from '@/components/brand-card';
+import { FadeInView } from '@/components/motion/fade-in-view';
 import { isFeatureEnabled } from '@/lib/features';
 import { PAGE_METADATA } from '@/lib/metadata';
 
@@ -24,27 +25,35 @@ export default function EventsPage() {
     <div className="bg-sunshine-white">
       <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-purple text-sunshine-white overflow-hidden">
         <div className="max-w-5xl mx-auto space-y-5 text-center">
-          <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-blue">
-            Community in motion
-          </p>
+          <FadeInView>
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-blue">
+              Community in motion
+            </p>
+          </FadeInView>
+          <FadeInView delay={0.1}>
             <h1 className="font-headline text-[clamp(2.8rem,6vw,4.6rem)] uppercase leading-[0.9] tracking-tight">
               Rooms that feel like sunlight or moonlight.
             </h1>
-          <p className="font-body text-lg leading-relaxed max-w-3xl mx-auto">
-            Why the room matters: women leave feeling seen, resourced, and ready to move. High energy connection or slow introspection—pick what you need.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link href="#golden-hour" className="w-full sm:w-auto">
-              <Button className="w-full sm:w-auto bg-sunshine-yellow text-sunshine-brown hover:bg-sunshine-blue">
-                Golden Hour
-              </Button>
-            </Link>
-            <Link href="#lunar-room" className="w-full sm:w-auto">
-              <Button variant="outline" className="w-full sm:w-auto border-sunshine-white text-sunshine-white hover:bg-sunshine-white hover:text-sunshine-purple">
-                Lunar Room
-              </Button>
-            </Link>
-          </div>
+          </FadeInView>
+          <FadeInView delay={0.2}>
+            <p className="font-body text-lg leading-relaxed max-w-3xl mx-auto">
+              Why the room matters: women leave feeling seen, resourced, and ready to move. High energy connection or slow introspection—pick what you need.
+            </p>
+          </FadeInView>
+          <FadeInView delay={0.3}>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link href="#golden-hour" className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto bg-sunshine-yellow text-sunshine-brown hover:bg-sunshine-blue">
+                  Golden Hour
+                </Button>
+              </Link>
+              <Link href="#lunar-room" className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full sm:w-auto border-sunshine-white text-sunshine-white hover:bg-sunshine-white hover:text-sunshine-purple">
+                  Lunar Room
+                </Button>
+              </Link>
+            </div>
+          </FadeInView>
         </div>
       </section>
 

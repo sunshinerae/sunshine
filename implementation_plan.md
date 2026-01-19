@@ -63,7 +63,7 @@
 
 ### Events Page
 - [x] Create `app/events/page.tsx` — page structure with metadata
-- [ ] Add Events intro section with "community in motion" placeholder copy
+- [x] Add Events intro section with "community in motion" placeholder copy
 - [ ] Create Golden Hour zone — warm background, sun imagery placeholder, event cards from JSON
 - [ ] Create Lunar Room zone — cool/dark background, moon imagery placeholder, event cards from JSON
 - [ ] Add visual divider or transition between zones
