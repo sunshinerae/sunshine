@@ -46,20 +46,20 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-sunshine-white">
+    <main className="min-h-screen bg-sun-cream">
       {/* Hero Section */}
-      <section className="py-20 md:py-28 px-4 bg-sunshine-purple">
+      <section className="py-20 md:py-28 px-4 bg-sun-plum">
         <div className="max-w-4xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Portrait placeholder with gradient */}
             <FadeInView direction="left" className="order-2 md:order-1">
-              <div className="aspect-[3/4] bg-gradient-to-br from-sunshine-yellow/40 via-sunshine-orange/30 to-sunshine-blue/20 rounded-2xl flex items-center justify-center mx-auto max-w-sm overflow-hidden relative shadow-xl">
+              <div className="aspect-[3/4] bg-gradient-to-br from-sun-gold/40 via-sun-coral/30 to-sun-sand/20 rounded-2xl flex items-center justify-center mx-auto max-w-sm overflow-hidden relative shadow-xl">
                 {/* Decorative sun element */}
-                <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-sunshine-yellow/30 blur-2xl" />
-                <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-sunshine-blue/20 blur-xl" />
+                <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-sun-gold/30 blur-2xl" />
+                <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-sun-coral/20 blur-xl" />
                 {/* Portrait icon */}
                 <svg
-                  className="w-24 h-24 text-sunshine-white/40 relative z-10"
+                  className="w-24 h-24 text-sun-cream/40 relative z-10"
                   viewBox="0 0 64 64"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -79,26 +79,26 @@ export default function AboutPage() {
             {/* Text content */}
             <div className="order-1 md:order-2 text-center md:text-left">
               <FadeInView delay={0.1}>
-                <p className="font-subhead text-sunshine-yellow text-lg md:text-xl mb-4">
+                <p className="font-subhead text-sun-gold text-lg md:text-xl mb-4">
                   Meet Your Guide
                 </p>
               </FadeInView>
 
               <FadeInView delay={0.2}>
-                <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl uppercase text-sunshine-white font-bold mb-6 leading-tight">
+                <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl uppercase text-sun-cream font-bold mb-6 leading-tight">
                   Sunshine
                 </h1>
               </FadeInView>
 
               <FadeInView delay={0.3}>
-                <p className="font-body text-xl md:text-2xl text-sunshine-white/90 leading-relaxed">
+                <p className="font-body text-xl md:text-2xl text-sun-cream/90 leading-relaxed">
                   A catalyst for women who are ready to create a life centered on purpose,
                   peace, and aligned action.
                 </p>
               </FadeInView>
 
               <FadeInView delay={0.4}>
-                <p className="font-body text-lg text-sunshine-blue mt-6 italic">
+                <p className="font-body text-lg text-sun-gold mt-6 italic">
                   "Real power doesn't have to push or prove."
                 </p>
               </FadeInView>
@@ -108,10 +108,10 @@ export default function AboutPage() {
       </section>
 
       {/* Story Section */}
-      <section className="py-20 md:py-28 px-4 bg-sunshine-white">
+      <section className="py-20 md:py-28 px-4 bg-sun-cream">
         <div className="max-w-3xl mx-auto">
           <FadeInView>
-            <h2 className="font-subhead text-2xl md:text-3xl text-sunshine-purple font-bold text-center mb-12 uppercase">
+            <h2 className="font-subhead text-2xl md:text-3xl text-sun-plum font-bold text-center mb-12 uppercase">
               The Journey
             </h2>
           </FadeInView>
@@ -119,13 +119,13 @@ export default function AboutPage() {
           {/* Story Block 1 */}
           <FadeInView delay={0.1} className="mb-12">
             <div className="text-center md:text-left">
-              <p className="font-body text-lg md:text-xl text-sunshine-brown leading-relaxed mb-6">
+              <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed mb-6">
                 There was a time when I lived in a constant state of hustle — pushing harder,
                 proving more, and wondering why success never felt like enough. The burnout was
                 real, but the deeper ache was the disconnect from myself and the life I actually
                 wanted.
               </p>
-              <p className="font-body text-lg md:text-xl text-sunshine-brown leading-relaxed">
+              <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed">
                 I thought I needed to do more. What I actually needed was to come home to myself.
               </p>
             </div>
@@ -133,14 +133,14 @@ export default function AboutPage() {
 
           {/* Story Block 2 */}
           <FadeInView delay={0.2} className="mb-12">
-            <div className="bg-sunshine-purple/5 rounded-2xl p-8 md:p-10">
-              <p className="font-body text-lg md:text-xl text-sunshine-brown leading-relaxed mb-6">
+            <div className="bg-sun-plum/5 rounded-2xl p-8 md:p-10">
+              <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed mb-6">
                 Through a blend of wellness practices, mindset work, and business strategy, I
                 began to rebuild. Not from a place of force, but from a foundation of inner peace
                 and self-trust. I learned that discipline is self-love in motion — and that real
                 power doesn't have to push or prove.
               </p>
-              <p className="font-body text-lg md:text-xl text-sunshine-brown leading-relaxed">
+              <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed">
                 Now I guide other women through the same transformation: from scattered and burned
                 out, to lighter, clearer, and deeply connected to their purpose.
               </p>
@@ -150,12 +150,12 @@ export default function AboutPage() {
           {/* Story Block 3 */}
           <FadeInView delay={0.3}>
             <div className="text-center">
-              <p className="font-body text-lg md:text-xl text-sunshine-brown leading-relaxed mb-8">
+              <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed mb-8">
                 The Sunshine Effect isn't just a brand — it's an invitation to glow from the heart.
                 To create a life (and business) that feels aligned, embodied, and alive. To move
                 like it's already yours.
               </p>
-              <p className="font-subhead text-xl md:text-2xl text-sunshine-purple font-bold italic">
+              <p className="font-subhead text-xl md:text-2xl text-sun-plum font-bold italic">
                 "You're allowed to want more ease."
               </p>
             </div>
@@ -164,16 +164,16 @@ export default function AboutPage() {
       </section>
 
       {/* Values Grid Section */}
-      <section className="py-20 md:py-28 px-4 bg-sunshine-yellow">
+      <section className="py-20 md:py-28 px-4 bg-sun-gold">
         <div className="max-w-5xl mx-auto">
           <FadeInView>
-            <h2 className="font-subhead text-2xl md:text-3xl text-sunshine-brown font-bold text-center mb-4 uppercase">
+            <h2 className="font-subhead text-2xl md:text-3xl text-sun-cocoa font-bold text-center mb-4 uppercase">
               What We Stand For
             </h2>
           </FadeInView>
 
           <FadeInView delay={0.1}>
-            <p className="font-body text-lg md:text-xl text-sunshine-brown text-center max-w-2xl mx-auto mb-16">
+            <p className="font-body text-lg md:text-xl text-sun-cocoa text-center max-w-2xl mx-auto mb-16">
               These values guide everything we do — from our events to our coaching
               to the way we show up for one another.
             </p>
@@ -185,21 +185,21 @@ export default function AboutPage() {
           >
             {values.map((value) => (
               <StaggerItem key={value.name}>
-                <div className="bg-sunshine-white rounded-2xl p-6 md:p-8 h-full shadow-sm hover:shadow-md transition-shadow duration-300">
+                <div className="bg-sun-paper rounded-2xl p-6 md:p-8 h-full shadow-sm hover:shadow-md transition-shadow duration-300">
                   {/* Icon placeholder */}
-                  <div className="w-14 h-14 md:w-16 md:h-16 bg-sunshine-purple/10 rounded-full flex items-center justify-center mb-5">
+                  <div className="w-14 h-14 md:w-16 md:h-16 bg-sun-plum/10 rounded-full flex items-center justify-center mb-5">
                     <span className="text-2xl md:text-3xl" aria-hidden="true">
                       {value.icon}
                     </span>
                   </div>
 
                   {/* Value name */}
-                  <h3 className="font-headline text-xl md:text-2xl text-sunshine-purple font-bold uppercase mb-3">
+                  <h3 className="font-headline text-xl md:text-2xl text-sun-plum font-bold uppercase mb-3">
                     {value.name}
                   </h3>
 
                   {/* Description */}
-                  <p className="font-body text-sunshine-brown leading-relaxed">
+                  <p className="font-body text-sun-cocoa leading-relaxed">
                     {value.description}
                   </p>
                 </div>
