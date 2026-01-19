@@ -1300,3 +1300,32 @@ Committed: `6b8f50c feat: add page structure with metadata to Events page`
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I added scroll animations to the Events intro section using `FadeInView` components with staggered delays (0, 0.1s, 0.2s, 0.3s) for:
+- "Community in motion" tagline
+- Main headline
+- Body copy
+- CTA buttons
+
+The task is marked complete in `implementation_plan.md` and committed.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m7a0da26 feat: add scroll animations to Events intro section[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 58s │ [0;36mAvg:[0m 51s │ [0;36mEst. remaining:[0m 41m 39s
+
+  [1;37mRecent commits:[0m
+    [0;36m7a0da26 feat: add scroll animations to Events intro section[0m
+    [0;36m6b8f50c feat: add page structure with metadata to Events page[0m
+    [0;36me5514fc feat: add scroll animations to all Offerings page sections[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 43[0m │ ������������������������������ 46%
+  [0;32m42 done[0m │ [1;33m49 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create Golden Hour zone — warm background, sun imagery placeholder, event cards from JSON[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
