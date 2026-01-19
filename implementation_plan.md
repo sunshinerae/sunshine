@@ -123,7 +123,7 @@
 - [x] Add smooth focus states for form inputs (ring with brand color)
 - [x] Add hover effects to all card components (slight lift/shadow)
 - [x] Review and ensure all pages have consistent scroll animations
-- [ ] Add page transition animations between routes (optional, if not too complex)
+- [x] Add page transition animations between routes (optional, if not too complex)
 
 ## Phase 9: Content Placeholders & Final Touches
 

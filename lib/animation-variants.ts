@@ -1,4 +1,4 @@
-import type { Variants, Transition } from 'framer-motion';
+import type { Variants, Transition, TargetAndTransition } from 'framer-motion';
 
 /**
  * Animation timing constants for The Sunshine Effect brand
@@ -379,3 +379,24 @@ export function createScaleIn(
     },
   };
 }
+
+/**
+ * Page transition variants for route changes
+ * Uses soft, gentle animations consistent with brand guidelines
+ */
+export const pageVariants: Variants = {
+  initial: {
+    opacity: 0,
+  },
+  enter: {
+    opacity: 1,
+  },
+  exit: {
+    opacity: 0,
+  },
+};
+
+export const pageTransition: Transition = {
+  duration: 0.3,
+  ease: softEase,
+};

@@ -2430,3 +2430,65 @@ Task completed. I've added smooth focus states for form inputs with brand colors
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. I added hover effects to the TestimonialCard component (the only card component missing them). The three main card components in `components/cards/` (EventCard, OfferingCard, BlogCard) already had hover effects with Framer Motion. The TestimonialCard now has the same consistent hover lift effect (`y: -4`) with shadow enhancement, using crisp 0.3s animation timing.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36meb48ec3 feat: add hover effects to all card components (slight lift/shadow)[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 29s │ [0;36mAvg:[0m 9m 39s │ [0;36mEst. remaining:[0m 1h 7m
+
+  [1;37mRecent commits:[0m
+    [0;36meb48ec3 feat: add hover effects to all card components (slight lift/shadow)[0m
+    [0;36m04b30a5 feat: add smooth focus states for form inputs (ring with brand color)[0m
+    [0;36m7b6213b feat: add subtle hover effects to nav links[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 81[0m │ ������������������������������ 92%
+  [0;32m84 done[0m │ [1;33m7 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Review and ensure all pages have consistent scroll animations[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
+Task completed. Here's a summary of what was done:
+
+**Task:** Review and ensure all pages have consistent scroll animations
+
+**Audit Results:**
+- **Already had animations:** about, offerings, events, community, contact, blog index, blog post, thank-you, not-found (9 pages)
+- **Missing animations:** home page (`app/page.tsx`), launch page (`app/launch/page.tsx`) (2 pages)
+
+**Changes Made:**
+1. **`app/page.tsx`** - Added FadeInView animations to headline, subheadline, and body copy with staggered delays (0-0.4s). Added ScaleIn for the CTA button and FadeInView for the microcopy.
+
+2. **`app/launch/page.tsx`** - Added FadeInView for hero content elements (tagline, headline, subheadline, body), SlideInView for the hero image, ScaleIn for the CTA button, and FadeInView for the social proof section and footer.
+
+**Animation Consistency:**
+- Soft animations (0.6s+ duration) used for body content and section reveals
+- Crisp animations (0.3-0.4s) used for CTAs and interactive elements
+- All animations respect `prefers-reduced-motion` through the animation components
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m01c5d2e feat: add consistent scroll animations to home and launch pages[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 2m 35s │ [0;36mAvg:[0m 9m 33s │ [0;36mEst. remaining:[0m 57m 18s
+
+  [1;37mRecent commits:[0m
+    [0;36m01c5d2e feat: add consistent scroll animations to home and launch pages[0m
+    [0;36meb48ec3 feat: add hover effects to all card components (slight lift/shadow)[0m
+    [0;36m04b30a5 feat: add smooth focus states for form inputs (ring with brand color)[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 82[0m │ ������������������������������ 93%
+  [0;32m85 done[0m │ [1;33m6 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Add page transition animations between routes (optional, if not too complex)[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

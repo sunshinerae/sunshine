@@ -4,6 +4,7 @@ import './globals.css';
 import { Navigation } from '@/components/navigation';
 import { SITE_CONFIG } from '@/lib/constants';
 import { Footer } from '@/components/footer';
+import { PageTransition } from '@/components/motion/page-transition';
 
 /**
  * Brand fonts per sunshineBrandSpec.typography
@@ -120,7 +121,9 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Navigation />
-        <main id="main-content" className="min-h-screen">{children}</main>
+        <main id="main-content" className="min-h-screen">
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
       </body>
     </html>
