@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { BrandCard } from '@/components/brand-card';
 import { PAGE_METADATA } from '@/lib/metadata';
 import { FadeInView } from '@/components/motion/fade-in-view';
+import { ScaleIn } from '@/components/motion/scale-in';
 import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-children';
 import { SOCIAL_LINKS } from '@/lib/constants';
 
@@ -29,22 +30,28 @@ export default function ThankYouPage() {
     <main className="bg-sunshine-white min-h-screen">
       {/* Hero Section */}
       <section className="bg-sunshine-purple text-sunshine-white px-6 py-20 md:py-28 overflow-hidden">
-        <FadeInView className="max-w-4xl mx-auto text-center space-y-6">
-          <span className="text-6xl md:text-7xl block mb-4" role="img" aria-label="fire">
-            🔥
-          </span>
-          <h1 className="font-headline text-[clamp(2.5rem,6vw,4.5rem)] uppercase leading-[0.9] tracking-tight">
-            You are in.
-          </h1>
-          <p className="font-body text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto text-sunshine-white/90">
-            Welcome to The Sunshine Effect, radiant one. Your journey from burnout to alignment starts now.
-          </p>
-          <FadeInView delay={0.3} direction="none">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <ScaleIn delay={0.1} initialScale={0.5} duration={0.5} className="inline-block">
+            <span className="text-6xl md:text-7xl block mb-4" role="img" aria-label="fire">
+              🔥
+            </span>
+          </ScaleIn>
+          <FadeInView delay={0.2} duration={0.7}>
+            <h1 className="font-headline text-[clamp(2.5rem,6vw,4.5rem)] uppercase leading-[0.9] tracking-tight">
+              You are in.
+            </h1>
+          </FadeInView>
+          <FadeInView delay={0.4} duration={0.7}>
+            <p className="font-body text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto text-sunshine-white/90">
+              Welcome to The Sunshine Effect, radiant one. Your journey from burnout to alignment starts now.
+            </p>
+          </FadeInView>
+          <FadeInView delay={0.6} direction="none" duration={0.7}>
             <p className="font-subhead text-lg text-sunshine-yellow">
               Glow from the heart.
             </p>
           </FadeInView>
-        </FadeInView>
+        </div>
       </section>
 
       {/* What Happens Next Section */}

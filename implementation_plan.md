@@ -101,7 +101,7 @@
 - [x] Add warm confirmation message with fire emoji
 - [x] Add "what happens next" section (lead magnet tease: "Your first ritual arrives in 24 hours")
 - [x] Add social links and community invitation
-- [ ] Add soft entrance animations
+- [x] Add soft entrance animations
 
 ### 404 Page
 - [ ] Create `app/not-found.tsx` — custom 404 page
