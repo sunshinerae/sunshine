@@ -12,7 +12,7 @@ export function SectionSeparator({ type = 'marquee', className }: SectionSeparat
     return (
       <div
         className={cn(
-          'w-full h-12 flex items-center justify-center bg-sunshine-yellow text-sunshine-brown font-subhead uppercase tracking-[0.14em]',
+          'w-full h-12 flex items-center justify-center bg-sun-sand text-sun-cocoa font-subhead uppercase tracking-[0.14em]',
           className
         )}
         aria-hidden
@@ -25,7 +25,7 @@ export function SectionSeparator({ type = 'marquee', className }: SectionSeparat
   return (
     <div
       className={cn(
-        'w-full h-12 bg-sunshine-purple text-sunshine-yellow overflow-hidden flex items-center',
+        'w-full h-12 bg-sun-plum text-sun-gold overflow-hidden flex items-center',
         className
       )}
       aria-hidden
