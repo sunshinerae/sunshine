@@ -868,3 +868,34 @@ Marked as complete and committed: `94abbdf`
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task complete. Created `components/seo/json-ld.tsx` with:
+
+- **`JsonLd`** - Generic component for rendering any JSON-LD schema
+- **`OrganizationJsonLd`** - Pre-configured Organization schema using site config
+- **`WebSiteJsonLd`** - WebSite schema for homepage
+- **`ArticleJsonLd`** - Article schema for blog posts
+- **`EventJsonLd`** - Event schema for Golden Hour and Lunar Room events
+
+The component integrates with existing `SITE_CONFIG` and `SOCIAL_LINKS` constants for consistent data.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36mec2ce56 feat: add structured data (JSON-LD) component for Organization schema[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 1m 0s │ [0;36mAvg:[0m 49s │ [0;36mEst. remaining:[0m 51m 27s
+
+  [1;37mRecent commits:[0m
+    [0;36mec2ce56 feat: add structured data (JSON-LD) component for Organization schema[0m
+    [0;36m94abbdf feat: verify app/robots.ts — robots.txt configuration already in place[0m
+    [0;36m16892b1 feat: create app/sitemap.ts — dynamic sitemap generation for all pages[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 29[0m │ ������������������������������ 30%
+  [0;32m28 done[0m │ [1;33m63 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create `components/seo/og-image.tsx` — template for Open Graph images (or use Next.js OG image generation)[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
