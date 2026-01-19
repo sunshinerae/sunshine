@@ -12,24 +12,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        // New sun-* brand palette (warm, cozy, calm)
+        // Brand palette — The Sunshine Effect
+        // Primary
+        'sunshine-gold': '#F6C453',     // Sunshine Gold
+        'sunshine-plum': '#6E054D',     // Deep Plum
+        // Neutrals
+        'sunshine-cocoa': '#240D01',    // Cocoa Ink (text)
+        'sunshine-cream': '#FFF6E9',    // Warm Cream (background)
+        'sunshine-sand': '#E9D7C7',     // Sand (borders)
+        'sunshine-rose': '#F3D0DB',     // Soft Rose (accent)
+        // sun-* aliases (used in pages)
         sun: {
-          plum: '#6E054D',    // buttons, accents, highlights
-          cocoa: '#240D01',   // headlines, body text
-          cream: '#FFF7F1',   // main background
-          paper: '#FFFFFF',   // cards
-          sand: '#F0E4DA',    // borders, subtle sections
-          gold: '#F6C453',    // highlights, warmth
-          coral: '#F28C7D',   // gentle emphasis
-          leaf: '#2F7A5B',    // success states
+          plum: '#6E054D',
+          cocoa: '#240D01',
+          cream: '#FFF6E9',
+          paper: '#FFFFFF',
+          sand: '#E9D7C7',
+          gold: '#F6C453',
+          rose: '#F3D0DB',
+          coral: '#D4856A',    // warm accent (golden hour sections)
+          leaf: '#9B7B9B',     // cool accent (lunar room - muted plum)
         },
-        // Legacy palette (being phased out)
+        // sunshine-* aliases (used in components)
         'sunshine-purple': '#6E054D',
-        'sunshine-orange': '#D4510B',
-        'sunshine-yellow': '#FFC019',
-        'sunshine-blue': '#95D7E6',
-        'sunshine-white': '#FCF6F2',
+        'sunshine-yellow': '#F6C453',
+        'sunshine-white': '#FFF6E9',
         'sunshine-brown': '#240D01',
+        'sunshine-orange': '#F6C453',
+        'sunshine-blue': '#F3D0DB',
         border: "var(--color-border)",
         input: "var(--color-input)",
         ring: "var(--color-ring)",

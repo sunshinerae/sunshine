@@ -43,7 +43,7 @@ export default function HomePage() {
           <ScaleIn delay={0.5} duration={0.4} initialScale={0.9}>
             <Link
               href="/launch"
-              className="inline-block bg-sun-plum text-white font-subhead font-bold py-5 px-12 md:py-6 md:px-16 rounded-[14px] text-xl md:text-2xl uppercase hover:bg-sun-plum/90 hover:scale-105 transition-all duration-300 shadow-2xl"
+              className="inline-block bg-sun-plum text-sun-cream font-subhead font-bold py-5 px-12 md:py-6 md:px-16 rounded-[14px] text-xl md:text-2xl uppercase hover:bg-sun-gold hover:text-sun-cocoa hover:scale-105 transition-all duration-300 shadow-soft"
             >
               Get Early Access
             </Link>

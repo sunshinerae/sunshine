@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Sun-* brand palette (warm, cozy, calm) */
-  --sun-plum: #6E054D;
-  --sun-cocoa: #240D01;
-  --sun-cream: #FFF7F1;
-  --sun-paper: #FFFFFF;
-  --sun-sand: #F0E4DA;
-  --sun-gold: #F6C453;
-  --sun-coral: #F28C7D;
-  --sun-leaf: #2F7A5B;
+  /* Brand palette — The Sunshine Effect */
+  --sun-plum: #6E054D;      /* Deep Plum */
+  --sun-cocoa: #240D01;     /* Cocoa Ink */
+  --sun-cream: #FFF6E9;     /* Warm Cream */
+  --sun-paper: #FFFFFF;     /* White */
+  --sun-sand: #E9D7C7;      /* Sand */
+  --sun-gold: #F6C453;      /* Sunshine Gold */
+  --sun-rose: #F3D0DB;      /* Soft Rose */
+  --sun-coral: #D4856A;     /* Warm accent (golden hour) */
+  --sun-leaf: #9B7B9B;      /* Cool accent (lunar room) */
 
   /* System colors mapped to sun-* */
   --color-background: var(--sun-cream);
@@ -26,8 +27,8 @@
   --color-muted-foreground: var(--sun-cocoa);
   --color-accent: var(--sun-gold);
   --color-accent-foreground: var(--sun-cocoa);
-  --color-destructive: var(--sun-coral);
-  --color-destructive-foreground: var(--sun-paper);
+  --color-destructive: var(--sun-rose);
+  --color-destructive-foreground: var(--sun-cocoa);
   --color-border: var(--sun-sand);
   --color-input: var(--sun-sand);
   --color-ring: var(--sun-plum);
@@ -92,12 +93,12 @@ body::before {
     background: linear-gradient(135deg, var(--sun-cream) 0%, var(--sun-sand) 100%);
   }
 
-  /* Legacy - being phased out */
+  /* Gradient utilities */
   .bg-sunshine-gradient {
-    background: radial-gradient(circle at top right, #D4510B 0%, #6E054D 100%);
+    background: linear-gradient(90deg, #F6C453 0%, #6E054D 100%);
   }
 
   .bg-sunshine-gradient-warm {
-    background: radial-gradient(circle at bottom left, #FFC619 0%, #D4510B 50%, #6E054D 100%);
+    background: linear-gradient(90deg, #F6C453 0%, #F3D0DB 100%);
   }
 }
