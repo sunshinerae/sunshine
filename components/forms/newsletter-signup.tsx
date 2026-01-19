@@ -71,18 +71,18 @@ export function NewsletterSignup({
 
   // Text colors based on background variant
   const textStyles = {
-    purple: 'text-sunshine-white',
-    orange: 'text-sunshine-white',
-    yellow: 'text-sunshine-brown',
-    white: 'text-sunshine-brown',
+    purple: 'text-sun-cream',
+    orange: 'text-sun-cream',
+    yellow: 'text-sun-cocoa',
+    white: 'text-sun-cocoa',
   };
 
   // Input styles based on variant for proper contrast
   const inputStyles = {
-    purple: 'bg-sunshine-white/10 border-sunshine-white/30 text-sunshine-white placeholder:text-sunshine-white/60 focus:border-sunshine-yellow focus:ring-sunshine-yellow/30',
-    orange: 'bg-sunshine-white/10 border-sunshine-white/30 text-sunshine-white placeholder:text-sunshine-white/60 focus:border-sunshine-yellow focus:ring-sunshine-yellow/30',
-    yellow: 'bg-sunshine-white border-sunshine-brown/20 text-sunshine-brown placeholder:text-sunshine-brown/50 focus:border-sunshine-purple focus:ring-sunshine-purple/30',
-    white: 'bg-sunshine-white border-sunshine-brown/20 text-sunshine-brown placeholder:text-sunshine-brown/50 focus:border-sunshine-purple focus:ring-sunshine-purple/30',
+    purple: 'bg-sun-cream/10 border-sun-cream/30 text-sun-cream placeholder:text-sun-cream/60 focus:border-sun-gold focus:ring-sun-gold/30',
+    orange: 'bg-sun-cream/10 border-sun-cream/30 text-sun-cream placeholder:text-sun-cream/60 focus:border-sun-gold focus:ring-sun-gold/30',
+    yellow: 'bg-sun-paper border-sun-sand text-sun-cocoa placeholder:text-sun-cocoa/50 focus:border-sun-plum focus:ring-sun-plum/30',
+    white: 'bg-sun-paper border-sun-sand text-sun-cocoa placeholder:text-sun-cocoa/50 focus:border-sun-plum focus:ring-sun-plum/30',
   };
 
   // Button variant mapping
@@ -103,8 +103,8 @@ export function NewsletterSignup({
         <p className={cn(
           'font-body text-sm mb-4 leading-relaxed',
           variant === 'purple' || variant === 'orange'
-            ? 'text-sunshine-white/80'
-            : 'text-sunshine-brown/70'
+            ? 'text-sun-cream/80'
+            : 'text-sun-cocoa/70'
         )}>
           {description}
         </p>
@@ -157,8 +157,8 @@ export function NewsletterSignup({
                 className={cn(
                   'mt-2 text-sm font-body',
                   variant === 'purple' || variant === 'orange'
-                    ? 'text-sunshine-yellow'
-                    : 'text-sunshine-orange'
+                    ? 'text-sun-gold'
+                    : 'text-sun-coral'
                 )}
                 role="alert"
               >

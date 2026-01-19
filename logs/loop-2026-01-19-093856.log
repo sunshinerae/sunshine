@@ -859,3 +859,32 @@ Build passed and changes committed.
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. Updated `components/cards/blog-card.tsx` with:
+- `bg-sun-paper` background
+- `border border-sun-sand` border  
+- `shadow-soft` styling
+- Replaced all `sunshine-*` colors with `sun-*` equivalents (sun-cocoa for text, sun-plum for accents, sun-gold/sun-coral for category badges)
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m3e40468 feat: Update components/cards/blog-card.tsx - sun-paper bg, sun-sand border[0m
+  [0;32m✓[0m Task marked complete
+  [0;36mRunning build check...[0m
+  [0;32m✓[0m Build passed
+
+  [0;36mTask time:[0m 1m 21s │ [0;36mAvg:[0m 2m 30s │ [0;36mEst. remaining:[0m 57m 30s
+
+  [1;37mRecent commits:[0m
+    [0;36m3e40468 feat: Update components/cards/blog-card.tsx - sun-paper bg, sun-sand border[0m
+    [0;36me5a188c feat: Update components/cards/offering-card.tsx - sun-paper bg, sun-sand border[0m
+    [0;36ma13722d feat: Update components/cards/event-card.tsx - sun-paper bg, sun-sand border[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 27[0m │ ������������������������������ 55%
+  [0;32m29 done[0m │ [1;33m23 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Update components/forms/newsletter-signup.tsx: sun-* colors[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
