@@ -11,7 +11,9 @@ import {
   getAllPostSlugs,
   formatPostDate,
   getReadingTime,
+  getRelatedPosts,
 } from '@/lib/blog';
+import { RelatedPosts } from '@/components/blog/related-posts';
 import { generatePageMetadata } from '@/lib/metadata';
 
 interface BlogPostPageProps {
@@ -222,6 +224,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </FadeInView>
       </section>
+
+      {/* Related Posts Section */}
+      <RelatedPosts posts={getRelatedPosts(slug)} />
 
       {/* CTA Section */}
       <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-yellow">
