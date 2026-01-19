@@ -92,13 +92,4 @@ body::before {
   .bg-sun-gradient-warm {
     background: linear-gradient(135deg, var(--sun-cream) 0%, var(--sun-sand) 100%);
   }
-
-  /* Gradient utilities */
-  .bg-sunshine-gradient {
-    background: linear-gradient(90deg, #F6C453 0%, #6E054D 100%);
-  }
-
-  .bg-sunshine-gradient-warm {
-    background: linear-gradient(90deg, #F6C453 0%, #F3D0DB 100%);
-  }
 }

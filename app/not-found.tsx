@@ -15,9 +15,9 @@ const quickLinks = [
 
 export default function NotFound() {
   return (
-    <main className="bg-sunshine-white min-h-screen">
+    <main className="bg-sun-cream min-h-screen">
       {/* Hero Section */}
-      <section className="bg-sunshine-purple text-sunshine-white px-6 py-20 md:py-28 overflow-hidden">
+      <section className="bg-sun-plum text-white px-6 py-20 md:py-28 overflow-hidden">
         <div className="max-w-4xl mx-auto text-center space-y-6">
           <ScaleIn delay={0.1} initialScale={0.5} duration={0.5} className="inline-block">
             <span className="text-6xl md:text-7xl block mb-4" role="img" aria-label="compass">
@@ -30,12 +30,12 @@ export default function NotFound() {
             </h1>
           </FadeInView>
           <FadeInView delay={0.4} duration={0.7}>
-            <p className="font-body text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto text-sunshine-white/90">
+            <p className="font-body text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto text-white/90">
               That is okay, radiant one. Even the brightest souls get lost sometimes. Let us guide you back to where you belong.
             </p>
           </FadeInView>
           <FadeInView delay={0.6} direction="none" duration={0.7}>
-            <p className="font-subhead text-lg text-sunshine-yellow">
+            <p className="font-subhead text-lg text-sun-gold">
               Come home to yourself.
             </p>
           </FadeInView>
@@ -46,13 +46,13 @@ export default function NotFound() {
       <section className="px-6 py-16 md:py-20 overflow-hidden">
         <div className="max-w-5xl mx-auto">
           <FadeInView className="text-center mb-12">
-            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-orange mb-3">
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-coral mb-3">
               Find your way
             </p>
-            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sunshine-purple mb-4">
+            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sun-plum mb-4">
               Where would you like to go?
             </h2>
-            <p className="font-body text-lg leading-relaxed text-sunshine-brown max-w-2xl mx-auto">
+            <p className="font-body text-lg leading-relaxed text-sun-cocoa max-w-2xl mx-auto">
               Every path leads somewhere beautiful. Choose the one that calls to you.
             </p>
           </FadeInView>
@@ -62,12 +62,12 @@ export default function NotFound() {
               <StaggerItem key={link.href}>
                 <Link
                   href={link.href}
-                  className="block p-6 rounded-2xl bg-sunshine-yellow/20 hover:bg-sunshine-yellow/40 border border-sunshine-yellow/30 transition-all duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sunshine-purple focus-visible:ring-offset-2"
+                  className="block p-6 rounded-2xl bg-sun-gold/20 hover:bg-sun-gold/40 border border-sun-gold/30 transition-all duration-300 hover:scale-[1.02] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sun-plum focus-visible:ring-offset-2"
                 >
-                  <h3 className="font-headline text-xl uppercase text-sunshine-purple mb-1">
+                  <h3 className="font-headline text-xl uppercase text-sun-plum mb-1">
                     {link.label}
                   </h3>
-                  <p className="font-body text-sm text-sunshine-brown/70">
+                  <p className="font-body text-sm text-sun-cocoa/70">
                     {link.description}
                   </p>
                 </Link>
@@ -78,23 +78,23 @@ export default function NotFound() {
       </section>
 
       {/* Return Home CTA Section */}
-      <section className="bg-sunshine-yellow px-6 py-16 md:py-20 overflow-hidden">
+      <section className="bg-sun-gold px-6 py-16 md:py-20 overflow-hidden">
         <div className="max-w-4xl mx-auto text-center">
           <FadeInView className="space-y-6">
-            <h2 className="font-headline text-[clamp(2rem,5vw,3rem)] uppercase leading-[0.9] tracking-tight text-sunshine-brown">
+            <h2 className="font-headline text-[clamp(2rem,5vw,3rem)] uppercase leading-[0.9] tracking-tight text-sun-cocoa">
               Ready to find your glow?
             </h2>
-            <p className="font-body text-lg leading-relaxed text-sunshine-brown/80 max-w-xl mx-auto">
+            <p className="font-body text-lg leading-relaxed text-sun-cocoa/80 max-w-xl mx-auto">
               Sometimes getting lost is exactly what we need to find our way back to ourselves.
             </p>
             <div className="pt-4">
               <Link href="/">
-                <Button className="bg-sunshine-purple text-sunshine-white hover:bg-sunshine-orange">
+                <Button className="bg-sun-plum text-white hover:bg-sun-plum/90">
                   Return Home
                 </Button>
               </Link>
             </div>
-            <p className="font-body text-sm text-sunshine-brown/60 pt-2">
+            <p className="font-body text-sm text-sun-cocoa/60 pt-2">
               Move like it is already yours.
             </p>
           </FadeInView>
