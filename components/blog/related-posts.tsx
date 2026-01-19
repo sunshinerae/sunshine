@@ -19,15 +19,15 @@ export function RelatedPosts({ posts }: RelatedPostsProps) {
   }
 
   return (
-    <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-white border-t border-sunshine-brown/10">
+    <section className="px-4 sm:px-6 py-12 md:py-16 bg-sun-cream border-t border-sun-sand">
       <div className="max-w-6xl mx-auto">
         {/* Section heading */}
         <FadeInView>
           <div className="text-center mb-10">
-            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-purple mb-3">
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum mb-3">
               Keep reading
             </p>
-            <h2 className="font-headline text-[clamp(1.5rem,3vw,2rem)] uppercase leading-[0.95] tracking-tight text-sunshine-brown">
+            <h2 className="font-headline text-[clamp(1.5rem,3vw,2rem)] uppercase leading-[0.95] tracking-tight text-sun-cocoa">
               You might also enjoy
             </h2>
           </div>
