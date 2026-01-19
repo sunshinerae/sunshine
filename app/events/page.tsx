@@ -15,10 +15,10 @@ import { getGoldenHourEvents, getLunarRoomEvents } from '@/lib/events';
 export const metadata: Metadata = PAGE_METADATA.events;
 
 const gallery = [
-  { src: '/festival-crowd.png', alt: 'Sun-drenched women celebrating together', gradient: 'from-sunshine-yellow via-sunshine-orange to-sunshine-purple/40' },
-  { src: '/dj-equipment.png', alt: 'Warm, electric event lighting', gradient: 'from-sunshine-orange via-sunshine-yellow to-sunshine-blue/30' },
-  { src: '/portrait-female-professional.png', alt: 'Community connection', gradient: 'from-sunshine-purple via-sunshine-blue/40 to-sunshine-yellow/30' },
-  { src: '/planning-notebook.png', alt: 'Quiet journaling moment', gradient: 'from-sunshine-blue/40 via-sunshine-purple to-sunshine-orange/30' },
+  { src: '/festival-crowd.png', alt: 'Sun-drenched women celebrating together', gradient: 'from-sun-gold via-sun-coral to-sun-plum/40' },
+  { src: '/dj-equipment.png', alt: 'Warm, electric event lighting', gradient: 'from-sun-coral via-sun-gold to-sun-leaf/30' },
+  { src: '/portrait-female-professional.png', alt: 'Community connection', gradient: 'from-sun-plum via-sun-leaf/40 to-sun-gold/30' },
+  { src: '/planning-notebook.png', alt: 'Quiet journaling moment', gradient: 'from-sun-leaf/40 via-sun-plum to-sun-coral/30' },
 ];
 
 export default function EventsPage() {
@@ -26,11 +26,11 @@ export default function EventsPage() {
     notFound();
   }
   return (
-    <div className="bg-sunshine-white">
-      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-purple text-sunshine-white overflow-hidden">
+    <div className="bg-sun-cream">
+      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sun-plum text-white overflow-hidden">
         <div className="max-w-5xl mx-auto space-y-5 text-center">
           <FadeInView>
-            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-blue">
+            <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-gold">
               Community in motion
             </p>
           </FadeInView>
@@ -47,12 +47,12 @@ export default function EventsPage() {
           <FadeInView delay={0.3}>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link href="#golden-hour" className="w-full sm:w-auto">
-                <Button className="w-full sm:w-auto bg-sunshine-yellow text-sunshine-brown hover:bg-sunshine-blue">
+                <Button className="w-full sm:w-auto bg-sun-gold text-sun-cocoa hover:bg-sun-gold/90">
                   Golden Hour
                 </Button>
               </Link>
               <Link href="#lunar-room" className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full sm:w-auto border-sunshine-white text-sunshine-white hover:bg-sunshine-white hover:text-sunshine-purple">
+                <Button variant="outline" className="w-full sm:w-auto border-white text-white hover:bg-white hover:text-sun-plum">
                   Lunar Room
                 </Button>
               </Link>
@@ -62,22 +62,22 @@ export default function EventsPage() {
       </section>
 
       {/* Golden Hour Zone - Warm background with sun imagery and event cards */}
-      <section id="golden-hour" className="px-4 sm:px-6 py-16 md:py-24 bg-sunshine-orange text-sunshine-white overflow-hidden relative">
+      <section id="golden-hour" className="px-4 sm:px-6 py-16 md:py-24 bg-sun-coral text-white overflow-hidden relative">
         {/* Sun imagery placeholder - decorative gradient overlay */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {/* Large sun circle - top right */}
-          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-sunshine-yellow/20 blur-3xl" />
+          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-sun-gold/20 blur-3xl" />
           {/* Smaller sun accent - bottom left */}
-          <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-sunshine-yellow/15 blur-2xl" />
+          <div className="absolute -bottom-16 -left-16 w-64 h-64 rounded-full bg-sun-gold/15 blur-2xl" />
           {/* Subtle rays effect */}
-          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-sunshine-yellow/10 to-transparent" />
+          <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-sun-gold/10 to-transparent" />
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
             <FadeInView>
-              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-yellow mb-3">
+              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-gold mb-3">
                 Golden Hour
               </p>
             </FadeInView>
@@ -87,7 +87,7 @@ export default function EventsPage() {
               </h2>
             </FadeInView>
             <FadeInView delay={0.2}>
-              <p className="font-body text-lg leading-relaxed max-w-2xl mx-auto text-sunshine-white/90">
+              <p className="font-body text-lg leading-relaxed max-w-2xl mx-auto text-white/90">
                 Sunshine leads motivational coaching, storytelling, and gentle networking. Leave with clarity, community, and at least two new women you actually want in your life.
               </p>
             </FadeInView>
@@ -96,7 +96,7 @@ export default function EventsPage() {
           {/* Sun imagery placeholder card */}
           <FadeInView delay={0.3} className="mb-12">
             <BrandCard className="p-0 overflow-hidden max-w-4xl mx-auto" variant="white">
-              <div className="relative aspect-[16/9] bg-gradient-to-br from-sunshine-yellow via-sunshine-orange to-sunshine-purple/40">
+              <div className="relative aspect-[16/9] bg-gradient-to-br from-sun-gold via-sun-coral to-sun-plum/40">
                 <Image
                   src="/festival-crowd.png"
                   alt="Women celebrating at a Golden Hour event - sun-drenched connection and joy"
@@ -105,12 +105,12 @@ export default function EventsPage() {
                 />
                 {/* Sun overlay graphic placeholder */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-sunshine-yellow/30 blur-xl" />
-                  <div className="absolute w-24 h-24 md:w-36 md:h-36 rounded-full bg-sunshine-yellow/50 blur-md" />
+                  <div className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-sun-gold/30 blur-xl" />
+                  <div className="absolute w-24 h-24 md:w-36 md:h-36 rounded-full bg-sun-gold/50 blur-md" />
                 </div>
                 {/* Caption overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-sunshine-brown/60 to-transparent">
-                  <p className="font-subhead text-sm md:text-base text-sunshine-white">
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-sun-cocoa/60 to-transparent">
+                  <p className="font-subhead text-sm md:text-base text-white">
                     Electric, playful, connective — this is networking that doesn&apos;t feel like networking.
                   </p>
                 </div>
@@ -137,7 +137,7 @@ export default function EventsPage() {
 
           {/* View all CTA */}
           <FadeInView delay={0.5} className="mt-10 text-center">
-            <Button className="bg-sunshine-yellow text-sunshine-brown hover:bg-sunshine-blue font-subhead">
+            <Button className="bg-sun-gold text-sun-cocoa hover:bg-sun-gold/90 font-subhead">
               See All Golden Hour Dates
             </Button>
           </FadeInView>
@@ -148,28 +148,28 @@ export default function EventsPage() {
       <ZoneDivider from="golden-hour" to="lunar-room" />
 
       {/* Lunar Room Zone - Cool/dark background with moon imagery and event cards */}
-      <section id="lunar-room" className="px-4 sm:px-6 py-16 md:py-24 bg-sunshine-purple text-sunshine-white overflow-hidden relative">
+      <section id="lunar-room" className="px-4 sm:px-6 py-16 md:py-24 bg-sun-plum text-white overflow-hidden relative">
         {/* Moon imagery placeholder - decorative gradient overlay */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {/* Large moon circle - top left */}
-          <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-sunshine-blue/15 blur-3xl" />
+          <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-sun-leaf/15 blur-3xl" />
           {/* Smaller moon accent - bottom right */}
-          <div className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full bg-sunshine-blue/10 blur-2xl" />
+          <div className="absolute -bottom-16 -right-16 w-64 h-64 rounded-full bg-sun-leaf/10 blur-2xl" />
           {/* Subtle glow effect */}
-          <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-sunshine-blue/5 to-transparent" />
+          <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-sun-leaf/5 to-transparent" />
           {/* Stars effect - scattered small circles */}
-          <div className="absolute top-20 right-1/4 w-2 h-2 rounded-full bg-sunshine-white/20" />
-          <div className="absolute top-32 right-1/3 w-1 h-1 rounded-full bg-sunshine-white/30" />
-          <div className="absolute top-48 left-1/4 w-1.5 h-1.5 rounded-full bg-sunshine-white/25" />
-          <div className="absolute bottom-32 left-1/3 w-1 h-1 rounded-full bg-sunshine-white/20" />
-          <div className="absolute bottom-48 right-1/5 w-2 h-2 rounded-full bg-sunshine-white/15" />
+          <div className="absolute top-20 right-1/4 w-2 h-2 rounded-full bg-white/20" />
+          <div className="absolute top-32 right-1/3 w-1 h-1 rounded-full bg-white/30" />
+          <div className="absolute top-48 left-1/4 w-1.5 h-1.5 rounded-full bg-white/25" />
+          <div className="absolute bottom-32 left-1/3 w-1 h-1 rounded-full bg-white/20" />
+          <div className="absolute bottom-48 right-1/5 w-2 h-2 rounded-full bg-white/15" />
         </div>
 
         <div className="max-w-6xl mx-auto relative z-10">
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
             <FadeInView>
-              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sunshine-blue mb-3">
+              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-gold mb-3">
                 Lunar Room
               </p>
             </FadeInView>
@@ -179,7 +179,7 @@ export default function EventsPage() {
               </h2>
             </FadeInView>
             <FadeInView delay={0.2}>
-              <p className="font-body text-lg leading-relaxed max-w-2xl mx-auto text-sunshine-white/90">
+              <p className="font-body text-lg leading-relaxed max-w-2xl mx-auto text-white/90">
                 Co-facilitated with healers and creative leaders. Expect yoga, sound, meditation, and space to hear your own desires. Leave with a quieter mind and a fuller heart.
               </p>
             </FadeInView>
@@ -188,7 +188,7 @@ export default function EventsPage() {
           {/* Moon imagery placeholder card */}
           <FadeInView delay={0.3} className="mb-12">
             <BrandCard className="p-0 overflow-hidden max-w-4xl mx-auto" variant="white">
-              <div className="relative aspect-[16/9] bg-gradient-to-br from-sunshine-purple via-sunshine-blue/40 to-sunshine-purple/80">
+              <div className="relative aspect-[16/9] bg-gradient-to-br from-sun-plum via-sun-leaf/40 to-sun-plum/80">
                 <Image
                   src="/planning-notebook.png"
                   alt="Candle-lit meditation space - restorative stillness and gentle light"
@@ -197,14 +197,14 @@ export default function EventsPage() {
                 />
                 {/* Moon overlay graphic placeholder */}
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-sunshine-blue/20 blur-xl" />
-                  <div className="absolute w-24 h-24 md:w-36 md:h-36 rounded-full bg-sunshine-white/10 blur-md" />
+                  <div className="w-32 h-32 md:w-48 md:h-48 rounded-full bg-sun-leaf/20 blur-xl" />
+                  <div className="absolute w-24 h-24 md:w-36 md:h-36 rounded-full bg-white/10 blur-md" />
                   {/* Crescent moon shape hint */}
-                  <div className="absolute w-20 h-20 md:w-32 md:h-32 rounded-full bg-sunshine-white/5 shadow-[inset_-8px_-8px_20px_rgba(252,246,242,0.15)]" />
+                  <div className="absolute w-20 h-20 md:w-32 md:h-32 rounded-full bg-white/5 shadow-[inset_-8px_-8px_20px_rgba(252,246,242,0.15)]" />
                 </div>
                 {/* Caption overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-sunshine-purple/80 to-transparent">
-                  <p className="font-subhead text-sm md:text-base text-sunshine-white">
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-sun-plum/80 to-transparent">
+                  <p className="font-subhead text-sm md:text-base text-white">
                     Exhale, ground, restore — this is your permission to slow down.
                   </p>
                 </div>
@@ -231,24 +231,24 @@ export default function EventsPage() {
 
           {/* View all CTA */}
           <FadeInView delay={0.5} className="mt-10 text-center">
-            <Button className="bg-sunshine-blue text-sunshine-purple hover:bg-sunshine-yellow font-subhead">
+            <Button className="bg-sun-gold text-sun-cocoa hover:bg-sun-gold/90 font-subhead">
               See All Lunar Room Dates
             </Button>
           </FadeInView>
         </div>
       </section>
 
-      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sunshine-white overflow-hidden">
+      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sun-cream overflow-hidden">
         <div className="max-w-6xl mx-auto space-y-8">
           <div className="space-y-2 text-center">
             <FadeInView>
-              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-orange">Event Gallery</p>
+              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-coral">Event Gallery</p>
             </FadeInView>
             <FadeInView delay={0.1}>
-              <h3 className="font-headline text-4xl uppercase text-sunshine-purple">See the energy</h3>
+              <h3 className="font-headline text-4xl uppercase text-sun-plum">See the energy</h3>
             </FadeInView>
             <FadeInView delay={0.2}>
-              <p className="text-lg text-sunshine-brown leading-relaxed max-w-3xl mx-auto">
+              <p className="text-lg text-sun-cocoa leading-relaxed max-w-3xl mx-auto">
                 A glimpse of both energies: sun-drenched connection and moon-lit restoration.
               </p>
             </FadeInView>

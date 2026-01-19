@@ -17,7 +17,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 - [x] Update app/page.tsx: replace sunshine-* with sun-* colors
 - [x] Update app/about/page.tsx: replace sunshine-* with sun-* colors
 - [x] Update app/offerings/page.tsx: replace sunshine-* with sun-* colors
-- [ ] Update app/events/page.tsx: replace sunshine-* with sun-* colors
+- [x] Update app/events/page.tsx: replace sunshine-* with sun-* colors
 - [ ] Update app/community/page.tsx: replace sunshine-* with sun-* colors
 - [ ] Update app/contact/page.tsx: replace sunshine-* with sun-* colors
 - [ ] Update app/blog/page.tsx: replace sunshine-* with sun-* colors
