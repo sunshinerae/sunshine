@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 import { BrandCard } from '@/components/brand-card';
 import { isFeatureEnabled } from '@/lib/features';
 import { PAGE_METADATA } from '@/lib/metadata';
@@ -8,6 +9,7 @@ import { FadeInView } from '@/components/motion/fade-in-view';
 import { SlideInView } from '@/components/motion/slide-in-view';
 import { NewsletterSignup } from '@/components/forms/newsletter-signup';
 import { SMSSignup } from '@/components/forms/sms-signup';
+import { SOCIAL_LINKS } from '@/lib/constants';
 
 export const metadata: Metadata = PAGE_METADATA.contact;
 
@@ -172,6 +174,69 @@ export default function ContactPage() {
 
             <p className="font-body text-xs text-sunshine-white/60 text-center mt-4">
               Move like it&apos;s already yours. 1-2 texts per week, max. Consent matters here.
+            </p>
+          </FadeInView>
+        </div>
+      </section>
+
+      {/* Social Links Section */}
+      <section className="bg-sunshine-white py-16 px-6">
+        <div className="max-w-4xl mx-auto">
+          <SlideInView direction="up" className="text-center mb-10">
+            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sunshine-purple mb-3">
+              Connect With Us
+            </p>
+            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-tight text-sunshine-brown mb-4">
+              Find Your Community
+            </h2>
+            <p className="font-body text-lg text-sunshine-brown/80 max-w-2xl mx-auto leading-relaxed">
+              Join the conversation. See what radiance looks like in real life. Connect with women who are glowing from the heart.
+            </p>
+          </SlideInView>
+
+          <FadeInView delay={0.2} className="flex flex-col items-center gap-8">
+            {/* Instagram - Primary */}
+            <Link
+              href={SOCIAL_LINKS.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col items-center gap-4 p-8 rounded-2xl bg-sunshine-yellow hover:bg-sunshine-orange transition-colors duration-300 w-full max-w-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sunshine-purple focus-visible:ring-offset-2"
+            >
+              <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-sunshine-purple text-sunshine-white font-headline text-2xl group-hover:scale-110 transition-transform duration-300">
+                IG
+              </span>
+              <div className="text-center">
+                <h3 className="font-headline text-xl uppercase text-sunshine-brown group-hover:text-sunshine-white transition-colors duration-300 mb-2">
+                  Instagram
+                </h3>
+                <p className="font-body text-sm text-sunshine-brown/80 group-hover:text-sunshine-white/90 transition-colors duration-300">
+                  Daily inspiration, behind-the-scenes moments, and community highlights
+                </p>
+              </div>
+              <span className="font-subhead text-sm text-sunshine-purple group-hover:text-sunshine-white transition-colors duration-300">
+                @thesunshineeffect
+              </span>
+            </Link>
+
+            {/* Secondary Social Links */}
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 px-6 py-3 rounded-full bg-sunshine-blue/20 hover:bg-sunshine-blue transition-colors duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sunshine-purple focus-visible:ring-offset-2"
+              >
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sunshine-blue text-sunshine-brown font-semibold group-hover:bg-sunshine-white transition-colors duration-300">
+                  In
+                </span>
+                <span className="font-subhead text-sm text-sunshine-brown">
+                  LinkedIn
+                </span>
+              </Link>
+            </div>
+
+            <p className="font-body text-sm text-sunshine-brown/60 text-center max-w-md">
+              Real power doesn&apos;t have to push or prove. We show up authentically and invite you to do the same.
             </p>
           </FadeInView>
         </div>

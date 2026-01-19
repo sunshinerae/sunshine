@@ -81,7 +81,7 @@
 - [x] Add contact form section
 - [x] Add newsletter signup section ("Consistent Bulletin")
 - [x] Add SMS signup section with "love note" placeholder copy
-- [ ] Add social links section (Instagram primary)
+- [x] Add social links section (Instagram primary)
 - [ ] Add scroll animations to all sections
 
 ### Blog Pages
