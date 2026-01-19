@@ -33,7 +33,7 @@ Replace old sunshine-* brand with new sun-* brand. Warm, cozy, calm.
 
 ### UI Components
 - [x] Update components/ui/button.tsx: sun-* colors, rounded-[14px]
-- [ ] Update components/ui/card.tsx: sun-paper bg, sun-sand border, shadow-soft
+- [x] Update components/ui/card.tsx: sun-paper bg, sun-sand border, shadow-soft
 - [ ] Update components/ui/badge.tsx: sun-* colors
 - [ ] Update components/ui/input.tsx: sun-sand border, sun-plum focus ring
 - [ ] Update components/ui/textarea.tsx: sun-sand border, sun-plum focus ring
