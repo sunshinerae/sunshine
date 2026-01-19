@@ -32,7 +32,7 @@
 
 ## Phase 4: Navigation & Footer
 
-- [ ] Update `components/navigation.tsx` — add all nav items: Home, About, Offerings, Events, Community, Blog, Contact + CTA button
+- [x] Update `components/navigation.tsx` — add all nav items: Home, About, Offerings, Events, Community, Blog, Contact + CTA button
 - [ ] Create `components/footer.tsx` — logo, tagline, nav links, newsletter signup, social links (Instagram), copyright
 - [ ] Add footer to root layout so it appears on all pages
 

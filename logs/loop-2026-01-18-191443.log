@@ -663,3 +663,36 @@ Task completed. Created `components/cards/offering-card.tsx` with:
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. Created `components/cards/blog-card.tsx` with:
+
+- **Image area**: Gradient placeholder with sun icon, supports actual images
+- **Category tag**: Color-coded by content pillar (Wellness=yellow, Self-Development=purple, Business Strategy=orange)
+- **Title**: Headline font, uppercase, Deep Brown text
+- **Excerpt**: Body font with 3-line clamp
+- **Date**: Formatted display
+- **Hover effect**: Crisp 0.3s lift animation with shadow
+- **Full card link**: Wraps entire card for blog post navigation
+
+The component follows brand spec contrast rules (White Cloud background with Deep Brown text) and matches the existing card component patterns.
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36mf0c1173 feat: create components/cards/blog-card.tsx — blog post preview card with image, title, excerpt, category tag[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 50s │ [0;36mAvg:[0m 49s │ [0;36mEst. remaining:[0m 57m 10s
+
+  [1;37mRecent commits:[0m
+    [0;36mf0c1173 feat: create components/cards/blog-card.tsx — blog post preview card with image, title, excerpt, category tag[0m
+    [0;36m6f94bb3 feat: create components/cards/offering-card.tsx — offering display card with icon placeholder, title, description, CTA[0m
+    [0;36m0f92514 feat: create components/cards/event-card.tsx — event display card with date, title, description, CTA[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 22[0m │ ������������������������������ 23%
+  [0;32m21 done[0m │ [1;33m70 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Update `components/navigation.tsx` — add all nav items: Home, About, Offerings, Events, Community, Blog, Contact + CTA button[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---
