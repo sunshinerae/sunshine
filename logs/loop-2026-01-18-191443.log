@@ -633,3 +633,33 @@ Task complete. Created `components/cards/event-card.tsx` with:
 
   [0;36mRunning Claude...[0m
 --- Claude Output Start ---
+Task completed. Created `components/cards/offering-card.tsx` with:
+- Icon placeholder (accepts custom icon or renders default SVG)
+- Title styled with `font-headline` (uppercase, brand typography)
+- Description with relaxed line-height
+- Full-width CTA button using the existing `CTAButton` component
+- Four visual variants (purple, orange, yellow, white) following brand contrast rules
+- Hover animation with lift effect (crisp 0.3s timing)
+- Responsive card layout with rounded corners
+--- Claude Output End ---
+
+  [0;32m✓[0m Commit detected: [0;36m6f94bb3 feat: create components/cards/offering-card.tsx — offering display card with icon placeholder, title, description, CTA[0m
+  [0;32m✓[0m Task marked complete
+
+  [0;36mTask time:[0m 50s │ [0;36mAvg:[0m 49s │ [0;36mEst. remaining:[0m 57m 59s
+
+  [1;37mRecent commits:[0m
+    [0;36m6f94bb3 feat: create components/cards/offering-card.tsx — offering display card with icon placeholder, title, description, CTA[0m
+    [0;36m0f92514 feat: create components/cards/event-card.tsx — event display card with date, title, description, CTA[0m
+    [0;36md47bf0c feat: create components/forms/contact-form.tsx — name, email, subject, message fields with submit[0m
+
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+  [1;37mIteration 21[0m │ ������������������������������ 21%
+  [0;32m20 done[0m │ [1;33m71 remaining[0m
+[0;36m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m
+
+  [1;37mNext task:[0m
+  [1;33m→ Create `components/cards/blog-card.tsx` — blog post preview card with image, title, excerpt, category tag[0m
+
+  [0;36mRunning Claude...[0m
+--- Claude Output Start ---

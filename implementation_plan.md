@@ -28,7 +28,7 @@
 - [x] Create `components/forms/contact-form.tsx` — name, email, subject, message fields with submit
 - [x] Create `components/cards/event-card.tsx` — event display card with date, title, description, CTA
 - [x] Create `components/cards/offering-card.tsx` — offering display card with icon placeholder, title, description, CTA
-- [ ] Create `components/cards/blog-card.tsx` — blog post preview card with image, title, excerpt, category tag
+- [x] Create `components/cards/blog-card.tsx` — blog post preview card with image, title, excerpt, category tag
 
 ## Phase 4: Navigation & Footer
 
