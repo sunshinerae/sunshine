@@ -2,6 +2,7 @@
 
 @theme {
   /* Brand palette — The Sunshine Effect */
+  /* Raw values for reference */
   --sun-plum: #6E054D;      /* Deep Plum */
   --sun-cocoa: #240D01;     /* Cocoa Ink */
   --sun-cream: #FFF6E9;     /* Warm Cream */
@@ -11,6 +12,17 @@
   --sun-rose: #F3D0DB;      /* Soft Rose */
   --sun-coral: #D4856A;     /* Warm accent (golden hour) */
   --sun-leaf: #9B7B9B;      /* Cool accent (lunar room) */
+
+  /* Color utilities — generates bg-sun-*, text-sun-*, border-sun-* classes */
+  --color-sun-plum: var(--sun-plum);
+  --color-sun-cocoa: var(--sun-cocoa);
+  --color-sun-cream: var(--sun-cream);
+  --color-sun-paper: var(--sun-paper);
+  --color-sun-sand: var(--sun-sand);
+  --color-sun-gold: var(--sun-gold);
+  --color-sun-rose: var(--sun-rose);
+  --color-sun-coral: var(--sun-coral);
+  --color-sun-leaf: var(--sun-leaf);
 
   /* System colors mapped to sun-* */
   --color-background: var(--sun-cream);
