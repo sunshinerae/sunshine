@@ -58,8 +58,6 @@ export function EventCard({
     });
   };
 
-  const isGoldenHour = type === 'golden-hour';
-
   // Type-based styling per brand spec
   const typeStyles = {
     'golden-hour': {

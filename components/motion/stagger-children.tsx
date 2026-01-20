@@ -58,9 +58,11 @@ export function StaggerChildren({
   className = '',
   delay = 0,
   staggerDelay = 0.1,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   duration = 0.3,
   once = true,
   margin = '-50px',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   offset = 15,
 }: StaggerChildrenProps) {
   const prefersReducedMotion = useReducedMotion();

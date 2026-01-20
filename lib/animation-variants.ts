@@ -1,4 +1,4 @@
-import type { Variants, Transition, TargetAndTransition } from 'framer-motion';
+import type { Variants, Transition } from 'framer-motion';
 
 /**
  * Animation timing constants for The Sunshine Effect brand

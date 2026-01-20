@@ -99,7 +99,7 @@ export default function AboutPage() {
 
               <FadeInView delay={0.4}>
                 <p className="font-body text-lg text-sun-gold mt-6 italic">
-                  "Real power doesn't have to push or prove."
+                  &ldquo;Real power doesn&apos;t have to push or prove.&rdquo;
                 </p>
               </FadeInView>
             </div>
@@ -138,7 +138,7 @@ export default function AboutPage() {
                 Through a blend of wellness practices, mindset work, and business strategy, I
                 began to rebuild. Not from a place of force, but from a foundation of inner peace
                 and self-trust. I learned that discipline is self-love in motion — and that real
-                power doesn't have to push or prove.
+                power doesn&apos;t have to push or prove.
               </p>
               <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed">
                 Now I guide other women through the same transformation: from scattered and burned
@@ -151,12 +151,12 @@ export default function AboutPage() {
           <FadeInView delay={0.3}>
             <div className="text-center">
               <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed mb-8">
-                The Sunshine Effect isn't just a brand — it's an invitation to glow from the heart.
+                The Sunshine Effect isn&apos;t just a brand — it&apos;s an invitation to glow from the heart.
                 To create a life (and business) that feels aligned, embodied, and alive. To move
-                like it's already yours.
+                like it&apos;s already yours.
               </p>
               <p className="font-subhead text-xl md:text-2xl text-sun-plum font-bold italic">
-                "You're allowed to want more ease."
+                &ldquo;You&apos;re allowed to want more ease.&rdquo;
               </p>
             </div>
           </FadeInView>

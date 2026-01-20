@@ -122,7 +122,7 @@ export default function LaunchPage() {
               {/* Testimonial */}
               <FadeInView delay={0.2}>
                 <blockquote className="max-w-2xl mx-auto">
-                  <span className="font-headline text-4xl text-sun-gold leading-none select-none" aria-hidden="true">"</span>
+                  <span className="font-headline text-4xl text-sun-gold leading-none select-none" aria-hidden="true">&ldquo;</span>
                   <p className="font-body text-lg md:text-xl text-white leading-relaxed -mt-2">
                     For the first time in years, I feel like I can breathe. The Sunshine Effect helped me find clarity when everything felt overwhelming.
                   </p>

@@ -60,7 +60,7 @@ export function TestimonialCard({
         )}
         aria-hidden="true"
       >
-        "
+        &ldquo;
       </span>
 
       <p className="font-body text-lg leading-relaxed -mt-4">{quote}</p>

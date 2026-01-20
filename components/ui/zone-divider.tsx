@@ -12,7 +12,6 @@ export function ZoneDivider({ from, to }: ZoneDividerProps) {
 
   // Colors based on transition direction
   const fromBg = isGoldenToLunar ? 'bg-sun-gold' : 'bg-sun-plum';
-  const toBg = isGoldenToLunar ? 'bg-sun-plum' : 'bg-sun-gold';
   const fromColor = isGoldenToLunar ? '#F6C453' : '#6E054D';
   const toColor = isGoldenToLunar ? '#6E054D' : '#F6C453';
   const accentColor = isGoldenToLunar ? '#F6C453' : '#F28C7D';
