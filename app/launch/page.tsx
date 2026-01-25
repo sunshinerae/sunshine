@@ -143,7 +143,7 @@ export default function LaunchPage() {
           <div className="max-w-6xl mx-auto px-6 md:px-12 text-center">
             <FadeInView>
               <p className="text-sm md:text-base text-sun-cocoa/70 font-body">
-                The Sunshine Effect is a Los Angeles-based community for women ready to move from burnout to alignment.
+                Los Angeles-based events. A community for women everywhere.
               </p>
             </FadeInView>
           </div>

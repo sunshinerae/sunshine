@@ -7,9 +7,19 @@ import { eq, and } from 'drizzle-orm';
 const subscribeSchema = z.object({
   type: z.enum(['newsletter', 'sms', 'glow-notes', 'guide', 'waitlist', 'launch']),
   email: z.string().email().optional(),
-  phone: z.string().optional(),
+  phone: z.string().min(7).optional(),
   firstName: z.string().optional(),
   lastName: z.string().optional(),
+}).superRefine((val, ctx) => {
+  const needsPhone = val.type === 'sms';
+  const needsEmail = val.type !== 'sms';
+
+  if (needsPhone && !val.phone) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Phone is required for SMS.' });
+  }
+  if (needsEmail && !val.email) {
+    ctx.addIssue({ code: z.ZodIssueCode.custom, message: 'Email is required.' });
+  }
 });
 
 export async function POST(request: Request) {
@@ -31,8 +41,28 @@ export async function POST(request: Request) {
         .limit(1);
 
       if (existing.length > 0) {
-        // Already subscribed - return success anyway (don't reveal this to prevent email enumeration)
-        console.log('Already subscribed:', data.email, data.type);
+        return NextResponse.json({
+          success: true,
+          message: 'Thanks for joining.',
+          alreadySubscribed: true
+        });
+      }
+    }
+
+    // Check if phone already subscribed
+    if (data.phone) {
+      const existingPhone = await db
+        .select()
+        .from(subscriptions)
+        .where(
+          and(
+            eq(subscriptions.phone, data.phone),
+            eq(subscriptions.type, data.type)
+          )
+        )
+        .limit(1);
+
+      if (existingPhone.length > 0) {
         return NextResponse.json({
           success: true,
           message: 'Thanks for joining.',
@@ -51,7 +81,7 @@ export async function POST(request: Request) {
     });
 
     // TODO: wire to real email/SMS provider (Resend, Postmark, Twilio, etc.)
-    console.log('New subscription:', data);
+    console.log('New subscription:', { type: data.type });
 
     return NextResponse.json({ success: true, message: 'Thanks for joining.' });
   } catch (error) {

@@ -13,15 +13,15 @@ export const metadata: Metadata = PAGE_METADATA.thankYou;
 const nextSteps = [
   {
     title: 'Check your inbox',
-    description: 'Your first ritual arrives within 24 hours. Add us to your contacts so it lands safely.',
+    description: 'Your first update arrives soon. Add us to your contacts so it lands safely.',
   },
   {
     title: 'Follow along',
-    description: 'Join us on Instagram for daily inspiration, behind-the-scenes moments, and community connection.',
+    description: 'Join us on Instagram for updates, behind-the-scenes moments, and community connection.',
   },
   {
     title: 'Mark your calendar',
-    description: 'Our next Golden Hour or Lunar Room gathering might be calling your name.',
+    description: 'The next Golden Hour gathering might be calling your name.',
   },
 ];
 
@@ -43,12 +43,12 @@ export default function ThankYouPage() {
           </FadeInView>
           <FadeInView delay={0.4} duration={0.7}>
             <p className="font-body text-xl md:text-2xl leading-relaxed max-w-2xl mx-auto text-white/90">
-              Welcome to The Sunshine Effect, radiant one. Your journey from burnout to alignment starts now.
+              Welcome to The Sunshine Effect. You&apos;re in the orbit now.
             </p>
           </FadeInView>
           <FadeInView delay={0.6} direction="none" duration={0.7}>
             <p className="font-subhead text-lg text-sun-gold">
-              Glow from the heart.
+              Your next chapter starts here.
             </p>
           </FadeInView>
         </div>
@@ -176,7 +176,7 @@ export default function ThankYouPage() {
                     Upcoming Events
                   </h3>
                   <p className="font-body text-sm leading-relaxed mb-4">
-                    Golden Hour energy sessions and Lunar Room restorative gatherings. Leave lighter, clearer, connected.
+                    Golden Hour gatherings in Los Angeles. Leave with clarity, momentum, and real connections.
                   </p>
                   <span className="font-subhead text-sm uppercase">
                     See events →
@@ -185,16 +185,16 @@ export default function ThankYouPage() {
               </Link>
             </StaggerItem>
             <StaggerItem>
-              <Link href="/offerings" className="block h-full">
+              <Link href="/about" className="block h-full">
                 <BrandCard className="p-7 h-full hover:scale-[1.02] transition-transform duration-300" variant="purple">
                   <h3 className="font-headline text-2xl uppercase mb-2">
-                    Work With Sunshine
+                    About Sunshine
                   </h3>
                   <p className="font-body text-sm leading-relaxed mb-4">
-                    1:1 coaching, retreats, and transformative experiences designed for women ready to glow.
+                    The woman behind the movement. Learn more about what I&apos;m building for ambitious women.
                   </p>
                   <span className="font-subhead text-sm uppercase">
-                    Explore offerings →
+                    Meet Sunshine →
                   </span>
                 </BrandCard>
               </Link>

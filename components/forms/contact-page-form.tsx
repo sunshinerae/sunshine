@@ -24,6 +24,7 @@ const contactSchema = z.object({
   email: z.string().email('Please enter a valid email address.'),
   topic: z.string().min(1, 'Please choose an option.'),
   message: z.string().min(10, 'Share a little more so we can respond with care.'),
+  website: z.string().max(0).optional(), // honeypot - must be empty
 });
 
 type ContactFormValues = z.infer<typeof contactSchema>;
@@ -39,6 +40,7 @@ export function ContactPageForm() {
       email: '',
       topic: '',
       message: '',
+      website: '',
     },
   });
 
@@ -101,6 +103,21 @@ export function ContactPageForm() {
     <BrandCard className="p-8 md:p-12" variant="white">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          {/* Honeypot field - hidden from users, bots will fill it */}
+          <div className="absolute -left-[9999px]" aria-hidden="true">
+            <FormField
+              control={form.control}
+              name="website"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Website</FormLabel>
+                  <FormControl>
+                    <Input type="text" tabIndex={-1} autoComplete="off" {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
           <div className="grid md:grid-cols-2 gap-6">
             <FormField
               control={form.control}

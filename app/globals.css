@@ -5,13 +5,15 @@
   /* Raw values for reference */
   --sun-plum: #6E054D;      /* Deep Plum */
   --sun-cocoa: #240D01;     /* Cocoa Ink */
-  --sun-cream: #FFF6E9;     /* Warm Cream */
+  --sun-cream: #FEF7F0;     /* Warm White - less tan, more luminous */
   --sun-paper: #FFFFFF;     /* White */
   --sun-sand: #E9D7C7;      /* Sand */
   --sun-gold: #F6C453;      /* Sunshine Gold */
   --sun-rose: #F3D0DB;      /* Soft Rose */
   --sun-coral: #D4856A;     /* Warm accent (golden hour) */
-  --sun-leaf: #9B7B9B;      /* Cool accent (lunar room) */
+  --sun-leaf: #9B7B9B;      /* Cool accent */
+  --sun-sky: #A8D5E5;       /* Baby Blue (subtle accents) */
+  --sun-ember: #FF9B71;     /* Ember Orange (fire effect) */
 
   /* Color utilities — generates bg-sun-*, text-sun-*, border-sun-* classes */
   --color-sun-plum: var(--sun-plum);
@@ -23,6 +25,8 @@
   --color-sun-rose: var(--sun-rose);
   --color-sun-coral: var(--sun-coral);
   --color-sun-leaf: var(--sun-leaf);
+  --color-sun-sky: var(--sun-sky);
+  --color-sun-ember: var(--sun-ember);
 
   /* System colors mapped to sun-* */
   --color-background: var(--sun-cream);
@@ -51,7 +55,12 @@
 body {
   background: var(--color-background);
   color: var(--color-foreground);
-  font-family: var(--font-body), sans-serif;
+  font-family: var(--font-body), 'DM Sans', sans-serif;
+}
+
+/* Headline font - Abril Fatface */
+.font-headline {
+  font-family: var(--font-headline), 'Abril Fatface', Georgia, serif;
 }
 
 @keyframes marquee {
@@ -104,4 +113,167 @@ body::before {
   .bg-sun-gradient-warm {
     background: linear-gradient(135deg, var(--sun-cream) 0%, var(--sun-sand) 100%);
   }
+
+  /* Artistic cream background with subtle warmth and sky tones */
+  .bg-artistic {
+    background:
+      radial-gradient(ellipse at 80% 20%, var(--sun-sky)/8 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, var(--sun-coral)/6 0%, transparent 50%),
+      linear-gradient(180deg, var(--sun-cream) 0%, #FFF9F5 100%);
+  }
+
+  /* Fire warmth vignette - subtle edge darkening like firelight */
+  .fire-vignette {
+    position: relative;
+  }
+
+  .fire-vignette::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(110, 5, 77, 0.08) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Fire flicker effect - subtle warmth animation */
+  .bg-fire-flicker {
+    background: linear-gradient(135deg, var(--sun-coral), var(--sun-gold), var(--sun-ember));
+    background-size: 200% 200%;
+    animation: ember-glow 4s ease-in-out infinite;
+  }
+
+  /* Immersive fire overlay - like standing by a fire */
+  .fire-overlay {
+    position: relative;
+    animation: warm-pulse 4s ease-in-out infinite;
+  }
+
+  .fire-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 100%, var(--sun-ember)/20 0%, transparent 60%),
+      radial-gradient(ellipse at 30% 80%, var(--sun-gold)/15 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 90%, var(--sun-coral)/18 0%, transparent 55%);
+    animation: fire-flicker 2s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .fire-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, var(--sun-ember)/12 0%, var(--sun-gold)/8 30%, transparent 70%);
+    background-size: 200% 200%;
+    animation: ember-glow 5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+/* Fire/ember glow animation - primary warmth pulse */
+@keyframes ember-glow {
+  0%, 100% {
+    background-position: 0% 50%;
+    opacity: 1;
+  }
+  50% {
+    background-position: 100% 50%;
+    opacity: 0.85;
+  }
+}
+
+/* Fire flicker - rapid, organic warmth variation */
+@keyframes fire-flicker {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  10% {
+    opacity: 0.92;
+    filter: brightness(1.05);
+  }
+  20% {
+    opacity: 0.98;
+    filter: brightness(0.98);
+  }
+  30% {
+    opacity: 0.9;
+    filter: brightness(1.02);
+  }
+  40% {
+    opacity: 0.95;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.88;
+    filter: brightness(1.08);
+  }
+  60% {
+    opacity: 0.96;
+    filter: brightness(0.95);
+  }
+  70% {
+    opacity: 0.91;
+    filter: brightness(1.03);
+  }
+  80% {
+    opacity: 0.97;
+    filter: brightness(1);
+  }
+  90% {
+    opacity: 0.89;
+    filter: brightness(1.06);
+  }
+}
+
+/* Warm glow pulse - slower, breathing warmth */
+@keyframes warm-pulse {
+  0%, 100% {
+    box-shadow:
+      inset 0 0 60px rgba(255, 155, 113, 0.1),
+      inset 0 0 120px rgba(246, 196, 83, 0.05);
+  }
+  50% {
+    box-shadow:
+      inset 0 0 80px rgba(255, 155, 113, 0.15),
+      inset 0 0 150px rgba(246, 196, 83, 0.08);
+  }
+}
+
+/* Scribble underline draw animation */
+@keyframes draw-underline {
+  from {
+    stroke-dashoffset: 100%;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Slow drift animation - makes static images feel alive */
+@keyframes slow-drift {
+  0% {
+    transform: scale(1.1) translate(0%, 0%);
+  }
+  25% {
+    transform: scale(1.18) translate(-3%, -1.5%);
+  }
+  50% {
+    transform: scale(1.25) translate(-5%, 0%);
+  }
+  75% {
+    transform: scale(1.18) translate(-2%, 2%);
+  }
+  100% {
+    transform: scale(1.1) translate(0%, 0%);
+  }
+}
+
+.animate-slow-drift {
+  animation: slow-drift 20s ease-in-out infinite;
+  will-change: transform;
 }

@@ -1,17 +1,17 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import { Sparkles, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const navItems = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
-  { label: 'Offerings', href: '/offerings' },
   { label: 'Events', href: '/events' },
-  { label: 'Community', href: '/community' },
   { label: 'Blog', href: '/blog' },
+  { label: 'Join', href: '/join' },
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -86,9 +86,13 @@ export function Navigation() {
               className="flex items-center gap-3 group flex-shrink-0"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sun-plum text-white transition-all">
-                <Sparkles className="h-5 w-5" />
-              </span>
+              <Image
+                src="/logo.png"
+                alt="The Sunshine Effect"
+                width={44}
+                height={44}
+                className="transition-all"
+              />
               <span className="font-subhead text-lg md:text-xl font-bold uppercase tracking-wide text-sun-plum group-hover:text-sun-plum/80 transition-colors">
                 {scrolled ? (
                   <span className="hidden sm:inline">Sunshine</span>
@@ -104,11 +108,11 @@ export function Navigation() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="relative px-3 py-2 text-sm font-medium text-sun-cocoa hover:text-sun-plum transition-all duration-300 rounded-full hover:bg-sun-plum/5 group"
+                  className="relative px-3 py-2 text-sm font-medium text-sun-cocoa hover:text-sun-plum transition-all duration-300 rounded-full hover:bg-sun-sky/20 group"
                 >
                   <span className="relative">
                     {item.label}
-                    <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-sun-plum rounded-full transition-all duration-300 group-hover:w-full" />
+                    <span className="absolute -bottom-0.5 left-0 w-0 h-0.5 bg-sun-sky rounded-full transition-all duration-300 group-hover:w-full" />
                   </span>
                 </Link>
               ))}

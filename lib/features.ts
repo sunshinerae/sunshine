@@ -22,9 +22,9 @@ export const FEATURES = {
   blog: true,
 
   // PHASE 2+: Features to enable later
-  offerings: true,
+  offerings: false,
   events: true,
-  community: true,
+  community: false,
   coaching: false,
   retreats: false,
   smsSignup: false,
@@ -60,10 +60,10 @@ export type NavItem = {
  * All possible navigation items (full site)
  */
 const ALL_NAV_ITEMS: NavItem[] = [
-  { label: 'About', href: '/', feature: 'about' },
-  { label: 'Offerings', href: '/offerings', feature: 'offerings' },
+  { label: 'About', href: '/about', feature: 'about' },
   { label: 'Events', href: '/events', feature: 'events' },
-  { label: 'Community', href: '/community', feature: 'community' },
+  { label: 'Blog', href: '/blog', feature: 'blog' },
+  { label: 'Join', href: '/join', feature: 'emailSignup' },
   { label: 'Contact', href: '/contact', feature: 'fullContact' },
 ];
 

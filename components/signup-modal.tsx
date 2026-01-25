@@ -83,13 +83,13 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
             {/* Headline */}
             <div className="mb-8">
               <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl text-sun-cocoa mb-4 font-bold leading-tight">
-                Stay<br />Connected<br />To The Fire
+                Be in my<br />orbit ✨
               </h2>
               <p className="font-body text-base md:text-lg text-sun-cocoa leading-relaxed max-w-md">
-                Enter your info to receive rituals, reflections, and invitations that keep you close to your own light.
+                What I&apos;m building, what I&apos;m hosting, and what I&apos;m into right now—events, updates, and inspo.
               </p>
               <p className="font-body text-sm md:text-base text-sun-plum mt-3 font-semibold">
-                Get your first ritual in 24 hours
+                First access to Golden Hour events
               </p>
             </div>
 
@@ -140,7 +140,7 @@ export function SignupModal({ isOpen, onClose }: SignupModalProps) {
                   disabled={isSubmitting}
                   className="w-full bg-sun-plum text-white font-body font-semibold py-5 px-8 rounded-[14px] hover:bg-sun-plum/90 active:scale-[0.98] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-lg"
                 >
-                  {isSubmitting ? 'Submitting...' : 'I Want In'}
+                  {isSubmitting ? 'Joining...' : 'Join the orbit'}
                 </button>
               </div>
             </form>

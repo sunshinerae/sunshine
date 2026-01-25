@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: 'Get in touch with The Sunshine Effect. Book a free 20-minute clarity call or send us a message about coaching, retreats, and events.',
-  keywords: ['contact', 'book coaching call', 'contact life coach', 'schedule consultation', 'get in touch'],
+  description: 'Get in touch with The Sunshine Effect. Questions about events, collaborations, or the community? Send a note.',
+  keywords: ['contact', 'get in touch', 'events', 'collaborations', 'community'],
   openGraph: {
     title: 'Contact | The Sunshine Effect',
-    description: 'Get in touch with The Sunshine Effect. Book a free 20-minute clarity call or send us a message about coaching, retreats, and events.',
+    description: 'Get in touch with The Sunshine Effect. Questions about events, collaborations, or the community? Send a note.',
     url: '/contact',
     type: 'website',
     images: [
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Contact | The Sunshine Effect',
-    description: 'Get in touch with The Sunshine Effect. Book a free 20-minute clarity call or send us a message about coaching, retreats, and events.',
+    description: 'Get in touch with The Sunshine Effect. Questions about events, collaborations, or the community? Send a note.',
     images: ['/og-image.png'],
   },
   alternates: { canonical: '/contact' },

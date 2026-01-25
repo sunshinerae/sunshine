@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { BrandCard } from '@/components/brand-card';
@@ -9,7 +10,6 @@ import { FadeInView } from '@/components/motion/fade-in-view';
 import { SlideInView } from '@/components/motion/slide-in-view';
 import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-children';
 import { NewsletterSignup } from '@/components/forms/newsletter-signup';
-import { SMSSignup } from '@/components/forms/sms-signup';
 import { SOCIAL_LINKS } from '@/lib/constants';
 
 export const metadata: Metadata = PAGE_METADATA.contact;
@@ -20,19 +20,27 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="bg-sun-cream">
+    <main className="bg-artistic">
       {/* Hero Section */}
-      <section className="bg-sun-plum text-white px-6 py-16 overflow-hidden">
-        <FadeInView className="max-w-5xl mx-auto space-y-4">
-          <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-gold">Contact</p>
-          <h1 className="font-headline text-[clamp(2.8rem,6vw,4.6rem)] uppercase leading-tight">
-            Safe, judgment-free connection.
+      <section className="text-white px-6 py-16 overflow-hidden relative">
+        {/* Warm sand texture background */}
+        <Image
+          src="/sand-warm.png"
+          alt=""
+          fill
+          priority
+          className="object-cover object-center"
+          aria-hidden="true"
+        />
+        {/* Subtle plum overlay */}
+        <div className="absolute inset-0 bg-sun-plum/65" />
+        <FadeInView className="max-w-5xl mx-auto space-y-4 relative z-10">
+          <p className="font-subhead uppercase tracking-[0.15em] text-sm text-sun-gold">Contact</p>
+          <h1 className="font-headline text-[clamp(2.8rem,6vw,4.6rem)] uppercase leading-[0.9] tracking-tight">
+            Let&apos;s connect.
           </h1>
           <p className="font-body text-lg leading-relaxed max-w-3xl">
-            Tell us what you need. We respond within 24 hours with next steps, calm guidance, and zero pressure.
-          </p>
-          <p className="font-body text-sm">
-            You are allowed to want more ease. This space is warm, private, and blame-free.
+            Questions about events, collaborations, or what we&apos;re building? Reach out. We respond within 24 hours.
           </p>
         </FadeInView>
       </section>
@@ -47,37 +55,37 @@ export default function ContactPage() {
         <StaggerChildren className="grid md:grid-cols-3 gap-6" staggerDelay={0.1} duration={0.3}>
           <StaggerItem>
             <BrandCard className="p-6 h-full" variant="yellow">
-              <h3 className="font-headline text-xl uppercase text-sun-plum mb-2">Response time</h3>
-              <p className="font-body text-sm leading-relaxed">Within 24 hours, with clear next steps and zero pushiness.</p>
+              <h3 className="font-headline text-xl uppercase leading-[0.9] tracking-tight text-sun-plum mb-2">Response time</h3>
+              <p className="font-body text-sm leading-relaxed">Within 24 hours with clear next steps.</p>
             </BrandCard>
           </StaggerItem>
           <StaggerItem>
-            <BrandCard className="p-6 h-full" variant="white">
-              <h3 className="font-headline text-xl uppercase text-sun-plum mb-2">Safety first</h3>
-              <p className="font-body text-sm leading-relaxed">Judgment-free communication. You can ask for what you need without pressure.</p>
+            <BrandCard className="p-6 h-full border-2 border-sun-sky/30" variant="white">
+              <h3 className="font-headline text-xl uppercase leading-[0.9] tracking-tight text-sun-plum mb-2">Collaborations</h3>
+              <p className="font-body text-sm leading-relaxed">Open to partnerships, speaking, and event collaborations.</p>
             </BrandCard>
           </StaggerItem>
           <StaggerItem>
             <BrandCard className="p-6 h-full" variant="orange">
-              <h3 className="font-headline text-xl uppercase mb-2">Gentle microcopy</h3>
-              <p className="font-body text-sm leading-relaxed">We reduce decision anxiety with clear options and loving encouragement.</p>
+              <h3 className="font-headline text-xl uppercase leading-[0.9] tracking-tight mb-2">Events</h3>
+              <p className="font-body text-sm leading-relaxed">Questions about Golden Hour? We&apos;ve got answers.</p>
             </BrandCard>
           </StaggerItem>
         </StaggerChildren>
       </section>
 
-      {/* Newsletter Signup Section - Consistent Bulletin */}
+      {/* Newsletter Signup Section - In My Orbit */}
       <section className="bg-sun-gold py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <SlideInView direction="up" className="text-center mb-10">
-            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-plum mb-3">
-              The Consistent Bulletin
+            <p className="font-subhead uppercase tracking-[0.15em] text-sm text-sun-plum mb-3">
+              In My Orbit
             </p>
-            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-tight text-sun-cocoa mb-4">
-              Stay Connected
+            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sun-cocoa mb-4">
+              Be in my orbit ✨
             </h2>
             <p className="font-body text-lg text-sun-cocoa/80 max-w-2xl mx-auto leading-relaxed">
-              A personal note from Sunshine, curated recommendations, event updates, and gentle reminders that radiance is yours.
+              What I&apos;m building, what I&apos;m hosting, and what I&apos;m into right now—events, updates, and inspo.
             </p>
           </SlideInView>
 
@@ -86,120 +94,59 @@ export default function ContactPage() {
               <div className="flex items-start gap-3">
                 <span className="text-sun-plum text-xl">✦</span>
                 <div>
-                  <h3 className="font-subhead text-sun-cocoa font-bold mb-1">Personal Notes</h3>
-                  <p className="font-body text-sm text-sun-cocoa/70">Intimate letters from Sunshine with wisdom and encouragement</p>
+                  <h3 className="font-subhead text-sun-cocoa font-bold mb-1">Event Invites</h3>
+                  <p className="font-body text-sm text-sun-cocoa/70">First access to Golden Hour gatherings</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-sun-plum text-xl">✦</span>
                 <div>
-                  <h3 className="font-subhead text-sun-cocoa font-bold mb-1">Curated Picks</h3>
-                  <p className="font-body text-sm text-sun-cocoa/70">Books, tools, and practices to support your alignment</p>
+                  <h3 className="font-subhead text-sun-cocoa font-bold mb-1">Behind the Scenes</h3>
+                  <p className="font-body text-sm text-sun-cocoa/70">What I&apos;m building and working on</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-sun-plum text-xl">✦</span>
                 <div>
-                  <h3 className="font-subhead text-sun-cocoa font-bold mb-1">Event Updates</h3>
-                  <p className="font-body text-sm text-sun-cocoa/70">First access to Golden Hour and Lunar Room gatherings</p>
+                  <h3 className="font-subhead text-sun-cocoa font-bold mb-1">Weekly Momentum</h3>
+                  <p className="font-body text-sm text-sun-cocoa/70">Ideas that move you forward</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <span className="text-sun-plum text-xl">✦</span>
                 <div>
-                  <h3 className="font-subhead text-sun-cocoa font-bold mb-1">Community Connection</h3>
-                  <p className="font-body text-sm text-sun-cocoa/70">Ways to stay in touch with women on the same path</p>
+                  <h3 className="font-subhead text-sun-cocoa font-bold mb-1">Future Offers</h3>
+                  <p className="font-body text-sm text-sun-cocoa/70">First to know when new offerings open</p>
                 </div>
               </div>
             </div>
 
             <NewsletterSignup
               variant="yellow"
-              placeholder="Enter your email"
-              buttonText="Join the Consistent Bulletin"
-              successMessage="Welcome to the community! Your first note arrives soon."
+              placeholder="Your email"
+              buttonText="Join the orbit"
+              successMessage="You're in the orbit. Welcome."
             />
 
             <p className="font-body text-xs text-sun-cocoa/60 text-center mt-4">
-              Glow from the heart. Unsubscribe anytime. No spam—just devotion and clarity.
-            </p>
-          </FadeInView>
-        </div>
-      </section>
-
-      {/* SMS Signup Section - Love Notes */}
-      <section className="bg-sun-plum py-16 px-6">
-        <div className="max-w-4xl mx-auto">
-          <SlideInView direction="up" className="text-center mb-10">
-            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-gold mb-3">
-              Love Notes
-            </p>
-            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-tight text-white mb-4">
-              A Little Sunshine in Your Pocket
-            </h2>
-            <p className="font-body text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-              Short, sweet text messages to brighten your day—gentle check-ins, soft encouragement, and reminders that you are held.
-            </p>
-          </SlideInView>
-
-          <FadeInView delay={0.2} className="max-w-xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="flex items-start gap-3">
-                <span className="text-sun-gold text-xl">♡</span>
-                <div>
-                  <h3 className="font-subhead text-white font-bold mb-1">Gentle Check-ins</h3>
-                  <p className="font-body text-sm text-white/70">A soft nudge to pause, breathe, and remember your radiance</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-sun-gold text-xl">♡</span>
-                <div>
-                  <h3 className="font-subhead text-white font-bold mb-1">Encouragement</h3>
-                  <p className="font-body text-sm text-white/70">Words of warmth when you need them most</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-sun-gold text-xl">♡</span>
-                <div>
-                  <h3 className="font-subhead text-white font-bold mb-1">Event Invites</h3>
-                  <p className="font-body text-sm text-white/70">First access to Golden Hour and Lunar Room gatherings</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="text-sun-gold text-xl">♡</span>
-                <div>
-                  <h3 className="font-subhead text-white font-bold mb-1">Always Optional</h3>
-                  <p className="font-body text-sm text-white/70">Reply STOP anytime. Your boundaries are honored.</p>
-                </div>
-              </div>
-            </div>
-
-            <SMSSignup
-              variant="purple"
-              placeholder="(555) 123-4567"
-              buttonText="Get Love Notes"
-              successMessage="Your first love note is on its way. Welcome, beautiful."
-            />
-
-            <p className="font-body text-xs text-white/60 text-center mt-4">
-              Move like it&apos;s already yours. 1-2 texts per week, max. Consent matters here.
+              No spam. Unsubscribe anytime.
             </p>
           </FadeInView>
         </div>
       </section>
 
       {/* Social Links Section */}
-      <section className="bg-sun-cream py-16 px-6">
+      <section className="bg-artistic py-16 px-6 border-t-2 border-sun-sky/20">
         <div className="max-w-4xl mx-auto">
           <SlideInView direction="up" className="text-center mb-10">
-            <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-plum mb-3">
-              Connect With Us
+            <p className="font-subhead uppercase tracking-[0.15em] text-sm text-sun-plum mb-3">
+              Connect
             </p>
-            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-tight text-sun-cocoa mb-4">
-              Find Your Community
+            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sun-cocoa mb-4">
+              Find Us
             </h2>
             <p className="font-body text-lg text-sun-cocoa/80 max-w-2xl mx-auto leading-relaxed">
-              Join the conversation. See what radiance looks like in real life. Connect with women who are glowing from the heart.
+              Follow along for updates, event photos, and behind-the-scenes of what we&apos;re building.
             </p>
           </SlideInView>
 
@@ -209,17 +156,17 @@ export default function ContactPage() {
               href={SOCIAL_LINKS.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex flex-col items-center gap-4 p-8 rounded-2xl bg-sun-gold hover:bg-sun-coral transition-colors duration-300 w-full max-w-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sun-plum focus-visible:ring-offset-2"
+              className="group flex flex-col items-center gap-4 p-8 rounded-3xl bg-sun-gold hover:bg-sun-coral transition-colors duration-300 w-full max-w-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sun-plum focus-visible:ring-offset-2"
             >
               <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-sun-plum text-white font-headline text-2xl group-hover:scale-110 transition-transform duration-300">
                 IG
               </span>
               <div className="text-center">
-                <h3 className="font-headline text-xl uppercase text-sun-cocoa group-hover:text-white transition-colors duration-300 mb-2">
+                <h3 className="font-headline text-xl uppercase leading-[0.9] tracking-tight text-sun-cocoa group-hover:text-white transition-colors duration-300 mb-2">
                   Instagram
                 </h3>
                 <p className="font-body text-sm text-sun-cocoa/80 group-hover:text-white/90 transition-colors duration-300">
-                  Daily inspiration, behind-the-scenes moments, and community highlights
+                  Updates, event photos, and community moments
                 </p>
               </div>
               <span className="font-subhead text-sm text-sun-plum group-hover:text-white transition-colors duration-300">
@@ -243,10 +190,6 @@ export default function ContactPage() {
                 </span>
               </Link>
             </div>
-
-            <p className="font-body text-sm text-sun-cocoa/60 text-center max-w-md">
-              Real power doesn&apos;t have to push or prove. We show up authentically and invite you to do the same.
-            </p>
           </FadeInView>
         </div>
       </section>

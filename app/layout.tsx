@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Fraunces, Inter } from 'next/font/google';
+import { Abril_Fatface, DM_Sans } from 'next/font/google';
 import './globals.css';
 import { Navigation } from '@/components/navigation';
 import { SITE_CONFIG } from '@/lib/constants';
@@ -7,24 +7,24 @@ import { Footer } from '@/components/footer';
 import { PageTransition } from '@/components/motion/page-transition';
 
 /**
- * Brand fonts - warm, cozy, calm
- * - Fraunces: Variable font for headlines (soft serif with personality)
- * - Inter: Clean body text (excellent readability)
+ * Brand fonts - confident, elevated, magnetic
+ * - Abril Fatface: Bold Didone display serif (dramatic, sexy, high-contrast)
+ * - DM Sans: Modern geometric sans for body (clean, readable)
  */
 
-// Fraunces - Headlines and display text
-const headline = Fraunces({
+// Abril Fatface - Headlines and display text (bold Didone, high drama)
+const headline = Abril_Fatface({
   variable: '--font-headline',
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400'],
   display: 'swap',
 });
 
-// Inter - Body copy and UI text
-const body = Inter({
+// DM Sans - Body copy and UI text (modern, geometric)
+const body = DM_Sans({
   variable: '--font-body',
   subsets: ['latin'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
 

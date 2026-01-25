@@ -7,9 +7,9 @@ import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-childr
 const quickLinks = [
   { href: '/', label: 'Home', description: 'Return to the beginning' },
   { href: '/about', label: 'About', description: 'Learn our story' },
-  { href: '/offerings', label: 'Offerings', description: 'Explore how we can work together' },
   { href: '/events', label: 'Events', description: 'Find your next gathering' },
   { href: '/blog', label: 'Blog', description: 'Read wisdom and rituals' },
+  { href: '/join', label: 'Join', description: 'Stay connected to the fire' },
   { href: '/contact', label: 'Contact', description: 'Reach out to us' },
 ];
 

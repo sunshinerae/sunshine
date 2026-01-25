@@ -1,105 +1,101 @@
 import { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
 import { PAGE_METADATA } from '@/lib/metadata';
 import { FadeInView } from '@/components/motion/fade-in-view';
 import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-children';
+import { Button } from '@/components/ui/button';
+import { ArchMedia } from '@/components/ui/arch-media';
 
 export const metadata: Metadata = PAGE_METADATA.about;
 
 const values = [
   {
+    name: 'Ambition',
+    icon: '🔥',
+    description:
+      'We want more. More impact, more alignment, more life. Ambition isn\'t greed—it\'s trusting yourself enough to go after what you actually want.',
+  },
+  {
+    name: 'Momentum',
+    icon: '✨',
+    description:
+      'Action creates clarity. We don\'t wait until we\'re ready—we move, adjust, and build momentum that compounds.',
+  },
+  {
     name: 'Community',
     icon: '🤝',
     description:
-      'We believe in the power of women gathering together. Real connection happens when we show up authentically and hold space for one another.',
-  },
-  {
-    name: 'Devotion',
-    icon: '🔥',
-    description:
-      'Devotion to yourself is the foundation of everything. We commit to practices that nurture our whole selves — body, mind, and spirit.',
+      'You level up faster surrounded by women who push you forward. Real connection. Real accountability. Real growth.',
   },
   {
     name: 'Courage',
-    icon: '✨',
+    icon: '👑',
     description:
-      'Growth lives on the other side of fear. We take imperfect action, trusting that the path reveals itself one brave step at a time.',
+      'Growth happens on the other side of fear. We take the bold action, have the hard conversation, bet on ourselves.',
   },
   {
     name: 'Alignment',
     icon: '🌿',
     description:
-      'When your inner world matches your outer world, everything flows. We choose integrity over approval and peace over proving.',
-  },
-  {
-    name: 'Compassion',
-    icon: '💛',
-    description:
-      'We lead with kindness — for ourselves first, then for others. Healing happens in spaces where we feel truly seen and accepted.',
+      'Success without alignment is just another grind. We build lives and businesses that actually feel good.',
   },
   {
     name: 'Leadership',
-    icon: '👑',
+    icon: '💛',
     description:
-      'Every woman is a leader. We model what we wish to see, inspire through our presence, and lift others as we rise.',
+      'Every woman here is a leader. We model what we believe, inspire through action, and lift others as we rise.',
   },
 ];
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-sun-cream">
+    <main className="min-h-screen bg-artistic">
       {/* Hero Section */}
-      <section className="py-20 md:py-28 px-4 bg-sun-plum">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-20 md:py-28 px-4 relative overflow-hidden">
+        {/* Purple dreamy clouds - slow drift animation */}
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src="/golden-hour-hero.png"
+            alt=""
+            fill
+            priority
+            className="object-cover object-center animate-slow-drift"
+            aria-hidden="true"
+          />
+        </div>
+        {/* Subtle plum overlay */}
+        <div className="absolute inset-0 bg-sun-plum/70" />
+        <div className="max-w-5xl mx-auto relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Portrait placeholder with gradient */}
+            {/* Arch portrait */}
             <FadeInView direction="left" className="order-2 md:order-1">
-              <div className="aspect-[3/4] bg-gradient-to-br from-sun-gold/40 via-sun-coral/30 to-sun-sand/20 rounded-2xl flex items-center justify-center mx-auto max-w-sm overflow-hidden relative shadow-xl">
-                {/* Decorative sun element */}
-                <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-sun-gold/30 blur-2xl" />
-                <div className="absolute -bottom-8 -left-8 w-32 h-32 rounded-full bg-sun-coral/20 blur-xl" />
-                {/* Portrait icon */}
-                <svg
-                  className="w-24 h-24 text-sun-cream/40 relative z-10"
-                  viewBox="0 0 64 64"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <circle cx="32" cy="22" r="12" stroke="currentColor" strokeWidth="2" />
-                  <path
-                    d="M12 56c0-11.046 8.954-20 20-20s20 8.954 20 20"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </div>
+              <ArchMedia
+                src="/portrait-female-professional.png"
+                alt="Sunshine - founder of The Sunshine Effect"
+                aspect="3/4"
+                gradient
+                className="max-w-sm mx-auto shadow-xl"
+              />
             </FadeInView>
 
             {/* Text content */}
             <div className="order-1 md:order-2 text-center md:text-left">
               <FadeInView delay={0.1}>
-                <p className="font-subhead text-sun-gold text-lg md:text-xl mb-4">
-                  Meet Your Guide
+                <p className="font-subhead text-sun-gold text-lg uppercase tracking-[0.15em] mb-4">
+                  Meet Sunshine
                 </p>
               </FadeInView>
 
               <FadeInView delay={0.2}>
-                <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl uppercase text-sun-cream font-bold mb-6 leading-tight">
-                  Sunshine
+                <h1 className="font-headline text-[clamp(3rem,8vw,5rem)] uppercase leading-[0.9] tracking-tight text-sun-cream font-bold mb-6">
+                  The woman behind the movement.
                 </h1>
               </FadeInView>
 
               <FadeInView delay={0.3}>
                 <p className="font-body text-xl md:text-2xl text-sun-cream/90 leading-relaxed">
-                  A catalyst for women who are ready to create a life centered on purpose,
-                  peace, and aligned action.
-                </p>
-              </FadeInView>
-
-              <FadeInView delay={0.4}>
-                <p className="font-body text-lg text-sun-gold mt-6 italic">
-                  &ldquo;Real power doesn&apos;t have to push or prove.&rdquo;
+                  Catalyst for ambitious women who refuse to play small.
                 </p>
               </FadeInView>
             </div>
@@ -108,55 +104,51 @@ export default function AboutPage() {
       </section>
 
       {/* Story Section */}
-      <section className="py-20 md:py-28 px-4 bg-sun-cream">
+      <section className="py-20 md:py-28 px-4 bg-artistic">
         <div className="max-w-3xl mx-auto">
           <FadeInView>
-            <h2 className="font-subhead text-2xl md:text-3xl text-sun-plum font-bold text-center mb-12 uppercase">
-              The Journey
+            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sun-plum text-center mb-12">
+              The Real Story
             </h2>
           </FadeInView>
 
-          {/* Story Block 1 */}
           <FadeInView delay={0.1} className="mb-12">
             <div className="text-center md:text-left">
               <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed mb-6">
-                There was a time when I lived in a constant state of hustle — pushing harder,
-                proving more, and wondering why success never felt like enough. The burnout was
-                real, but the deeper ache was the disconnect from myself and the life I actually
-                wanted.
+                I spent years in hustle mode—pushing harder, proving more, wondering why &quot;success&quot;
+                felt hollow. The burnout was real. But the deeper problem? I&apos;d lost connection
+                with what I actually wanted.
               </p>
               <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed">
-                I thought I needed to do more. What I actually needed was to come home to myself.
+                <strong>The fix wasn&apos;t doing more. It was coming home to myself.</strong>
               </p>
             </div>
           </FadeInView>
 
-          {/* Story Block 2 */}
           <FadeInView delay={0.2} className="mb-12">
-            <div className="bg-sun-plum/5 rounded-2xl p-8 md:p-10">
+            <div className="bg-sun-plum/5 rounded-3xl p-8 md:p-10">
               <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed mb-6">
-                Through a blend of wellness practices, mindset work, and business strategy, I
-                began to rebuild. Not from a place of force, but from a foundation of inner peace
-                and self-trust. I learned that discipline is self-love in motion — and that real
-                power doesn&apos;t have to push or prove.
+                Through a blend of mindset work, business strategy, and nervous system tools,
+                I rebuilt my life from the inside out. Not from force—from clarity and self-trust.
+                I learned that discipline is momentum in motion, and real confidence doesn&apos;t need
+                anyone&apos;s permission.
               </p>
               <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed">
-                Now I guide other women through the same transformation: from scattered and burned
-                out, to lighter, clearer, and deeply connected to their purpose.
+                Now I help other women make the same shift: from scattered and burned out,
+                to clear, focused, and ready to take action.
               </p>
             </div>
           </FadeInView>
 
-          {/* Story Block 3 */}
           <FadeInView delay={0.3}>
             <div className="text-center">
               <p className="font-body text-lg md:text-xl text-sun-cocoa leading-relaxed mb-8">
-                The Sunshine Effect isn&apos;t just a brand — it&apos;s an invitation to glow from the heart.
-                To create a life (and business) that feels aligned, embodied, and alive. To move
-                like it&apos;s already yours.
+                The Sunshine Effect is the room I wish I&apos;d had. A space where ambitious women
+                invest in themselves, build momentum, and leave with the clarity to
+                take their next bold move.
               </p>
-              <p className="font-subhead text-xl md:text-2xl text-sun-plum font-bold italic">
-                &ldquo;You&apos;re allowed to want more ease.&rdquo;
+              <p className="font-headline text-2xl md:text-3xl uppercase leading-[0.9] tracking-tight text-sun-plum">
+                &ldquo;Stop waiting. Start moving.&rdquo;
               </p>
             </div>
           </FadeInView>
@@ -167,15 +159,14 @@ export default function AboutPage() {
       <section className="py-20 md:py-28 px-4 bg-sun-gold">
         <div className="max-w-5xl mx-auto">
           <FadeInView>
-            <h2 className="font-subhead text-2xl md:text-3xl text-sun-cocoa font-bold text-center mb-4 uppercase">
+            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sun-cocoa text-center mb-4">
               What We Stand For
             </h2>
           </FadeInView>
 
           <FadeInView delay={0.1}>
             <p className="font-body text-lg md:text-xl text-sun-cocoa text-center max-w-2xl mx-auto mb-16">
-              These values guide everything we do — from our events to our coaching
-              to the way we show up for one another.
+              These values show up in every event, every conversation, every move we make.
             </p>
           </FadeInView>
 
@@ -185,20 +176,15 @@ export default function AboutPage() {
           >
             {values.map((value) => (
               <StaggerItem key={value.name}>
-                <div className="bg-sun-paper rounded-2xl p-6 md:p-8 h-full shadow-sm hover:shadow-md transition-shadow duration-300">
-                  {/* Icon placeholder */}
+                <div className="bg-sun-paper rounded-3xl p-6 md:p-8 h-full shadow-soft hover:shadow-lg transition-shadow duration-300 border-2 border-sun-sky/20 hover:border-sun-sky/40">
                   <div className="w-14 h-14 md:w-16 md:h-16 bg-sun-plum/10 rounded-full flex items-center justify-center mb-5">
                     <span className="text-2xl md:text-3xl" aria-hidden="true">
                       {value.icon}
                     </span>
                   </div>
-
-                  {/* Value name */}
-                  <h3 className="font-headline text-xl md:text-2xl text-sun-plum font-bold uppercase mb-3">
+                  <h3 className="font-headline text-xl md:text-2xl uppercase leading-[0.9] tracking-tight text-sun-plum mb-3">
                     {value.name}
                   </h3>
-
-                  {/* Description */}
                   <p className="font-body text-sun-cocoa leading-relaxed">
                     {value.description}
                   </p>
@@ -206,6 +192,37 @@ export default function AboutPage() {
               </StaggerItem>
             ))}
           </StaggerChildren>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 md:py-28 px-4 bg-sun-coral fire-overlay">
+        <div className="max-w-3xl mx-auto text-center relative z-10">
+          <FadeInView>
+            <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-white mb-6">
+              Ready to stop playing small?
+            </h2>
+          </FadeInView>
+          <FadeInView delay={0.2}>
+            <p className="font-body text-lg md:text-xl text-white/90 mb-8 max-w-xl mx-auto">
+              Join ambitious women who are building momentum, taking bold action,
+              and investing in themselves.
+            </p>
+          </FadeInView>
+          <FadeInView delay={0.3} direction="none">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/events">
+                <Button className="bg-sun-paper text-sun-plum hover:bg-sun-gold hover:text-sun-cocoa">
+                  See Upcoming Events
+                </Button>
+              </Link>
+              <Link href="/join">
+                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-sun-plum">
+                  Join the Orbit
+                </Button>
+              </Link>
+            </div>
+          </FadeInView>
         </div>
       </section>
     </main>

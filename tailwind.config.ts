@@ -16,12 +16,14 @@ export default {
         sun: {
           plum: '#6E054D',     // Deep Plum (buttons, accents)
           cocoa: '#240D01',    // Cocoa Ink (text)
-          cream: '#FFF7F1',    // Warm Cream (main background)
+          cream: '#FEF7F0',    // Warm White - less tan, more luminous
           paper: '#FFFFFF',    // White (cards)
           sand: '#F0E4DA',     // Sand (borders, subtle sections)
           gold: '#F6C453',     // Sunshine Gold (highlights)
           coral: '#F28C7D',    // Coral (gentle emphasis)
           leaf: '#2F7A5B',     // Leaf Green (success)
+          sky: '#A8D5E5',      // Baby Blue (subtle accents)
+          ember: '#FF9B71',    // Ember Orange (fire effect)
         },
         border: "var(--color-border)",
         input: "var(--color-input)",
@@ -64,9 +66,9 @@ export default {
         pill: "9999px",
       },
       fontFamily: {
-        headline: ["var(--font-headline)", "Belvare", "Times New Roman", "serif"],
-        subhead: ["var(--font-subhead)", "Laro Soft", "system-ui", "sans-serif"],
-        body: ["var(--font-body)", "Poppins", "system-ui", "sans-serif"],
+        headline: ["var(--font-headline)", "Abril Fatface", "Georgia", "serif"],
+        subhead: ["var(--font-body)", "DM Sans", "system-ui", "sans-serif"],
+        body: ["var(--font-body)", "DM Sans", "system-ui", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {

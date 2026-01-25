@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { SOCIAL_LINKS } from '@/lib/constants';
@@ -15,17 +16,25 @@ export function Footer() {
   const [footerSubmitted, setFooterSubmitted] = useState(false);
 
   return (
-    <footer className="bg-sun-plum text-white border-t border-sun-sand">
+    <footer className="bg-sun-plum text-white border-t-2 border-sun-sky/30">
       <div className="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-3 gap-10">
         <div className="space-y-3">
-          <p className="font-subhead uppercase tracking-[0.14em] text-sm">
-            The Sunshine Effect
-          </p>
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              alt="The Sunshine Effect"
+              width={48}
+              height={48}
+            />
+            <p className="font-subhead uppercase tracking-[0.14em] text-sm">
+              The Sunshine Effect
+            </p>
+          </div>
           <p className="font-headline text-3xl leading-tight">
-            Glow from the heart, together.
+            Stop playing small.
           </p>
           <p className="text-sm leading-relaxed">
-            Weekly love notes, event invites, and gentle reminders that discipline is self love in motion.
+            Golden Hour events, momentum, and everything I&apos;m building for women who refuse to play small.
           </p>
           <div className="flex items-center gap-4 pt-3">
             <Link href={SOCIAL_LINKS.instagram} aria-label="Instagram" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-full transition-transform hover:scale-110">
@@ -59,7 +68,7 @@ export function Footer() {
             </nav>
             <div className="pt-4">
               <p className="text-sm">
-                Move like it&apos;s already yours—start with one small ritual today.
+                Your next chapter starts here.
               </p>
             </div>
           </div>
@@ -68,10 +77,10 @@ export function Footer() {
         {FEATURES.emailSignup && (
           <div className="space-y-3">
             <p className="font-subhead uppercase tracking-[0.14em] text-sm">
-              Join the Consistent Bulletin
+              In My Orbit ✨
             </p>
             <p className="text-sm leading-relaxed">
-              Two notes per week: practices to stay resourced, aligned event invites, and community updates.
+              Event invites, updates on what I&apos;m building, and weekly momentum for ambitious women.
             </p>
             {!footerSubmitted ? (
               <>
@@ -121,8 +130,8 @@ export function Footer() {
               </>
             ) : (
               <div className="bg-sun-gold text-sun-cocoa rounded-lg p-4">
-                <p className="font-semibold text-sm">✨ You&apos;re in!</p>
-                <p className="text-xs mt-1">Check your inbox for a warm welcome.</p>
+                <p className="font-semibold text-sm">✨ You&apos;re in the orbit!</p>
+                <p className="text-xs mt-1">Welcome. Check your inbox.</p>
               </div>
             )}
           </div>
@@ -138,7 +147,7 @@ export function Footer() {
           </div>
           <div className="flex gap-4">
             {FEATURES.fullContact && (
-              <Link href="/contact" className="hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm">Work With Sunshine</Link>
+              <Link href="/contact" className="hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm">Get in Touch</Link>
             )}
             {FEATURES.events && (
               <Link href="/events" className="hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm">Explore Events</Link>

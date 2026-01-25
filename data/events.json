@@ -5,10 +5,10 @@
       "title": "Golden Hour Gathering",
       "date": "2025-02-15",
       "time": "5:00 PM - 8:00 PM",
-      "description": "An evening of heart-led connection and storytelling. Meet women who get it, share what's on your heart, and leave with at least two new friendships that actually feel aligned.",
+      "description": "An evening of real connection and honest conversations. Meet ambitious women, share what's on your mind, and leave with new connections that actually matter.",
       "type": "golden-hour",
       "image": "/images/events/golden-hour-placeholder.jpg",
-      "location": "Austin, TX",
+      "location": "Los Angeles, CA",
       "capacity": 25,
       "price": "Free"
     },
@@ -17,7 +17,7 @@
       "title": "Sunset & Strategy",
       "date": "2025-03-08",
       "time": "4:30 PM - 7:30 PM",
-      "description": "Bring your big dreams and your questions. This session blends mindset coaching with real talk about building a life and business that doesn't burn you out. Expect clarity, connection, and golden hour magic.",
+      "description": "Bring your big dreams and your questions. This session blends mindset coaching with real talk about building a life and business that actually works. Expect clarity, connection, and momentum.",
       "type": "golden-hour",
       "image": "/images/events/golden-hour-placeholder.jpg",
       "location": "Los Angeles, CA",
@@ -29,48 +29,12 @@
       "title": "Electric Evening",
       "date": "2025-04-12",
       "time": "6:00 PM - 9:00 PM",
-      "description": "High energy, playful connection, and a little bit of magic. This is networking that doesn't feel like networking—think deep conversations, spontaneous laughter, and the kind of introductions that actually stick.",
+      "description": "High energy, real conversations, and the kind of introductions that actually stick. This is networking for women who are done playing small and ready to level up.",
       "type": "golden-hour",
       "image": "/images/events/golden-hour-placeholder.jpg",
-      "location": "Austin, TX",
+      "location": "Los Angeles, CA",
       "capacity": 30,
       "price": "$35"
-    },
-    {
-      "id": "lunar-room-1",
-      "title": "New Moon Reset",
-      "date": "2025-02-28",
-      "time": "7:00 PM - 9:30 PM",
-      "description": "A gentle evening to release what's heavy and set intentions from a grounded place. Includes guided meditation, journaling prompts, and a sound bath to help you exhale into the new cycle.",
-      "type": "lunar-room",
-      "image": "/images/events/lunar-room-placeholder.jpg",
-      "location": "Austin, TX",
-      "capacity": 15,
-      "price": "$55"
-    },
-    {
-      "id": "lunar-room-2",
-      "title": "Nervous System Sanctuary",
-      "date": "2025-03-22",
-      "time": "6:30 PM - 9:00 PM",
-      "description": "Your nervous system has been working overtime. This restorative session combines gentle yoga, breathwork, and guided relaxation to help you come back home to yourself. Soft lighting, warm tea, deep rest.",
-      "type": "lunar-room",
-      "image": "/images/events/lunar-room-placeholder.jpg",
-      "location": "Los Angeles, CA",
-      "capacity": 12,
-      "price": "$65"
-    },
-    {
-      "id": "lunar-room-3",
-      "title": "Full Moon Flow",
-      "date": "2025-04-26",
-      "time": "7:30 PM - 10:00 PM",
-      "description": "Move slowly, breathe deeply, and let the full moon energy wash over you. This evening weaves together slow yoga flow, candlelit meditation, and a closing sound healing session. Leave lighter and more connected to yourself.",
-      "type": "lunar-room",
-      "image": "/images/events/lunar-room-placeholder.jpg",
-      "location": "Austin, TX",
-      "capacity": 18,
-      "price": "$50"
     }
   ]
 }

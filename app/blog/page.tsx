@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import Image from 'next/image';
 import { FadeInView } from '@/components/motion/fade-in-view';
 import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-children';
 import { BlogCard } from '@/components/cards/blog-card';
@@ -20,8 +21,21 @@ export default function BlogPage() {
   return (
     <div className="bg-sun-cream min-h-screen">
       {/* Hero Section */}
-      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sun-plum text-white overflow-hidden">
-        <div className="max-w-5xl mx-auto space-y-5 text-center">
+      <section className="px-4 sm:px-6 py-12 md:py-16 text-white overflow-hidden relative">
+        {/* Purple dreamy clouds - slow drift animation */}
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src="/golden-hour-hero.png"
+            alt=""
+            fill
+            priority
+            className="object-cover object-center animate-slow-drift"
+            aria-hidden="true"
+          />
+        </div>
+        {/* Plum overlay */}
+        <div className="absolute inset-0 bg-sun-plum/50" />
+        <div className="max-w-5xl mx-auto space-y-5 text-center relative z-10">
           <FadeInView>
             <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-gold">
               Insights & Reflections
