@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FadeInView } from '@/components/motion/fade-in-view';
 import { ScaleIn } from '@/components/motion/scale-in';
 import { NewsletterSignup } from '@/components/forms/newsletter-signup';
+import { FEATURES } from '@/lib/features';
 
 export default function HomePage() {
   const handleNewsletterSubmit = async (email: string) => {
@@ -20,7 +21,7 @@ export default function HomePage() {
       {/* Golden Hour Hero Background - slow drift animation */}
       <div className="absolute inset-0 overflow-hidden">
         <Image
-          src="/golden-hour-hero.png"
+          src="/bg-option-orange-2.png"
           alt=""
           fill
           priority
@@ -28,8 +29,14 @@ export default function HomePage() {
           aria-hidden="true"
         />
       </div>
-      {/* Gradient overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-sun-cocoa/40 via-transparent to-sun-sky/20" />
+      {/* Layered gradient overlays - elegant & sexy */}
+      <div className="absolute inset-0 bg-gradient-to-t from-sun-plum/70 via-sun-plum/20 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-br from-sun-coral/40 via-transparent to-sun-gold/30" />
+      {/* Glowing orbs */}
+      <div className="absolute -bottom-32 left-1/4 w-[700px] h-[400px] rounded-full bg-sun-coral/40 blur-[100px]" />
+      <div className="absolute -bottom-20 right-1/4 w-[500px] h-[300px] rounded-full bg-sun-gold/30 blur-[80px]" />
+      <div className="absolute top-1/4 -left-20 w-[300px] h-[300px] rounded-full bg-sun-plum/30 blur-[60px]" />
+      <div className="absolute top-1/4 -right-20 w-[300px] h-[300px] rounded-full bg-sun-sky/20 blur-[60px]" />
 
       {/* Main content */}
       <div className="max-w-4xl mx-auto text-center space-y-8 md:space-y-12 relative z-10">
@@ -73,16 +80,18 @@ export default function HomePage() {
         </FadeInView>
 
         {/* Secondary CTA */}
-        <div className="pt-2">
-          <ScaleIn delay={0.5} duration={0.4} initialScale={0.9}>
-            <Link
-              href="/events"
-              className="inline-block text-sun-plum font-subhead font-bold text-lg uppercase hover:text-sun-coral transition-colors duration-200 underline underline-offset-4 decoration-sun-gold decoration-2 hover:decoration-sun-coral"
-            >
-              See upcoming events →
-            </Link>
-          </ScaleIn>
-        </div>
+        {!FEATURES.landingPageMode && (
+          <div className="pt-2">
+            <ScaleIn delay={0.5} duration={0.4} initialScale={0.9}>
+              <Link
+                href="/events"
+                className="inline-block text-sun-plum font-subhead font-bold text-lg uppercase hover:text-sun-coral transition-colors duration-200 underline underline-offset-4 decoration-sun-gold decoration-2 hover:decoration-sun-coral"
+              >
+                See upcoming events →
+              </Link>
+            </ScaleIn>
+          </div>
+        )}
       </div>
     </div>
   );

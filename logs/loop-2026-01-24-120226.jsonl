@@ -1,0 +1,23 @@
+{
+  "event": "session_start",
+  "session_id": "0eeb8806-a281-4562-9781-538fa312c13d",
+  "timestamp": "2026-01-24T12:02:26-08:00"
+}
+{
+  "event": "state_transition",
+  "timestamp": "2026-01-24T12:02:26-08:00",
+  "session_id": "0eeb8806-a281-4562-9781-538fa312c13d",
+  "data": {
+    "from": "INIT",
+    "to": "PREFLIGHT"
+  }
+}
+{
+  "event": "state_transition",
+  "timestamp": "2026-01-24T12:02:26-08:00",
+  "session_id": "0eeb8806-a281-4562-9781-538fa312c13d",
+  "data": {
+    "from": "PREFLIGHT",
+    "to": "IDLE"
+  }
+}

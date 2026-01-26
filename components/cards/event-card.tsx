@@ -4,20 +4,12 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { crispEase } from '@/lib/animation-variants';
 import { CTAButton } from '@/components/ui/cta-button';
+import { AddToCalendarButton } from '@/components/ui/add-to-calendar-button';
+import { Event } from '@/lib/events';
 
 export interface EventCardProps {
-  /** Event title */
-  title: string;
-  /** Event date (ISO string or formatted string) */
-  date: string;
-  /** Event time range */
-  time?: string;
-  /** Event description */
-  description: string;
-  /** Event type determines visual styling */
-  type: 'golden-hour' | 'lunar-room';
-  /** Event location */
-  location?: string;
+  /** Full event object for calendar functionality */
+  event: Event;
   /** CTA text */
   ctaText?: string;
   /** CTA link */
@@ -36,17 +28,13 @@ export interface EventCardProps {
  * - lunar-room: Cool/dark palette (purple/blue), calm introspective vibe
  */
 export function EventCard({
-  title,
-  date,
-  time,
-  description,
-  type,
-  location,
+  event,
   ctaText = 'RSVP',
   ctaHref,
   onCtaClick,
   className,
 }: EventCardProps) {
+  const { title, date, time, description, type, location } = event;
   // Format date for display
   const formatDate = (dateStr: string) => {
     const d = new Date(dateStr);
@@ -147,7 +135,7 @@ export function EventCard({
       </div>
 
       {/* CTA */}
-      <div className="p-6 pt-2 mt-auto">
+      <div className="p-6 pt-2 mt-auto space-y-3">
         <CTAButton
           variant={styles.ctaVariant}
           href={ctaHref}
@@ -156,6 +144,7 @@ export function EventCard({
         >
           {ctaText}
         </CTAButton>
+        <AddToCalendarButton event={event} variant={type} />
       </div>
     </motion.article>
   );

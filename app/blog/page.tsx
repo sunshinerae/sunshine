@@ -34,7 +34,7 @@ export default function BlogPage() {
           />
         </div>
         {/* Plum overlay */}
-        <div className="absolute inset-0 bg-sun-plum/50" />
+        <div className="absolute inset-0 bg-sun-plum/40" />
         <div className="max-w-5xl mx-auto space-y-5 text-center relative z-10">
           <FadeInView>
             <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-gold">
@@ -56,8 +56,10 @@ export default function BlogPage() {
       </section>
 
       {/* Category Pills */}
-      <section className="px-4 sm:px-6 py-8 bg-sun-cream border-b border-sun-sand">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 py-8 relative overflow-hidden border-b border-sun-sand">
+        <div className="absolute inset-0 bg-gradient-to-r from-sun-cream via-sun-sand/20 to-sun-cream" />
+        <div className="absolute inset-0 bg-gradient-to-b from-sun-sky/5 via-transparent to-transparent" />
+        <div className="max-w-6xl mx-auto relative z-10">
           <FadeInView>
             <div className="flex flex-wrap justify-center gap-3">
               <button
@@ -80,8 +82,13 @@ export default function BlogPage() {
       </section>
 
       {/* Blog Post Grid */}
-      <section className="px-4 sm:px-6 py-12 md:py-16 bg-sun-cream">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-4 sm:px-6 py-12 md:py-16 relative overflow-hidden">
+        {/* Subtle elegant gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-sun-cream via-sun-paper/50 to-sun-cream" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-sun-coral/8 via-transparent to-sun-sky/8" />
+        <div className="absolute top-1/4 right-0 w-[400px] h-[400px] rounded-full bg-sun-gold/10 blur-[100px]" />
+        <div className="absolute bottom-1/3 left-0 w-[350px] h-[350px] rounded-full bg-sun-plum/8 blur-[90px]" />
+        <div className="max-w-6xl mx-auto relative z-10">
           <h2 className="sr-only">Blog Posts</h2>
           {posts.length > 0 ? (
             <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" staggerDelay={0.1}>

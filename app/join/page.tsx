@@ -23,17 +23,19 @@ export default function JoinPage() {
   return (
     <main className="bg-artistic">
       <section className="text-white px-6 py-16 md:py-20 relative overflow-hidden">
-        {/* Golden hour clouds background - same as homepage */}
-        <Image
-          src="/golden-hour-clouds.png"
-          alt=""
-          fill
-          priority
-          className="object-cover object-center"
-          aria-hidden="true"
-        />
-        {/* Plum overlay for brand consistency */}
-        <div className="absolute inset-0 bg-sun-plum/60" />
+        {/* Purple dreamy clouds - slow drift animation */}
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src="/golden-hour-hero.png"
+            alt=""
+            fill
+            priority
+            className="object-cover object-center animate-slow-drift"
+            aria-hidden="true"
+          />
+        </div>
+        {/* Plum overlay */}
+        <div className="absolute inset-0 bg-sun-plum/40" />
         <div className="max-w-5xl mx-auto text-center space-y-5 relative z-10">
           <FadeInView>
             <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-gold">
@@ -67,8 +69,13 @@ export default function JoinPage() {
         </div>
       </section>
 
-      <section className="px-6 py-14 md:py-20">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
+      <section className="px-6 py-14 md:py-20 relative overflow-hidden">
+        {/* Elegant warm gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-sun-cream via-sun-sand/30 to-sun-cream" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-sun-coral/10 via-transparent to-sun-sky/15" />
+        <div className="absolute top-1/3 right-0 w-[400px] h-[400px] rounded-full bg-sun-gold/15 blur-[100px]" />
+        <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full bg-sun-plum/10 blur-[80px]" />
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-6 relative z-10">
           {bullets.map((b) => (
             <BrandCard key={b.title} variant="white" className="p-7">
               <h2 className="font-headline text-2xl uppercase text-sun-plum mb-2">{b.title}</h2>
@@ -77,7 +84,7 @@ export default function JoinPage() {
           ))}
         </div>
 
-        <div className="max-w-3xl mx-auto text-center mt-12 space-y-4">
+        <div className="max-w-3xl mx-auto text-center mt-12 space-y-4 relative z-10">
           <p className="font-body text-sm text-sun-cocoa/70">
             No current offer — and that&apos;s intentional. We&apos;re building the room first. When it&apos;s time, you&apos;ll be first in line.
           </p>

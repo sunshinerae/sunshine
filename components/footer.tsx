@@ -9,15 +9,21 @@ import { SOCIAL_LINKS } from '@/lib/constants';
 import { getActiveNavItems, FEATURES } from '@/lib/features';
 
 export function Footer() {
-  const year = new Date().getFullYear();
+  const year = 2025;
   const navItems = getActiveNavItems();
   const [footerEmail, setFooterEmail] = useState('');
   const [footerSubmitting, setFooterSubmitting] = useState(false);
   const [footerSubmitted, setFooterSubmitted] = useState(false);
 
   return (
-    <footer className="bg-sun-plum text-white border-t-2 border-sun-sky/30">
-      <div className="max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-3 gap-10">
+    <footer className="relative text-white border-t border-sun-gold/30 overflow-hidden">
+      {/* Elegant gradient background - inverted */}
+      <div className="absolute inset-0 bg-gradient-to-b from-sun-coral/80 via-sun-plum to-[#4a0336]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-sun-plum/50 via-transparent to-sun-plum/50" />
+      {/* Subtle glowing orbs */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-sun-gold/15 blur-[100px]" />
+      <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full bg-sun-plum/30 blur-[80px]" />
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-14 grid md:grid-cols-3 gap-10">
         <div className="space-y-3">
           <div className="flex items-center gap-3">
             <Image
@@ -137,7 +143,7 @@ export function Footer() {
           </div>
         )}
       </div>
-      <div className="border-t border-sun-sand/30">
+      <div className="relative z-10 border-t border-sun-gold/20">
         <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm">
           <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4">
             <p className="font-medium">© {year} The Sunshine Effect</p>
@@ -145,14 +151,16 @@ export function Footer() {
               Privacy Policy
             </Link>
           </div>
-          <div className="flex gap-4">
-            {FEATURES.fullContact && (
-              <Link href="/contact" className="hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm">Get in Touch</Link>
-            )}
-            {FEATURES.events && (
-              <Link href="/events" className="hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm">Explore Events</Link>
-            )}
-          </div>
+          {!FEATURES.landingPageMode && (
+            <div className="flex gap-4">
+              {FEATURES.fullContact && (
+                <Link href="/contact" className="hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm">Get in Touch</Link>
+              )}
+              {FEATURES.events && (
+                <Link href="/events" className="hover:text-sun-gold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-sm">Explore Events</Link>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </footer>

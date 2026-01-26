@@ -114,6 +114,10 @@ body::before {
     background: linear-gradient(135deg, var(--sun-cream) 0%, var(--sun-sand) 100%);
   }
 
+  .bg-gradient-radial {
+    background: radial-gradient(ellipse at center, var(--tw-gradient-from) 0%, var(--tw-gradient-to) 70%);
+  }
+
   /* Artistic cream background with subtle warmth and sky tones */
   .bg-artistic {
     background:

@@ -1,386 +1,271 @@
 #!/bin/bash
+# =============================================================================
+# Ralph Wiggum Loop v2 — Sophisticated Edition
+# =============================================================================
 
-# ===========================================
-# Ralph Wiggum Loop — Full Featured Edition
-# The Sunshine Effect
-# ===========================================
+set -euo pipefail
 
-set -e
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+LOOP_DIR="$SCRIPT_DIR/.loop"
 
-# --- Configuration ---
-MAX_ITERATIONS=100
-SLEEP_SECONDS=3
-MAX_RETRIES=2
-LOG_DIR="logs"
-BUILD_CHECK=true
-INTERACTIVE=false
-YOLO_MODE=true  # Skip permission prompts (run on isolated VM!)
+# Source libraries
+for lib in "$LOOP_DIR/lib/"*.sh; do source "$lib"; done
 
-# --- Parse flags ---
-while [[ "$#" -gt 0 ]]; do
-    case $1 in
-        --interactive|-i) INTERACTIVE=true ;;
-        --no-build) BUILD_CHECK=false ;;
-        --safe) YOLO_MODE=false ;;
-        --max=*) MAX_ITERATIONS="${1#*=}" ;;
-        --help|-h)
-            echo "Usage: ./loop.sh [options]"
-            echo ""
-            echo "Options:"
-            echo "  --interactive, -i   Pause after each task for review"
-            echo "  --no-build          Skip build check after each task"
-            echo "  --safe              Require permission prompts (slower but safer)"
-            echo "  --max=N             Set max iterations (default: 100)"
-            echo "  --help, -h          Show this help"
-            echo ""
-            echo "NOTE: By default runs in YOLO mode (no permission prompts)."
-            echo "      Only run on isolated VMs, not your local machine!"
-            exit 0
-            ;;
-        *) echo "Unknown option: $1"; exit 1 ;;
-    esac
-    shift
-done
+# Config
+YOLO_MODE=false DRY_RUN=false INTERACTIVE=false BUILD_CHECK=true
+MAX_ITERATIONS=100 MAX_RETRIES=3 CLAUDE_TIMEOUT=600 SLEEP_SECONDS=3
+PLAN_FILE="implementation_plan.md" PROMPT_FILE="prompt.md"
+LOCK_FILE="$LOOP_DIR/lock.pid" TEMP_FILES=()
 
-# --- Colors ---
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-WHITE='\033[1;37m'
-NC='\033[0m' # No Color
+show_help() {
+    cat <<'EOF'
+Ralph Wiggum Loop v2 — The Sunshine Effect
 
-# --- Logging ---
-mkdir -p "$LOG_DIR"
-LOG_FILE="$LOG_DIR/loop-$(date +%Y-%m-%d-%H%M%S).log"
-FAILED_TASKS_FILE="$LOG_DIR/failed-tasks.log"
+Usage: ./loop.sh [options]
 
-log() {
-    echo -e "$1" | tee -a "$LOG_FILE"
+Options:
+  --yolo          Enable --dangerously-skip-permissions mode
+  --dry-run       Show what would happen without changes
+  --interactive   Pause after each task
+  --no-build      Skip build check
+  --max=N         Max iterations (default: 100)
+  --help          Show this help
+
+Examples:
+  ./loop.sh --yolo          # Fully automatic (isolated VM only!)
+  ./loop.sh --dry-run       # Preview mode
+  ./loop.sh --interactive   # Step through
+EOF
 }
 
-log_raw() {
-    echo "$1" >> "$LOG_FILE"
+parse_args() {
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --yolo) YOLO_MODE=true ;;
+            --dry-run) DRY_RUN=true ;;
+            --interactive|-i) INTERACTIVE=true ;;
+            --no-build) BUILD_CHECK=false ;;
+            --max=*) MAX_ITERATIONS="${1#*=}" ;;
+            --help|-h) show_help; exit 0 ;;
+            *) echo "Unknown: $1" >&2; exit 1 ;;
+        esac
+        shift
+    done
 }
 
-# --- Helper Functions ---
-get_done_count() {
-    local count=$(grep -c '^\- \[x\]' implementation_plan.md 2>/dev/null || true)
-    echo "${count:-0}" | tr -d '\n'
+lock_acquire() {
+    [[ -f "$LOCK_FILE" ]] && {
+        local pid=$(cat "$LOCK_FILE" 2>/dev/null)
+        kill -0 "$pid" 2>/dev/null && { echo "ERROR: Running (PID $pid)" >&2; return 1; }
+        rm -f "$LOCK_FILE"
+    }
+    echo $$ > "$LOCK_FILE"
 }
 
-get_todo_count() {
-    local count=$(grep -c '^\- \[ \]' implementation_plan.md 2>/dev/null || true)
-    echo "${count:-0}" | tr -d '\n'
+lock_release() {
+    [[ -f "$LOCK_FILE" && "$(cat "$LOCK_FILE" 2>/dev/null)" == "$$" ]] && rm -f "$LOCK_FILE"
 }
 
-get_next_task() {
-    grep -m1 '^\- \[ \]' implementation_plan.md | sed 's/^- \[ \] //'
+cleanup() {
+    log_message "INFO" "Cleaning up..."
+    lock_release
+    for f in "${TEMP_FILES[@]}"; do rm -f "$f" 2>/dev/null; done
+    exit "${1:-0}"
 }
 
-get_last_commit() {
-    git log --oneline -1 2>/dev/null || echo "none"
-}
-
-get_commit_count() {
-    git rev-list --count HEAD 2>/dev/null || echo 0
-}
-
-format_time() {
-    local seconds=$1
-    if [ "$seconds" -lt 60 ]; then
-        echo "${seconds}s"
-    elif [ "$seconds" -lt 3600 ]; then
-        echo "$((seconds / 60))m $((seconds % 60))s"
-    else
-        echo "$((seconds / 3600))h $((seconds % 3600 / 60))m"
-    fi
-}
-
-# --- Pre-flight Checks ---
 preflight() {
-    log ""
-    log "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    log "${WHITE}  Pre-flight Checks${NC}"
-    log "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    log_divider
+    log_human "  Pre-flight Checks"
+    log_divider
 
-    local checks_passed=true
+    local ok=true
+    platform_check_deps && status_ok "Dependencies" || { status_fail "Missing deps"; ok=false; }
+    git rev-parse --git-dir &>/dev/null && status_ok "Git repo" || { status_fail "Not a git repo"; ok=false; }
+    git_is_clean && status_ok "Clean worktree" || status_warn "Uncommitted changes"
+    [[ -f "$PLAN_FILE" ]] && status_ok "Plan: $PLAN_FILE" || { status_fail "No $PLAN_FILE"; ok=false; }
+    [[ -f "$PROMPT_FILE" ]] && status_ok "Prompt: $PROMPT_FILE" || { status_fail "No $PROMPT_FILE"; ok=false; }
+    [[ -d "node_modules" ]] && status_ok "node_modules" || status_warn "Missing node_modules"
+    [[ "$YOLO_MODE" == "true" ]] && status_warn "YOLO: ON" || status_ok "YOLO: OFF"
+    [[ "$DRY_RUN" == "true" ]] && status_info "DRY-RUN mode"
+    log_human ""
 
-    # Check git
-    if git rev-parse --git-dir > /dev/null 2>&1; then
-        log "  ${GREEN}✓${NC} Git repository detected"
-    else
-        log "  ${RED}✗${NC} Not a git repository"
-        checks_passed=false
-    fi
-
-    # Check for uncommitted changes
-    if [ -z "$(git status --porcelain)" ]; then
-        log "  ${GREEN}✓${NC} Working directory clean"
-    else
-        log "  ${YELLOW}!${NC} Uncommitted changes detected"
-        log "    ${YELLOW}Files:${NC}"
-        git status --porcelain | head -5 | sed 's/^/      /'
-        if [ $(git status --porcelain | wc -l) -gt 5 ]; then
-            log "      ... and more"
-        fi
-    fi
-
-    # Check implementation_plan.md exists
-    if [ -f "implementation_plan.md" ]; then
-        log "  ${GREEN}✓${NC} implementation_plan.md found"
-    else
-        log "  ${RED}✗${NC} implementation_plan.md not found"
-        checks_passed=false
-    fi
-
-    # Check prompt.md exists
-    if [ -f "prompt.md" ]; then
-        log "  ${GREEN}✓${NC} prompt.md found"
-    else
-        log "  ${RED}✗${NC} prompt.md not found"
-        checks_passed=false
-    fi
-
-    # Check node_modules
-    if [ -d "node_modules" ]; then
-        log "  ${GREEN}✓${NC} node_modules present"
-    else
-        log "  ${YELLOW}!${NC} node_modules missing — run npm install first"
-    fi
-
-    # Check Claude CLI
-    if command -v claude &> /dev/null; then
-        log "  ${GREEN}✓${NC} Claude CLI available"
-    else
-        log "  ${RED}✗${NC} Claude CLI not found"
-        checks_passed=false
-    fi
-
-    if [ "$checks_passed" = false ]; then
-        log ""
-        log "${RED}Pre-flight checks failed. Aborting.${NC}"
-        exit 1
-    fi
-
-    log ""
+    [[ "$ok" == true ]]
 }
 
-# --- Build Check ---
-run_build_check() {
-    if [ "$BUILD_CHECK" = true ]; then
-        log "  ${CYAN}Running build check...${NC}"
-        if npm run build > /dev/null 2>&1; then
-            log "  ${GREEN}✓${NC} Build passed"
-            return 0
-        else
-            log "  ${RED}✗${NC} Build failed"
-            return 1
-        fi
+run_build() {
+    [[ "$BUILD_CHECK" != "true" ]] && return 0
+    [[ "$DRY_RUN" == "true" ]] && { log_human "  [DRY-RUN] Would build"; return 0; }
+    log_human "  Building..."
+    npm run build &>/dev/null && status_ok "Build passed" || { status_fail "Build failed"; return 1; }
+}
+
+execute_task() {
+    local line="$1" task="$2"
+    local checkpoint=""
+
+    if [[ "$DRY_RUN" != "true" ]]; then
+        checkpoint=$(git_checkpoint_create "$(state_get_field iteration)" "$task")
+        state_set_task "$line" "$task" "$checkpoint"
+    else
+        log_human "  [DRY-RUN] Would create checkpoint"
     fi
+
+    local prompt=$(claude_build_prompt "$PROMPT_FILE" "$task")
+
+    if [[ "$DRY_RUN" == "true" ]]; then
+        log_human "  [DRY-RUN] Would run Claude:"
+        log_human "    Task: $task"
+        return 0
+    fi
+
+    local commits_before=$(git_commit_count)
+    log_human "  Running Claude..."
+
+    local outfile=$(mktemp)
+    TEMP_FILES+=("$outfile")
+
+    local code=0
+    claude_run "$prompt" "$CLAUDE_TIMEOUT" "$YOLO_MODE" "$outfile" || code=$?
+
+    if [[ $code -eq 124 ]]; then
+        log_message "ERROR" "Claude timed out"
+        [[ -n "$checkpoint" ]] && git_checkpoint_rollback "$checkpoint"
+        return 1
+    fi
+
+    [[ $code -ne 0 ]] && { log_message "ERROR" "Claude exit $code"; return 1; }
+
+    log_human ""
+    git_verify_commit "$commits_before" && status_ok "Commit: $(git_last_commit)" || status_warn "No commit"
+
+    # Check if task marked complete
+    local status=$(tasks_parse "$PLAN_FILE" | awk -F'\t' -v ln="$line" '$1==ln {print $2}')
+    [[ "$status" == "done" ]] && { status_ok "Task complete"; return 0; }
+    status_warn "Task not marked complete"
+    return 1
+}
+
+interactive_prompt() {
+    [[ "$INTERACTIVE" != "true" ]] && return 0
+    log_human "  Press Enter to continue, s=skip, q=quit"
+    local input; read -r input
+    case "$input" in
+        q|Q) log_human "Quitting"; exit 0 ;;
+        s|S) return 1 ;;
+    esac
     return 0
 }
 
-# --- Main Loop ---
+format_time() {
+    local s="$1"
+    ((s < 60)) && echo "${s}s" && return
+    ((s < 3600)) && echo "$((s/60))m $((s%60))s" && return
+    echo "$((s/3600))h $((s%3600/60))m"
+}
+
 main() {
-    local start_time=$(date +%s)
-    local task_times=()
-    local retry_count=0
-    local current_task=""
+    local start=$(date +%s)
+    parse_args "$@"
+    colors_init
+    state_init "$LOOP_DIR"
+    log_init "logs" "$(state_session_id)"
+    memory_init "$LOOP_DIR/memory.json"
 
-    # Header
-    log ""
-    log "${PURPLE}╔═══════════════════════════════════════════╗${NC}"
-    log "${PURPLE}║${NC}   ${WHITE}Ralph Wiggum Loop${NC}                       ${PURPLE}║${NC}"
-    log "${PURPLE}║${NC}   ${CYAN}The Sunshine Effect${NC}                     ${PURPLE}║${NC}"
-    log "${PURPLE}╚═══════════════════════════════════════════╝${NC}"
-    log ""
-    log "  Log file: ${CYAN}$LOG_FILE${NC}"
-    log "  Interactive mode: ${CYAN}$INTERACTIVE${NC}"
-    log "  Build checks: ${CYAN}$BUILD_CHECK${NC}"
-    if [ "$YOLO_MODE" = true ]; then
-        log "  YOLO mode: ${RED}ON${NC} (no permission prompts)"
-    else
-        log "  YOLO mode: ${GREEN}OFF${NC} (will ask for permissions)"
-    fi
+    lock_acquire || exit 1
+    trap 'cleanup $?' SIGINT SIGTERM EXIT
 
-    # Pre-flight
-    preflight
+    log_box "Ralph Wiggum Loop v2"
+    log_human "  Log: $LOG_FILE"
+    log_human "  State: $STATE_FILE"
+    log_human ""
 
-    # Initial counts
-    local initial_done=$(get_done_count)
-    log "  Starting with ${GREEN}$initial_done${NC} tasks already complete"
-    log ""
+    state_is_recovery && log_human "  Recovering from previous session..."
 
-    # Main loop
-    for ((i=1; i<=MAX_ITERATIONS; i++)); do
-        local iteration_start=$(date +%s)
+    preflight || { log_message "ERROR" "Preflight failed"; exit 1; }
 
-        # Get counts
-        local done_count=$(get_done_count)
-        local todo_count=$(get_todo_count)
-        local total=$((done_count + todo_count))
-        local percent=$((done_count * 100 / total))
+    state_transition "IDLE"
 
-        # Exit if no tasks remaining
-        if [ "$todo_count" -eq 0 ]; then
-            local end_time=$(date +%s)
-            local total_time=$((end_time - start_time))
-            log ""
-            log "${GREEN}╔═══════════════════════════════════════════╗${NC}"
-            log "${GREEN}║${NC}   ${WHITE}All tasks complete!${NC}                     ${GREEN}║${NC}"
-            log "${GREEN}║${NC}   ${CYAN}$done_count/$total tasks done${NC}                      ${GREEN}║${NC}"
-            log "${GREEN}║${NC}   ${CYAN}Total time: $(format_time $total_time)${NC}                   ${GREEN}║${NC}"
-            log "${GREEN}╚═══════════════════════════════════════════╝${NC}"
+    local total=$(tasks_count "$PLAN_FILE")
+    local done=$(tasks_done_count "$PLAN_FILE")
+    state_update_stats "total_tasks" "$total"
+
+    log_human "  Starting: $done/$total complete"
+    log_human ""
+
+    local iter=0 retry=0 curr_line=""
+
+    while ((iter < MAX_ITERATIONS)); do
+        iter=$((iter + 1))
+        state_set "iteration" "$iter"
+
+        done=$(tasks_done_count "$PLAN_FILE")
+        local pending=$(tasks_pending_count "$PLAN_FILE")
+        total=$((done + pending))
+
+        if ((pending == 0)); then
+            local elapsed=$(($(date +%s) - start))
+            log_box "All tasks complete!"
+            log_human "  $done/$total done in $(format_time $elapsed)"
             exit 0
         fi
 
-        # Get next task
-        local next_task=$(get_next_task)
+        local next=$(tasks_get_next "$PLAN_FILE")
+        [[ -z "$next" ]] && { log_message "ERROR" "No task found"; break; }
 
-        # Check if this is a retry
-        if [ "$next_task" = "$current_task" ]; then
-            ((retry_count++))
-            if [ "$retry_count" -ge "$MAX_RETRIES" ]; then
-                log "  ${RED}Task failed $MAX_RETRIES times. Skipping.${NC}"
-                echo "$(date): SKIPPED - $next_task" >> "$FAILED_TASKS_FILE"
-                # Mark as done with skip note (so loop continues)
-                sed -i "0,/^\- \[ \] $(echo "$next_task" | sed 's/[\/&]/\\&/g')/s//- [x] [SKIPPED] $next_task/" implementation_plan.md
-                git add implementation_plan.md
-                git commit -m "skip: $next_task (failed $MAX_RETRIES times)" || true
-                retry_count=0
+        local line=$(echo "$next" | cut -f1)
+        local task=$(echo "$next" | cut -f2)
+
+        if [[ "$line" == "$curr_line" ]]; then
+            retry=$((retry + 1))
+            if ((retry >= MAX_RETRIES)); then
+                log_message "WARN" "Skipping after $MAX_RETRIES failures"
+                [[ "$DRY_RUN" != "true" ]] && {
+                    tasks_mark_skipped "$line" "$PLAN_FILE" "failed $MAX_RETRIES times"
+                    git add "$PLAN_FILE" && git_commit_safe "skip: $(tasks_sanitize_for_git "$task")"
+                }
+                state_increment_stat "tasks_skipped"
+                retry=0 curr_line=""
                 continue
             fi
-            log "  ${YELLOW}Retry $retry_count/$MAX_RETRIES${NC}"
+            log_human "  Retry $retry/$MAX_RETRIES"
         else
-            current_task="$next_task"
-            retry_count=0
+            curr_line="$line" retry=0
         fi
 
-        # Progress bar
-        local bar_width=30
-        local filled=$((percent * bar_width / 100))
-        local empty=$((bar_width - filled))
-        local bar=$(printf "%${filled}s" | tr ' ' '█')$(printf "%${empty}s" | tr ' ' '░')
+        log_divider
+        log_human "  Iteration $iter | $(progress_bar "$done" "$total")"
+        log_human "  $done done | $pending remaining"
+        log_divider
+        log_human ""
+        log_human "  Next: $task"
+        log_human ""
 
-        # Show status
-        log "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-        log "  ${WHITE}Iteration $i${NC} │ ${bar} ${percent}%"
-        log "  ${GREEN}$done_count done${NC} │ ${YELLOW}$todo_count remaining${NC}"
-        log "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-        log ""
-        log "  ${WHITE}Next task:${NC}"
-        log "  ${YELLOW}→ $next_task${NC}"
-        log ""
-
-        # Get commit count before
-        local commits_before=$(get_commit_count)
-        local last_commit_before=$(get_last_commit)
-
-        # Build the prompt with recent context
-        local context_prompt="$(cat prompt.md)
-
----
-CONTEXT: Last commit was: $last_commit_before
-CURRENT TASK: $next_task
----"
-
-        # Run Claude
-        log "  ${CYAN}Running Claude...${NC}"
-        log_raw "--- Claude Output Start ---"
-
-        local claude_flags="--print"
-        if [ "$YOLO_MODE" = true ]; then
-            claude_flags="--dangerously-skip-permissions --print"
+        if execute_task "$line" "$task"; then
+            state_clear_task
+            retry=0 curr_line=""
+            memory_add_success "$task" "$(git_last_hash)" "0"
+            state_increment_stat "tasks_completed"
         fi
 
-        if claude $claude_flags "$context_prompt" 2>&1 | tee -a "$LOG_FILE"; then
-            log_raw "--- Claude Output End ---"
-        else
-            log "  ${RED}Claude exited with error${NC}"
+        run_build || log_human "  Build failed, will retry"
+
+        local iter_time=$(($(date +%s) - start))
+        log_human "  Time: $(format_time $iter_time)"
+        log_human ""
+
+        if ! interactive_prompt; then
+            [[ "$DRY_RUN" != "true" ]] && {
+                tasks_mark_skipped "$line" "$PLAN_FILE" "manual"
+                git add "$PLAN_FILE" && git_commit_safe "skip: $(tasks_sanitize_for_git "$task")"
+            }
+            state_increment_stat "tasks_skipped"
+            retry=0 curr_line=""
         fi
 
-        log ""
-
-        # Verify commit happened
-        local commits_after=$(get_commit_count)
-        local last_commit_after=$(get_last_commit)
-
-        if [ "$commits_after" -gt "$commits_before" ]; then
-            log "  ${GREEN}✓${NC} Commit detected: ${CYAN}$last_commit_after${NC}"
-        else
-            log "  ${YELLOW}!${NC} No new commit detected"
-        fi
-
-        # Verify task was marked complete
-        local new_done_count=$(get_done_count)
-        if [ "$new_done_count" -gt "$done_count" ]; then
-            log "  ${GREEN}✓${NC} Task marked complete"
-        else
-            log "  ${YELLOW}!${NC} Task not marked complete — will retry"
-        fi
-
-        # Build check
-        if ! run_build_check; then
-            log "  ${YELLOW}Build failed — agent should fix on next iteration${NC}"
-        fi
-
-        # Time tracking
-        local iteration_end=$(date +%s)
-        local iteration_time=$((iteration_end - iteration_start))
-        task_times+=($iteration_time)
-
-        # Calculate average and estimate
-        local total_task_time=0
-        for t in "${task_times[@]}"; do
-            total_task_time=$((total_task_time + t))
-        done
-        local avg_time=$((total_task_time / ${#task_times[@]}))
-        local remaining_time=$((avg_time * (todo_count - 1)))
-
-        log ""
-        log "  ${CYAN}Task time:${NC} $(format_time $iteration_time) │ ${CYAN}Avg:${NC} $(format_time $avg_time) │ ${CYAN}Est. remaining:${NC} $(format_time $remaining_time)"
-        log ""
-
-        # Show recent commits
-        log "  ${WHITE}Recent commits:${NC}"
-        git log --oneline -3 2>/dev/null | while read line; do
-            log "    ${CYAN}$line${NC}"
-        done
-        log ""
-
-        # Interactive mode
-        if [ "$INTERACTIVE" = true ]; then
-            log "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-            log "  ${WHITE}Interactive mode${NC}"
-            log "  Press ${GREEN}Enter${NC} to continue, ${YELLOW}s${NC} to skip task, ${RED}q${NC} to quit"
-            log "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-            read -r input
-            case $input in
-                q|Q)
-                    log "  ${YELLOW}Quitting...${NC}"
-                    exit 0
-                    ;;
-                s|S)
-                    log "  ${YELLOW}Skipping task...${NC}"
-                    echo "$(date): MANUAL SKIP - $next_task" >> "$FAILED_TASKS_FILE"
-                    sed -i "0,/^\- \[ \] $(echo "$next_task" | sed 's/[\/&]/\\&/g')/s//- [x] [SKIPPED] $next_task/" implementation_plan.md
-                    git add implementation_plan.md
-                    git commit -m "skip: $next_task (manual skip)" || true
-                    ;;
-            esac
-        fi
-
-        # Sleep
-        sleep $SLEEP_SECONDS
+        sleep "$SLEEP_SECONDS"
     done
 
-    log ""
-    log "${YELLOW}Max iterations ($MAX_ITERATIONS) reached${NC}"
-    log "Run again to continue."
+    log_human "Max iterations reached"
 }
 
-# --- Run ---
-main
+main "$@"

@@ -16,6 +16,10 @@
 export type FeatureFlag = keyof typeof FEATURES;
 
 export const FEATURES = {
+  // LANDING PAGE MODE: Set to true to hide all nav and show only signup
+  // Set to false when ready to launch full site
+  landingPageMode: true,
+
   // PHASE 1: Active features (launch state)
   about: true,
   emailSignup: true,
@@ -76,5 +80,9 @@ const ALL_NAV_ITEMS: NavItem[] = [
  * navItems.map(item => <NavLink href={item.href}>{item.label}</NavLink>)
  */
 export function getActiveNavItems(): NavItem[] {
+  // In landing page mode, hide all navigation
+  if (FEATURES.landingPageMode) {
+    return [];
+  }
   return ALL_NAV_ITEMS.filter(item => isFeatureEnabled(item.feature));
 }

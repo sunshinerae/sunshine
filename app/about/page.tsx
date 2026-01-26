@@ -65,7 +65,7 @@ export default function AboutPage() {
           />
         </div>
         {/* Subtle plum overlay */}
-        <div className="absolute inset-0 bg-sun-plum/70" />
+        <div className="absolute inset-0 bg-sun-plum/40" />
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Arch portrait */}
@@ -104,8 +104,12 @@ export default function AboutPage() {
       </section>
 
       {/* Story Section */}
-      <section className="py-20 md:py-28 px-4 bg-artistic">
-        <div className="max-w-3xl mx-auto">
+      <section className="py-20 md:py-28 px-4 relative overflow-hidden">
+        {/* Subtle warm gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-sun-cream via-sun-sand/30 to-sun-cream" />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-sun-coral/10 blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-sun-sky/10 blur-3xl" />
+        <div className="max-w-3xl mx-auto relative z-10">
           <FadeInView>
             <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sun-plum text-center mb-12">
               The Real Story
@@ -155,9 +159,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Values Grid Section */}
-      <section className="py-20 md:py-28 px-4 bg-sun-gold">
-        <div className="max-w-5xl mx-auto">
+      {/* Values Grid Section - Mesh gradient */}
+      <section className="py-20 md:py-28 px-4 relative overflow-hidden">
+        {/* Layered mesh gradient background - DRAMATIC */}
+        <div className="absolute inset-0 bg-sun-gold" />
+        <div className="absolute inset-0 bg-gradient-to-br from-sun-coral/60 via-sun-gold/20 to-sun-plum/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-sun-plum/30 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-sun-sky/15 via-transparent to-sun-coral/20" />
+        {/* Dramatic glowing orbs */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-sun-coral/50 blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-sun-plum/40 blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-sun-gold/30 blur-[150px]" />
+        <div className="absolute top-0 left-1/4 w-[300px] h-[300px] rounded-full bg-sun-sky/20 blur-[80px]" />
+        <div className="max-w-5xl mx-auto relative z-10">
           <FadeInView>
             <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sun-cocoa text-center mb-4">
               What We Stand For
@@ -195,8 +209,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 md:py-28 px-4 bg-sun-coral fire-overlay">
+      {/* CTA Section - Rich gradient */}
+      <section className="py-20 md:py-28 px-4 relative overflow-hidden">
+        {/* Layered gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-sun-plum via-sun-coral to-sun-gold" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-sun-plum/50 via-transparent to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-sun-gold/20 blur-3xl" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
           <FadeInView>
             <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-white mb-6">

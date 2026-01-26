@@ -23,17 +23,19 @@ export default function ContactPage() {
     <main className="bg-artistic">
       {/* Hero Section */}
       <section className="text-white px-6 py-16 overflow-hidden relative">
-        {/* Warm sand texture background */}
-        <Image
-          src="/sand-warm.png"
-          alt=""
-          fill
-          priority
-          className="object-cover object-center"
-          aria-hidden="true"
-        />
+        {/* Warm sand texture - slow drift animation */}
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src="/sand-warm.png"
+            alt=""
+            fill
+            priority
+            className="object-cover object-center animate-slow-drift"
+            aria-hidden="true"
+          />
+        </div>
         {/* Subtle plum overlay */}
-        <div className="absolute inset-0 bg-sun-plum/65" />
+        <div className="absolute inset-0 bg-sun-plum/50" />
         <FadeInView className="max-w-5xl mx-auto space-y-4 relative z-10">
           <p className="font-subhead uppercase tracking-[0.15em] text-sm text-sun-gold">Contact</p>
           <h1 className="font-headline text-[clamp(2.8rem,6vw,4.6rem)] uppercase leading-[0.9] tracking-tight">
@@ -46,7 +48,13 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Form Section */}
-      <section className="max-w-5xl mx-auto py-12 px-6 space-y-12">
+      <section className="py-12 px-6 relative overflow-hidden">
+        {/* Elegant layered gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-sun-cream via-sun-sand/20 to-sun-cream" />
+        <div className="absolute inset-0 bg-gradient-to-br from-sun-coral/10 via-transparent to-sun-sky/10" />
+        <div className="absolute top-0 right-1/4 w-[400px] h-[400px] rounded-full bg-sun-gold/15 blur-[100px]" />
+        <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] rounded-full bg-sun-plum/10 blur-[80px]" />
+        <div className="max-w-5xl mx-auto space-y-12 relative z-10">
         <FadeInView direction="up" duration={0.6}>
           <ContactPageForm />
         </FadeInView>
@@ -72,6 +80,7 @@ export default function ContactPage() {
             </BrandCard>
           </StaggerItem>
         </StaggerChildren>
+        </div>
       </section>
 
       {/* Newsletter Signup Section - In My Orbit */}
@@ -136,8 +145,13 @@ export default function ContactPage() {
       </section>
 
       {/* Social Links Section */}
-      <section className="bg-artistic py-16 px-6 border-t-2 border-sun-sky/20">
-        <div className="max-w-4xl mx-auto">
+      <section className="py-16 px-6 relative overflow-hidden">
+        {/* Subtle warm gradient */}
+        <div className="absolute inset-0 bg-gradient-to-t from-sun-cream via-sun-paper to-sun-cream" />
+        <div className="absolute inset-0 bg-gradient-to-tl from-sun-sky/10 via-transparent to-sun-coral/10" />
+        <div className="absolute bottom-1/4 right-0 w-[350px] h-[350px] rounded-full bg-sun-gold/10 blur-[90px]" />
+        <div className="absolute top-1/4 left-0 w-[250px] h-[250px] rounded-full bg-sun-plum/8 blur-[70px]" />
+        <div className="max-w-4xl mx-auto relative z-10">
           <SlideInView direction="up" className="text-center mb-10">
             <p className="font-subhead uppercase tracking-[0.15em] text-sm text-sun-plum mb-3">
               Connect

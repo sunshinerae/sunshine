@@ -1,0 +1,13 @@
+# Loop Configuration - Safe defaults
+version: 1
+plan_file: "implementation_plan.md"
+prompt_file: "prompt.md"
+log_dir: "logs"
+yolo_mode: false
+max_iterations: 100
+max_retries: 3
+claude_timeout_seconds: 600
+sleep_between_tasks: 3
+build_check:
+  enabled: true
+  command: "npm run build"

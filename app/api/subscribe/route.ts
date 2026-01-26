@@ -80,8 +80,43 @@ export async function POST(request: Request) {
       lastName: data.lastName || null,
     });
 
-    // TODO: wire to real email/SMS provider (Resend, Postmark, Twilio, etc.)
-    console.log('New subscription:', { type: data.type });
+    // Send to Flodesk
+    if (data.email && process.env.FLODESK_API_KEY) {
+      try {
+        const flodeskPayload: Record<string, unknown> = {
+          email: data.email,
+        };
+
+        // Add to specific segment if configured
+        if (process.env.FLODESK_SEGMENT_ID) {
+          flodeskPayload.segment_ids = [process.env.FLODESK_SEGMENT_ID];
+        }
+
+        // Add name if provided
+        if (data.firstName) {
+          flodeskPayload.first_name = data.firstName;
+        }
+        if (data.lastName) {
+          flodeskPayload.last_name = data.lastName;
+        }
+
+        await fetch('https://api.flodesk.com/v1/subscribers', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Basic ${Buffer.from(process.env.FLODESK_API_KEY + ':').toString('base64')}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(flodeskPayload),
+        });
+
+        console.log('Subscriber added to Flodesk:', data.email);
+      } catch (flodeskError) {
+        // Log but don't fail - we still saved to local DB
+        console.error('Flodesk API error:', flodeskError);
+      }
+    } else {
+      console.log('New subscription (Flodesk not configured):', { type: data.type, email: data.email });
+    }
 
     return NextResponse.json({ success: true, message: 'Thanks for joining.' });
   } catch (error) {

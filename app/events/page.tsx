@@ -7,10 +7,10 @@ import { BrandCard } from '@/components/brand-card';
 import { FadeInView } from '@/components/motion/fade-in-view';
 import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-children';
 import { EventCard } from '@/components/cards/event-card';
-import { ViewportVideo } from '@/components/ViewportVideo';
+import { CalendarView } from '@/components/calendar';
 import { isFeatureEnabled } from '@/lib/features';
 import { PAGE_METADATA } from '@/lib/metadata';
-import { getGoldenHourEvents } from '@/lib/events';
+import { getGoldenHourEvents, getAllEvents } from '@/lib/events';
 
 export const metadata: Metadata = PAGE_METADATA.events;
 
@@ -29,15 +29,17 @@ export default function EventsPage() {
     <div className="bg-artistic">
       {/* Hero */}
       <section className="px-4 sm:px-6 py-12 md:py-16 text-white overflow-hidden relative">
-        {/* Purple dreamy background */}
-        <Image
-          src="/golden-hour-hero.png"
-          alt=""
-          fill
-          priority
-          className="object-cover object-center"
-          aria-hidden="true"
-        />
+        {/* Purple dreamy clouds - slow drift animation */}
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src="/golden-hour-hero.png"
+            alt=""
+            fill
+            priority
+            className="object-cover object-center animate-slow-drift"
+            aria-hidden="true"
+          />
+        </div>
         {/* Plum overlay */}
         <div className="absolute inset-0 bg-sun-plum/40" />
         <div className="max-w-5xl mx-auto space-y-5 text-center relative z-10">
@@ -66,6 +68,31 @@ export default function EventsPage() {
         </div>
       </section>
 
+      {/* Event Calendar */}
+      <section className="px-4 sm:px-6 py-12 md:py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-sun-cream via-sun-paper to-sun-cream" />
+        <div className="absolute inset-0 bg-gradient-to-br from-sun-gold/10 via-transparent to-sun-plum/5" />
+        <div className="max-w-xl mx-auto relative z-10">
+          <div className="text-center mb-8">
+            <FadeInView>
+              <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-plum mb-2">
+                Plan Ahead
+              </p>
+            </FadeInView>
+            <FadeInView delay={0.1}>
+              <h2 className="font-headline text-3xl uppercase text-sun-cocoa">
+                Event Calendar
+              </h2>
+            </FadeInView>
+          </div>
+          <FadeInView delay={0.2}>
+            <BrandCard variant="white" className="p-6">
+              <CalendarView events={getAllEvents()} />
+            </BrandCard>
+          </FadeInView>
+        </div>
+      </section>
+
       {/* Golden Hour Zone */}
       <section id="events" className="px-4 sm:px-6 py-16 md:py-24 text-white overflow-hidden relative bg-gradient-to-br from-sun-coral via-sun-gold/80 to-sun-coral">
 
@@ -73,17 +100,17 @@ export default function EventsPage() {
           {/* Section Header */}
           <div className="text-center mb-12 md:mb-16">
             <FadeInView>
-              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-gold mb-3">
+              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-sm text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] mb-3">
                 Los Angeles Events
               </p>
             </FadeInView>
             <FadeInView delay={0.1}>
-              <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.95] tracking-tight mb-4">
+              <h2 className="font-headline text-[clamp(2rem,5vw,3.5rem)] uppercase leading-[0.95] tracking-tight mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
                 High energy. Real momentum.
               </h2>
             </FadeInView>
             <FadeInView delay={0.2}>
-              <p className="font-body text-lg leading-relaxed max-w-2xl mx-auto text-white/90">
+              <p className="font-body text-lg leading-relaxed max-w-2xl mx-auto text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.2)]">
                 Coaching, storytelling, and connections that actually move the needle. Leave with clarity, momentum, and women who push you forward.
               </p>
             </FadeInView>
@@ -116,15 +143,12 @@ export default function EventsPage() {
           <StaggerChildren className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.15}>
             {getGoldenHourEvents().map((event) => (
               <StaggerItem key={event.id}>
-                <EventCard
-                  title={event.title}
-                  date={event.date}
-                  time={event.time}
-                  description={event.description}
-                  type={event.type}
-                  location={event.location}
-                  ctaText={event.price === 'Free' ? 'RSVP Free' : `RSVP · ${event.price}`}
-                />
+                <div id={`event-${event.id}`}>
+                  <EventCard
+                    event={event}
+                    ctaText={event.price === 'Free' ? 'RSVP Free' : `RSVP · ${event.price}`}
+                  />
+                </div>
               </StaggerItem>
             ))}
           </StaggerChildren>
@@ -141,8 +165,13 @@ export default function EventsPage() {
       </section>
 
       {/* Past Events Gallery */}
-      <section className="px-4 sm:px-6 py-12 md:py-16 bg-artistic overflow-hidden border-t-2 border-sun-sky/20">
-        <div className="max-w-6xl mx-auto space-y-8">
+      <section className="px-4 sm:px-6 py-12 md:py-16 relative overflow-hidden">
+        {/* Elegant layered gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-sun-cream via-sun-paper to-sun-cream" />
+        <div className="absolute inset-0 bg-gradient-to-br from-sun-gold/15 via-transparent to-sun-plum/10" />
+        <div className="absolute top-0 left-1/3 w-[450px] h-[450px] rounded-full bg-sun-coral/10 blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[350px] h-[350px] rounded-full bg-sun-sky/15 blur-[90px]" />
+        <div className="max-w-6xl mx-auto space-y-8 relative z-10">
           <div className="space-y-2 text-center">
             <FadeInView>
               <p className="font-subhead uppercase tracking-[0.14em] text-sm text-sun-plum">Past Golden Hours</p>
