@@ -19,3 +19,12 @@ export const SOCIAL_LINKS = {
   instagram: 'https://instagram.com/thesunshineeffect',
   linkedin: 'https://linkedin.com/company/thesunshineeffect',
 };
+
+export const EVENT_CONFIG = {
+  name: 'Love Body Ritual',
+};
+
+export const PAYMENT_LINKS = {
+  venmo: 'https://venmo.com/u/SunshineB',
+  zelle: 'tel:19095189378',
+};

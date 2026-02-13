@@ -23,3 +23,13 @@ export const subscriptions = pgTable('subscriptions', {
   // Prevent duplicate email+type combinations
   emailTypeIdx: uniqueIndex('email_type_idx').on(table.email, table.type),
 }));
+
+// Event check-ins (QR code sign-in at events)
+export const eventCheckins = pgTable('event_checkins', {
+  id: serial('id').primaryKey(),
+  firstName: varchar('first_name', { length: 255 }).notNull(),
+  lastName: varchar('last_name', { length: 255 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull(),
+  phone: varchar('phone', { length: 50 }).notNull(),
+  checkedInAt: timestamp('checked_in_at').defaultNow().notNull(),
+});
