@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import Image from 'next/image';
 import { FadeInView } from '@/components/motion/fade-in-view';
 import { ScaleIn } from '@/components/motion/scale-in';
@@ -13,13 +13,21 @@ export default function CheckinPage() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [joinMailingList, setJoinMailingList] = useState(false);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+
+  // Persist success state across page refreshes
+  useEffect(() => {
+    if (sessionStorage.getItem('checkin-complete')) {
+      setStatus('success');
+    }
+  }, []);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !phone) {
+    if (!firstName.trim() || !lastName.trim() || !email.trim() || !phone.trim()) {
       setStatus('error');
       setErrorMessage('Please fill out all fields.');
       return;
@@ -32,13 +40,14 @@ export default function CheckinPage() {
       const res = await fetch('/api/checkin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName, lastName, email, phone }),
+        body: JSON.stringify({ firstName, lastName, email, phone, joinMailingList }),
       });
 
       if (!res.ok) {
         throw new Error('Check-in failed');
       }
 
+      sessionStorage.setItem('checkin-complete', 'true');
       setStatus('success');
     } catch {
       setStatus('error');
@@ -47,12 +56,15 @@ export default function CheckinPage() {
   };
 
   const inputStyles =
-    'w-full h-11 px-4 rounded-full font-body text-sm border-2 outline-none transition-all duration-200 bg-sun-paper border-sun-sand text-sun-cocoa placeholder:text-sun-cocoa/50 focus:border-sun-plum focus:ring-2 focus:ring-sun-plum/30 focus:ring-offset-0';
+    'w-full h-11 px-4 rounded-full font-body text-sm border-2 outline-none transition-all duration-200 bg-sun-paper border-sun-sand text-sun-cocoa placeholder:text-sun-cocoa/50 focus:border-sun-plum focus:ring-2 focus:ring-sun-plum/30 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed';
+
+  const paymentLinkStyles =
+    'group flex items-center gap-4 px-6 py-4 rounded-2xl bg-sun-plum hover:bg-sun-plum/90 transition-colors duration-300 w-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sun-cocoa focus-visible:ring-offset-2';
 
   // ─── CONFIRMATION STATE ───
   if (status === 'success') {
     return (
-      <main className="min-h-screen">
+      <div className="min-h-screen">
         {/* Hero confirmation */}
         <section className="bg-sun-plum text-white px-6 py-16 md:py-20 overflow-hidden">
           <div className="max-w-4xl mx-auto text-center space-y-6">
@@ -92,7 +104,7 @@ export default function CheckinPage() {
                   href={PAYMENT_LINKS.venmo}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 px-6 py-4 rounded-2xl bg-sun-plum hover:bg-sun-plum/90 transition-colors duration-300 w-full"
+                  className={paymentLinkStyles}
                 >
                   <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sun-paper text-sun-plum font-headline text-lg group-hover:scale-110 transition-transform duration-300">
                     $
@@ -111,7 +123,7 @@ export default function CheckinPage() {
               <StaggerItem>
                 <a
                   href={PAYMENT_LINKS.zelle}
-                  className="group flex items-center gap-4 px-6 py-4 rounded-2xl bg-sun-plum hover:bg-sun-plum/90 transition-colors duration-300 w-full"
+                  className={paymentLinkStyles}
                 >
                   <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sun-paper text-sun-plum font-headline text-lg group-hover:scale-110 transition-transform duration-300">
                     $
@@ -135,13 +147,13 @@ export default function CheckinPage() {
             </FadeInView>
           </div>
         </section>
-      </main>
+      </div>
     );
   }
 
   // ─── FORM STATE ───
   return (
-    <main className="bg-sun-cream min-h-screen flex items-center justify-center px-4 py-12">
+    <div className="bg-sun-cream min-h-screen flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         <FadeInView duration={0.7}>
           <div className="text-center mb-8">
@@ -176,8 +188,11 @@ export default function CheckinPage() {
                       if (status === 'error') setStatus('idle');
                     }}
                     placeholder="First name"
+                    autoComplete="given-name"
+                    maxLength={255}
                     disabled={status === 'loading'}
                     className={inputStyles}
+                    aria-describedby={status === 'error' ? 'checkin-error' : undefined}
                   />
                 </div>
                 <div>
@@ -191,8 +206,11 @@ export default function CheckinPage() {
                       if (status === 'error') setStatus('idle');
                     }}
                     placeholder="Last name"
+                    autoComplete="family-name"
+                    maxLength={255}
                     disabled={status === 'loading'}
                     className={inputStyles}
+                    aria-describedby={status === 'error' ? 'checkin-error' : undefined}
                   />
                 </div>
               </div>
@@ -208,8 +226,12 @@ export default function CheckinPage() {
                     if (status === 'error') setStatus('idle');
                   }}
                   placeholder="Email"
+                  autoComplete="email"
+                  inputMode="email"
+                  maxLength={255}
                   disabled={status === 'loading'}
                   className={inputStyles}
+                  aria-describedby={status === 'error' ? 'checkin-error' : undefined}
                 />
               </div>
 
@@ -224,13 +246,30 @@ export default function CheckinPage() {
                     if (status === 'error') setStatus('idle');
                   }}
                   placeholder="Phone number"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  maxLength={50}
                   disabled={status === 'loading'}
                   className={inputStyles}
+                  aria-describedby={status === 'error' ? 'checkin-error' : undefined}
                 />
               </div>
 
+              <label className="flex items-start gap-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={joinMailingList}
+                  onChange={(e) => setJoinMailingList(e.target.checked)}
+                  disabled={status === 'loading'}
+                  className="mt-1 h-4 w-4 rounded border-sun-sand text-sun-plum focus:ring-sun-plum/30 accent-sun-plum"
+                />
+                <span className="font-body text-xs text-sun-cocoa/70 leading-relaxed">
+                  Also join The Sunshine Effect mailing list for events, updates, and inspo
+                </span>
+              </label>
+
               {status === 'error' && errorMessage && (
-                <p className="text-sun-coral text-sm font-body" role="alert">
+                <p id="checkin-error" className="text-sun-coral text-sm font-body" role="alert">
                   {errorMessage}
                 </p>
               )}
@@ -247,6 +286,6 @@ export default function CheckinPage() {
           </div>
         </FadeInView>
       </div>
-    </main>
+    </div>
   );
 }

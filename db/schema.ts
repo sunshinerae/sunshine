@@ -31,5 +31,8 @@ export const eventCheckins = pgTable('event_checkins', {
   lastName: varchar('last_name', { length: 255 }).notNull(),
   email: varchar('email', { length: 255 }).notNull(),
   phone: varchar('phone', { length: 50 }).notNull(),
+  eventName: varchar('event_name', { length: 255 }).notNull(),
   checkedInAt: timestamp('checked_in_at').defaultNow().notNull(),
-});
+}, (table) => ({
+  checkinEmailEventIdx: uniqueIndex('checkin_email_event_idx').on(table.email, table.eventName),
+}));
