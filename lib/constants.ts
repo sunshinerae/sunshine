@@ -16,7 +16,7 @@ export const NAV_LINKS = [
 export const HOME_SECTIONS = ['home', 'alignment', 'pathway', 'offerings', 'events', 'community'];
 
 export const SOCIAL_LINKS = {
-  instagram: 'https://instagram.com/thesunshineeffect',
+  instagram: 'https://instagram.com/raesunshineirl',
   linkedin: 'https://linkedin.com/company/thesunshineeffect',
 };
 
@@ -26,5 +26,5 @@ export const EVENT_CONFIG = {
 
 export const PAYMENT_LINKS = {
   venmo: 'https://venmo.com/u/SunshineB',
-  zelle: 'tel:19095189378',
+  zelle: 'tel:19095199378',
 };

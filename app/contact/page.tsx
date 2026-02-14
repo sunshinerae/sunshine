@@ -184,7 +184,7 @@ export default function ContactPage() {
                 </p>
               </div>
               <span className="font-subhead text-sm text-sun-plum group-hover:text-white transition-colors duration-300">
-                @thesunshineeffect
+                @raesunshineirl
               </span>
             </Link>
 

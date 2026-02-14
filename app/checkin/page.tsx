@@ -86,16 +86,19 @@ export default function CheckinPage() {
           </div>
         </section>
 
-        {/* Tip section */}
+        {/* Donation section */}
         <section className="bg-sun-cream px-6 py-12 md:py-16 overflow-hidden">
           <div className="max-w-md mx-auto">
-            <FadeInView className="text-center mb-8">
+            <FadeInView className="text-center mb-6">
               <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum mb-3">
                 Show some love
               </p>
-              <h2 className="font-headline text-[clamp(1.5rem,4vw,2.5rem)] uppercase leading-[0.9] tracking-tight text-sun-plum">
+              <h2 className="font-headline text-[clamp(1.5rem,4vw,2.5rem)] uppercase leading-[0.9] tracking-tight text-sun-plum mb-3">
                 Leave a tip
               </h2>
+              <p className="font-body text-sm leading-relaxed text-sun-cocoa/80 max-w-sm mx-auto">
+                Every donation is reinvested into future sessions — supporting facilitators and covering the costs of creating safe, intentional spaces.
+              </p>
             </FadeInView>
 
             <StaggerChildren className="flex flex-col gap-4 mb-8">
@@ -114,7 +117,7 @@ export default function CheckinPage() {
                       Venmo
                     </h3>
                     <p className="font-body text-xs text-white/80">
-                      Tap to open Venmo
+                      @SunshineB
                     </p>
                   </div>
                 </a>
@@ -133,7 +136,7 @@ export default function CheckinPage() {
                       Zelle
                     </h3>
                     <p className="font-body text-xs text-white/80">
-                      Tap to open Zelle
+                      (909) 519-9378
                     </p>
                   </div>
                 </a>

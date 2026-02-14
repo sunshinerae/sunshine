@@ -44,18 +44,18 @@ export default function HomePage() {
         {/* Bold headline */}
         <div className="space-y-4">
           <FadeInView delay={0} duration={0.7}>
-            <h1 className="font-headline text-[clamp(3rem,10vw,7rem)] uppercase leading-[0.85] tracking-tight text-white font-bold drop-shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
-              Stop playing<br />small.
+            <h1 className="font-headline text-[clamp(2.5rem,8vw,5.5rem)] uppercase leading-[0.85] tracking-tight text-white font-bold drop-shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+              Welcome —<br />so glad you&apos;re here.
             </h1>
           </FadeInView>
           <FadeInView delay={0.15} duration={0.6}>
-            <p className="font-headline text-[clamp(1.8rem,5vw,3.5rem)] uppercase leading-[0.9] tracking-tight text-sun-plum drop-shadow-[0_2px_10px_rgba(255,255,255,0.5)]">
-              Your next chapter starts here.
+            <p className="font-headline text-[clamp(1.5rem,4vw,2.8rem)] uppercase leading-[0.9] tracking-tight text-sun-plum drop-shadow-[0_2px_10px_rgba(255,255,255,0.5)]">
+              The Sunshine Effect welcomes you
             </p>
           </FadeInView>
           <FadeInView delay={0.25} duration={0.6}>
-            <p className="font-subhead text-xl md:text-2xl text-white font-bold uppercase tracking-wide drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
-              The Sunshine Effect
+            <p className="font-body text-lg md:text-xl text-white/90 max-w-xl mx-auto leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
+              Wellness + community for the ambitious and the tired.
             </p>
           </FadeInView>
         </div>
