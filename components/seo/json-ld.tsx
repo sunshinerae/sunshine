@@ -119,7 +119,6 @@ export function OrganizationJsonLd() {
     description: SITE_CONFIG.description,
     sameAs: [
       SOCIAL_LINKS.instagram,
-      SOCIAL_LINKS.linkedin,
     ],
     contactPoint: {
       '@type': 'ContactPoint',

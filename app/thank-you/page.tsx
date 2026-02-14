@@ -133,32 +133,12 @@ export default function ThankYouPage() {
                     Instagram
                   </h3>
                   <p className="font-body text-xs text-white/80">
-                    @raesunshineirl
+                    @raeofsunshineirl
                   </p>
                 </div>
               </Link>
             </StaggerItem>
 
-            <StaggerItem>
-              <Link
-                href={SOCIAL_LINKS.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-4 px-6 py-4 rounded-2xl bg-sun-plum hover:bg-sun-plum/90 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sun-cocoa focus-visible:ring-offset-2 w-full sm:w-auto"
-              >
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sun-paper text-sun-plum font-headline text-lg group-hover:scale-110 transition-transform duration-300">
-                  in
-                </span>
-                <div className="text-left">
-                  <h3 className="font-headline text-base uppercase text-white mb-0.5">
-                    LinkedIn
-                  </h3>
-                  <p className="font-body text-xs text-white/80">
-                    The Sunshine Effect
-                  </p>
-                </div>
-              </Link>
-            </StaggerItem>
           </StaggerChildren>
         </div>
       </section>

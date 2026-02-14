@@ -4,7 +4,6 @@ import { useState, useEffect, FormEvent } from 'react';
 import Image from 'next/image';
 import { FadeInView } from '@/components/motion/fade-in-view';
 import { ScaleIn } from '@/components/motion/scale-in';
-import { StaggerChildren, StaggerItem } from '@/components/motion/stagger-children';
 import { CTAButton } from '@/components/ui/cta-button';
 import { EVENT_CONFIG, PAYMENT_LINKS } from '@/lib/constants';
 
@@ -16,6 +15,7 @@ export default function CheckinPage() {
   const [joinMailingList, setJoinMailingList] = useState(false);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [zelleCopied, setZelleCopied] = useState(false);
 
   // Persist success state across page refreshes
   useEffect(() => {
@@ -59,92 +59,107 @@ export default function CheckinPage() {
     'w-full h-11 px-4 rounded-full font-body text-sm border-2 outline-none transition-all duration-200 bg-sun-paper border-sun-sand text-sun-cocoa placeholder:text-sun-cocoa/50 focus:border-sun-plum focus:ring-2 focus:ring-sun-plum/30 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const paymentLinkStyles =
-    'group flex items-center gap-4 px-6 py-4 rounded-2xl bg-sun-plum hover:bg-sun-plum/90 transition-colors duration-300 w-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sun-cocoa focus-visible:ring-offset-2';
+    'group flex min-h-[52px] items-center gap-4 px-6 py-4 rounded-2xl bg-sun-plum hover:bg-sun-plum/90 text-white transition-colors duration-300 w-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sun-cocoa focus-visible:ring-offset-2';
+  const successHeadlineStyles =
+    'font-headline text-[clamp(2.3rem,6vw,4.2rem)] uppercase leading-[0.86] tracking-[0.02em] text-white';
+  const successBodyStyles =
+    'font-body text-sm md:text-base leading-relaxed';
+  const cardLabelStyles =
+    'font-body text-xs uppercase tracking-[0.12em] text-sun-cocoa/70 text-center';
 
   // ─── CONFIRMATION STATE ───
   if (status === 'success') {
     return (
       <div className="min-h-screen">
         {/* Hero confirmation */}
-        <section className="bg-sun-plum text-white px-6 py-16 md:py-20 overflow-hidden">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
+        <section className="bg-sun-plum text-white px-6 py-10 md:py-14 overflow-hidden">
+          <div className="max-w-3xl mx-auto text-center space-y-4">
             <ScaleIn delay={0.1} initialScale={0.5} duration={0.5} className="inline-block">
-              <span className="text-6xl md:text-7xl block mb-4" role="img" aria-label="fire">
-                🔥
+              <span className="text-6xl md:text-7xl block mb-2" role="img" aria-label="spark">
+                ⟡
               </span>
             </ScaleIn>
             <FadeInView delay={0.2} duration={0.7}>
-              <h1 className="font-headline text-[clamp(2.5rem,6vw,4.5rem)] uppercase leading-[0.9] tracking-tight">
-                You&apos;re in the room.
+              <h1 className={successHeadlineStyles}>
+                You&apos;re in.
+                <br />
+                Welcome to the Orbit.
               </h1>
             </FadeInView>
             <FadeInView delay={0.4} direction="none" duration={0.7}>
-              <p className="font-subhead text-lg text-sun-gold">
-                {EVENT_CONFIG.name}
+              <p className={`${successBodyStyles} text-white/90 max-w-lg mx-auto`}>
+                This event is yours too. Your contribution supports the facilitators who held this space and is reinvested into future gatherings for this community.
               </p>
             </FadeInView>
-          </div>
-        </section>
-
-        {/* Donation section */}
-        <section className="bg-sun-cream px-6 py-12 md:py-16 overflow-hidden">
-          <div className="max-w-md mx-auto">
-            <FadeInView className="text-center mb-6">
-              <p className="font-subhead uppercase tracking-[0.15em] font-bold text-xs text-sun-plum mb-3">
-                Show some love
-              </p>
-              <h2 className="font-headline text-[clamp(1.5rem,4vw,2.5rem)] uppercase leading-[0.9] tracking-tight text-sun-plum mb-3">
-                Leave a tip
-              </h2>
-              <p className="font-body text-sm leading-relaxed text-sun-cocoa/80 max-w-sm mx-auto">
-                Every donation is reinvested into future sessions — supporting facilitators and covering the costs of creating safe, intentional spaces.
-              </p>
+            <FadeInView delay={0.5} duration={0.6}>
+              <div className="max-w-lg mx-auto bg-sun-paper/95 text-sun-cocoa rounded-3xl p-5 md:p-7 text-left space-y-4">
+                <h2 className="font-headline text-[clamp(1.3rem,4vw,1.9rem)] uppercase leading-[0.95] tracking-[0.02em] text-sun-plum text-center">
+                  ⟡ Invest In Yourself ⟡
+                </h2>
+                <p className={cardLabelStyles}>
+                  Suggested contribution tiers
+                </p>
+                <p className="font-body text-sm text-sun-cocoa/85 text-center">
+                  $25 Grounded support • $35 Community builder • $45 Experience sponsor • $65 Elevated sponsor • $100 Legacy contribution
+                </p>
+                <div className="space-y-4 pt-1">
+                  <a
+                    href={PAYMENT_LINKS.venmo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={paymentLinkStyles}
+                  >
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sun-paper text-sun-plum font-headline text-lg">
+                      $
+                    </span>
+                    <div className="text-left">
+                      <h3 className="font-headline text-base uppercase mb-0.5">
+                        Venmo
+                      </h3>
+                      <p className="font-body text-xs text-white/80">
+                        @SunshineB • Open App
+                      </p>
+                    </div>
+                  </a>
+                  <a
+                    href={PAYMENT_LINKS.zelle}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${paymentLinkStyles} border-2 border-sun-gold/70`}
+                  >
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sun-gold text-sun-plum font-headline text-lg">
+                      Z
+                    </span>
+                    <div className="text-left">
+                      <h3 className="font-headline text-base uppercase mb-0.5">
+                        Zelle
+                      </h3>
+                      <p className="font-body text-xs text-white/80">
+                        (909) 519-9378 • Open App
+                      </p>
+                    </div>
+                  </a>
+                  <div className="flex items-center justify-center gap-3">
+                    <span className="font-body text-sm font-semibold text-sun-cocoa/80">
+                      Need to copy the Zelle number?
+                    </span>
+                    <button
+                      type="button"
+                      onClick={async () => {
+                        await navigator.clipboard.writeText('9095199378');
+                        setZelleCopied(true);
+                        setTimeout(() => setZelleCopied(false), 1500);
+                      }}
+                      className="font-body text-xs px-2 py-1 rounded bg-sun-plum text-white"
+                    >
+                      {zelleCopied ? 'Copied' : 'Copy'}
+                    </button>
+                  </div>
+                </div>
+              </div>
             </FadeInView>
-
-            <StaggerChildren className="flex flex-col gap-4 mb-8">
-              <StaggerItem>
-                <a
-                  href={PAYMENT_LINKS.venmo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={paymentLinkStyles}
-                >
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sun-paper text-sun-plum font-headline text-lg group-hover:scale-110 transition-transform duration-300">
-                    $
-                  </span>
-                  <div className="text-left">
-                    <h3 className="font-headline text-base uppercase text-white mb-0.5">
-                      Venmo
-                    </h3>
-                    <p className="font-body text-xs text-white/80">
-                      @SunshineB
-                    </p>
-                  </div>
-                </a>
-              </StaggerItem>
-
-              <StaggerItem>
-                <a
-                  href={PAYMENT_LINKS.zelle}
-                  className={paymentLinkStyles}
-                >
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-sun-paper text-sun-plum font-headline text-lg group-hover:scale-110 transition-transform duration-300">
-                    $
-                  </span>
-                  <div className="text-left">
-                    <h3 className="font-headline text-base uppercase text-white mb-0.5">
-                      Zelle
-                    </h3>
-                    <p className="font-body text-xs text-white/80">
-                      (909) 519-9378
-                    </p>
-                  </div>
-                </a>
-              </StaggerItem>
-            </StaggerChildren>
-
-            <FadeInView delay={0.4} className="text-center">
-              <p className="font-body text-sm text-sun-cocoa/60">
+            <FadeInView delay={0.6} className="text-center">
+              <p className="font-body text-sm text-white/80">
                 Thank you for being here.
               </p>
             </FadeInView>
@@ -267,7 +282,7 @@ export default function CheckinPage() {
                   className="mt-1 h-4 w-4 rounded border-sun-sand text-sun-plum focus:ring-sun-plum/30 accent-sun-plum"
                 />
                 <span className="font-body text-xs text-sun-cocoa/70 leading-relaxed">
-                  Also join The Sunshine Effect mailing list for events, updates, and inspo
+                  Bring me into orbit for the updates that move me forward.
                 </span>
               </label>
 

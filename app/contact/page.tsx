@@ -184,26 +184,10 @@ export default function ContactPage() {
                 </p>
               </div>
               <span className="font-subhead text-sm text-sun-plum group-hover:text-white transition-colors duration-300">
-                @raesunshineirl
+                @raeofsunshineirl
               </span>
             </Link>
 
-            {/* Secondary Social Links */}
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link
-                href={SOCIAL_LINKS.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-3 px-6 py-3 rounded-full bg-sun-sand hover:bg-sun-plum transition-colors duration-300 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sun-plum focus-visible:ring-offset-2"
-              >
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sun-plum text-white font-semibold group-hover:bg-white group-hover:text-sun-plum transition-colors duration-300">
-                  In
-                </span>
-                <span className="font-subhead text-sm text-sun-cocoa group-hover:text-white transition-colors duration-300">
-                  LinkedIn
-                </span>
-              </Link>
-            </div>
           </FadeInView>
         </div>
       </section>

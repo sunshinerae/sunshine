@@ -16,8 +16,7 @@ export const NAV_LINKS = [
 export const HOME_SECTIONS = ['home', 'alignment', 'pathway', 'offerings', 'events', 'community'];
 
 export const SOCIAL_LINKS = {
-  instagram: 'https://instagram.com/raesunshineirl',
-  linkedin: 'https://linkedin.com/company/thesunshineeffect',
+  instagram: 'https://www.instagram.com/raeofsunshineirl',
 };
 
 export const EVENT_CONFIG = {

@@ -48,11 +48,6 @@ export function Footer() {
                 IG
               </span>
             </Link>
-            <Link href={SOCIAL_LINKS.linkedin} aria-label="LinkedIn" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-coral focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-full transition-transform hover:scale-110">
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sun-coral text-sun-cocoa font-semibold">
-                In
-              </span>
-            </Link>
           </div>
         </div>
 
