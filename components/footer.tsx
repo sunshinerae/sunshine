@@ -36,12 +36,6 @@ export function Footer() {
               The Sunshine Effect
             </p>
           </div>
-          <p className="font-headline text-3xl leading-tight">
-            Stop playing small.
-          </p>
-          <p className="text-sm leading-relaxed">
-            Golden Hour events, momentum, and everything I&apos;m building for women who refuse to play small.
-          </p>
           <div className="flex items-center gap-4 pt-3">
             <Link href={SOCIAL_LINKS.instagram} aria-label="Instagram" className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sun-gold focus-visible:ring-offset-2 focus-visible:ring-offset-sun-plum rounded-full transition-transform hover:scale-110">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sun-gold text-sun-cocoa font-semibold">

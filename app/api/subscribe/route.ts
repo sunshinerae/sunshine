@@ -6,10 +6,10 @@ import { eq, and } from 'drizzle-orm';
 
 const subscribeSchema = z.object({
   type: z.enum(['newsletter', 'sms', 'glow-notes', 'guide', 'waitlist', 'launch']),
-  email: z.string().email().optional(),
-  phone: z.string().min(7).optional(),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
+  email: z.string().trim().toLowerCase().email().optional(),
+  phone: z.string().trim().min(7).optional(),
+  firstName: z.string().trim().optional(),
+  lastName: z.string().trim().optional(),
 }).superRefine((val, ctx) => {
   const needsPhone = val.type === 'sms';
   const needsEmail = val.type !== 'sms';
@@ -100,7 +100,7 @@ export async function POST(request: Request) {
           flodeskPayload.last_name = data.lastName;
         }
 
-        await fetch('https://api.flodesk.com/v1/subscribers', {
+        const flodeskRes = await fetch('https://api.flodesk.com/v1/subscribers', {
           method: 'POST',
           headers: {
             'Authorization': `Basic ${Buffer.from(process.env.FLODESK_API_KEY + ':').toString('base64')}`,
@@ -108,6 +108,11 @@ export async function POST(request: Request) {
           },
           body: JSON.stringify(flodeskPayload),
         });
+
+        if (!flodeskRes.ok) {
+          const errBody = await flodeskRes.text().catch(() => '');
+          throw new Error(`Flodesk sync failed (${flodeskRes.status}): ${errBody}`);
+        }
 
         console.log('Subscriber added to Flodesk:', data.email);
       } catch (flodeskError) {
