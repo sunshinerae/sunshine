@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sunshine Event Payment Sheet</title>
+  <style>
+    @page { size: Letter portrait; margin: 0.6in; }
+    body { font-family: "Helvetica Neue", Arial, sans-serif; color: #240D01; }
+    .wrap { border: 3px solid #6E054D; border-radius: 16px; padding: 18px; }
+    h1 { margin: 0; font-size: 28px; text-transform: uppercase; letter-spacing: 0.02em; color: #6E054D; }
+    .lead { margin: 8px 0 16px; font-size: 13px; }
+    .tiers { background: #FEF7F0; border: 1px solid #E9D7C7; border-radius: 10px; padding: 10px 12px; font-size: 13px; margin-bottom: 14px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .card { border: 2px solid #6E054D; border-radius: 12px; padding: 12px; min-height: 280px; }
+    .card h2 { margin: 0 0 8px; font-size: 24px; color: #6E054D; text-transform: uppercase; }
+    .big { font-size: 20px; font-weight: 700; margin: 6px 0 10px; }
+    .qr { border: 2px dashed #6E054D; border-radius: 10px; height: 170px; display: flex; align-items: center; justify-content: center; color: #6E054D; font-weight: 700; }
+    .link { margin-top: 10px; font-size: 11px; word-break: break-all; }
+    .foot { margin-top: 14px; font-size: 11px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Support This Event</h1>
+    <p class="lead">Thank you for being here. Contributions support facilitators and future community gatherings.</p>
+    <div class="tiers"><strong>Suggested tiers:</strong> $25 • $35 • $45 • $65 • $100</div>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Venmo</h2>
+        <div class="big">@SunshineB</div>
+        <div class="qr">PLACE VENMO QR HERE</div>
+        <div class="link">https://venmo.com/u/SunshineB</div>
+      </div>
+      <div class="card">
+        <h2>Zelle</h2>
+        <div class="big">(909) 519-9378</div>
+        <div class="qr">PLACE ZELLE QR HERE</div>
+        <div class="link">tel:+19095199378</div>
+      </div>
+    </div>
+
+    <div class="foot">The Sunshine Effect • Instagram: @raeofsunshineirl</div>
+  </div>
+</body>
+</html>
