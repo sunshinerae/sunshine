@@ -41,3 +41,6 @@ yarn-error.log*
 next-env.d.ts
 .env*.local
 .claude-transcripts/
+
+# social pipeline logs
+/output/
