@@ -22,6 +22,27 @@
       "when": 1771016992860,
       "tag": "0002_bright_omega_flight",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1771205889956,
+      "tag": "0003_magenta_venom",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1771212408545,
+      "tag": "0004_strange_nomad",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1771218830875,
+      "tag": "0005_plain_gideon",
+      "breakpoints": true
     }
   ]
 }

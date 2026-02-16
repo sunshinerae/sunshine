@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { db } from '@/db';
 import { subscriptions } from '@/db/schema';
 import { eq, and } from 'drizzle-orm';
+import { syncPerson } from '@/lib/admin/sync-person';
 
 const subscribeSchema = z.object({
   type: z.enum(['newsletter', 'sms', 'glow-notes', 'guide', 'waitlist', 'launch']),
@@ -121,6 +122,16 @@ export async function POST(request: Request) {
       }
     } else {
       console.log('New subscription (Flodesk not configured):', { type: data.type, email: data.email });
+    }
+
+    // Sync to people table for admin tool
+    if (data.email) {
+      await syncPerson({
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
+      });
     }
 
     return NextResponse.json({ success: true, message: 'Thanks for joining.' });

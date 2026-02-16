@@ -4,6 +4,7 @@ import { db } from '@/db';
 import { eventCheckins, subscriptions } from '@/db/schema';
 import { eq, and } from 'drizzle-orm';
 import { EVENT_CONFIG } from '@/lib/constants';
+import { syncPerson } from '@/lib/admin/sync-person';
 
 const checkinSchema = z.object({
   firstName: z.string().trim().min(1, 'First name is required').max(255),
@@ -130,6 +131,14 @@ export async function POST(request: Request) {
         });
       }
     }
+
+    // Sync to people table for admin tool
+    await syncPerson({
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phone: data.phone,
+    });
 
     return NextResponse.json({ success: true });
   } catch (error) {
