@@ -58,30 +58,10 @@ const GENERATION_MESSAGES = [
 ];
 
 const MOTION_STYLES = [
-  {
-    key: 'elegant',
-    name: 'Elegant',
-    description: 'Slow fades, gentle slides, smooth ease-in-out transitions. Perfect for luxury and premium brands.',
-    animation: 'transition-all duration-1000 ease-in-out',
-  },
-  {
-    key: 'energetic',
-    name: 'Energetic',
-    description: 'Quick bounces, spring physics, playful overshoot. Great for fitness, youth, and active brands.',
-    animation: 'transition-all duration-300',
-  },
-  {
-    key: 'minimal',
-    name: 'Minimal',
-    description: 'Subtle opacity changes, clean cuts, understated movement. Ideal for tech and professional brands.',
-    animation: 'transition-all duration-500 ease-linear',
-  },
-  {
-    key: 'playful',
-    name: 'Playful',
-    description: 'Wobbles, scale pops, rotation effects. Fun for creative and lifestyle brands.',
-    animation: 'transition-all duration-500',
-  },
+  { key: 'elegant', name: 'Elegant', description: 'Slow fades, gentle slides, smooth ease-in-out. Premium and luxury brands.' },
+  { key: 'energetic', name: 'Energetic', description: 'Quick bounces, spring physics, playful overshoot. Fitness and active brands.' },
+  { key: 'minimal', name: 'Minimal', description: 'Subtle opacity changes, clean cuts, understated. Tech and professional brands.' },
+  { key: 'playful', name: 'Playful', description: 'Wobbles, scale pops, rotation effects. Creative and lifestyle brands.' },
 ];
 
 const MOTION_SPEEDS = [
@@ -450,6 +430,20 @@ export default function BrandDeckWizardPage() {
     }
   }, [deck?.images]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ─── Hydrate Motion from Deck ──────────────────────────────────
+  useEffect(() => {
+    if (!deck?.motion) return;
+
+    try {
+      const data = typeof deck.motion === 'string' ? JSON.parse(deck.motion) : deck.motion;
+      if (data.style) setMotionStyle(data.style);
+      if (data.speed) setMotionSpeed(data.speed);
+      if (data.notes) setMotionNotes(data.notes);
+    } catch {
+      // Motion data not parseable — leave defaults
+    }
+  }, [deck?.motion]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // ─── Load Google Fonts for Visuals ──────────────────────────────
   useEffect(() => {
     if (!visualsData?.fontPairings) return;
@@ -679,6 +673,15 @@ export default function BrandDeckWizardPage() {
         payload.visuals = {
           ...existingVisuals,
           darkMode: { auto: darkModeColors, custom: darkModeCustom },
+        };
+      }
+
+      // Save motion data when leaving motion step
+      if (activeStep === 8) {
+        payload.motion = {
+          style: motionStyle,
+          speed: motionSpeed,
+          notes: motionNotes.trim(),
         };
       }
 
@@ -1309,6 +1312,134 @@ export default function BrandDeckWizardPage() {
               </button>
             </div>
           </div>
+        </div>
+      </div>
+    );
+  };
+
+  // ─── Motion Step Renderer ──────────────────────────────────
+
+  const renderMotionStep = () => {
+    // Resolve accent color from visuals data for the demo squares
+    let accentColor = '#f59e0b';
+    if (visualsData?.palettes?.length) {
+      const palette = visualsData.palettes[selectedPalette];
+      if (palette?.colors) {
+        accentColor = customColors.accent || palette.colors.accent || accentColor;
+      }
+    }
+
+    return (
+      <div className="space-y-8">
+        {/* Keyframe animations */}
+        <style>{`
+          @keyframes elegantSlide {
+            0%, 100% { transform: translateX(0); opacity: 0.7; }
+            50% { transform: translateX(20px); opacity: 1; }
+          }
+          @keyframes energeticBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+          }
+          @keyframes minimalPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+          }
+          @keyframes playfulSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.2); }
+            100% { transform: rotate(360deg) scale(1); }
+          }
+        `}</style>
+
+        <p className="text-sm text-zinc-400">
+          Choose an animation style that reflects your brand personality. The live previews show how elements will move throughout your brand deck.
+        </p>
+
+        {/* Style Cards - 2x2 grid */}
+        <div className="grid grid-cols-2 gap-4">
+          {MOTION_STYLES.map((style) => {
+            const isSelected = motionStyle === style.key;
+            const animationMap: Record<string, string> = {
+              elegant: 'elegantSlide 3s ease-in-out infinite',
+              energetic: 'energeticBounce 0.6s ease-in-out infinite',
+              minimal: 'minimalPulse 2s ease-in-out infinite',
+              playful: 'playfulSpin 2s ease-in-out infinite',
+            };
+
+            return (
+              <button
+                key={style.key}
+                onClick={() => setMotionStyle(style.key)}
+                className={`text-left bg-zinc-900 border rounded-xl p-5 transition-all hover:border-zinc-600 ${
+                  isSelected
+                    ? 'border-amber-500 ring-2 ring-amber-500/30'
+                    : 'border-zinc-800'
+                }`}
+              >
+                {/* Live animated demo */}
+                <div className="flex items-center justify-center h-20 mb-4 bg-zinc-950 rounded-lg overflow-hidden">
+                  <div
+                    style={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: 6,
+                      backgroundColor: accentColor,
+                      animation: animationMap[style.key],
+                    }}
+                  />
+                </div>
+
+                <h3 className={`text-sm font-semibold mb-1 ${
+                  isSelected ? 'text-amber-400' : 'text-zinc-200'
+                }`}>
+                  {style.name}
+                </h3>
+                <p className="text-xs text-zinc-500 leading-relaxed">
+                  {style.description}
+                </p>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Speed Preference */}
+        <div>
+          <label className="block text-sm font-medium text-zinc-300 mb-3">
+            Animation Speed
+          </label>
+          <div className="flex gap-2">
+            {MOTION_SPEEDS.map((speed) => {
+              const isSelected = motionSpeed === speed.key;
+              return (
+                <button
+                  key={speed.key}
+                  onClick={() => setMotionSpeed(speed.key)}
+                  className={`flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    isSelected
+                      ? 'bg-amber-600 text-white'
+                      : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-300 border border-zinc-700'
+                  }`}
+                >
+                  {speed.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Animation Notes */}
+        <div>
+          <label className="block text-sm font-medium text-zinc-300 mb-1.5">
+            Animation Notes <span className="text-zinc-600 text-xs font-normal">(optional)</span>
+          </label>
+          <textarea
+            value={motionNotes}
+            onChange={(e) => setMotionNotes(e.target.value)}
+            rows={3}
+            placeholder="Any additional notes about motion preferences — e.g., 'Keep hero sections static, only animate CTAs' or 'No rotation effects'..."
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none"
+          />
         </div>
       </div>
     );
@@ -2667,7 +2798,10 @@ export default function BrandDeckWizardPage() {
                 </h2>
               </div>
 
-              {activeStep === 7 ? (
+              {activeStep === 8 ? (
+                /* ─── Motion Direction ─────────────────────────── */
+                renderMotionStep()
+              ) : activeStep === 7 ? (
                 /* ─── Applications ──────────────────────────────── */
                 renderApplicationsStep()
               ) : activeStep === 6 ? (
