@@ -9,17 +9,18 @@ export const maxDuration = 60;
 
 async function launchBrowser(): Promise<Browser> {
   if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
-    const chromium = await import('@sparticuz/chromium');
-    const puppeteerCore = await import('puppeteer-core');
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const chromium = (await import('@sparticuz/chromium')).default;
+    const puppeteerCore = (await import('puppeteer-core')).default;
     return puppeteerCore.launch({
       args: chromium.args,
       executablePath: await chromium.executablePath(),
       headless: true,
       defaultViewport: { width: 816, height: 1056 },
-    });
+    }) as unknown as Browser;
   }
 
-  const puppeteer = await import('puppeteer');
+  const puppeteer = (await import('puppeteer')).default;
   return puppeteer.launch({
     headless: true,
     defaultViewport: { width: 816, height: 1056 },
