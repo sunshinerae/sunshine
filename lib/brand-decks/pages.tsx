@@ -5,7 +5,7 @@
 // Each page renders at letter-size ratio (8.5:11) for print-like layout.
 // ---------------------------------------------------------------------------
 
-interface DeckData {
+export interface DeckData {
   title: string;
   intake: {
     businessName: string;
