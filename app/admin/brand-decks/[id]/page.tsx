@@ -6,6 +6,7 @@ import {
   ArrowLeft, ArrowRight, Check, Loader2, Upload, RefreshCw,
   ClipboardList, Sparkles, Heart, Users, MessageSquare,
   Palette, Moon, Layout, Zap, Eye, Download, Plus, X,
+  Search, Camera,
 } from 'lucide-react';
 
 // ─── Types ──────────────────────────────────────────────────────
@@ -101,6 +102,14 @@ interface FoundationAudience {
   }[];
 }
 
+interface UnsplashImage {
+  id: string;
+  urls: { small: string; regular: string; full: string };
+  alt: string;
+  photographer: string;
+  photographerUrl: string;
+}
+
 // ─── Wizard Steps ───────────────────────────────────────────────
 
 const WIZARD_STEPS = [
@@ -169,6 +178,13 @@ export default function BrandDeckWizardPage() {
   const [selectedFont, setSelectedFont] = useState(0);
   const [customColors, setCustomColors] = useState<Record<string, string>>({});
   const [visualsData, setVisualsData] = useState<FoundationVisuals | null>(null);
+
+  // ─── Mood Board State ─────────────────────────────────────────
+  const [unsplashQuery, setUnsplashQuery] = useState('');
+  const [unsplashResults, setUnsplashResults] = useState<UnsplashImage[]>([]);
+  const [unsplashSearching, setUnsplashSearching] = useState(false);
+  const [moodBoardImages, setMoodBoardImages] = useState<UnsplashImage[]>([]);
+  const [photoNotes, setPhotoNotes] = useState('');
 
   // ─── Foundation State ──────────────────────────────────────────
   const [generating, setGenerating] = useState(false);
@@ -351,6 +367,23 @@ export default function BrandDeckWizardPage() {
     }
   }, [deck?.visuals]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ─── Hydrate Mood Board from Deck ──────────────────────────────
+  useEffect(() => {
+    if (!deck?.images) return;
+
+    try {
+      const data = typeof deck.images === 'string' ? JSON.parse(deck.images) : deck.images;
+      if (Array.isArray(data.moodBoard)) {
+        setMoodBoardImages(data.moodBoard);
+      }
+      if (data.photoNotes) {
+        setPhotoNotes(data.photoNotes);
+      }
+    } catch {
+      // Images data not parseable — leave defaults
+    }
+  }, [deck?.images]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // ─── Load Google Fonts for Visuals ──────────────────────────────
   useEffect(() => {
     if (!visualsData?.fontPairings) return;
@@ -363,6 +396,20 @@ export default function BrandDeckWizardPage() {
     return () => { document.head.removeChild(link); };
   }, [visualsData]);
 
+  // ─── Auto-search Unsplash when arriving at visuals step ──────
+  const unsplashAutoSearched = useRef(false);
+  useEffect(() => {
+    if (activeStep !== 5 || unsplashAutoSearched.current) return;
+    if (moodBoardImages.length > 0 || unsplashResults.length > 0) return;
+    // Build a query from intake keywords or business name
+    const kw = keywords.trim() || businessName.trim();
+    if (kw) {
+      unsplashAutoSearched.current = true;
+      setUnsplashQuery(kw);
+      searchUnsplash(kw);
+    }
+  }, [activeStep]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // ─── Logo Handler ────────────────────────────────────────────
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -373,6 +420,34 @@ export default function BrandDeckWizardPage() {
       setLogoDataUrl(reader.result as string);
     };
     reader.readAsDataURL(file);
+  };
+
+  // ─── Unsplash Search ────────────────────────────────────────────
+
+  const searchUnsplash = async (query: string) => {
+    if (!query.trim()) return;
+    setUnsplashSearching(true);
+    try {
+      const res = await fetch(`/api/admin/brand-decks/unsplash?query=${encodeURIComponent(query)}`);
+      if (res.ok) {
+        const data = await res.json();
+        setUnsplashResults(data.images || []);
+      }
+    } catch {
+      /* ignore */
+    } finally {
+      setUnsplashSearching(false);
+    }
+  };
+
+  const toggleMoodBoardImage = (image: UnsplashImage) => {
+    setMoodBoardImages((prev) => {
+      const exists = prev.find((img) => img.id === image.id);
+      if (exists) {
+        return prev.filter((img) => img.id !== image.id);
+      }
+      return [...prev, image];
+    });
   };
 
   // ─── Foundation Generation ──────────────────────────────────────
@@ -522,6 +597,10 @@ export default function BrandDeckWizardPage() {
           selectedPalette,
           selectedFont,
           customColors,
+        };
+        payload.images = {
+          moodBoard: moodBoardImages,
+          photoNotes: photoNotes.trim(),
         };
       }
 
@@ -875,6 +954,155 @@ export default function BrandDeckWizardPage() {
                 <p className="text-xs text-zinc-400 leading-relaxed mt-3">{fp.rationale}</p>
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* ── Divider ── */}
+        <div className="border-t border-zinc-800" />
+
+        {/* ── Section 3: Photography & Mood Board ── */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-1 flex items-center gap-2">
+            <Camera className="w-5 h-5 text-amber-400" />
+            Photography &amp; Mood Board
+          </h3>
+          <p className="text-sm text-zinc-500 mb-5">
+            Select 4-8 images that capture the visual feel of your brand.
+          </p>
+
+          {/* Selected Images */}
+          {moodBoardImages.length > 0 && (
+            <div className="mb-6">
+              <p className="text-xs font-medium text-zinc-400 mb-2">
+                Selected ({moodBoardImages.length})
+              </p>
+              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+                {moodBoardImages.map((img) => (
+                  <button
+                    key={img.id}
+                    type="button"
+                    onClick={() => toggleMoodBoardImage(img)}
+                    className="relative rounded-lg overflow-hidden cursor-pointer ring-2 ring-amber-500 aspect-square group"
+                  >
+                    <img
+                      src={img.urls.small}
+                      alt={img.alt || 'Mood board image'}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <X className="w-4 h-4 text-white" />
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Search Bar */}
+          <div className="flex gap-2 mb-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+              <input
+                type="text"
+                value={unsplashQuery}
+                onChange={(e) => setUnsplashQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    searchUnsplash(unsplashQuery);
+                  }
+                }}
+                placeholder="Search Unsplash for images..."
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg pl-9 pr-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+              />
+            </div>
+            <button
+              type="button"
+              onClick={() => searchUnsplash(unsplashQuery)}
+              disabled={unsplashSearching || !unsplashQuery.trim()}
+              className="px-4 py-2 bg-amber-600 hover:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors flex items-center gap-2"
+            >
+              {unsplashSearching ? (
+                <Loader2 className="w-4 h-4 animate-spin" />
+              ) : (
+                <Search className="w-4 h-4" />
+              )}
+              Search
+            </button>
+          </div>
+
+          {/* Results Grid */}
+          {unsplashSearching && unsplashResults.length === 0 && (
+            <div className="text-center py-12">
+              <Loader2 className="w-8 h-8 text-amber-400 animate-spin mx-auto mb-3" />
+              <p className="text-sm text-zinc-500">Searching images...</p>
+            </div>
+          )}
+
+          {!unsplashSearching && unsplashResults.length === 0 && unsplashQuery.trim() && (
+            <div className="text-center py-12">
+              <Camera className="w-10 h-10 text-zinc-700 mx-auto mb-3" />
+              <p className="text-sm text-zinc-500">No images found. Try a different search term.</p>
+            </div>
+          )}
+
+          {unsplashResults.length > 0 && (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {unsplashResults.map((img) => {
+                const isSelected = moodBoardImages.some((m) => m.id === img.id);
+                return (
+                  <button
+                    key={img.id}
+                    type="button"
+                    onClick={() => toggleMoodBoardImage(img)}
+                    className={`relative rounded-lg overflow-hidden cursor-pointer transition-all aspect-[4/3] group ${
+                      isSelected
+                        ? 'ring-2 ring-amber-500 ring-offset-2 ring-offset-zinc-950'
+                        : 'hover:ring-1 hover:ring-zinc-600'
+                    }`}
+                  >
+                    <img
+                      src={img.urls.small}
+                      alt={img.alt || 'Unsplash image'}
+                      className="w-full h-full object-cover"
+                    />
+                    {isSelected && (
+                      <div className="absolute top-2 right-2 w-6 h-6 bg-amber-500 rounded-full flex items-center justify-center">
+                        <Check className="w-3.5 h-3.5 text-white" />
+                      </div>
+                    )}
+                    <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent p-2 pt-6">
+                      <a
+                        href={img.photographerUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="text-[10px] text-white/70 hover:text-white/90 transition-colors"
+                      >
+                        {img.photographer}
+                      </a>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Photography Style Notes */}
+          <div className="mt-6">
+            <label className="block text-sm font-medium text-zinc-400 mb-2">
+              Photography Style Notes
+            </label>
+            <textarea
+              value={photoNotes}
+              onChange={(e) => setPhotoNotes(e.target.value)}
+              rows={3}
+              placeholder="Describe the photography direction for this brand (e.g. warm natural lighting, candid lifestyle shots, minimal flat lays...)"
+              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none"
+            />
+            <p className="text-xs text-zinc-600 mt-1">
+              Style notes will be included in the brand deck export.
+            </p>
           </div>
         </div>
       </div>
