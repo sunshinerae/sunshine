@@ -6,7 +6,7 @@ import {
   ArrowLeft, ArrowRight, Check, Loader2, Upload, RefreshCw,
   ClipboardList, Sparkles, Heart, Users, MessageSquare,
   Palette, Moon, Layout, Zap, Eye, Download, Plus, X,
-  Search, Camera,
+  Search, Camera, ExternalLink, Copy, CheckCircle, Link,
 } from 'lucide-react';
 import {
   InstagramPostMockup, InstagramProfileMockup,
@@ -19,6 +19,7 @@ import { BrandDeckPages, type DeckData } from '@/lib/brand-decks/pages';
 
 interface BrandDeck {
   id: number;
+  slug: string;
   title: string;
   status: string;
   currentStep: number;
@@ -223,6 +224,10 @@ export default function BrandDeckWizardPage() {
 
   // ─── Preview State ───────────────────────────────────────────
   const [previewZoom, setPreviewZoom] = useState(0.75);
+
+  // ─── Export State ───────────────────────────────────────────
+  const [pdfLoading, setPdfLoading] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   // ─── Mood Board State ─────────────────────────────────────────
   const [unsplashQuery, setUnsplashQuery] = useState('');
@@ -1600,6 +1605,212 @@ export default function BrandDeckWizardPage() {
     );
   };
 
+  // ─── Export Step Renderer ──────────────────────────────────
+
+  const renderExportStep = () => {
+    if (!deck) return null;
+
+    const shareableUrl = typeof window !== 'undefined'
+      ? `${window.location.origin}/brand/${deck.slug}`
+      : `/brand/${deck.slug}`;
+    const isCompleted = deck.status === 'completed';
+
+    const handleDownloadPdf = async () => {
+      setPdfLoading(true);
+      try {
+        const res = await fetch(`/api/admin/brand-decks/${id}/export-pdf`, { method: 'POST' });
+        if (!res.ok) throw new Error('PDF generation failed');
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${deck.title || 'brand-deck'}.pdf`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('PDF downloaded!');
+      } catch {
+        showToast('PDF generation failed');
+      } finally {
+        setPdfLoading(false);
+      }
+    };
+
+    const handleCopyLink = async () => {
+      try {
+        await navigator.clipboard.writeText(shareableUrl);
+        setLinkCopied(true);
+        showToast('Link copied to clipboard!');
+        setTimeout(() => setLinkCopied(false), 2000);
+      } catch {
+        showToast('Failed to copy link');
+      }
+    };
+
+    const handleMarkComplete = async () => {
+      try {
+        const res = await fetch(`/api/admin/brand-decks/${id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: 'completed' }),
+        });
+        if (!res.ok) throw new Error('Failed to mark as complete');
+        const data = await res.json();
+        setDeck(data.deck);
+        showToast('Brand deck marked as complete!');
+      } catch {
+        showToast('Failed to update status');
+      }
+    };
+
+    return (
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-8 text-center">
+          <div className="text-4xl mb-4">🎉</div>
+          <h3 className="text-2xl font-bold text-zinc-100 mb-2">
+            Your Brand Deck is Ready!
+          </h3>
+          <p className="text-lg text-zinc-300">{deck.title}</p>
+          <p className="text-sm text-zinc-500 mt-1">
+            Created {new Date(deck.createdAt).toLocaleDateString('en-US', {
+              month: 'long',
+              day: 'numeric',
+              year: 'numeric',
+            })}
+          </p>
+          {isCompleted && (
+            <span className="inline-flex items-center gap-1.5 mt-3 px-3 py-1 bg-emerald-500/20 text-emerald-400 text-sm rounded-full">
+              <CheckCircle className="w-4 h-4" />
+              Completed
+            </span>
+          )}
+        </div>
+
+        {/* Download PDF */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-lg bg-amber-600/20 flex items-center justify-center flex-shrink-0">
+              <Download className="w-5 h-5 text-amber-400" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h4 className="text-lg font-semibold text-zinc-100">Download PDF</h4>
+              <p className="text-sm text-zinc-400 mt-1">
+                Get your complete brand deck as a print-ready PDF document.
+              </p>
+              <button
+                onClick={handleDownloadPdf}
+                disabled={pdfLoading}
+                className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-amber-600 hover:bg-amber-500 disabled:bg-zinc-800 disabled:text-zinc-600 text-white rounded-lg text-sm font-medium transition-colors"
+              >
+                {pdfLoading ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Generating PDF...
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-4 h-4" />
+                    Download PDF
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Shareable Link */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+          <div className="flex items-start gap-4">
+            <div className="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center flex-shrink-0">
+              <Link className="w-5 h-5 text-blue-400" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h4 className="text-lg font-semibold text-zinc-100">Shareable Link</h4>
+              <p className="text-sm text-zinc-400 mt-1">
+                Share with designers, printers, or anyone who needs access.
+              </p>
+              <div className="mt-4 flex items-stretch gap-2">
+                <div className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2.5 text-sm text-zinc-300 truncate font-mono">
+                  {shareableUrl}
+                </div>
+                <button
+                  onClick={handleCopyLink}
+                  className="flex items-center gap-2 px-4 py-2.5 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 rounded-lg text-sm font-medium transition-colors flex-shrink-0"
+                >
+                  {linkCopied ? (
+                    <>
+                      <Check className="w-4 h-4 text-emerald-400" />
+                      Copied
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-4 h-4" />
+                      Copy Link
+                    </>
+                  )}
+                </button>
+              </div>
+              <a
+                href={shareableUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 mt-3 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                Open in new tab
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Mark as Complete */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+          <div className="flex items-start gap-4">
+            <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
+              isCompleted ? 'bg-emerald-600/20' : 'bg-emerald-600/10'
+            }`}>
+              <CheckCircle className={`w-5 h-5 ${isCompleted ? 'text-emerald-400' : 'text-emerald-600'}`} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <h4 className="text-lg font-semibold text-zinc-100">Mark as Complete</h4>
+              <p className="text-sm text-zinc-400 mt-1">
+                Finalize this deck and make the shareable link live.
+              </p>
+              <p className="text-xs text-zinc-500 mt-1.5">
+                This makes your shareable link visible to anyone with the URL.
+              </p>
+              {isCompleted ? (
+                <div className="mt-4 inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600/20 text-emerald-400 rounded-lg text-sm font-medium">
+                  <CheckCircle className="w-4 h-4" />
+                  Deck Completed
+                </div>
+              ) : (
+                <button
+                  onClick={handleMarkComplete}
+                  className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-sm font-medium transition-colors"
+                >
+                  <Check className="w-4 h-4" />
+                  Mark Complete
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Edit Deck Button */}
+        <div className="pt-2">
+          <button
+            onClick={() => setActiveStep(0)}
+            className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Edit Deck
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   // ─── Visuals Step Renderer ──────────────────────────────────
 
   const renderVisualsStep = () => {
@@ -2852,7 +3063,9 @@ export default function BrandDeckWizardPage() {
     ? 'max-w-6xl'
     : activeStep === 1 || activeStep === 5 || activeStep === 6 || activeStep === 7
       ? 'max-w-5xl'
-      : 'max-w-3xl';
+      : activeStep === 10
+        ? 'max-w-2xl'
+        : 'max-w-3xl';
 
   const handleMobileStepSelect = (stepIndex: number) => {
     if (stepIndex <= maxReachableStep) {
@@ -3038,7 +3251,10 @@ export default function BrandDeckWizardPage() {
                 </p>
               </div>
 
-              {activeStep === 9 ? (
+              {activeStep === 10 ? (
+                /* ─── Export ───────────────────────────────────── */
+                renderExportStep()
+              ) : activeStep === 9 ? (
                 /* ─── Preview ──────────────────────────────────── */
                 renderPreviewStep()
               ) : activeStep === 8 ? (
@@ -3224,6 +3440,7 @@ export default function BrandDeckWizardPage() {
           </div>
 
           {/* Bottom Bar */}
+          {!isFinalStep && (
           <div className="sticky bottom-0 border-t border-zinc-800 bg-zinc-950/95 backdrop-blur px-4 sm:px-6 lg:px-8 py-3.5">
             <div className={`mx-auto flex items-center justify-between gap-3 ${contentWidthClass}`}>
               <button
@@ -3246,20 +3463,21 @@ export default function BrandDeckWizardPage() {
 
               <button
                 onClick={handleNext}
-                disabled={saving || isFinalStep}
+                disabled={saving}
                 className="flex items-center gap-2 px-5 py-2 bg-amber-600 hover:bg-amber-500 disabled:bg-zinc-800 disabled:text-zinc-600 text-white rounded-lg text-sm font-medium transition-colors"
               >
                 {saving ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
                 ) : (
                   <>
-                    {isFinalStep ? 'Done' : 'Next'}
-                    {!isFinalStep && <ArrowRight className="w-4 h-4" />}
+                    Next
+                    <ArrowRight className="w-4 h-4" />
                   </>
                 )}
               </button>
             </div>
           </div>
+          )}
         </main>
       </div>
     </div>
