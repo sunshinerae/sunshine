@@ -8,6 +8,11 @@ import {
   Palette, Moon, Layout, Zap, Eye, Download, Plus, X,
   Search, Camera,
 } from 'lucide-react';
+import {
+  InstagramPostMockup, InstagramProfileMockup,
+  BusinessCardMockup, LetterheadMockup,
+  EmailSignatureMockup, WebsiteHeroMockup,
+} from '@/lib/brand-decks/mockups';
 
 // ─── Types ──────────────────────────────────────────────────────
 
@@ -50,6 +55,39 @@ const GENERATION_MESSAGES = [
   'Building audience personas...',
   'Defining your voice...',
   'Almost there...',
+];
+
+const MOTION_STYLES = [
+  {
+    key: 'elegant',
+    name: 'Elegant',
+    description: 'Slow fades, gentle slides, smooth ease-in-out transitions. Perfect for luxury and premium brands.',
+    animation: 'transition-all duration-1000 ease-in-out',
+  },
+  {
+    key: 'energetic',
+    name: 'Energetic',
+    description: 'Quick bounces, spring physics, playful overshoot. Great for fitness, youth, and active brands.',
+    animation: 'transition-all duration-300',
+  },
+  {
+    key: 'minimal',
+    name: 'Minimal',
+    description: 'Subtle opacity changes, clean cuts, understated movement. Ideal for tech and professional brands.',
+    animation: 'transition-all duration-500 ease-linear',
+  },
+  {
+    key: 'playful',
+    name: 'Playful',
+    description: 'Wobbles, scale pops, rotation effects. Fun for creative and lifestyle brands.',
+    animation: 'transition-all duration-500',
+  },
+];
+
+const MOTION_SPEEDS = [
+  { key: 'slow', label: 'Slow' },
+  { key: 'medium', label: 'Medium' },
+  { key: 'fast', label: 'Fast' },
 ];
 
 // ─── Foundation Types ─────────────────────────────────────────
@@ -182,6 +220,11 @@ export default function BrandDeckWizardPage() {
   // ─── Dark Mode State ─────────────────────────────────────────
   const [darkModeColors, setDarkModeColors] = useState<Record<string, string>>({});
   const [darkModeCustom, setDarkModeCustom] = useState<Record<string, string>>({});
+
+  // ─── Motion State ─────────────────────────────────────────────
+  const [motionStyle, setMotionStyle] = useState('elegant');
+  const [motionSpeed, setMotionSpeed] = useState('medium');
+  const [motionNotes, setMotionNotes] = useState('');
 
   // ─── Mood Board State ─────────────────────────────────────────
   const [unsplashQuery, setUnsplashQuery] = useState('');
@@ -913,6 +956,119 @@ export default function BrandDeckWizardPage() {
     }
     setDarkModeColors(generateDarkPalette(effectiveLight));
   }, [activeStep, visualsData, selectedPalette, customColors, darkModeColors]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ─── Applications Step Renderer ───────────────────────────────
+
+  const renderApplicationsStep = () => {
+    // Gather brand data defensively from saved deck fields
+    let brandName = deck?.title || 'Brand';
+    try {
+      const intake = deck?.intake ? (typeof deck.intake === 'string' ? JSON.parse(deck.intake) : deck.intake) : null;
+      if (intake?.businessName) brandName = intake.businessName;
+    } catch { /* use default */ }
+
+    let tagline: string | undefined;
+    try {
+      const voice = deck?.voice ? (typeof deck.voice === 'string' ? JSON.parse(deck.voice) : deck.voice) : null;
+      if (voice?.selectedTagline) {
+        tagline = voice.selectedTagline;
+      } else if (Array.isArray(voice?.taglines) && voice.taglines.length > 0) {
+        tagline = voice.taglines[0];
+      }
+    } catch { /* no tagline */ }
+
+    let colors = { primary: '#6366f1', secondary: '#8b5cf6', accent: '#f59e0b', background: '#ffffff', text: '#18181b' };
+    let headingFont: string | undefined;
+    let bodyFont: string | undefined;
+    try {
+      const vis = deck?.visuals ? (typeof deck.visuals === 'string' ? JSON.parse(deck.visuals) : deck.visuals) : null;
+      if (vis) {
+        const paletteIdx = typeof vis.selectedPalette === 'number' ? vis.selectedPalette : 0;
+        const palette = vis.palettes?.[paletteIdx];
+        if (palette?.colors) {
+          const cc = vis.customColors || {};
+          colors = {
+            primary: cc.primary || palette.colors.primary || colors.primary,
+            secondary: cc.secondary || palette.colors.secondary || colors.secondary,
+            accent: cc.accent || palette.colors.accent || colors.accent,
+            background: cc.background || palette.colors.background || colors.background,
+            text: cc.text || palette.colors.text || colors.text,
+          };
+        }
+        const fontIdx = typeof vis.selectedFont === 'number' ? vis.selectedFont : 0;
+        const fp = vis.fontPairings?.[fontIdx];
+        if (fp) {
+          headingFont = fp.heading;
+          bodyFont = fp.body;
+        }
+      }
+    } catch { /* use defaults */ }
+
+    let moodBoardImage: string | undefined;
+    try {
+      const imgs = deck?.images ? (typeof deck.images === 'string' ? JSON.parse(deck.images) : deck.images) : null;
+      if (Array.isArray(imgs?.moodBoard) && imgs.moodBoard.length > 0) {
+        moodBoardImage = imgs.moodBoard[0].urls?.regular || imgs.moodBoard[0].urls?.small;
+      }
+    } catch { /* no image */ }
+
+    const mockupProps = { brandName, tagline, colors, headingFont, bodyFont, moodBoardImage };
+
+    return (
+      <div className="space-y-12">
+        {/* ── Social Media ──────────────────────────────────────── */}
+        <section>
+          <h3 className="text-lg font-medium text-zinc-200 mb-1 flex items-center gap-2">
+            <Camera className="w-5 h-5 text-amber-400" />
+            Social Media
+          </h3>
+          <p className="text-sm text-zinc-500 mb-6">
+            See how your brand looks on Instagram posts and profiles.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start justify-items-center">
+            <InstagramPostMockup {...mockupProps} />
+            <InstagramProfileMockup {...mockupProps} />
+          </div>
+        </section>
+
+        {/* ── Print & Stationery ────────────────────────────────── */}
+        <section>
+          <h3 className="text-lg font-medium text-zinc-200 mb-1 flex items-center gap-2">
+            <ClipboardList className="w-5 h-5 text-amber-400" />
+            Print &amp; Stationery
+          </h3>
+          <p className="text-sm text-zinc-500 mb-6">
+            Business cards and letterhead with your brand system applied.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start justify-items-center">
+            <BusinessCardMockup {...mockupProps} />
+            <LetterheadMockup {...mockupProps} />
+          </div>
+        </section>
+
+        {/* ── Digital ───────────────────────────────────────────── */}
+        <section>
+          <h3 className="text-lg font-medium text-zinc-200 mb-1 flex items-center gap-2">
+            <Layout className="w-5 h-5 text-amber-400" />
+            Digital
+          </h3>
+          <p className="text-sm text-zinc-500 mb-6">
+            Email signatures and a website hero section preview.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start justify-items-center">
+            <EmailSignatureMockup {...mockupProps} />
+            <WebsiteHeroMockup {...mockupProps} />
+          </div>
+        </section>
+
+        {/* ── Note ──────────────────────────────────────────────── */}
+        <p className="text-sm text-zinc-500 text-center mt-4">
+          These mockups use your selected brand colors, fonts, and images.
+          Go back to previous steps to make adjustments.
+        </p>
+      </div>
+    );
+  };
 
   // ─── Dark Mode Step Renderer ──────────────────────────────────
 
@@ -2503,7 +2659,7 @@ export default function BrandDeckWizardPage() {
         <main className="flex-1 flex flex-col">
           {/* Step Content */}
           <div className="flex-1 p-8">
-            <div className={`mx-auto ${activeStep === 1 || activeStep === 5 || activeStep === 6 ? 'max-w-5xl' : 'max-w-3xl'}`}>
+            <div className={`mx-auto ${activeStep === 1 || activeStep === 5 || activeStep === 6 || activeStep === 7 ? 'max-w-5xl' : 'max-w-3xl'}`}>
               <div className="flex items-center gap-3 mb-6">
                 <currentStepData.icon className="w-6 h-6 text-amber-400" />
                 <h2 className="text-xl font-semibold text-zinc-100">
@@ -2511,7 +2667,10 @@ export default function BrandDeckWizardPage() {
                 </h2>
               </div>
 
-              {activeStep === 6 ? (
+              {activeStep === 7 ? (
+                /* ─── Applications ──────────────────────────────── */
+                renderApplicationsStep()
+              ) : activeStep === 6 ? (
                 /* ─── Dark Mode ─────────────────────────────────── */
                 renderDarkModeStep()
               ) : activeStep === 5 ? (
