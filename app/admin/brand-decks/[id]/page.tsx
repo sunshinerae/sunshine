@@ -143,6 +143,17 @@ export default function BrandDeckWizardPage() {
   const [identityValues, setIdentityValues] = useState<{ name: string; description: string }[]>([]);
   const [identityPersonality, setIdentityPersonality] = useState<{ trait: string; description: string }[]>([]);
 
+  // ─── Audience Form State ─────────────────────────────────────────
+  const [audiencePersonas, setAudiencePersonas] = useState<{
+    name: string;
+    ageRange: string;
+    occupation: string;
+    location: string;
+    painPoints: string[];
+    goals: string[];
+    channels: string[];
+  }[]>([]);
+
   // ─── Foundation State ──────────────────────────────────────────
   const [generating, setGenerating] = useState(false);
   const [generationMsgIndex, setGenerationMsgIndex] = useState(0);
@@ -240,6 +251,36 @@ export default function BrandDeckWizardPage() {
       // Identity data not parseable — leave defaults
     }
   }, [deck?.identity]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ─── Hydrate Audience Form from Deck ──────────────────────────────
+  useEffect(() => {
+    if (!deck?.audience) return;
+
+    try {
+      const data = typeof deck.audience === 'string' ? JSON.parse(deck.audience) : deck.audience;
+      if (Array.isArray(data.personas)) {
+        setAudiencePersonas(data.personas.map((p: {
+          name?: string;
+          ageRange?: string;
+          occupation?: string;
+          location?: string;
+          painPoints?: string[];
+          goals?: string[];
+          channels?: string[];
+        }) => ({
+          name: p.name || '',
+          ageRange: p.ageRange || '',
+          occupation: p.occupation || '',
+          location: p.location || '',
+          painPoints: Array.isArray(p.painPoints) ? p.painPoints : [],
+          goals: Array.isArray(p.goals) ? p.goals : [],
+          channels: Array.isArray(p.channels) ? p.channels : [],
+        })));
+      }
+    } catch {
+      // Audience data not parseable — leave defaults
+    }
+  }, [deck?.audience]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ─── Logo Handler ────────────────────────────────────────────
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -360,6 +401,21 @@ export default function BrandDeckWizardPage() {
         };
       }
 
+      // Save audience data when leaving audience step
+      if (activeStep === 3) {
+        payload.audience = {
+          personas: audiencePersonas.map((p) => ({
+            name: p.name.trim(),
+            ageRange: p.ageRange.trim(),
+            occupation: p.occupation.trim(),
+            location: p.location.trim(),
+            painPoints: p.painPoints.map((pp) => pp.trim()).filter(Boolean),
+            goals: p.goals.map((g) => g.trim()).filter(Boolean),
+            channels: p.channels.map((ch) => ch.trim()).filter(Boolean),
+          })),
+        };
+      }
+
       // Update currentStep if advancing beyond the saved step
       if (nextStep > deck.currentStep) {
         payload.currentStep = nextStep;
@@ -428,6 +484,253 @@ export default function BrandDeckWizardPage() {
 
   const addTrait = () => {
     setIdentityPersonality((prev) => [...prev, { trait: '', description: '' }]);
+  };
+
+  // ─── Audience Step Helpers ────────────────────────────────────
+
+  const updatePersona = (index: number, field: string, value: string) => {
+    setAudiencePersonas((prev) =>
+      prev.map((p, i) => (i === index ? { ...p, [field]: value } : p))
+    );
+  };
+
+  const removePersona = (index: number) => {
+    setAudiencePersonas((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const addPersona = () => {
+    setAudiencePersonas((prev) => [
+      ...prev,
+      { name: '', ageRange: '', occupation: '', location: '', painPoints: [''], goals: [''], channels: [''] },
+    ]);
+  };
+
+  const updatePersonaListItem = (
+    personaIndex: number,
+    field: 'painPoints' | 'goals' | 'channels',
+    itemIndex: number,
+    value: string,
+  ) => {
+    setAudiencePersonas((prev) =>
+      prev.map((p, i) => {
+        if (i !== personaIndex) return p;
+        const updated = [...p[field]];
+        updated[itemIndex] = value;
+        return { ...p, [field]: updated };
+      })
+    );
+  };
+
+  const removePersonaListItem = (
+    personaIndex: number,
+    field: 'painPoints' | 'goals' | 'channels',
+    itemIndex: number,
+  ) => {
+    setAudiencePersonas((prev) =>
+      prev.map((p, i) => {
+        if (i !== personaIndex) return p;
+        return { ...p, [field]: p[field].filter((_, j) => j !== itemIndex) };
+      })
+    );
+  };
+
+  const addPersonaListItem = (
+    personaIndex: number,
+    field: 'painPoints' | 'goals' | 'channels',
+  ) => {
+    setAudiencePersonas((prev) =>
+      prev.map((p, i) => {
+        if (i !== personaIndex) return p;
+        return { ...p, [field]: [...p[field], ''] };
+      })
+    );
+  };
+
+  // ─── Audience Step Renderer ──────────────────────────────────
+
+  const renderAudienceStep = () => {
+    return (
+      <div className="space-y-6">
+        {audiencePersonas.map((persona, pi) => (
+          <div
+            key={pi}
+            className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 space-y-4"
+          >
+            {/* Header row: persona name + remove */}
+            <div className="flex items-center justify-between gap-4">
+              <input
+                type="text"
+                value={persona.name}
+                onChange={(e) => updatePersona(pi, 'name', e.target.value)}
+                placeholder="Persona name"
+                className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-lg font-semibold text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+              />
+              {audiencePersonas.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => removePersona(pi)}
+                  className="text-zinc-500 hover:text-red-400 transition-colors text-sm flex items-center gap-1"
+                >
+                  <X className="w-4 h-4" />
+                  Remove
+                </button>
+              )}
+            </div>
+
+            {/* Demographics row */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label className="block text-xs font-medium text-zinc-500 mb-1">Age Range</label>
+                <input
+                  type="text"
+                  value={persona.ageRange}
+                  onChange={(e) => updatePersona(pi, 'ageRange', e.target.value)}
+                  placeholder="e.g., 25-35"
+                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-zinc-500 mb-1">Occupation</label>
+                <input
+                  type="text"
+                  value={persona.occupation}
+                  onChange={(e) => updatePersona(pi, 'occupation', e.target.value)}
+                  placeholder="e.g., Marketing Manager"
+                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-zinc-500 mb-1">Location</label>
+                <input
+                  type="text"
+                  value={persona.location}
+                  onChange={(e) => updatePersona(pi, 'location', e.target.value)}
+                  placeholder="e.g., Los Angeles, CA"
+                  className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                />
+              </div>
+            </div>
+
+            {/* Pain Points */}
+            <div>
+              <h4 className="text-xs font-medium text-red-400 mb-2">Pain Points</h4>
+              <div className="space-y-2">
+                {persona.painPoints.map((pp, j) => (
+                  <div key={j} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={pp}
+                      onChange={(e) => updatePersonaListItem(pi, 'painPoints', j, e.target.value)}
+                      placeholder="Pain point..."
+                      className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                    />
+                    {persona.painPoints.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removePersonaListItem(pi, 'painPoints', j)}
+                        className="text-zinc-500 hover:text-red-400 transition-colors"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => addPersonaListItem(pi, 'painPoints')}
+                className="flex items-center gap-1 mt-2 text-xs text-zinc-400 hover:text-zinc-100 transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Add Pain Point
+              </button>
+            </div>
+
+            {/* Goals */}
+            <div>
+              <h4 className="text-xs font-medium text-emerald-400 mb-2">Goals</h4>
+              <div className="space-y-2">
+                {persona.goals.map((g, j) => (
+                  <div key={j} className="flex items-center gap-2">
+                    <input
+                      type="text"
+                      value={g}
+                      onChange={(e) => updatePersonaListItem(pi, 'goals', j, e.target.value)}
+                      placeholder="Goal..."
+                      className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                    />
+                    {persona.goals.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removePersonaListItem(pi, 'goals', j)}
+                        className="text-zinc-500 hover:text-red-400 transition-colors"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => addPersonaListItem(pi, 'goals')}
+                className="flex items-center gap-1 mt-2 text-xs text-zinc-400 hover:text-zinc-100 transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Add Goal
+              </button>
+            </div>
+
+            {/* Channels */}
+            <div>
+              <h4 className="text-xs font-medium text-zinc-400 mb-2">Channels</h4>
+              <div className="flex flex-wrap gap-2">
+                {persona.channels.map((ch, j) => (
+                  <div key={j} className="flex items-center gap-1">
+                    <input
+                      type="text"
+                      value={ch}
+                      onChange={(e) => updatePersonaListItem(pi, 'channels', j, e.target.value)}
+                      placeholder="Channel..."
+                      className="w-36 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                    />
+                    {persona.channels.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removePersonaListItem(pi, 'channels', j)}
+                        className="text-zinc-500 hover:text-red-400 transition-colors"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => addPersonaListItem(pi, 'channels')}
+                className="flex items-center gap-1 mt-2 text-xs text-zinc-400 hover:text-zinc-100 transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Add Channel
+              </button>
+            </div>
+          </div>
+        ))}
+
+        {/* Add Persona button */}
+        {audiencePersonas.length < 4 && (
+          <button
+            type="button"
+            onClick={addPersona}
+            className="flex items-center gap-2 px-4 py-3 w-full border border-dashed border-zinc-700 hover:border-zinc-500 rounded-xl text-sm text-zinc-400 hover:text-zinc-100 justify-center transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            Add Persona
+          </button>
+        )}
+      </div>
+    );
   };
 
   // ─── Identity Step Renderer ──────────────────────────────────
@@ -1016,7 +1319,10 @@ export default function BrandDeckWizardPage() {
                 </h2>
               </div>
 
-              {activeStep === 2 ? (
+              {activeStep === 3 ? (
+                /* ─── Audience ──────────────────────────────────── */
+                renderAudienceStep()
+              ) : activeStep === 2 ? (
                 /* ─── Core Identity ──────────────────────────────── */
                 renderIdentityStep()
               ) : activeStep === 0 ? (
