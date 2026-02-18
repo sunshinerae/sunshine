@@ -13,6 +13,7 @@ import {
   BusinessCardMockup, LetterheadMockup,
   EmailSignatureMockup, WebsiteHeroMockup,
 } from '@/lib/brand-decks/mockups';
+import { BrandDeckPages, type DeckData } from '@/lib/brand-decks/pages';
 
 // ─── Types ──────────────────────────────────────────────────────
 
@@ -144,6 +145,20 @@ const WIZARD_STEPS = [
   { key: 'export', label: 'Export', icon: Download },
 ];
 
+const STEP_DESCRIPTIONS: Record<string, string> = {
+  intake: 'Capture the essentials before AI starts shaping the deck.',
+  foundation: 'Generate the strategic baseline to edit and refine.',
+  identity: 'Define your story, values, and personality clearly.',
+  audience: 'Map who you serve and what motivates them.',
+  voice: 'Lock in tone, messaging pillars, and copy style.',
+  visuals: 'Pick palettes, fonts, and mood references.',
+  darkMode: 'Create a high-contrast visual system for dark surfaces.',
+  applications: 'Preview identity usage across practical touchpoints.',
+  motion: 'Set animation direction and movement behavior.',
+  preview: 'Review the full deck structure before export.',
+  export: 'Ship PDF, share link, and editable output.',
+};
+
 export default function BrandDeckWizardPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
@@ -206,6 +221,9 @@ export default function BrandDeckWizardPage() {
   const [motionSpeed, setMotionSpeed] = useState('medium');
   const [motionNotes, setMotionNotes] = useState('');
 
+  // ─── Preview State ───────────────────────────────────────────
+  const [previewZoom, setPreviewZoom] = useState(0.75);
+
   // ─── Mood Board State ─────────────────────────────────────────
   const [unsplashQuery, setUnsplashQuery] = useState('');
   const [unsplashResults, setUnsplashResults] = useState<UnsplashImage[]>([]);
@@ -249,6 +267,11 @@ export default function BrandDeckWizardPage() {
   useEffect(() => {
     fetchDeck();
   }, [fetchDeck]);
+
+  useEffect(() => {
+    if (loading) return;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [activeStep, loading]);
 
   // ─── Hydrate Intake Form from Deck ──────────────────────────────
   useEffect(() => {
@@ -879,9 +902,9 @@ export default function BrandDeckWizardPage() {
   const hexToHsl = (hex: string): [number, number, number] => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     if (!result) return [0, 0, 0];
-    let r = parseInt(result[1], 16) / 255;
-    let g = parseInt(result[2], 16) / 255;
-    let b = parseInt(result[3], 16) / 255;
+    const r = parseInt(result[1], 16) / 255;
+    const g = parseInt(result[2], 16) / 255;
+    const b = parseInt(result[3], 16) / 255;
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
     let h = 0;
@@ -1440,6 +1463,138 @@ export default function BrandDeckWizardPage() {
             placeholder="Any additional notes about motion preferences — e.g., 'Keep hero sections static, only animate CTAs' or 'No rotation effects'..."
             className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none"
           />
+        </div>
+      </div>
+    );
+  };
+
+  // ─── Build DeckData from Deck Record ──────────────────────────
+
+  const buildDeckData = (d: BrandDeck): DeckData => {
+    const intakeData = d.intake ? JSON.parse(d.intake) : null;
+    const identityData = d.identity ? JSON.parse(d.identity) : null;
+    const audienceData = d.audience ? JSON.parse(d.audience) : null;
+    const voiceData = d.voice ? JSON.parse(d.voice) : null;
+    const visualsJson = d.visuals ? JSON.parse(d.visuals) : null;
+    const imagesData = d.images ? JSON.parse(d.images) : null;
+    const motionData = d.motion ? JSON.parse(d.motion) : null;
+
+    // Get selected palette with custom overrides
+    const selPaletteIdx = visualsJson?.selectedPalette ?? 0;
+    const basePalette = visualsJson?.colorPalettes?.[selPaletteIdx] ?? visualsJson?.palettes?.[selPaletteIdx];
+    const custColors = visualsJson?.customColors ?? {};
+    const paletteColors = basePalette?.colors ?? basePalette;
+    const deckColors = paletteColors ? {
+      primary: custColors.primary || paletteColors.primary,
+      secondary: custColors.secondary || paletteColors.secondary,
+      accent: custColors.accent || paletteColors.accent,
+      background: custColors.background || paletteColors.background,
+      text: custColors.text || paletteColors.text,
+    } : { primary: '#6366f1', secondary: '#8b5cf6', accent: '#f59e0b', background: '#ffffff', text: '#18181b' };
+
+    // Get dark mode colors
+    const darkAuto = visualsJson?.darkMode?.auto ?? {};
+    const darkCust = visualsJson?.darkMode?.custom ?? {};
+    const deckDarkColors = Object.keys(darkAuto).length > 0 ? {
+      primary: darkCust.primary || darkAuto.primary,
+      secondary: darkCust.secondary || darkAuto.secondary,
+      accent: darkCust.accent || darkAuto.accent,
+      background: darkCust.background || darkAuto.background,
+      text: darkCust.text || darkAuto.text,
+    } : null;
+
+    // Get selected font pairing
+    const selFontIdx = visualsJson?.selectedFont ?? 0;
+    const fontPair = visualsJson?.fontPairings?.[selFontIdx];
+
+    return {
+      title: d.title,
+      intake: intakeData,
+      identity: identityData,
+      audience: audienceData,
+      voice: voiceData,
+      colors: deckColors,
+      darkColors: deckDarkColors,
+      colorPsychology: basePalette?.psychology,
+      headingFont: fontPair?.heading || 'Inter',
+      bodyFont: fontPair?.body || 'Inter',
+      moodBoardImages: (imagesData?.moodBoard || []).map((img: { urls?: { regular?: string; small?: string }; url?: string; alt?: string; photographer?: string }) => ({
+        url: img.urls?.regular || img.urls?.small || img.url || '',
+        alt: img.alt || '',
+        photographer: img.photographer || '',
+      })),
+      photoNotes: imagesData?.photoNotes,
+      motion: motionData,
+    };
+  };
+
+  // ─── Preview Step Renderer ──────────────────────────────────
+
+  const renderPreviewStep = () => {
+    if (!deck) return null;
+
+    const deckData = buildDeckData(deck);
+
+    // Load Google Fonts for preview
+    const fontsToLoad = [deckData.headingFont, deckData.bodyFont].filter((f) => f && f !== 'Inter');
+    const uniqueFonts = [...new Set(fontsToLoad)];
+
+    const zoomLevels = [
+      { label: '50%', value: 0.5 },
+      { label: '75%', value: 0.75 },
+      { label: '100%', value: 1 },
+    ];
+
+    return (
+      <div className="space-y-6">
+        {/* Load Google Fonts */}
+        {uniqueFonts.length > 0 && (
+          // eslint-disable-next-line @next/next/no-page-custom-font
+          <link
+            rel="stylesheet"
+            href={`https://fonts.googleapis.com/css2?${uniqueFonts.map(f => `family=${encodeURIComponent(f)}:wght@400;600;700;800`).join('&')}&display=swap`}
+          />
+        )}
+
+        {/* Controls bar */}
+        <div className="flex items-center justify-between">
+          <p className="text-sm text-zinc-400">
+            Full deck preview — scroll to review all pages before exporting.
+          </p>
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-zinc-500 mr-1">Zoom:</span>
+            {zoomLevels.map((z) => (
+              <button
+                key={z.value}
+                onClick={() => setPreviewZoom(z.value)}
+                className={`px-3 py-1 text-xs rounded-md font-medium transition-colors ${
+                  previewZoom === z.value
+                    ? 'bg-amber-600 text-white'
+                    : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-200'
+                }`}
+              >
+                {z.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Scrollable preview container */}
+        <div
+          className="overflow-auto rounded-xl border border-zinc-800 bg-zinc-950"
+          style={{ maxHeight: 'calc(100vh - 280px)' }}
+        >
+          <div
+            style={{
+              transform: `scale(${previewZoom})`,
+              transformOrigin: 'top center',
+              width: previewZoom < 1 ? `${100 / previewZoom}%` : '100%',
+            }}
+          >
+            <div className="flex flex-col items-center gap-8 py-8 px-4 [&>div]:w-full [&>div]:max-w-[816px] [&>div]:shadow-2xl [&>div]:rounded-lg [&>div]:overflow-hidden [&>div]:border [&>div]:border-zinc-700/50">
+              <BrandDeckPages data={deckData} />
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -2688,20 +2843,42 @@ export default function BrandDeckWizardPage() {
   }
 
   const currentStepData = WIZARD_STEPS[activeStep];
+  const maxReachableStep = Math.max(0, Math.min(deck.currentStep, WIZARD_STEPS.length - 1));
+  const completedSteps = Math.max(0, Math.min(deck.currentStep, WIZARD_STEPS.length - 1));
+  const progressPercent = Math.round((completedSteps / (WIZARD_STEPS.length - 1)) * 100);
+  const stepDescription = STEP_DESCRIPTIONS[currentStepData.key] ?? '';
+  const isFinalStep = activeStep >= WIZARD_STEPS.length - 1;
+  const contentWidthClass = activeStep === 9
+    ? 'max-w-6xl'
+    : activeStep === 1 || activeStep === 5 || activeStep === 6 || activeStep === 7
+      ? 'max-w-5xl'
+      : 'max-w-3xl';
+
+  const handleMobileStepSelect = (stepIndex: number) => {
+    if (stepIndex <= maxReachableStep) {
+      setActiveStep(stepIndex);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+    <div className="relative min-h-screen bg-zinc-950 text-zinc-100">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,158,11,0.14),transparent_48%)]" />
+
       {/* Toast */}
       {toast && (
-        <div className="fixed top-4 right-4 z-50 bg-zinc-800 border border-zinc-700 text-zinc-200 px-4 py-3 rounded-lg shadow-lg text-sm">
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed top-4 right-4 z-50 bg-zinc-800/95 backdrop-blur border border-zinc-700 text-zinc-200 px-4 py-3 rounded-lg shadow-lg text-sm"
+        >
           {toast}
         </div>
       )}
 
       {/* Top Bar */}
-      <div className="border-b border-zinc-800 bg-zinc-950">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+      <div className="relative border-b border-zinc-800 bg-zinc-950/95 backdrop-blur">
+        <div className="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
             <button
               onClick={() => router.push('/admin/brand-decks')}
               className="flex items-center gap-1 text-sm text-zinc-400 hover:text-zinc-200 transition-colors"
@@ -2710,11 +2887,11 @@ export default function BrandDeckWizardPage() {
               Back
             </button>
             <span className="text-zinc-700">|</span>
-            <h1 className="text-sm font-medium text-zinc-200 truncate max-w-xs">
+            <h1 className="text-sm font-medium text-zinc-200 truncate max-w-[220px] sm:max-w-xs">
               {deck.title}
             </h1>
             <span
-              className={`text-xs px-2 py-0.5 rounded-full ${
+              className={`hidden sm:inline-flex text-xs px-2 py-0.5 rounded-full ${
                 deck.status === 'completed'
                   ? 'bg-emerald-500/20 text-emerald-400'
                   : 'bg-blue-500/20 text-blue-400'
@@ -2723,13 +2900,43 @@ export default function BrandDeckWizardPage() {
               {deck.status === 'completed' ? 'Completed' : 'Draft'}
             </span>
           </div>
+
+          <div className="hidden md:flex items-center gap-3 min-w-[220px]">
+            <div className="w-full">
+              <div className="flex items-center justify-between text-[11px] text-zinc-500 mb-1">
+                <span>Progress</span>
+                <span>{progressPercent}%</span>
+              </div>
+              <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-amber-500 rounded-full transition-all"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Main Layout: Sidebar + Content */}
-      <div className="flex min-h-[calc(100vh-57px)]">
+      <div className="relative flex min-h-[calc(100vh-58px)]">
         {/* Sidebar */}
-        <aside className="w-60 flex-shrink-0 bg-zinc-900 border-r border-zinc-800 py-4">
+        <aside className="hidden lg:block w-64 flex-shrink-0 bg-zinc-900/85 border-r border-zinc-800 py-4">
+          <div className="px-3 pb-4">
+            <div className="bg-zinc-950/70 border border-zinc-800 rounded-xl p-3">
+              <p className="text-xs uppercase tracking-wide text-zinc-500">Wizard Progress</p>
+              <p className="mt-1 text-lg font-semibold text-zinc-100">
+                {completedSteps}/{WIZARD_STEPS.length - 1} complete
+              </p>
+              <div className="mt-2 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-amber-500 rounded-full transition-all"
+                  style={{ width: `${progressPercent}%` }}
+                />
+              </div>
+            </div>
+          </div>
+
           <nav className="space-y-1 px-3">
             {WIZARD_STEPS.map((step, index) => {
               const isActive = index === activeStep;
@@ -2787,18 +2994,54 @@ export default function BrandDeckWizardPage() {
         </aside>
 
         {/* Content Area */}
-        <main className="flex-1 flex flex-col">
+        <main className="flex-1 flex flex-col min-w-0">
           {/* Step Content */}
-          <div className="flex-1 p-8">
-            <div className={`mx-auto ${activeStep === 1 || activeStep === 5 || activeStep === 6 || activeStep === 7 ? 'max-w-5xl' : 'max-w-3xl'}`}>
-              <div className="flex items-center gap-3 mb-6">
-                <currentStepData.icon className="w-6 h-6 text-amber-400" />
-                <h2 className="text-xl font-semibold text-zinc-100">
-                  {currentStepData.label}
-                </h2>
+          <div className="flex-1 p-4 sm:p-6 lg:p-8 pb-28">
+            <div className={`mx-auto ${contentWidthClass}`}>
+              {/* Mobile Step Picker */}
+              <div className="lg:hidden mb-5 bg-zinc-900/90 border border-zinc-800 rounded-xl p-4">
+                <div className="flex items-center justify-between text-xs text-zinc-500 mb-2">
+                  <span>Step {activeStep + 1} of {WIZARD_STEPS.length}</span>
+                  <span>{progressPercent}% complete</span>
+                </div>
+                <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-amber-500 rounded-full transition-all"
+                    style={{ width: `${progressPercent}%` }}
+                  />
+                </div>
+                <label className="mt-3 block text-xs uppercase tracking-wide text-zinc-500">
+                  Jump to step
+                </label>
+                <select
+                  value={activeStep}
+                  onChange={(e) => handleMobileStepSelect(Number(e.target.value))}
+                  className="mt-1.5 w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:ring-2 focus:ring-amber-500/40 focus:border-amber-500"
+                >
+                  {WIZARD_STEPS.map((step, index) => (
+                    <option key={step.key} value={index} disabled={index > maxReachableStep}>
+                      {index + 1}. {step.label}{index > maxReachableStep ? ' (Locked)' : ''}
+                    </option>
+                  ))}
+                </select>
               </div>
 
-              {activeStep === 8 ? (
+              <div className="mb-6 sm:mb-8">
+                <div className="flex items-center gap-3">
+                  <currentStepData.icon className="w-6 h-6 text-amber-400" />
+                  <h2 className="text-xl sm:text-2xl font-semibold text-zinc-100">
+                    {currentStepData.label}
+                  </h2>
+                </div>
+                <p className="mt-2 text-sm text-zinc-400 max-w-2xl">
+                  {stepDescription}
+                </p>
+              </div>
+
+              {activeStep === 9 ? (
+                /* ─── Preview ──────────────────────────────────── */
+                renderPreviewStep()
+              ) : activeStep === 8 ? (
                 /* ─── Motion Direction ─────────────────────────── */
                 renderMotionStep()
               ) : activeStep === 7 ? (
@@ -2981,8 +3224,8 @@ export default function BrandDeckWizardPage() {
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-zinc-800 bg-zinc-950 px-8 py-4">
-            <div className="max-w-3xl mx-auto flex items-center justify-between">
+          <div className="sticky bottom-0 border-t border-zinc-800 bg-zinc-950/95 backdrop-blur px-4 sm:px-6 lg:px-8 py-3.5">
+            <div className={`mx-auto flex items-center justify-between gap-3 ${contentWidthClass}`}>
               <button
                 onClick={handleBack}
                 disabled={activeStep === 0}
@@ -2992,21 +3235,26 @@ export default function BrandDeckWizardPage() {
                 Back
               </button>
 
-              <span className="text-xs text-zinc-600">
-                Step {activeStep + 1} of {WIZARD_STEPS.length}
-              </span>
+              <div className="text-center">
+                <p className="text-xs text-zinc-500">
+                  Step {activeStep + 1} of {WIZARD_STEPS.length}
+                </p>
+                <p className="text-[11px] text-zinc-600">
+                  {progressPercent}% complete
+                </p>
+              </div>
 
               <button
                 onClick={handleNext}
-                disabled={saving || activeStep >= WIZARD_STEPS.length - 1}
+                disabled={saving || isFinalStep}
                 className="flex items-center gap-2 px-5 py-2 bg-amber-600 hover:bg-amber-500 disabled:bg-zinc-800 disabled:text-zinc-600 text-white rounded-lg text-sm font-medium transition-colors"
               >
                 {saving ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
                 ) : (
                   <>
-                    Next
-                    <ArrowRight className="w-4 h-4" />
+                    {isFinalStep ? 'Done' : 'Next'}
+                    {!isFinalStep && <ArrowRight className="w-4 h-4" />}
                   </>
                 )}
               </button>
