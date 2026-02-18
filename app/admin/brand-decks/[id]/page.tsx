@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import {
-  ArrowLeft, ArrowRight, Check, Loader2,
+  ArrowLeft, ArrowRight, Check, Loader2, Upload,
   ClipboardList, Sparkles, Heart, Users, MessageSquare,
   Palette, Moon, Layout, Zap, Eye, Download,
 } from 'lucide-react';
@@ -15,18 +15,33 @@ interface BrandDeck {
   title: string;
   status: string;
   currentStep: number;
-  intakeData: Record<string, unknown> | null;
-  aiFoundation: Record<string, unknown> | null;
-  identity: Record<string, unknown> | null;
-  audience: Record<string, unknown> | null;
-  voiceMessaging: Record<string, unknown> | null;
-  visualSystem: Record<string, unknown> | null;
-  darkMode: Record<string, unknown> | null;
-  applications: Record<string, unknown> | null;
-  motion: Record<string, unknown> | null;
+  intake: string | null;
+  identity: string | null;
+  audience: string | null;
+  voice: string | null;
+  visuals: string | null;
+  applications: string | null;
+  motion: string | null;
+  images: string | null;
   createdAt: string;
   updatedAt: string;
 }
+
+interface IntakeData {
+  businessName: string;
+  industry: string;
+  keywords: string;
+  about: string;
+  targetCustomer: string;
+  existingCopy: string;
+  logoFilename: string;
+  logoDataUrl: string;
+}
+
+const INDUSTRIES = [
+  'Wellness', 'Beauty', 'Fashion', 'Food & Beverage', 'Fitness',
+  'Lifestyle', 'Tech', 'Creative', 'Retail', 'Services', 'Other',
+];
 
 // ─── Wizard Steps ───────────────────────────────────────────────
 
@@ -51,6 +66,17 @@ export default function BrandDeckWizardPage() {
   const [loading, setLoading] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
   const [saving, setSaving] = useState(false);
+
+  // ─── Intake Form State ─────────────────────────────────────────
+  const [businessName, setBusinessName] = useState('');
+  const [industry, setIndustry] = useState('');
+  const [keywords, setKeywords] = useState('');
+  const [about, setAbout] = useState('');
+  const [targetCustomer, setTargetCustomer] = useState('');
+  const [existingCopy, setExistingCopy] = useState('');
+  const [logoFilename, setLogoFilename] = useState('');
+  const [logoDataUrl, setLogoDataUrl] = useState('');
+  const [intakeErrors, setIntakeErrors] = useState<Record<string, string>>({});
 
   // Toast
   const [toast, setToast] = useState<string | null>(null);
@@ -84,22 +110,93 @@ export default function BrandDeckWizardPage() {
     fetchDeck();
   }, [fetchDeck]);
 
+  // ─── Hydrate Intake Form from Deck ──────────────────────────────
+  useEffect(() => {
+    if (!deck) return;
+
+    // Pre-fill business name from title if no intake data
+    if (!deck.intake) {
+      setBusinessName(deck.title || '');
+      return;
+    }
+
+    try {
+      const data: IntakeData =
+        typeof deck.intake === 'string' ? JSON.parse(deck.intake) : deck.intake;
+      setBusinessName(data.businessName || deck.title || '');
+      setIndustry(data.industry || '');
+      setKeywords(data.keywords || '');
+      setAbout(data.about || '');
+      setTargetCustomer(data.targetCustomer || '');
+      setExistingCopy(data.existingCopy || '');
+      setLogoFilename(data.logoFilename || '');
+      setLogoDataUrl(data.logoDataUrl || '');
+    } catch {
+      setBusinessName(deck.title || '');
+    }
+  }, [deck?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ─── Logo Handler ────────────────────────────────────────────
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setLogoFilename(file.name);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setLogoDataUrl(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // ─── Intake Validation ─────────────────────────────────────────
+  const validateIntake = (): boolean => {
+    const errors: Record<string, string> = {};
+    if (!businessName.trim()) errors.businessName = 'Business name is required';
+    if (!industry) errors.industry = 'Industry is required';
+    setIntakeErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
   // ─── Navigation ───────────────────────────────────────────────
 
   const handleNext = async () => {
     if (!deck) return;
     if (activeStep >= WIZARD_STEPS.length - 1) return;
 
+    // Validate intake step before proceeding
+    if (activeStep === 0 && !validateIntake()) return;
+
     const nextStep = activeStep + 1;
 
-    // Save progress if advancing beyond the current highest step
-    if (nextStep > deck.currentStep) {
-      setSaving(true);
-      try {
+    setSaving(true);
+    try {
+      // Build the payload
+      const payload: Record<string, unknown> = {};
+
+      // Always save intake data when leaving intake step
+      if (activeStep === 0) {
+        payload.intake = {
+          businessName: businessName.trim(),
+          industry,
+          keywords: keywords.trim(),
+          about: about.trim(),
+          targetCustomer: targetCustomer.trim(),
+          existingCopy: existingCopy.trim(),
+          logoFilename,
+          logoDataUrl,
+        };
+      }
+
+      // Update currentStep if advancing beyond the saved step
+      if (nextStep > deck.currentStep) {
+        payload.currentStep = nextStep;
+      }
+
+      if (Object.keys(payload).length > 0) {
         const res = await fetch(`/api/admin/brand-decks/${id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ currentStep: nextStep }),
+          body: JSON.stringify(payload),
         });
 
         if (!res.ok) {
@@ -109,12 +206,12 @@ export default function BrandDeckWizardPage() {
 
         const data = await res.json();
         setDeck(data.deck);
-      } catch {
-        showToast('Failed to save progress');
-        return;
-      } finally {
-        setSaving(false);
       }
+    } catch {
+      showToast('Failed to save progress');
+      return;
+    } finally {
+      setSaving(false);
     }
 
     setActiveStep(nextStep);
@@ -269,16 +366,161 @@ export default function BrandDeckWizardPage() {
                 </h2>
               </div>
 
-              {/* Placeholder content */}
-              <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8 text-center">
-                <currentStepData.icon className="w-12 h-12 text-zinc-700 mx-auto mb-4" />
-                <p className="text-zinc-400 text-sm">
-                  Step {activeStep + 1}: {currentStepData.label} — Coming soon
-                </p>
-                <p className="text-zinc-600 text-xs mt-2">
-                  This step will be implemented in a future update.
-                </p>
-              </div>
+              {activeStep === 0 ? (
+                /* ─── Intake Form ────────────────────────────────── */
+                <div className="space-y-6">
+                  {/* Business Name */}
+                  <div>
+                    <label className="block text-sm font-medium text-zinc-300 mb-1.5">
+                      Business Name <span className="text-amber-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={businessName}
+                      onChange={(e) => {
+                        setBusinessName(e.target.value);
+                        if (intakeErrors.businessName) setIntakeErrors((prev) => ({ ...prev, businessName: '' }));
+                      }}
+                      placeholder="e.g., The Sunshine Effect"
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                    />
+                    {intakeErrors.businessName && (
+                      <p className="text-sm text-red-400 mt-1">{intakeErrors.businessName}</p>
+                    )}
+                  </div>
+
+                  {/* Industry */}
+                  <div>
+                    <label className="block text-sm font-medium text-zinc-300 mb-1.5">
+                      Industry <span className="text-amber-500">*</span>
+                    </label>
+                    <select
+                      value={industry}
+                      onChange={(e) => {
+                        setIndustry(e.target.value);
+                        if (intakeErrors.industry) setIntakeErrors((prev) => ({ ...prev, industry: '' }));
+                      }}
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                    >
+                      <option value="" className="text-zinc-500">Select an industry...</option>
+                      {INDUSTRIES.map((ind) => (
+                        <option key={ind} value={ind}>{ind}</option>
+                      ))}
+                    </select>
+                    {intakeErrors.industry && (
+                      <p className="text-sm text-red-400 mt-1">{intakeErrors.industry}</p>
+                    )}
+                  </div>
+
+                  {/* Keywords / Vibe */}
+                  <div>
+                    <label className="block text-sm font-medium text-zinc-300 mb-1.5">
+                      Keywords / Vibe
+                    </label>
+                    <input
+                      type="text"
+                      value={keywords}
+                      onChange={(e) => setKeywords(e.target.value)}
+                      placeholder="e.g., earthy, feminine, bold, modern, luxe"
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                    />
+                  </div>
+
+                  {/* About the Business */}
+                  <div>
+                    <label className="block text-sm font-medium text-zinc-300 mb-1.5">
+                      About the Business
+                    </label>
+                    <textarea
+                      value={about}
+                      onChange={(e) => setAbout(e.target.value)}
+                      rows={3}
+                      placeholder="What does this business do? 2-3 sentences..."
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none"
+                    />
+                  </div>
+
+                  {/* Target Customer */}
+                  <div>
+                    <label className="block text-sm font-medium text-zinc-300 mb-1.5">
+                      Target Customer
+                    </label>
+                    <textarea
+                      value={targetCustomer}
+                      onChange={(e) => setTargetCustomer(e.target.value)}
+                      rows={3}
+                      placeholder="Who do they serve? Describe their ideal customer..."
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none"
+                    />
+                  </div>
+
+                  {/* Existing Copy */}
+                  <div>
+                    <label className="block text-sm font-medium text-zinc-300 mb-1.5">
+                      Existing Copy <span className="text-zinc-600 text-xs font-normal">(optional)</span>
+                    </label>
+                    <textarea
+                      value={existingCopy}
+                      onChange={(e) => setExistingCopy(e.target.value)}
+                      rows={4}
+                      placeholder="Paste any existing copy — Instagram bio, website text, marketing materials... This helps us analyze their existing voice."
+                      className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none"
+                    />
+                  </div>
+
+                  {/* Logo Upload */}
+                  <div>
+                    <label className="block text-sm font-medium text-zinc-300 mb-1.5">
+                      Logo <span className="text-zinc-600 text-xs font-normal">(optional)</span>
+                    </label>
+                    <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-zinc-700 rounded-lg cursor-pointer bg-zinc-800/50 hover:bg-zinc-800 hover:border-zinc-600 transition-colors">
+                      {logoDataUrl ? (
+                        <div className="flex flex-col items-center gap-2">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={logoDataUrl}
+                            alt="Logo preview"
+                            className="max-h-16 max-w-[200px] object-contain"
+                          />
+                          <span className="text-xs text-zinc-400">{logoFilename}</span>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center gap-2 text-zinc-500">
+                          <Upload className="w-6 h-6" />
+                          <span className="text-sm">Upload logo (optional)</span>
+                          <span className="text-xs text-zinc-600">PNG, JPG, or SVG</span>
+                        </div>
+                      )}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleLogoChange}
+                        className="hidden"
+                      />
+                    </label>
+                    {logoDataUrl && (
+                      <button
+                        type="button"
+                        onClick={() => { setLogoFilename(''); setLogoDataUrl(''); }}
+                        className="text-xs text-zinc-500 hover:text-red-400 mt-1.5 transition-colors"
+                      >
+                        Remove logo
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                /* ─── Placeholder for other steps ────────────────── */
+                <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8 text-center">
+                  <currentStepData.icon className="w-12 h-12 text-zinc-700 mx-auto mb-4" />
+                  <p className="text-zinc-400 text-sm">
+                    Step {activeStep + 1}: {currentStepData.label} — Coming soon
+                  </p>
+                  <p className="text-zinc-600 text-xs mt-2">
+                    This step will be implemented in a future update.
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
