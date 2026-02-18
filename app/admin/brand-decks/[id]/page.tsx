@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import {
-  ArrowLeft, ArrowRight, Check, Loader2, Upload,
+  ArrowLeft, ArrowRight, Check, Loader2, Upload, RefreshCw,
   ClipboardList, Sparkles, Heart, Users, MessageSquare,
   Palette, Moon, Layout, Zap, Eye, Download,
 } from 'lucide-react';
@@ -43,6 +43,64 @@ const INDUSTRIES = [
   'Lifestyle', 'Tech', 'Creative', 'Retail', 'Services', 'Other',
 ];
 
+const GENERATION_MESSAGES = [
+  'Crafting your brand story...',
+  'Designing color palettes...',
+  'Building audience personas...',
+  'Defining your voice...',
+  'Almost there...',
+];
+
+// ─── Foundation Types ─────────────────────────────────────────
+
+interface FoundationIdentity {
+  brandStory: string;
+  mission: string;
+  vision: string;
+  values: { name: string; description: string }[];
+  personalityTraits: string[];
+}
+
+interface FoundationVoice {
+  taglines: string[];
+  elevatorPitch: string;
+  toneAttributes: string[];
+  dos: string[];
+  donts: string[];
+  examplePhrases: string[];
+}
+
+interface FoundationVisuals {
+  palettes: {
+    name: string;
+    psychology: string;
+    colors: {
+      primary: string;
+      secondary: string;
+      accent: string;
+      background: string;
+      text: string;
+    };
+  }[];
+  fontPairings: {
+    heading: string;
+    body: string;
+    rationale: string;
+  }[];
+}
+
+interface FoundationAudience {
+  personas: {
+    name: string;
+    ageRange: string;
+    occupation: string;
+    location: string;
+    painPoints: string[];
+    goals: string[];
+    channels: string[];
+  }[];
+}
+
 // ─── Wizard Steps ───────────────────────────────────────────────
 
 const WIZARD_STEPS = [
@@ -77,6 +135,11 @@ export default function BrandDeckWizardPage() {
   const [logoFilename, setLogoFilename] = useState('');
   const [logoDataUrl, setLogoDataUrl] = useState('');
   const [intakeErrors, setIntakeErrors] = useState<Record<string, string>>({});
+
+  // ─── Foundation State ──────────────────────────────────────────
+  const [generating, setGenerating] = useState(false);
+  const [generationMsgIndex, setGenerationMsgIndex] = useState(0);
+  const generationIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Toast
   const [toast, setToast] = useState<string | null>(null);
@@ -147,6 +210,57 @@ export default function BrandDeckWizardPage() {
     };
     reader.readAsDataURL(file);
   };
+
+  // ─── Foundation Generation ──────────────────────────────────────
+
+  const handleGenerateFoundation = async () => {
+    if (!deck) return;
+
+    setGenerating(true);
+    setGenerationMsgIndex(0);
+
+    // Cycle through progress messages
+    generationIntervalRef.current = setInterval(() => {
+      setGenerationMsgIndex((prev) =>
+        prev < GENERATION_MESSAGES.length - 1 ? prev + 1 : prev
+      );
+    }, 5000);
+
+    try {
+      const res = await fetch(`/api/admin/brand-decks/${id}/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ step: 'foundation' }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        showToast(err.error || 'Generation failed');
+        return;
+      }
+
+      const data = await res.json();
+      setDeck(data.deck);
+      showToast('Brand foundation generated!');
+    } catch {
+      showToast('Generation failed — please try again');
+    } finally {
+      setGenerating(false);
+      if (generationIntervalRef.current) {
+        clearInterval(generationIntervalRef.current);
+        generationIntervalRef.current = null;
+      }
+    }
+  };
+
+  // Cleanup interval on unmount
+  useEffect(() => {
+    return () => {
+      if (generationIntervalRef.current) {
+        clearInterval(generationIntervalRef.current);
+      }
+    };
+  }, []);
 
   // ─── Intake Validation ─────────────────────────────────────────
   const validateIntake = (): boolean => {
@@ -229,6 +343,319 @@ export default function BrandDeckWizardPage() {
     if (stepIndex <= deck.currentStep) {
       setActiveStep(stepIndex);
     }
+  };
+
+  // ─── Foundation Step Renderer ──────────────────────────────────
+
+  const renderFoundationStep = () => {
+    if (!deck) return null;
+
+    // Parse stored JSON
+    const identity: FoundationIdentity | null = deck.identity ? JSON.parse(deck.identity) : null;
+    const voice: FoundationVoice | null = deck.voice ? JSON.parse(deck.voice) : null;
+    const visuals: FoundationVisuals | null = deck.visuals ? JSON.parse(deck.visuals) : null;
+    const audience: FoundationAudience | null = deck.audience ? JSON.parse(deck.audience) : null;
+
+    const hasData = identity && voice && visuals && audience;
+
+    // ── State 2: Generating ──
+    if (generating) {
+      return (
+        <div className="flex flex-col items-center justify-center py-24 gap-6">
+          <Loader2 className="w-12 h-12 animate-spin text-amber-500" />
+          <p className="text-lg text-zinc-300 font-medium animate-pulse">
+            {GENERATION_MESSAGES[generationMsgIndex]}
+          </p>
+          <p className="text-sm text-zinc-600">
+            This takes about 30–60 seconds
+          </p>
+        </div>
+      );
+    }
+
+    // ── State 1: No data yet ──
+    if (!hasData) {
+      return (
+        <div className="flex flex-col items-center justify-center py-16 gap-6">
+          <div className="w-20 h-20 rounded-full bg-amber-600/20 flex items-center justify-center">
+            <Sparkles className="w-10 h-10 text-amber-400" />
+          </div>
+          <div className="text-center max-w-md">
+            <h3 className="text-lg font-semibold text-zinc-100 mb-2">
+              Generate Brand Foundation
+            </h3>
+            <p className="text-sm text-zinc-400 leading-relaxed">
+              Based on your intake data, our AI will generate your complete brand foundation
+              including story, values, color palettes, typography, audience personas, and voice guide.
+            </p>
+            <p className="text-xs text-zinc-600 mt-3">
+              This takes about 30–60 seconds
+            </p>
+          </div>
+          <button
+            onClick={handleGenerateFoundation}
+            className="flex items-center gap-2 px-6 py-3 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-sm font-semibold transition-colors"
+          >
+            <Sparkles className="w-5 h-5" />
+            Generate Brand Foundation
+          </button>
+        </div>
+      );
+    }
+
+    // ── State 3: Show Results ──
+    return (
+      <div className="space-y-8">
+        {/* Regenerate button */}
+        <div className="flex justify-end">
+          <button
+            onClick={handleGenerateFoundation}
+            className="flex items-center gap-2 px-4 py-2 border border-zinc-700 hover:border-zinc-500 text-zinc-300 hover:text-zinc-100 rounded-lg text-sm transition-colors"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Regenerate All
+          </button>
+        </div>
+
+        {/* A. Brand Story & Identity */}
+        <section>
+          <h3 className="text-xl font-semibold text-zinc-100 mb-4">Brand Story &amp; Identity</h3>
+
+          {/* Brand Story */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 mb-4">
+            <p className="text-sm font-medium text-amber-400 mb-2">Brand Story</p>
+            <p className="text-zinc-300 leading-relaxed italic border-l-2 border-amber-600/40 pl-4">
+              {identity.brandStory}
+            </p>
+          </div>
+
+          {/* Mission & Vision */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <p className="text-sm font-medium text-amber-400 mb-2">Mission</p>
+              <p className="text-zinc-300 text-sm leading-relaxed">{identity.mission}</p>
+            </div>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <p className="text-sm font-medium text-amber-400 mb-2">Vision</p>
+              <p className="text-zinc-300 text-sm leading-relaxed">{identity.vision}</p>
+            </div>
+          </div>
+
+          {/* Values */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 mb-4">
+            <p className="text-sm font-medium text-amber-400 mb-3">Values</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {identity.values.map((v, i) => (
+                <div key={i} className="bg-zinc-800/50 rounded-lg p-3">
+                  <p className="text-sm font-medium text-zinc-200">{v.name}</p>
+                  <p className="text-xs text-zinc-400 mt-1">{v.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Personality Traits */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <p className="text-sm font-medium text-amber-400 mb-3">Personality Traits</p>
+            <div className="flex flex-wrap gap-2">
+              {identity.personalityTraits.map((trait, i) => (
+                <span
+                  key={i}
+                  className="px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/20 text-amber-400"
+                >
+                  {trait}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* B. Taglines & Elevator Pitch */}
+        <section>
+          <h3 className="text-xl font-semibold text-zinc-100 mb-4">Taglines &amp; Messaging</h3>
+
+          {/* Taglines */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            {voice.taglines.map((tagline, i) => (
+              <div
+                key={i}
+                className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 flex items-center justify-center text-center"
+              >
+                <p className="text-lg font-semibold text-zinc-100 leading-snug">
+                  &ldquo;{tagline}&rdquo;
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* Elevator Pitch */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <p className="text-sm font-medium text-amber-400 mb-2">Elevator Pitch</p>
+            <p className="text-zinc-300 leading-relaxed">{voice.elevatorPitch}</p>
+          </div>
+        </section>
+
+        {/* C. Color Palettes */}
+        <section>
+          <h3 className="text-xl font-semibold text-zinc-100 mb-4">Color Palettes</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {visuals.palettes.map((palette, i) => (
+              <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+                <p className="text-sm font-semibold text-zinc-200 mb-3">{palette.name}</p>
+                <div className="flex gap-2 mb-3">
+                  {Object.entries(palette.colors).map(([role, hex]) => (
+                    <div key={role} className="flex flex-col items-center gap-1">
+                      <div
+                        className="w-12 h-12 rounded-lg border border-zinc-700"
+                        style={{ backgroundColor: hex }}
+                      />
+                      <span className="text-[10px] text-zinc-500 font-mono">{hex}</span>
+                      <span className="text-[10px] text-zinc-600 capitalize">{role}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-zinc-400 leading-relaxed">{palette.psychology}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* D. Font Pairings */}
+        <section>
+          <h3 className="text-xl font-semibold text-zinc-100 mb-4">Font Pairings</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {visuals.fontPairings.map((fp, i) => (
+              <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+                <div className="mb-3">
+                  <p className="text-xs text-zinc-500 uppercase tracking-wide">Heading</p>
+                  <p className="text-lg font-semibold text-zinc-100">{fp.heading}</p>
+                </div>
+                <div className="mb-3">
+                  <p className="text-xs text-zinc-500 uppercase tracking-wide">Body</p>
+                  <p className="text-base text-zinc-200">{fp.body}</p>
+                </div>
+                <p className="text-xs text-zinc-400 leading-relaxed">{fp.rationale}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* E. Audience Personas */}
+        <section>
+          <h3 className="text-xl font-semibold text-zinc-100 mb-4">Audience Personas</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {audience.personas.map((persona, i) => (
+              <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className="text-base font-semibold text-zinc-100">{persona.name}</p>
+                    <p className="text-xs text-zinc-500">
+                      {persona.ageRange} &middot; {persona.occupation} &middot; {persona.location}
+                    </p>
+                  </div>
+                  <Users className="w-5 h-5 text-zinc-700 flex-shrink-0" />
+                </div>
+                <div className="grid grid-cols-2 gap-4 mb-3">
+                  <div>
+                    <p className="text-xs font-medium text-red-400 mb-1">Pain Points</p>
+                    <ul className="space-y-1">
+                      {persona.painPoints.map((pp, j) => (
+                        <li key={j} className="text-xs text-zinc-400 flex gap-1.5">
+                          <span className="text-zinc-600 mt-0.5">&#8226;</span>
+                          {pp}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs font-medium text-emerald-400 mb-1">Goals</p>
+                    <ul className="space-y-1">
+                      {persona.goals.map((g, j) => (
+                        <li key={j} className="text-xs text-zinc-400 flex gap-1.5">
+                          <span className="text-zinc-600 mt-0.5">&#8226;</span>
+                          {g}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-xs font-medium text-zinc-500 mb-1.5">Channels</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {persona.channels.map((ch, j) => (
+                      <span
+                        key={j}
+                        className="px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/20 text-amber-400"
+                      >
+                        {ch}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* F. Voice Guide */}
+        <section>
+          <h3 className="text-xl font-semibold text-zinc-100 mb-4">Voice Guide</h3>
+
+          {/* Tone Attributes */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 mb-4">
+            <p className="text-sm font-medium text-amber-400 mb-3">Tone Attributes</p>
+            <div className="flex flex-wrap gap-2">
+              {voice.toneAttributes.map((attr, i) => (
+                <span
+                  key={i}
+                  className="px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/20 text-amber-400"
+                >
+                  {attr}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Dos & Don'ts */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <p className="text-sm font-medium text-emerald-400 mb-3">Do</p>
+              <ul className="space-y-2">
+                {voice.dos.map((d, i) => (
+                  <li key={i} className="text-sm text-zinc-300 flex gap-2">
+                    <Check className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+              <p className="text-sm font-medium text-red-400 mb-3">Don&apos;t</p>
+              <ul className="space-y-2">
+                {voice.donts.map((d, i) => (
+                  <li key={i} className="text-sm text-zinc-300 flex gap-2">
+                    <span className="text-red-500 flex-shrink-0 mt-0.5 font-bold">&times;</span>
+                    {d}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Example Phrases */}
+          <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
+            <p className="text-sm font-medium text-amber-400 mb-3">Example Phrases</p>
+            <div className="space-y-2">
+              {voice.examplePhrases.map((phrase, i) => (
+                <p key={i} className="text-sm text-zinc-300 italic border-l-2 border-zinc-700 pl-3">
+                  &ldquo;{phrase}&rdquo;
+                </p>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    );
   };
 
   // ─── Render ───────────────────────────────────────────────────
@@ -358,7 +785,7 @@ export default function BrandDeckWizardPage() {
         <main className="flex-1 flex flex-col">
           {/* Step Content */}
           <div className="flex-1 p-8">
-            <div className="max-w-3xl mx-auto">
+            <div className={`mx-auto ${activeStep === 1 ? 'max-w-5xl' : 'max-w-3xl'}`}>
               <div className="flex items-center gap-3 mb-6">
                 <currentStepData.icon className="w-6 h-6 text-amber-400" />
                 <h2 className="text-xl font-semibold text-zinc-100">
@@ -509,6 +936,9 @@ export default function BrandDeckWizardPage() {
                     )}
                   </div>
                 </div>
+              ) : activeStep === 1 ? (
+                /* ─── AI Foundation ───────────────────────────────── */
+                renderFoundationStep()
               ) : (
                 /* ─── Placeholder for other steps ────────────────── */
                 <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-8 text-center">
