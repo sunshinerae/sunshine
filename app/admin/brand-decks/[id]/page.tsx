@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import {
   ArrowLeft, ArrowRight, Check, Loader2, Upload, RefreshCw,
   ClipboardList, Sparkles, Heart, Users, MessageSquare,
-  Palette, Moon, Layout, Zap, Eye, Download,
+  Palette, Moon, Layout, Zap, Eye, Download, Plus, X,
 } from 'lucide-react';
 
 // ─── Types ──────────────────────────────────────────────────────
@@ -136,6 +136,13 @@ export default function BrandDeckWizardPage() {
   const [logoDataUrl, setLogoDataUrl] = useState('');
   const [intakeErrors, setIntakeErrors] = useState<Record<string, string>>({});
 
+  // ─── Identity Form State ─────────────────────────────────────────
+  const [identityBrandStory, setIdentityBrandStory] = useState('');
+  const [identityMission, setIdentityMission] = useState('');
+  const [identityVision, setIdentityVision] = useState('');
+  const [identityValues, setIdentityValues] = useState<{ name: string; description: string }[]>([]);
+  const [identityPersonality, setIdentityPersonality] = useState<{ trait: string; description: string }[]>([]);
+
   // ─── Foundation State ──────────────────────────────────────────
   const [generating, setGenerating] = useState(false);
   const [generationMsgIndex, setGenerationMsgIndex] = useState(0);
@@ -198,6 +205,41 @@ export default function BrandDeckWizardPage() {
       setBusinessName(deck.title || '');
     }
   }, [deck?.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ─── Hydrate Identity Form from Deck ──────────────────────────────
+  useEffect(() => {
+    if (!deck?.identity) return;
+
+    try {
+      const data = typeof deck.identity === 'string' ? JSON.parse(deck.identity) : deck.identity;
+      setIdentityBrandStory(data.brandStory || '');
+      setIdentityMission(data.mission || '');
+      setIdentityVision(data.vision || '');
+
+      // Values: may come from foundation or previously saved identity
+      if (Array.isArray(data.values)) {
+        setIdentityValues(data.values.map((v: { name: string; description: string }) => ({
+          name: v.name || '',
+          description: v.description || '',
+        })));
+      }
+
+      // Personality: foundation stores personalityTraits (string[]), saved identity stores personality ({ trait, description }[])
+      if (Array.isArray(data.personality)) {
+        setIdentityPersonality(data.personality.map((p: { trait: string; description: string }) => ({
+          trait: p.trait || '',
+          description: p.description || '',
+        })));
+      } else if (Array.isArray(data.personalityTraits)) {
+        setIdentityPersonality(data.personalityTraits.map((t: string) => ({
+          trait: t,
+          description: '',
+        })));
+      }
+    } catch {
+      // Identity data not parseable — leave defaults
+    }
+  }, [deck?.identity]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ─── Logo Handler ────────────────────────────────────────────
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -301,6 +343,23 @@ export default function BrandDeckWizardPage() {
         };
       }
 
+      // Save identity data when leaving identity step
+      if (activeStep === 2) {
+        payload.identity = {
+          brandStory: identityBrandStory.trim(),
+          mission: identityMission.trim(),
+          vision: identityVision.trim(),
+          values: identityValues.map((v) => ({
+            name: v.name.trim(),
+            description: v.description.trim(),
+          })),
+          personality: identityPersonality.map((p) => ({
+            trait: p.trait.trim(),
+            description: p.description.trim(),
+          })),
+        };
+      }
+
       // Update currentStep if advancing beyond the saved step
       if (nextStep > deck.currentStep) {
         payload.currentStep = nextStep;
@@ -343,6 +402,170 @@ export default function BrandDeckWizardPage() {
     if (stepIndex <= deck.currentStep) {
       setActiveStep(stepIndex);
     }
+  };
+
+  // ─── Identity Step Helpers ────────────────────────────────────
+
+  const updateValue = (index: number, field: 'name' | 'description', value: string) => {
+    setIdentityValues((prev) => prev.map((v, i) => (i === index ? { ...v, [field]: value } : v)));
+  };
+
+  const removeValue = (index: number) => {
+    setIdentityValues((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const addValue = () => {
+    setIdentityValues((prev) => [...prev, { name: '', description: '' }]);
+  };
+
+  const updateTrait = (index: number, field: 'trait' | 'description', value: string) => {
+    setIdentityPersonality((prev) => prev.map((p, i) => (i === index ? { ...p, [field]: value } : p)));
+  };
+
+  const removeTrait = (index: number) => {
+    setIdentityPersonality((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const addTrait = () => {
+    setIdentityPersonality((prev) => [...prev, { trait: '', description: '' }]);
+  };
+
+  // ─── Identity Step Renderer ──────────────────────────────────
+
+  const renderIdentityStep = () => {
+    return (
+      <div className="space-y-8">
+        {/* Brand Story */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Brand Story</h3>
+          <textarea
+            value={identityBrandStory}
+            onChange={(e) => setIdentityBrandStory(e.target.value)}
+            rows={6}
+            placeholder="Your brand story..."
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none"
+          />
+        </div>
+
+        {/* Mission Statement */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Mission Statement</h3>
+          <input
+            type="text"
+            value={identityMission}
+            onChange={(e) => setIdentityMission(e.target.value)}
+            placeholder="Your mission statement..."
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+          />
+        </div>
+
+        {/* Vision Statement */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Vision Statement</h3>
+          <input
+            type="text"
+            value={identityVision}
+            onChange={(e) => setIdentityVision(e.target.value)}
+            placeholder="Your vision statement..."
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+          />
+        </div>
+
+        {/* Core Values */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Core Values</h3>
+          <div className="space-y-3">
+            {identityValues.map((v, i) => (
+              <div
+                key={i}
+                className="relative bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-4"
+              >
+                {identityValues.length > 3 && (
+                  <button
+                    type="button"
+                    onClick={() => removeValue(i)}
+                    className="absolute top-3 right-3 text-zinc-400 hover:text-zinc-100 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+                <input
+                  type="text"
+                  value={v.name}
+                  onChange={(e) => updateValue(i, 'name', e.target.value)}
+                  placeholder="Value name"
+                  className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 text-sm mb-2"
+                />
+                <textarea
+                  value={v.description}
+                  onChange={(e) => updateValue(i, 'description', e.target.value)}
+                  rows={2}
+                  placeholder="Describe this value..."
+                  className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none text-sm"
+                />
+              </div>
+            ))}
+          </div>
+          {identityValues.length < 5 && (
+            <button
+              type="button"
+              onClick={addValue}
+              className="flex items-center gap-1.5 mt-3 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+              Add Value
+            </button>
+          )}
+        </div>
+
+        {/* Brand Personality */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Brand Personality</h3>
+          <div className="space-y-3">
+            {identityPersonality.map((p, i) => (
+              <div
+                key={i}
+                className="relative bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-4"
+              >
+                {identityPersonality.length > 3 && (
+                  <button
+                    type="button"
+                    onClick={() => removeTrait(i)}
+                    className="absolute top-3 right-3 text-zinc-400 hover:text-zinc-100 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+                <input
+                  type="text"
+                  value={p.trait}
+                  onChange={(e) => updateTrait(i, 'trait', e.target.value)}
+                  placeholder="Trait name"
+                  className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 text-sm mb-2"
+                />
+                <textarea
+                  value={p.description}
+                  onChange={(e) => updateTrait(i, 'description', e.target.value)}
+                  rows={2}
+                  placeholder="Describe this trait..."
+                  className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none text-sm"
+                />
+              </div>
+            ))}
+          </div>
+          {identityPersonality.length < 7 && (
+            <button
+              type="button"
+              onClick={addTrait}
+              className="flex items-center gap-1.5 mt-3 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+              Add Trait
+            </button>
+          )}
+        </div>
+      </div>
+    );
   };
 
   // ─── Foundation Step Renderer ──────────────────────────────────
@@ -793,7 +1016,10 @@ export default function BrandDeckWizardPage() {
                 </h2>
               </div>
 
-              {activeStep === 0 ? (
+              {activeStep === 2 ? (
+                /* ─── Core Identity ──────────────────────────────── */
+                renderIdentityStep()
+              ) : activeStep === 0 ? (
                 /* ─── Intake Form ────────────────────────────────── */
                 <div className="space-y-6">
                   {/* Business Name */}
