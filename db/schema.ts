@@ -149,6 +149,43 @@ export const sponsorDeals = pgTable('sponsor_deals', {
   sponsorIdIdx: index('sponsor_deals_sponsor_id_idx').on(table.sponsorId),
 }));
 
+// ─── Admin Tool: Outreach Pipeline ───────────────────────────────
+
+// Multi-step email sequence per sponsor
+export const outreachSequences = pgTable('outreach_sequences', {
+  id: serial('id').primaryKey(),
+  sponsorId: integer('sponsor_id').notNull().references(() => sponsors.id, { onDelete: 'cascade' }),
+  status: varchar('status', { length: 50 }).default('active').notNull(), // active, paused, replied, completed, bounced
+  currentStep: integer('current_step').default(0).notNull(),
+  nextSendAt: timestamp('next_send_at'),
+  lastSentAt: timestamp('last_sent_at'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+}, (table) => ({
+  sponsorIdIdx: index('outreach_sequences_sponsor_id_idx').on(table.sponsorId),
+  statusIdx: index('outreach_sequences_status_idx').on(table.status),
+}));
+
+// Individual emails sent within a sequence
+export const outreachEmails = pgTable('outreach_emails', {
+  id: serial('id').primaryKey(),
+  sequenceId: integer('sequence_id').notNull().references(() => outreachSequences.id, { onDelete: 'cascade' }),
+  sponsorId: integer('sponsor_id').notNull().references(() => sponsors.id, { onDelete: 'cascade' }),
+  step: integer('step').notNull(),
+  subject: varchar('subject', { length: 500 }).notNull(),
+  body: text('body').notNull(),
+  resendId: varchar('resend_id', { length: 255 }),
+  sentAt: timestamp('sent_at'),
+  deliveredAt: timestamp('delivered_at'),
+  openedAt: timestamp('opened_at'),
+  clickedAt: timestamp('clicked_at'),
+  bouncedAt: timestamp('bounced_at'),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+}, (table) => ({
+  sequenceIdIdx: index('outreach_emails_sequence_id_idx').on(table.sequenceId),
+  sponsorIdIdx: index('outreach_emails_sponsor_id_idx').on(table.sponsorId),
+}));
+
 // ─── Admin Tool: AI Prospector ───────────────────────────────────
 
 // Prospects found via AI-powered search
@@ -171,3 +208,25 @@ export const prospects = pgTable('prospects', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow().notNull(),
 });
+
+// ─── Admin Tool: Brand Deck Builder ─────────────────────────────
+
+export const brandDecks = pgTable('brand_decks', {
+  id: serial('id').primaryKey(),
+  slug: varchar('slug', { length: 100 }).notNull(),
+  title: varchar('title', { length: 255 }).notNull(),
+  status: varchar('status', { length: 50 }).default('draft').notNull(),
+  currentStep: integer('current_step').default(0).notNull(),
+  intake: text('intake'),       // JSON: { businessName, industry, keywords, vibe, existingCopy, logoUrl }
+  identity: text('identity'),   // JSON: { brandStory, mission, vision, values, personality }
+  audience: text('audience'),   // JSON: { personas: [{ name, age, location, occupation, painPoints, goals, channels }] }
+  voice: text('voice'),         // JSON: { toneAttributes, elevatorPitch, taglines, messagingPillars, voiceGuide, dosAndDonts }
+  visuals: text('visuals'),     // JSON: { colors: { primary, secondary, accent, darkMode }, typography: { primary, secondary }, photographyStyle, patterns }
+  applications: text('applications'), // JSON: { socialTemplates, businessCard, letterhead, emailSignature, websitePreview }
+  motion: text('motion'),       // JSON: { style, transitions, scrollBehavior, animationNotes }
+  images: text('images'),       // JSON: { moodBoard: [{ unsplashId, url, alt }], uploads: [{ url, alt }] }
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
+}, (table) => ({
+  slugIdx: uniqueIndex('brand_decks_slug_idx').on(table.slug),
+}));
