@@ -154,6 +154,16 @@ export default function BrandDeckWizardPage() {
     channels: string[];
   }[]>([]);
 
+  // ─── Voice Form State ─────────────────────────────────────────
+  const [voiceTone, setVoiceTone] = useState<string[]>([]);
+  const [voicePitch, setVoicePitch] = useState('');
+  const [voiceTaglines, setVoiceTaglines] = useState<string[]>([]);
+  const [voicePillars, setVoicePillars] = useState<{ title: string; description: string }[]>([]);
+  const [voiceDos, setVoiceDos] = useState<string[]>([]);
+  const [voiceDonts, setVoiceDonts] = useState<string[]>([]);
+  const [voicePhrases, setVoicePhrases] = useState<string[]>([]);
+  const [toneInput, setToneInput] = useState('');
+
   // ─── Foundation State ──────────────────────────────────────────
   const [generating, setGenerating] = useState(false);
   const [generationMsgIndex, setGenerationMsgIndex] = useState(0);
@@ -281,6 +291,42 @@ export default function BrandDeckWizardPage() {
       // Audience data not parseable — leave defaults
     }
   }, [deck?.audience]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ─── Hydrate Voice Form from Deck ──────────────────────────────
+  useEffect(() => {
+    if (!deck?.voice) return;
+
+    try {
+      const data = typeof deck.voice === 'string' ? JSON.parse(deck.voice) : deck.voice;
+      if (Array.isArray(data.toneAttributes)) {
+        setVoiceTone(data.toneAttributes);
+      }
+      if (data.elevatorPitch) {
+        setVoicePitch(data.elevatorPitch);
+      }
+      if (Array.isArray(data.taglines)) {
+        setVoiceTaglines(data.taglines);
+      }
+      if (Array.isArray(data.messagingPillars)) {
+        setVoicePillars(data.messagingPillars.map((p: { title?: string; description?: string }) => ({
+          title: p.title || '',
+          description: p.description || '',
+        })));
+      }
+      if (data.voiceGuide) {
+        if (Array.isArray(data.voiceGuide.dos)) setVoiceDos(data.voiceGuide.dos);
+        if (Array.isArray(data.voiceGuide.donts)) setVoiceDonts(data.voiceGuide.donts);
+      }
+      // Also support flat dos/donts from foundation generation
+      if (Array.isArray(data.dos) && voiceDos.length === 0) setVoiceDos(data.dos);
+      if (Array.isArray(data.donts) && voiceDonts.length === 0) setVoiceDonts(data.donts);
+      if (Array.isArray(data.examplePhrases)) {
+        setVoicePhrases(data.examplePhrases);
+      }
+    } catch {
+      // Voice data not parseable — leave defaults
+    }
+  }, [deck?.voice]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ─── Logo Handler ────────────────────────────────────────────
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -416,6 +462,24 @@ export default function BrandDeckWizardPage() {
         };
       }
 
+      // Save voice data when leaving voice step
+      if (activeStep === 4) {
+        payload.voice = {
+          toneAttributes: voiceTone.filter(Boolean),
+          elevatorPitch: voicePitch.trim(),
+          taglines: voiceTaglines.map((t) => t.trim()).filter(Boolean),
+          messagingPillars: voicePillars.map((p) => ({
+            title: p.title.trim(),
+            description: p.description.trim(),
+          })),
+          voiceGuide: {
+            dos: voiceDos.map((d) => d.trim()).filter(Boolean),
+            donts: voiceDonts.map((d) => d.trim()).filter(Boolean),
+          },
+          examplePhrases: voicePhrases.map((p) => p.trim()).filter(Boolean),
+        };
+      }
+
       // Update currentStep if advancing beyond the saved step
       if (nextStep > deck.currentStep) {
         payload.currentStep = nextStep;
@@ -544,6 +608,65 @@ export default function BrandDeckWizardPage() {
         return { ...p, [field]: [...p[field], ''] };
       })
     );
+  };
+
+  // ─── Voice Step Helpers ────────────────────────────────────
+
+  const addToneAttribute = () => {
+    const val = toneInput.trim();
+    if (!val || voiceTone.includes(val)) return;
+    setVoiceTone((prev) => [...prev, val]);
+    setToneInput('');
+  };
+
+  const removeToneAttribute = (index: number) => {
+    setVoiceTone((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const updateTagline = (index: number, value: string) => {
+    setVoiceTaglines((prev) => prev.map((t, i) => (i === index ? value : t)));
+  };
+
+  const addTagline = () => {
+    setVoiceTaglines((prev) => [...prev, '']);
+  };
+
+  const removeTagline = (index: number) => {
+    setVoiceTaglines((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const updatePillar = (index: number, field: 'title' | 'description', value: string) => {
+    setVoicePillars((prev) => prev.map((p, i) => (i === index ? { ...p, [field]: value } : p)));
+  };
+
+  const removePillar = (index: number) => {
+    setVoicePillars((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const addPillar = () => {
+    setVoicePillars((prev) => [...prev, { title: '', description: '' }]);
+  };
+
+  const updateVoiceListItem = (
+    list: string[],
+    setList: React.Dispatch<React.SetStateAction<string[]>>,
+    index: number,
+    value: string,
+  ) => {
+    setList(list.map((item, i) => (i === index ? value : item)));
+  };
+
+  const removeVoiceListItem = (
+    setList: React.Dispatch<React.SetStateAction<string[]>>,
+    index: number,
+  ) => {
+    setList((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const addVoiceListItem = (
+    setList: React.Dispatch<React.SetStateAction<string[]>>,
+  ) => {
+    setList((prev) => [...prev, '']);
   };
 
   // ─── Audience Step Renderer ──────────────────────────────────
@@ -729,6 +852,270 @@ export default function BrandDeckWizardPage() {
             Add Persona
           </button>
         )}
+      </div>
+    );
+  };
+
+  // ─── Voice Step Renderer ──────────────────────────────────
+
+  const renderVoiceStep = () => {
+    return (
+      <div className="space-y-8">
+        {/* 1. Tone Attributes */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Tone Attributes</h3>
+          <div className="flex flex-wrap gap-2 mb-3">
+            {voiceTone.map((attr, i) => (
+              <span
+                key={i}
+                className="px-3 py-1 rounded-full text-sm bg-amber-500/20 text-amber-400 flex items-center gap-1.5"
+              >
+                {attr}
+                <button
+                  type="button"
+                  onClick={() => removeToneAttribute(i)}
+                  className="hover:text-amber-200 transition-colors"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </span>
+            ))}
+          </div>
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={toneInput}
+              onChange={(e) => setToneInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  addToneAttribute();
+                }
+              }}
+              placeholder="Add a tone attribute..."
+              className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+            />
+            <button
+              type="button"
+              onClick={addToneAttribute}
+              className="flex items-center gap-1 px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-sm text-zinc-300 hover:text-zinc-100 hover:border-zinc-500 transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+              Add
+            </button>
+          </div>
+        </div>
+
+        {/* 2. Elevator Pitch */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Elevator Pitch</h3>
+          <textarea
+            value={voicePitch}
+            onChange={(e) => setVoicePitch(e.target.value)}
+            rows={3}
+            placeholder="A concise pitch that captures what makes this brand special..."
+            className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none"
+          />
+        </div>
+
+        {/* 3. Taglines */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Taglines</h3>
+          <div className="space-y-3">
+            {voiceTaglines.map((tagline, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={tagline}
+                  onChange={(e) => updateTagline(i, e.target.value)}
+                  placeholder={`Tagline ${i + 1}...`}
+                  className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                />
+                {voiceTaglines.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeTagline(i)}
+                    className="text-zinc-500 hover:text-red-400 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+          {voiceTaglines.length < 6 && (
+            <button
+              type="button"
+              onClick={addTagline}
+              className="flex items-center gap-1.5 mt-3 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
+            >
+              <Plus className="w-4 h-4" />
+              Add Tagline
+            </button>
+          )}
+        </div>
+
+        {/* 4. Messaging Pillars */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Messaging Pillars</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {voicePillars.map((pillar, i) => (
+              <div
+                key={i}
+                className="relative bg-zinc-800/50 border border-zinc-700/50 rounded-lg p-4"
+              >
+                {voicePillars.length > 2 && (
+                  <button
+                    type="button"
+                    onClick={() => removePillar(i)}
+                    className="absolute top-3 right-3 text-zinc-400 hover:text-zinc-100 transition-colors"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+                <input
+                  type="text"
+                  value={pillar.title}
+                  onChange={(e) => updatePillar(i, 'title', e.target.value)}
+                  placeholder="Pillar title"
+                  className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 text-sm mb-2"
+                />
+                <textarea
+                  value={pillar.description}
+                  onChange={(e) => updatePillar(i, 'description', e.target.value)}
+                  rows={2}
+                  placeholder="Describe this messaging pillar..."
+                  className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 resize-none text-sm"
+                />
+              </div>
+            ))}
+          </div>
+          {voicePillars.length < 6 && (
+            <button
+              type="button"
+              onClick={addPillar}
+              className="flex items-center gap-2 px-4 py-3 w-full border border-dashed border-zinc-700 hover:border-zinc-500 rounded-xl text-sm text-zinc-400 hover:text-zinc-100 justify-center transition-colors mt-4"
+            >
+              <Plus className="w-4 h-4" />
+              Add Pillar
+            </button>
+          )}
+        </div>
+
+        {/* 5. Voice Dos and Don'ts */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Voice Dos &amp; Don&apos;ts</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Do column */}
+            <div className="bg-zinc-900 border border-emerald-500/30 rounded-xl p-5">
+              <h4 className="text-sm font-medium text-emerald-400 mb-3">Do</h4>
+              <div className="space-y-2">
+                {voiceDos.map((d, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                    <input
+                      type="text"
+                      value={d}
+                      onChange={(e) => updateVoiceListItem(voiceDos, setVoiceDos, i, e.target.value)}
+                      placeholder="Do this..."
+                      className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500"
+                    />
+                    {voiceDos.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removeVoiceListItem(setVoiceDos, i)}
+                        className="text-zinc-500 hover:text-red-400 transition-colors"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => addVoiceListItem(setVoiceDos)}
+                className="flex items-center gap-1 mt-3 text-xs text-emerald-400 hover:text-emerald-300 transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Add Do
+              </button>
+            </div>
+
+            {/* Don't column */}
+            <div className="bg-zinc-900 border border-red-500/30 rounded-xl p-5">
+              <h4 className="text-sm font-medium text-red-400 mb-3">Don&apos;t</h4>
+              <div className="space-y-2">
+                {voiceDonts.map((d, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <span className="text-red-500 flex-shrink-0 font-bold">&times;</span>
+                    <input
+                      type="text"
+                      value={d}
+                      onChange={(e) => updateVoiceListItem(voiceDonts, setVoiceDonts, i, e.target.value)}
+                      placeholder="Don't do this..."
+                      className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500"
+                    />
+                    {voiceDonts.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removeVoiceListItem(setVoiceDonts, i)}
+                        className="text-zinc-500 hover:text-red-400 transition-colors"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => addVoiceListItem(setVoiceDonts)}
+                className="flex items-center gap-1 mt-3 text-xs text-red-400 hover:text-red-300 transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                Add Don&apos;t
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* 6. Example Phrases */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-3">Example Phrases</h3>
+          <div className="space-y-2">
+            {voicePhrases.map((phrase, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <span className="text-zinc-600 flex-shrink-0 italic">&ldquo;</span>
+                <input
+                  type="text"
+                  value={phrase}
+                  onChange={(e) => updateVoiceListItem(voicePhrases, setVoicePhrases, i, e.target.value)}
+                  placeholder="Example brand voice phrase..."
+                  className="flex-1 bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-1.5 text-sm text-zinc-100 placeholder-zinc-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                />
+                <span className="text-zinc-600 flex-shrink-0 italic">&rdquo;</span>
+                {voicePhrases.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeVoiceListItem(setVoicePhrases, i)}
+                    className="text-zinc-500 hover:text-red-400 transition-colors"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+          <button
+            type="button"
+            onClick={() => addVoiceListItem(setVoicePhrases)}
+            className="flex items-center gap-1.5 mt-3 text-sm text-zinc-400 hover:text-zinc-100 transition-colors"
+          >
+            <Plus className="w-4 h-4" />
+            Add Phrase
+          </button>
+        </div>
       </div>
     );
   };
@@ -1319,7 +1706,10 @@ export default function BrandDeckWizardPage() {
                 </h2>
               </div>
 
-              {activeStep === 3 ? (
+              {activeStep === 4 ? (
+                /* ─── Voice & Messaging ─────────────────────────── */
+                renderVoiceStep()
+              ) : activeStep === 3 ? (
                 /* ─── Audience ──────────────────────────────────── */
                 renderAudienceStep()
               ) : activeStep === 2 ? (
