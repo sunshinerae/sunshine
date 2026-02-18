@@ -164,6 +164,12 @@ export default function BrandDeckWizardPage() {
   const [voicePhrases, setVoicePhrases] = useState<string[]>([]);
   const [toneInput, setToneInput] = useState('');
 
+  // ─── Visuals Form State ─────────────────────────────────────────
+  const [selectedPalette, setSelectedPalette] = useState(0);
+  const [selectedFont, setSelectedFont] = useState(0);
+  const [customColors, setCustomColors] = useState<Record<string, string>>({});
+  const [visualsData, setVisualsData] = useState<FoundationVisuals | null>(null);
+
   // ─── Foundation State ──────────────────────────────────────────
   const [generating, setGenerating] = useState(false);
   const [generationMsgIndex, setGenerationMsgIndex] = useState(0);
@@ -328,6 +334,35 @@ export default function BrandDeckWizardPage() {
     }
   }, [deck?.voice]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ─── Hydrate Visuals Form from Deck ──────────────────────────────
+  useEffect(() => {
+    if (!deck?.visuals) return;
+
+    try {
+      const data = typeof deck.visuals === 'string' ? JSON.parse(deck.visuals) : deck.visuals;
+      setVisualsData(data);
+      if (typeof data.selectedPalette === 'number') setSelectedPalette(data.selectedPalette);
+      if (typeof data.selectedFont === 'number') setSelectedFont(data.selectedFont);
+      if (data.customColors && typeof data.customColors === 'object') {
+        setCustomColors(data.customColors);
+      }
+    } catch {
+      // Visuals data not parseable — leave defaults
+    }
+  }, [deck?.visuals]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ─── Load Google Fonts for Visuals ──────────────────────────────
+  useEffect(() => {
+    if (!visualsData?.fontPairings) return;
+    const fonts = visualsData.fontPairings.flatMap(fp => [fp.heading, fp.body]);
+    const unique = [...new Set(fonts)];
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = `https://fonts.googleapis.com/css2?${unique.map(f => `family=${encodeURIComponent(f)}:wght@400;600;700`).join('&')}&display=swap`;
+    document.head.appendChild(link);
+    return () => { document.head.removeChild(link); };
+  }, [visualsData]);
+
   // ─── Logo Handler ────────────────────────────────────────────
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -477,6 +512,16 @@ export default function BrandDeckWizardPage() {
             donts: voiceDonts.map((d) => d.trim()).filter(Boolean),
           },
           examplePhrases: voicePhrases.map((p) => p.trim()).filter(Boolean),
+        };
+      }
+
+      // Save visuals selections when leaving visuals step
+      if (activeStep === 5 && visualsData) {
+        payload.visuals = {
+          ...visualsData,
+          selectedPalette,
+          selectedFont,
+          customColors,
         };
       }
 
@@ -667,6 +712,173 @@ export default function BrandDeckWizardPage() {
     setList: React.Dispatch<React.SetStateAction<string[]>>,
   ) => {
     setList((prev) => [...prev, '']);
+  };
+
+  // ─── Visuals Step Renderer ──────────────────────────────────
+
+  const renderVisualsStep = () => {
+    if (!visualsData || !visualsData.palettes?.length) {
+      return (
+        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-8 text-center">
+          <Palette className="w-12 h-12 text-zinc-700 mx-auto mb-4" />
+          <p className="text-zinc-400 text-sm">
+            No visual data generated yet. Go back to the AI Foundation step to generate your brand foundation first.
+          </p>
+        </div>
+      );
+    }
+
+    const COLOR_LABELS = ['primary', 'secondary', 'accent', 'background', 'text'] as const;
+
+    // Get the effective colors for the selected palette (base + overrides)
+    const basePalette = visualsData.palettes[selectedPalette];
+    const getEffectiveColor = (role: string) =>
+      customColors[role] || (basePalette?.colors as Record<string, string>)?.[role] || '#000000';
+
+    return (
+      <div className="space-y-10">
+        {/* ── Section 1: Color Palettes ── */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-4">Color Palettes</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {visualsData.palettes.map((palette, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => {
+                  setSelectedPalette(i);
+                  setCustomColors({});
+                }}
+                className={`bg-zinc-900 border rounded-xl p-6 cursor-pointer transition-all hover:border-zinc-600 text-left ${
+                  selectedPalette === i
+                    ? 'ring-2 ring-amber-500 border-amber-500/50'
+                    : 'border-zinc-800'
+                }`}
+              >
+                <p className="text-sm font-semibold text-zinc-200 mb-4">{palette.name}</p>
+                <div className="flex gap-2 mb-4">
+                  {COLOR_LABELS.map((role) => (
+                    <div key={role} className="flex flex-col items-center gap-1">
+                      <div
+                        className="w-14 h-14 rounded-lg border border-zinc-600"
+                        style={{ backgroundColor: (palette.colors as Record<string, string>)[role] }}
+                      />
+                      <span className="text-[10px] text-zinc-500 font-mono">
+                        {(palette.colors as Record<string, string>)[role]}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-zinc-400 leading-relaxed">{palette.psychology}</p>
+              </button>
+            ))}
+          </div>
+
+          {/* Custom Color Overrides */}
+          <div className="mt-6">
+            <h4 className="text-sm font-medium text-zinc-400 mb-3">Customize Selected Palette</h4>
+            <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                {COLOR_LABELS.map((role) => (
+                  <div key={role}>
+                    <label className="block text-xs font-medium text-zinc-500 mb-2 capitalize">{role}</label>
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="color"
+                        value={getEffectiveColor(role)}
+                        onChange={(e) =>
+                          setCustomColors((prev) => ({ ...prev, [role]: e.target.value }))
+                        }
+                        className="w-10 h-10 rounded cursor-pointer bg-transparent border-0"
+                      />
+                      <input
+                        type="text"
+                        value={getEffectiveColor(role)}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          if (/^#[0-9a-fA-F]{0,6}$/.test(val)) {
+                            setCustomColors((prev) => ({ ...prev, [role]: val }));
+                          }
+                        }}
+                        className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-2 py-1.5 text-xs text-zinc-100 font-mono focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              {Object.keys(customColors).length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setCustomColors({})}
+                  className="mt-3 text-xs text-zinc-500 hover:text-zinc-300 transition-colors"
+                >
+                  Reset to palette defaults
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Divider ── */}
+        <div className="border-t border-zinc-800" />
+
+        {/* ── Section 2: Typography ── */}
+        <div>
+          <h3 className="text-lg font-medium text-zinc-200 mb-4">Typography</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {visualsData.fontPairings.map((fp, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setSelectedFont(i)}
+                className={`bg-zinc-900 border rounded-xl p-6 cursor-pointer transition-all hover:border-zinc-600 text-left ${
+                  selectedFont === i
+                    ? 'ring-2 ring-amber-500 border-amber-500/50'
+                    : 'border-zinc-800'
+                }`}
+              >
+                {('name' in fp && (fp as { name?: string }).name) ? (
+                  <p className="text-xs font-medium text-amber-400 mb-3">{(fp as { name: string }).name}</p>
+                ) : null}
+                <div className="mb-3">
+                  <p className="text-xs text-zinc-500 uppercase tracking-wide mb-1">Heading</p>
+                  <p
+                    className="text-xl font-semibold text-zinc-100"
+                    style={{ fontFamily: `"${fp.heading}", sans-serif` }}
+                  >
+                    {fp.heading}
+                  </p>
+                </div>
+                <div className="mb-3">
+                  <p className="text-xs text-zinc-500 uppercase tracking-wide mb-1">Body</p>
+                  <p
+                    className="text-base text-zinc-200"
+                    style={{ fontFamily: `"${fp.body}", sans-serif` }}
+                  >
+                    {fp.body}
+                  </p>
+                </div>
+                <div className="border-t border-zinc-800 pt-3 mt-3 space-y-2">
+                  <p
+                    className="text-lg font-semibold text-zinc-100"
+                    style={{ fontFamily: `"${fp.heading}", sans-serif` }}
+                  >
+                    The quick brown fox
+                  </p>
+                  <p
+                    className="text-sm text-zinc-300 leading-relaxed"
+                    style={{ fontFamily: `"${fp.body}", sans-serif` }}
+                  >
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
+                  </p>
+                </div>
+                <p className="text-xs text-zinc-400 leading-relaxed mt-3">{fp.rationale}</p>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
   };
 
   // ─── Audience Step Renderer ──────────────────────────────────
@@ -1698,7 +1910,7 @@ export default function BrandDeckWizardPage() {
         <main className="flex-1 flex flex-col">
           {/* Step Content */}
           <div className="flex-1 p-8">
-            <div className={`mx-auto ${activeStep === 1 ? 'max-w-5xl' : 'max-w-3xl'}`}>
+            <div className={`mx-auto ${activeStep === 1 || activeStep === 5 ? 'max-w-5xl' : 'max-w-3xl'}`}>
               <div className="flex items-center gap-3 mb-6">
                 <currentStepData.icon className="w-6 h-6 text-amber-400" />
                 <h2 className="text-xl font-semibold text-zinc-100">
@@ -1706,7 +1918,10 @@ export default function BrandDeckWizardPage() {
                 </h2>
               </div>
 
-              {activeStep === 4 ? (
+              {activeStep === 5 ? (
+                /* ─── Visual System ─────────────────────────────── */
+                renderVisualsStep()
+              ) : activeStep === 4 ? (
                 /* ─── Voice & Messaging ─────────────────────────── */
                 renderVoiceStep()
               ) : activeStep === 3 ? (
